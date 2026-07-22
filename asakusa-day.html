@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Asakusa Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --paper: #FAF8F4;
+    --paper-deep: #F3F1EA;
+    --card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-soft: #2E2921;
+    --red: #B23A2E;
+    --red-soft: #C85A4B;
+    --line: #E1DACB;
+    --gold: #A87C4F;
+    --gray-bg: #EEEAE1;
+    --blue: #4A6D8C;
+    --green-bg: #E4EDE3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light only; }
+
+  body {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  /* ---------- Torii accent line ---------- */
+  .torii-line {
+    position: fixed;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--red) 8%, var(--red) 92%, transparent 100%);
+    z-index: 50;
+    opacity: 0.85;
+  }
+  @media (max-width: 720px) { .torii-line { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #EFEAE0 0%, #E9E4D8 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-mark {
+    position: absolute;
+    top: 50%; right: 6%;
+    transform: translateY(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(5.5rem, 15vw, 9.5rem);
+    color: var(--red);
+    opacity: 0.28;
+    line-height: 1;
+    z-index: 1;
+    user-select: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 8vw;
+    width: 100%;
+  }
+  .eyebrow {
+    color: var(--red);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
+  .hero h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  .quote-intro {
+    min-height: 16vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem 8vw;
+    text-align: center;
+    background: var(--paper-deep);
+  }
+  .quote-intro blockquote {
+    max-width: 560px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    color: var(--ink);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+  .quote-intro .quote-author {
+    display: block;
+    margin-top: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .quote-intro .quote-jp {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--red);
+    opacity: 1;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .overview-list {
+    list-style: none;
+    margin-bottom: 3rem;
+  }
+  .overview-list li {
+    position: relative;
+    padding: 0.7rem 0 0.7rem 1.6rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+  .overview-list li::before {
+    content: "";
+    position: absolute; left: 0; top: 1.15rem;
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+  .overview-list li:last-child { border-bottom: none; }
+  .accent { color: var(--gold); font-weight: 500; }
+
+  /* ---------- Places navigation ---------- */
+  .nav-places {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+  .nav-places-label {
+    width: 100%;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .nav-place-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    background: var(--gray-bg);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .nav-place-btn:hover {
+    color: var(--red);
+    border-color: var(--red-soft);
+    background: rgba(178,58,46,0.06);
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabs-nav {
+    display: flex;
+    gap: 0.3rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    padding: 0.8rem 1.1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .tab-btn::after {
+    content: "";
+    position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+  .tab-btn.active { color: var(--red); font-weight: 500; }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--red-soft); }
+
+  .tab-panel { display: none; animation: fadeIn 0.3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- Section headings ---------- */
+  h2.section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: var(--red);
+    margin: 2.4rem 0 1.2rem;
+  }
+  h2.section-title:first-child { margin-top: 0; }
+
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 1.4rem 0 0.6rem;
+  }
+
+  p { margin-bottom: 1rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Two-column blocks ---------- */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
+  @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
+
+  .cols + .note,
+  .cols + .notes-grid,
+  .cols + .read-more { margin-top: 0; }
+
+  .cols img, figure img {
+    width: 100%;
+    border-radius: 2px;
+    display: block;
+    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
+  }
+
+  .img-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 2px;
+    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(178,58,46,0.10) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(168,124,79,0.12) 0%, transparent 50%),
+      var(--gray-bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-placeholder::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(28,25,23,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,25,23,0.04) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .img-placeholder span {
+    position: relative;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    padding: 0.5rem 1rem;
+    background: rgba(247,243,236,0.6);
+  }
+
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
+  .cols-4 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 680px) { .cols-4 { grid-template-columns: 1fr; } }
+
+  /* ---------- Unified note system ---------- */
+  .note {
+    padding: 0.9rem 0;
+    margin: 1.3rem 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .note-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.08); }
+  .note-tag.tag-try { color: var(--gold); background: rgba(168,124,79,0.10); }
+  .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
+  .note-tag.tag-tip { color: var(--blue); background: rgba(74,109,140,0.08); }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+    margin: 1.3rem 0;
+  }
+  .notes-grid .note { margin: 0; padding: 0.9rem 0; }
+  @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  /* Practical info as label/value table, not prose-in-a-box */
+  .practical-table { margin: 1.3rem 0; }
+  .practical-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .practical-row:last-child { border-bottom: none; }
+  .practical-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+    padding-top: 0.1rem;
+  }
+  .practical-value { color: var(--ink-soft); }
+  @media (max-width: 560px) {
+    .practical-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+
+  /* Read more as a quiet footnote, not a callout */
+  .read-more {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: 1rem 0 1.6rem;
+    padding: 0.7rem 0 0.7rem 1rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(168,124,79,0.06);
+  }
+  .read-more-label {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .read-more a {
+    color: var(--red);
+    text-decoration: none;
+    border-bottom: 1px solid var(--red-soft);
+  }
+  .read-more a:hover { color: var(--red-soft); }
+
+  /* Back-to-overview floating button */
+  .back-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    padding: 0.65rem 1.3rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(28,25,23,0.25);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .callout {
+    position: relative;
+    padding: 1rem 1.3rem 1rem 1.6rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 1.2rem 0;
+    display: flex;
+    gap: 0.7rem;
+    background: linear-gradient(90deg, rgba(178,58,46,0.05) 0%, transparent 100%);
+  }
+  .callout::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+  .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
+  .callout a, .callout strong { color: var(--ink); }
+
+  .blockquote {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-style: italic;
+    position: relative;
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    margin: 1.4rem 0;
+  }
+  .blockquote::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--red-soft);
+  }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+  ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
+  ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---------- Practical info page ---------- */
+  .info-list { list-style: none; }
+  .info-list li {
+    display: flex;
+    gap: 0.9rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+  }
+  .info-list li::before { content: "→"; color: var(--red); flex-shrink: 0; font-weight: 600; }
+
+  /* ---------- Footer ---------- */
+  .footnote {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    color: #9A9284;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .tab-panel { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="torii-line" aria-hidden="true"></div>
+
+<section class="quote-intro">
+  <blockquote>
+    <span class="quote-jp">誰にもかれにも、同じ時間が流れていると思うのはまちがいだ</span>
+    Время течёт одинаково для всех вещей, но каждый человек плывёт в нём по-своему
+    <span class="quote-author">Ясунари Кавабата</span>
+  </blockquote>
+</section>
+
+<header class="hero">
+  <div class="hero-mark" aria-hidden="true">浅草</div>
+  <div class="hero-content">
+    <div class="eyebrow"><a href="index.html" style="color: var(--red); text-decoration: none;">← Все дни</a> &nbsp;·&nbsp; Tokyo · Day Plan</div>
+    <h1>Asakusa Day</h1>
+    <div class="sub">浅草 — храм Сэнсо-дзи, Накамисэ-дори и старый город</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <nav class="nav-places">
+    <div class="nav-places-label">По местам ↓</div>
+    <button class="nav-place-btn" data-target="loc-kaminarimon">Kaminarimon</button>
+    <button class="nav-place-btn" data-target="loc-nakamise">Nakamise</button>
+    <button class="nav-place-btn" data-target="loc-hozomon">Hōzōmon</button>
+    <button class="nav-place-btn" data-target="loc-sensoji">Sensō-ji</button>
+    <button class="nav-place-btn" data-target="loc-shrine">Asakusa Shrine</button>
+    <button class="nav-place-btn" data-target="loc-kappabashi">Kappabashi</button>
+  </nav>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="t1">Highlights</button>
+    <button class="tab-btn" data-tab="t2">Route</button>
+    <button class="tab-btn" data-tab="t3">Places</button>
+    <button class="tab-btn" data-tab="t4">Food & Practical</button>
+  </nav>
+
+  <!-- TAB 1: Highlights -->
+  <section class="tab-panel active" id="t1">
+    <p>С Японией всё иначе. Токио пережил землетрясения, пожары и войну. Большая часть того, что ты увидишь сегодня, построена сравнительно недавно. И всё же Асакуса кажется древней. Почему?</p>
+    <p>Потому что здесь сохранились не столько стены, сколько традиции. Люди идут к храму той же дорогой. Покупают уличные сладости на той же торговой улице. Приходят сюда помолиться перед важным событием. Вытягивают предсказания. Встречают Новый год.</p>
+    <p>То, что делает Асакусу особенной, нельзя измерить возрастом зданий. Это место сохранило свою <strong>непрерывность</strong>. Почти всё в Sensō-ji — не оригинал. Комплекс горел десятки раз, последний раз почти полностью — во время бомбардировок 1945 года. Нынешние здания — послевоенный железобетон, стилизованный под старину.</p>
+    <p>И всё же для японцев это никак не умаляет подлинности храма: <strong>важна не физическая древность материала, а непрерывность ритуала и места</strong>. Тот же принцип работает в Ise Jingu, где главное святилище перестраивают заново каждые 20 лет.</p>
+
+    <div class="cols">
+      <div>
+        <h4>Сегодня ты</h4>
+        <ul class="plain">
+          <li>впервые познакомишься с традиционной Японией внутри современного Токио</li>
+          <li>узнаешь, почему дорога к храму так же важна, как и сам храм</li>
+          <li>попробуешь несколько простых японских ритуалов</li>
+          <li>научишься замечать детали, которые большинство туристов проходят мимо</li>
+          <li>увидишь, как традиционное ремесло продолжает жить в XXI веке</li>
+        </ul>
+      </div>
+      <div class="callout"><span class="icon">📌</span><span>Асакуса приобрела известность в период Эдо (1603–1868) как развлекательный район с храмом Сэнсо-дзи в центре — сравнимый с современным Синдзюку. До середины XX века здесь собирались представители «красных фонарей» и театралы. Ярко описана в романе Ясунари Кавабаты «Алая банда Асакусы» (1930; Нобелевская премия по литературе, 1968).</span></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: Маршрут -->
+  <section class="tab-panel" id="t2">
+    <p>Сегодняшний маршрут несложный. Nakamise → Asakusa Menchi → Sensō-ji — компактный участок, всё в пределах 5–10 минут пешком, нагрузки нет.</p>
+    <p>Почти весь день проходит по ровной местности, без подъёмов и длинных переходов. Не пытайся пройти его быстро. Если начнёшь выбиваться из графика, лучше отказаться от одного из дополнительных мест, чем сокращать время у храма.</p>
+    <div class="blockquote">От Sensō-ji до Kappabashi — пешком. Интересный переход через жилые кварталы, часть впечатления от дня, расстояние комфортное.<br><br>От Kappabashi до Ueno — на метро. Station Tawaramachi (Ginza Line) рядом с Kappabashi, до Ueno — одна остановка.</div>
+  </section>
+
+  <!-- TAB 3: По местам -->
+  <section class="tab-panel" id="t3">
+
+    <h2 class="section-title" id="loc-kaminarimon">Kaminarimon — ворота власти</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Kaminarimon</span></div></figure>
+      <div>
+        <p>Большинство фотографируют Kaminarimon как красивые ворота. На самом деле это заявление о власти. Статуи <strong>Fūjin</strong> (бог ветра) и <strong>Raijin</strong> (бог грома) в нишах — не украшение, а стражи, отмечающие границу: за ней действуют другие правила.</p>
+        <p>Гигантский фонарь исторически был настолько велик, что под ним физически не мог проехать паланкин знати — все спешивались, будь ты хоть сёгун. Красота здесь — оболочка, а функция — расстановка границ власти и статуса.</p>
+      </div>
+    </div>
+
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Перед Kaminarimon почти никто не рассматривает <strong>основание ворот</strong> — именно там скрываются резные фигуры богов ветра и грома, давших воротам своё название.<br><br>У статуй-хранителей <strong>Niō</strong> в нишах Kaminarimon и Hōzōmon стоит задержаться на пару секунд дольше обычного — их выражения специально утрированы, чтобы отпугивать зло взглядом, а не архитектурой. Статуи всегда парные и воплощают начало и конец: правый страж <strong>Агьё</strong> (阿形) — с открытым ртом, произносящим «А», символ рождения и открытой силы; левый страж <strong>Унгьё</strong> (吽形) — с закрытым ртом, произносящим «Ун», символ смерти, скрытой мощи и защиты от зла.</div>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#fujin-raijin">Fūjin и Raijin</a> · <a href="glossary.html#nio-guardians">Niō, стражи ворот</a></p>
+
+    <div class="notes-grid">
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Посмотри не только на витрины. Многие магазины передаются одной семьёй из поколения в поколение — иногда об этом рассказывают небольшие таблички у входа.</div>
+      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Не стоит покупать еду в первом понравившемся месте.<br><strong>Ningyo-yaki</strong> — бисквитные пирожные со сладкой фасолью.<br><strong>Age-manju</strong> — жареные булочки с начинками.<br><strong>Kibi dango</strong> — рисовые шарики на шпажке.</div>
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Большинство магазинов закрывается раньше, чем ожидают туристы — примерно между 17:00 и 18:00.</div>
+      <div class="note"><span class="note-tag tag-skip">Что можно пропустить</span><br>Не спеши покупать сувениры в первой лавке — похожие товары встретятся ещё много раз. За качественными изделиями лучше дойти до Каппабаси.</div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-nakamise">Nakamise — дорога к храму</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Nakamise-dōri</span></div></figure>
+      <div>
+        <p>Накамисэ — одна из старейших торговых улиц Японии. Идея почти не изменилась: <strong>путь к храму начинается задолго до его ворот</strong>.</p>
+        <p>Asakusa с самого начала развивался не как тихое место паломничества, а как торговый и развлекательный квартал вокруг храма. Nakamise — не позднейшая туристическая надстройка, а прямое продолжение той же логики: паломники всегда шли к богу через торговлю. Buddhism в Japan редко существовал отдельно от коммерции — он её освящал.</p>
+        <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#edo-asakusa">Асакуса в период Эдо</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-hozomon">Hōzōmon gate</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Hōzōmon</span></div></figure>
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если увидишь большие соломенные сандалии (waraji), обрати внимание на их размер. По легенде они должны отпугивать демонов: если обувь настолько велика, значит и её владелец ещё больше.</div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-sensoji">Sensō-ji</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Sensō-ji</span></div></figure>
+      <div>
+        <p>Большинство зданий, которые ты видишь сегодня, восстановлены после Второй мировой войны. Это хороший пример японского отношения к наследию: важно сохранить не только оригинальное здание, но и саму традицию.</p>
+        <p>По легенде, в 628 году два рыбака выловили в реке Сумида небольшую статую <strong>бодхисаттвы Каннон</strong> — покровительницы сострадания. Каждый раз, когда они пытались вернуть её в реку, статуя снова попадала в сети. Так появилось место, которое позже стало храмом Сэнсо-дзи — старейшим буддийским храмом Токио (645 год).</p>
+      </div>
+    </div>
+    <p>Храм стал могущественным духовным оплотом благодаря принципам <strong>фэншуй</strong>, согласно которым он защищал замок Эдо от злых духов, проникавших с неблагоприятного северо-восточного направления («кимон»).</p>
+    <ul class="plain">
+      <li><strong>Роль Иэясу:</strong> первый сёгун Токугава Иэясу (правивший в 1603–1605) по совету духовного наставника, монаха Тэнкай, назначил Сэнсо-дзи официальным молитвенным храмом сёгуната для защиты своей резиденции.</li>
+      <li><strong>Покровительство:</strong> в храме веками молились о процветании рода Токугава, что сделало его культовым центром среди простых жителей Эдо в период его расцвета.</li>
+    </ul>
+
+    <div class="cols">
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>У Sensō-ji своя репутация в гаданиях — здесь традиционно сохраняют старую систему Kannon Hyakusen, где около 30% омикудзи «плохие», тогда как большинство современных храмов давно занизили эту долю ради спокойствия туристов. Плохое предсказание не забирают домой — его завязывают на специальной стойке рядом, оставляя неудачу храму.<br><br>На обратной стороне многих фонарей, ворот и украшений часто написаны имена жертвователей. Попробуй иногда смотреть не на фасад, а на обратную сторону вещей.</div>
+      <div>
+        <span class="note-tag tag-attention">Обрати внимание</span>
+        <p style="font-size:0.92rem; margin-top:0.5rem">При входе в главный зал висят два двустишия работы Noguchi Setsue, одного из «трёх мастеров Kansei»:</p>
+        <div class="blockquote">«Тело Будды идеально круглое, без спины» и «Все, кто приходит с десяти сторон света, обращены к ней».</div>
+        <p style="font-size:0.9rem">Мысль изящная: у совершенного тела нет изнанки, оно одинаково обращено ко всем — откуда бы паломник ни пришёл, он всегда оказывается лицом к лицу с божеством.</p>
+      </div>
+    </div>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Origin legend of Sensō-ji and the Sumida River · Kannon (Avalokiteśvara) in Japanese Buddhism · Firebombing of Tokyo, March 1945 · Concept of authenticity in Shinto vs Buddhist sites · Shikinen Sengu tradition at Ise Jingu</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-shrine">Asakusa Shrine и разделённая память</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Asakusa Shrine</span></div></figure>
+      <div>
+        <p>Рядом с главным залом стоит Asakusa Shrine — синтоистское святилище, посвящённое не богам, а трём конкретным людям: тем самым рыбакам и старосте, принявшему статую Kannon.</p>
+        <p>До 1868 года храм и святилище управлялись как единое целое: раз в год духи трёх основателей «навещали» Kannon в главном зале, проводили с ней ночь, а затем их несли в паланкинах через реку и по улицам города. Meiji-правительство насильно разделило синто и буддизм — и только тогда святилище стало самостоятельным.</p>
+        <p>Здание при этом — подлинное, одно из двух построек в районе, переживших бомбардировки 1945 года; пока Sensō-ji отстраивали заново, здесь по-прежнему стоит Edo-период.</p>
+      </div>
+    </div>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Shinbutsu Bunri, separation of Shinto and Buddhism 1868 · Sanja Matsuri festival history</p>
+    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Место открыто для тихого созерцания сразу за шумом главного зала — komainu (львы-стражи) у входа: один с открытой пастью, другой с закрытой, символизируя начало и конец всех вещей. Отдельная пара komainu под общим зонтом называется Meoto Komainu («женатые львы-собаки») — к ним приходят молиться о счастливом браке.</div>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-kappabashi">Kappabashi — легенда о дренаже</h2>
+    <p>Название улицы отсылает не к посуде, а к воде. По легенде, в XIX веке местный купец по имени Kappaya Kihachi взялся прокладывать дренажные каналы, чтобы спасти район от постоянных наводнений. Работа шла тяжело — и, по преданию, ему стали помогать kappa, водяные существа из японского фольклора, приходившие по ночам.</p>
+    <p>Есть и более прозаичная версия: раньше здесь на мосту (bashi) сушили дождевики (kappa) низкоранговых самураев. Обе версии сходятся в одном — именно вода определила имя места, которое сегодня торгует кастрюлями.</p>
+    <ul class="plain">
+      <li>В Kappabashi есть маленький Sogenji Temple в переулках за главной улицей — там хранится мумифицированная кисть kappa под стеклом, и местные до сих пор оставляют статуям огурцы и саке.</li>
+      <li>Golden Kappa statue на середине Kappabashi-dori поставлена в 2003 году к 90-летию торговой улицы — своего рода официальное признание мифа маскотом района.</li>
+    </ul>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Kappa in Japanese folklore · Sogenji Temple and the mummified kappa hand</p>
+  </section>
+
+  <!-- TAB 4: Еда и практика -->
+  <section class="tab-panel" id="t4">
+    <h2 class="section-title">Food & Coffee</h2>
+    <p><strong>Asakusa Menchi</strong> — здесь берут именно за простоту: один продукт, доведённый до совершенства, без попытки удивить. Хорошая точка, чтобы почувствовать вкус старого квартала, а не гостиничный вариант японской кухни.</p>
+
+    <h2 class="section-title">Practical Info</h2>
+    <div class="practical-table">
+      <div class="practical-row"><div class="practical-label">Tourist Center</div><div class="practical-value">Прямо напротив Kaminarimon, вход и подъём на смотровую (8 этаж) бесплатны, лифт или эскалатор. Открыт 9:00–20:00, смотровая — до 22:00. Лучше зайти в начале дня, до толп на Nakamise.</div></div>
+      <div class="practical-row"><div class="practical-label">Sensō-ji</div><div class="practical-value">Лучше смотреть до 9:00–9:30, пока не подошли основные группы.</div></div>
+      <div class="practical-row"><div class="practical-label">Nakamise</div><div class="practical-value">Закрывается в 20:00 — вечером улица выглядит совершенно иначе.</div></div>
+      <div class="practical-row"><div class="practical-label">Туалеты</div><div class="practical-value">У Kaminarimon и рядом с главным залом, там же локеры.</div></div>
+      <div class="practical-row"><div class="practical-label">Курение</div><div class="practical-value">За пределами храмовой территории, ближе к Kappabashi-dori.</div></div>
+      <div class="practical-row"><div class="practical-label">Kappabashi</div><div class="practical-value">По воскресеньям многие магазины закрыты — для «рабочей» улицы лучше идти в будний день.</div></div>
+    </div>
+  </section>
+
+  <p class="footnote">Asakusa Day · Japan 2026 · план дня, собранный вручную</p>
+</main>
+
+<button class="back-btn" id="backBtn">↑ К списку мест</button>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 20, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.nav-place-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // switch to "По местам" tab (t3)
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('.tab-btn[data-tab="t3"]').classList.add('active');
+      document.getElementById('t3').classList.add('active');
+      // then scroll to the specific location
+      const target = document.getElementById(btn.dataset.target);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+    });
+  });
+
+  // Back-to-list floating button: visible only while inside t3 with a location scrolled past nav
+  const backBtn = document.getElementById('backBtn');
+  const navPlaces = document.querySelector('.nav-places');
+  const t3Panel = document.getElementById('t3');
+
+  function updateBackBtn() {
+    if (!t3Panel.classList.contains('active')) {
+      backBtn.classList.remove('visible');
+      return;
+    }
+    const navBottom = navPlaces.getBoundingClientRect().bottom;
+    if (navBottom < 0) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateBackBtn, { passive: true });
+
+  backBtn.addEventListener('click', () => {
+    navPlaces.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+</body>
+</html>

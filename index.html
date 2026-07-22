@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Japan 2026 — Указатель</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --paper: #FAF8F4;
+    --paper-deep: #F3F1EA;
+    --card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-soft: #2E2921;
+    --red: #B23A2E;
+    --red-soft: #C85A4B;
+    --line: #E1DACB;
+    --gold: #A87C4F;
+    --gray-bg: #EEEAE1;
+    --blue: #4A6D8C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light only; }
+  body {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .torii-line {
+    position: fixed; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--red) 8%, var(--red) 92%, transparent 100%);
+    z-index: 50; opacity: 0.85;
+  }
+  @media (max-width: 720px) { .torii-line { display: none; } }
+
+  /* ---------- Hero: quote + ink-wash image, replacing the giant-kanji shrine hero used on day pages ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: var(--paper-deep);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2.5rem;
+    padding: 3.2rem 6vw 0;
+  }
+  .hero-text { flex: 1 1 380px; min-width: 280px; padding-bottom: 2.4rem; }
+  .hero-image {
+    flex: 0 0 240px; align-self: stretch;
+    position: relative; overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 30% 20%;
+    display: block;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    mask-composite: intersect;
+  }
+  @media (max-width: 760px) {
+    .hero-inner { flex-direction: column-reverse; padding-top: 0; }
+    .hero-image { flex-basis: auto; width: 100%; height: 200px; }
+    .hero-image img { object-position: 50% 15%;
+      -webkit-mask-image: linear-gradient(0deg, transparent, black 18%);
+      mask-image: linear-gradient(0deg, transparent, black 18%); mask-composite: normal; -webkit-mask-composite: source-over;
+    }
+    .hero-text { padding-top: 2.2rem; }
+  }
+
+  .eyebrow {
+    color: var(--red); font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
+  .hero-quote { max-width: 560px; }
+  .hero-quote .quote-jp {
+    display: block; font-family: 'Shippori Mincho', serif; font-weight: 500;
+    font-size: 1rem; color: var(--red); opacity: 0.9; margin-bottom: 0.6rem; letter-spacing: 0.02em;
+  }
+  .hero-quote blockquote {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(1.15rem, 2.6vw, 1.6rem); color: var(--ink); line-height: 1.5;
+    white-space: nowrap;
+  }
+  @media (max-width: 560px) { .hero-quote blockquote { white-space: normal; } }
+  .hero-quote .quote-author {
+    display: block; margin-top: 0.6rem; font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  }
+  .hero-text .sub { margin-top: 1.3rem; font-size: 0.95rem; color: var(--ink-soft); max-width: 44ch; }
+
+  /* the index-tab bar: literal table of contents, doubles as the page's visual signature */
+  .index-bar {
+    max-width: 1080px; margin: 2rem auto 0; padding: 0 6vw 2.2rem;
+    display: flex; align-items: center;
+  }
+  .index-bar .stop { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; color: var(--ink-soft); flex-shrink: 0; }
+  .index-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); flex-shrink: 0; transition: transform 0.15s; }
+  .index-bar .stop:hover .dot { transform: scale(1.3); }
+  .index-bar .stop-label {
+    font-size: 0.78rem; letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .index-bar .stop:hover .stop-label { color: var(--red); }
+  .index-bar .connector { flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 9px); margin: 0 0.9rem; opacity: 0.8; }
+  @media (max-width: 640px) { .index-bar { flex-wrap: wrap; gap: 0.8rem; } .index-bar .connector { display: none; } }
+
+  /* ---------- Israel ⇄ Japan live time strip ---------- */
+  .time-strip {
+    max-width: 920px; margin: 0 auto; padding: 0.9rem 1.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 1.1rem;
+    font-size: 0.82rem; color: var(--ink-soft); border-bottom: 1px solid var(--line);
+  }
+  .time-strip .tz { display: flex; align-items: baseline; gap: 0.4rem; }
+  .time-strip .tz-label { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .time-strip .tz-time { font-family: 'Shippori Mincho', serif; font-size: 1rem; color: var(--ink); }
+  .time-strip .tz-diff { font-size: 0.76rem; color: #9A9284; white-space: nowrap; }
+  .time-strip .tz-sep { color: var(--line); }
+  @media (max-width: 480px) { .time-strip { flex-wrap: wrap; gap: 0.6rem 1rem; } }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 3.4rem 1.5rem 6rem; }
+
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.1rem; display: flex; align-items: center; gap: 0.7rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .section-note { font-size: 0.85rem; color: #9A9284; margin: -0.6rem 0 1.6rem; }
+
+  /* ---------- Общее и справочники: visible dot-track, no cards ---------- */
+  .tools-track {
+    display: flex; flex-wrap: wrap; align-items: flex-start;
+    gap: 2.2rem 2.6rem; margin-bottom: 3.6rem;
+  }
+  .tool-stop { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; width: 6.5rem; }
+  .tool-stop .tool-dot {
+    width: 3rem; height: 3rem; border-radius: 50%;
+    background: var(--card); border: 1.5px solid var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Shippori Mincho', serif; font-size: 0.92rem; color: var(--red);
+    margin-bottom: 0.6rem; transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .tool-stop:hover .tool-dot { background: var(--red); color: var(--paper); transform: scale(1.08); }
+  .tool-stop h4 {
+    font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; color: var(--ink-soft);
+    text-align: center; transition: color 0.2s;
+  }
+  .tool-stop:hover h4 { color: var(--red); }
+
+  /* ---------- Дни поездки: line + dots, minimal ---------- */
+  .day-route { position: relative; margin-bottom: 3.4rem; padding-left: 1.6rem; }
+  .day-route::before {
+    content: ""; position: absolute; left: 4px; top: 0.5rem; bottom: 0.5rem;
+    width: 1px; background: var(--line);
+  }
+  .day-stop {
+    position: relative; display: flex; align-items: baseline; gap: 0.9rem;
+    padding: 0.85rem 0; text-decoration: none; color: inherit;
+    border-bottom: 1px solid var(--line);
+  }
+  .day-route .day-stop:last-of-type { border-bottom: none; }
+  .day-stop::before {
+    content: ""; position: absolute; left: -1.6rem; top: 50%; transform: translateY(-50%);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--red); border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--red);
+  }
+  .day-stop .day-kanji { font-family: 'Shippori Mincho', serif; font-size: 1.2rem; color: var(--gold); width: 2.2ch; flex-shrink: 0; }
+  .day-stop .day-text h3 {
+    font-family: 'Shippori Mincho', serif; font-weight: 600; font-size: 1.08rem; color: var(--ink);
+    display: inline; margin-right: 0.6rem;
+  }
+  .day-stop .day-area {
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold);
+  }
+  .day-stop .day-desc { display: block; font-size: 0.84rem; color: var(--ink-soft); margin-top: 0.15rem; }
+  .day-stop .arrow { margin-left: auto; color: var(--red); opacity: 0.5; flex-shrink: 0; transition: opacity 0.2s, transform 0.2s; align-self: center; }
+  .day-stop:hover .arrow { opacity: 1; transform: translateX(3px); }
+  .day-stop:hover .day-text h3 { color: var(--red); }
+
+  .day-stop.placeholder { color: #9A9284; cursor: default; }
+  .day-stop.placeholder::before { background: var(--gray-bg); box-shadow: 0 0 0 1px var(--line); }
+  .day-stop.placeholder .day-kanji { color: var(--line); }
+  .day-stop.placeholder:hover .day-text h3 { color: inherit; }
+
+  /* ---------- Места: card-catalog index with dotted leaders ---------- */
+  .places-index {
+    columns: 2; column-gap: 2.4rem; margin-bottom: 3rem;
+  }
+  @media (max-width: 640px) { .places-index { columns: 1; } }
+  .place-entry {
+    display: flex; align-items: baseline; gap: 0.4rem;
+    padding: 0.5rem 0; break-inside: avoid;
+    text-decoration: none; color: inherit;
+    border-bottom: 1px dotted var(--line);
+  }
+  .place-entry .place-name { font-size: 0.92rem; color: var(--ink); white-space: nowrap; }
+  .place-entry .leader { flex: 1; border-bottom: 1px dotted var(--line); margin-bottom: 3px; min-width: 0.5rem; }
+  .place-entry .place-day {
+    font-size: 0.72rem; letter-spacing: 0.04em; color: var(--gold); white-space: nowrap; flex-shrink: 0;
+  }
+  .place-entry:hover .place-name { color: var(--red); }
+  .place-entry:hover .place-day { color: var(--red); }
+
+  .footnote {
+    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+    font-size: 0.8rem; color: #9A9284;
+  }
+</style>
+</head>
+<body>
+
+<div class="torii-line" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">Japan 2026</div>
+      <div class="hero-quote">
+        <span class="quote-jp">道に迷うことこそ、道を知ることだ</span>
+        <blockquote>Заблудиться — это и есть способ найти дорогу</blockquote>
+        <span class="quote-author">Восточноафриканская пословица</span>
+      </div>
+      <div class="sub">Дни и места, к которым идём.</div>
+    </div>
+    <div class="hero-image">
+      <img src="hero-monk-sunrise.png" alt="">
+    </div>
+  </div>
+
+  <nav class="index-bar">
+    <a class="stop" href="#section-common"><span class="dot"></span><span class="stop-label">Общее</span></a>
+    <span class="connector" aria-hidden="true"></span>
+    <a class="stop" href="#section-days"><span class="dot"></span><span class="stop-label">Дни</span></a>
+    <span class="connector" aria-hidden="true"></span>
+    <a class="stop" href="#section-places"><span class="dot"></span><span class="stop-label">Места</span></a>
+  </nav>
+</header>
+
+<div class="time-strip">
+  <span class="tz"><span class="tz-label">Israel</span><span class="tz-time" id="ilTime">—:—</span></span>
+  <span class="tz-sep">·</span>
+  <span class="tz"><span class="tz-label">Japan</span><span class="tz-time" id="jpTime">—:—</span></span>
+  <span class="tz-sep">·</span>
+  <span class="tz-diff" id="tzDiff">разница считается</span>
+</div>
+
+<main class="wrap">
+
+  <h2 class="section-label" id="section-common">Общее и справочники</h2>
+  <div class="tools-track">
+    <a class="tool-stop" href="trip-logistics.html">
+      <span class="tool-dot">旅程</span>
+      <h4>Trip Logistics</h4>
+    </a>
+    <a class="tool-stop" href="trip-info.html">
+      <span class="tool-dot">心得</span>
+      <h4>Trip Info</h4>
+    </a>
+    <a class="tool-stop" href="shopping.html">
+      <span class="tool-dot">買物</span>
+      <h4>Shopping</h4>
+    </a>
+    <a class="tool-stop" href="glossary.html">
+      <span class="tool-dot">用語集</span>
+      <h4>Glossary</h4>
+    </a>
+  </div>
+
+  <h2 class="section-label" id="section-days">Дни поездки</h2>
+  <p class="section-note">Порядок ориентировочный и может измениться — точные даты смотри в Trip Logistics.</p>
+  <div class="day-route">
+
+    <a class="day-stop" href="asakusa-day.html">
+      <span class="day-kanji">浅草</span>
+      <span class="day-text">
+        <h3>Asakusa Day</h3>
+        <span class="day-area">Taitō</span>
+        <span class="day-desc">Sensō-ji, Nakamise-dōri, Asakusa Shrine, Kappabashi</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="day-stop" href="shimokitazawa-day.html">
+      <span class="day-kanji">猫</span>
+      <span class="day-text">
+        <h3>Shimokitazawa Day</h3>
+        <span class="day-area">Setagaya</span>
+        <span class="day-desc">Gōtoku-ji, винтаж и район, где ничто не называется тем, чем является</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <span class="day-stop placeholder">
+      <span class="day-kanji">···</span>
+      <span class="day-text"><h3>Следующий день</h3><span class="day-desc">в работе</span></span>
+    </span>
+
+    <span class="day-stop placeholder">
+      <span class="day-kanji">···</span>
+      <span class="day-text"><h3>Следующий день</h3><span class="day-desc">в работе</span></span>
+    </span>
+
+  </div>
+
+  <h2 class="section-label" id="section-places">Места</h2>
+  <p class="section-note">Алфавитный указатель по местам — если место переедет в другой день, поправить нужно только эту строку.</p>
+  <div class="places-index">
+    <a class="place-entry" href="shimokitazawa-day.html#loc-apfr"><span class="place-name">APFR TOKYO</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-shrine"><span class="place-name">Asakusa Shrine</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+    <a class="place-entry" href="shimokitazawa-day.html#loc-desklabo"><span class="place-name">Desk Labo</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="shimokitazawa-day.html#loc-gotokuji"><span class="place-name">Gōtoku-ji Temple</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-hozomon"><span class="place-name">Hōzōmon</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-kaminarimon"><span class="place-name">Kaminarimon</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-kappabashi"><span class="place-name">Kappabashi</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+    <a class="place-entry" href="shimokitazawa-day.html#loc-littlesoul"><span class="place-name">Little Soul Cafe</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-nakamise"><span class="place-name">Nakamise</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+    <a class="place-entry" href="shimokitazawa-day.html#loc-nerdydogs"><span class="place-name">Nerdy Dogs</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="shimokitazawa-day.html#loc-ozeki"><span class="place-name">Ōzeki Shimokitazawa</span><span class="leader"></span><span class="place-day">Shimokitazawa</span></a>
+    <a class="place-entry" href="asakusa-day.html#loc-sensoji"><span class="place-name">Sensō-ji</span><span class="leader"></span><span class="place-day">Asakusa</span></a>
+  </div>
+
+  <p class="footnote">Japan 2026 · указатель · обновляется по ходу подготовки</p>
+</main>
+
+<script>
+  function getOffsetHours(timeZone, date) {
+    const dtf = new Intl.DateTimeFormat('en-US', {
+      timeZone, hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+    const p = dtf.formatToParts(date).reduce((acc, x) => { acc[x.type] = x.value; return acc; }, {});
+    const asUTC = Date.UTC(p.year, p.month - 1, p.day, p.hour === '24' ? 0 : p.hour, p.minute, p.second);
+    return (asUTC - date.getTime()) / 3600000;
+  }
+
+  function updateClocks() {
+    const now = new Date();
+    const ilFmt = new Intl.DateTimeFormat('ru-RU', { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit' });
+    const jpFmt = new Intl.DateTimeFormat('ru-RU', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' });
+    document.getElementById('ilTime').textContent = ilFmt.format(now);
+    document.getElementById('jpTime').textContent = jpFmt.format(now);
+
+    const diff = Math.round(getOffsetHours('Asia/Tokyo', now) - getOffsetHours('Asia/Jerusalem', now));
+    document.getElementById('tzDiff').textContent = `в Токио на ${diff} ч. больше`;
+  }
+
+  updateClocks();
+  setInterval(updateClocks, 30000);
+</script>
+
+</body>
+</html>

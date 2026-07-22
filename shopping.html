@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Shopping — Japan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --paper: #FAF8F4;
+    --paper-deep: #F3F1EA;
+    --card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-soft: #2E2921;
+    --red: #B23A2E;
+    --red-soft: #C85A4B;
+    --line: #E1DACB;
+    --gold: #A87C4F;
+    --gray-bg: #EEEAE1;
+    --blue: #4A6D8C;
+    --green-bg: #E4EDE3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light only; }
+
+  body {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  .torii-line {
+    position: fixed; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--red) 8%, var(--red) 92%, transparent 100%);
+    z-index: 50; opacity: 0.85;
+  }
+  @media (max-width: 720px) { .torii-line { display: none; } }
+
+  /* ---------- Hero: text + ink-wash image, side by side ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: var(--paper-deep);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2.5rem;
+    padding: 3.2rem 6vw 0;
+  }
+  .hero-text { flex: 1 1 380px; min-width: 280px; padding-bottom: 2.4rem; }
+  .hero-image {
+    flex: 0 0 240px; align-self: stretch;
+    position: relative; overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+    display: block;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    mask-composite: intersect;
+  }
+  @media (max-width: 760px) {
+    .hero-inner { flex-direction: column-reverse; padding-top: 0; }
+    .hero-image { flex-basis: auto; width: 100%; height: 200px; }
+    .hero-image img { object-position: 50% 15%;
+      -webkit-mask-image: linear-gradient(0deg, transparent, black 18%);
+      mask-image: linear-gradient(0deg, transparent, black 18%); mask-composite: normal; -webkit-mask-composite: source-over;
+    }
+    .hero-text { padding-top: 2.2rem; }
+  }
+
+  .eyebrow {
+    color: var(--red); font-size: 0.72rem; letter-spacing: 0.28em;
+    text-transform: uppercase; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
+  .hero-quote { max-width: 560px; }
+  .hero-quote .quote-jp {
+    display: block; font-family: 'Shippori Mincho', serif; font-weight: 500;
+    font-size: 1rem; color: var(--red); opacity: 0.9; margin-bottom: 0.6rem; letter-spacing: 0.02em;
+  }
+  .hero-quote blockquote {
+    font-family: 'Shippori Mincho', serif; font-weight: 600;
+    font-size: clamp(1.8rem, 4.4vw, 2.7rem); color: var(--ink); line-height: 1.15;
+  }
+  .hero-quote .quote-author {
+    display: block; margin-top: 0.6rem; font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  }
+  .hero-text .sub { margin-top: 1.1rem; font-size: 0.95rem; color: var(--ink-soft); max-width: 44ch; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  .overview-list { list-style: none; margin-bottom: 3rem; }
+  .overview-list li {
+    position: relative; padding: 0.7rem 0 0.7rem 1.6rem;
+    border-bottom: 1px solid var(--line); font-size: 0.98rem;
+  }
+  .overview-list li::before {
+    content: ""; position: absolute; left: 0; top: 1.15rem;
+    width: 6px; height: 6px; background: var(--red); border-radius: 50%;
+  }
+  .overview-list li:last-child { border-bottom: none; }
+  .accent { color: var(--gold); font-weight: 500; }
+
+  .nav-places {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem;
+  }
+  .nav-places-label {
+    width: 100%; font-size: 0.75rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .nav-place-btn {
+    font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--ink-soft);
+    background: var(--gray-bg); border: 1px solid var(--line); border-radius: 20px;
+    padding: 0.5rem 1rem; cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+  }
+  .nav-place-btn:hover { color: var(--red); border-color: var(--red-soft); background: rgba(178,58,46,0.06); }
+
+  .tabs-nav {
+    display: flex; gap: 0.3rem; border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem; overflow-x: auto; scrollbar-width: none;
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none; font-family: 'Inter', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.04em; color: var(--ink-soft);
+    padding: 0.8rem 1.1rem; cursor: pointer; white-space: nowrap;
+    position: relative; transition: color 0.2s;
+  }
+  .tab-btn::after {
+    content: ""; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--red); transform: scaleX(0); transition: transform 0.25s ease;
+  }
+  .tab-btn.active { color: var(--red); font-weight: 500; }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--red-soft); }
+
+  .tab-panel { display: none; animation: fadeIn 0.3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  h2.section-title {
+    font-family: 'Shippori Mincho', serif; font-weight: 600; font-size: 1.7rem;
+    color: var(--red); margin: 2.4rem 0 1.2rem;
+  }
+  h2.section-title:first-child { margin-top: 0; }
+
+  h4 {
+    font-family: 'Inter', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 0.6rem;
+  }
+
+  p { margin-bottom: 1rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .cols {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    margin-bottom: 1.5rem; align-items: start;
+  }
+  @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
+  .cols + .note, .cols + .notes-grid, .cols + .read-more { margin-top: 0; }
+  .cols img, figure img { width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 12px rgba(28,25,23,0.08); }
+
+  .img-placeholder {
+    width: 100%; aspect-ratio: 4 / 3; border-radius: 2px;
+    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(178,58,46,0.10) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(168,124,79,0.12) 0%, transparent 50%),
+      var(--gray-bg);
+    position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  .img-placeholder::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(28,25,23,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,25,23,0.04) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .img-placeholder span {
+    position: relative; font-family: 'Shippori Mincho', serif; font-size: 0.78rem;
+    letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase;
+    border: 1px solid var(--line); padding: 0.5rem 1rem; background: rgba(247,243,236,0.6);
+  }
+
+  /* ---------- Technical thumbnails: screenshots / product shots ---------- */
+  /* Unlike the atmospheric hero-size images on other pages, images here are */
+  /* reference material (coupon screens, product photos) — small, several per section, text stays primary. */
+  .shot-row { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1rem 0 1.6rem; }
+  .shot { width: 118px; flex-shrink: 0; }
+  .shot-img {
+    width: 100%; aspect-ratio: 3 / 4; border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(28,25,23,0.10);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(178,58,46,0.08) 0%, transparent 50%),
+      var(--gray-bg);
+    position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  .shot-img::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(28,25,23,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,25,23,0.04) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  .shot-img span {
+    position: relative; font-family: 'Inter', sans-serif; font-size: 0.6rem;
+    letter-spacing: 0.06em; color: var(--gold); text-transform: uppercase;
+    text-align: center; padding: 0 0.4rem;
+  }
+  .shot-cap { font-size: 0.72rem; color: #9A9284; margin-top: 0.4rem; text-align: center; line-height: 1.3; }
+
+  /* ---------- Step-by-step redemption block ---------- */
+  .steps { margin: 1.2rem 0 1.6rem; }
+  .steps ol { list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 0.9rem 2.1rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: -0.05rem;
+    width: 1.5rem; height: 1.5rem;
+    border-radius: 50%;
+    background: var(--red);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps li strong { color: var(--ink); }
+  .steps a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red-soft); }
+
+  .note { padding: 0.9rem 0; margin: 1.3rem 0; font-size: 0.92rem; color: var(--ink-soft); }
+  .note-tag {
+    display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    padding: 0.15rem 0.55rem; border-radius: 2px; margin-bottom: 0.5rem;
+  }
+  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.08); }
+  .note-tag.tag-try { color: var(--gold); background: rgba(168,124,79,0.10); }
+  .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
+  .note-tag.tag-tip { color: var(--blue); background: rgba(74,109,140,0.08); }
+
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; margin: 1.3rem 0; }
+  .notes-grid .note { margin: 0; padding: 0.9rem 0; }
+  @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  .practical-table { margin: 1.3rem 0; }
+  .practical-row {
+    display: grid; grid-template-columns: 160px 1fr; gap: 1rem;
+    padding: 0.65rem 0; border-bottom: 1px solid var(--line); font-size: 0.9rem;
+  }
+  .practical-row:last-child { border-bottom: none; }
+  .practical-label {
+    font-family: 'Inter', sans-serif; font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); padding-top: 0.1rem;
+  }
+  .practical-value { color: var(--ink-soft); }
+  @media (max-width: 560px) { .practical-row { grid-template-columns: 1fr; gap: 0.2rem; } }
+
+  .read-more {
+    font-size: 0.86rem; color: var(--ink-soft); margin: 1rem 0 1.6rem;
+    padding: 0.7rem 0 0.7rem 1rem; border-left: 2px solid var(--gold);
+    background: rgba(168,124,79,0.06);
+  }
+  .read-more-label {
+    color: var(--gold); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; display: block; margin-bottom: 0.3rem;
+  }
+
+  .callout {
+    position: relative; padding: 1rem 1.3rem 1rem 1.6rem; font-size: 0.92rem;
+    color: var(--ink-soft); margin: 1.2rem 0; display: flex; gap: 0.7rem;
+    background: linear-gradient(90deg, rgba(178,58,46,0.05) 0%, transparent 100%);
+  }
+  .callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
+  .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
+  .callout strong { color: var(--ink); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+  ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
+  ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---------- Comparison / coupon table ---------- */
+  .deal-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0 1.8rem; font-size: 0.88rem; }
+  .deal-table th, .deal-table td { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .deal-table th {
+    font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); font-weight: 600; border-bottom: 1px solid var(--red-soft);
+  }
+  .deal-table td.num { color: var(--red); font-weight: 600; white-space: nowrap; }
+  .deal-table tr:last-child td { border-bottom: none; }
+  .deal-table .muted { color: #9A9284; font-size: 0.82rem; }
+  @media (max-width: 680px) {
+    .deal-table thead { display: none; }
+    .deal-table, .deal-table tbody, .deal-table tr, .deal-table td { display: block; width: 100%; }
+    .deal-table tr { border-bottom: 1px solid var(--line); padding: 0.6rem 0; }
+    .deal-table td { border-bottom: none; padding: 0.2rem 0; }
+    .deal-table td::before { content: attr(data-label); display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; }
+  }
+
+  .status-pill {
+    display: inline-block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.15rem 0.55rem; border-radius: 2px; font-weight: 600;
+  }
+  .status-verified { color: #3D6B3D; background: rgba(61,107,61,0.10); }
+  .status-pending { color: var(--gold); background: rgba(168,124,79,0.12); }
+
+  .back-btn {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--paper); font-family: 'Inter', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.03em; padding: 0.65rem 1.3rem; border-radius: 30px; border: none; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(28,25,23,0.25); z-index: 40; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+
+  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.8rem; color: #9A9284; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .tab-panel { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="torii-line" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow"><a href="index.html" style="color: var(--red); text-decoration: none;">← Все дни</a> &nbsp;·&nbsp; Japan 2026 · Shopping</div>
+      <div class="hero-quote">
+        <span class="quote-jp">買い物</span>
+        <blockquote>Shopping</blockquote>
+        <span class="quote-author">Tax-free · купоны · категории</span>
+      </div>
+      <div class="sub">скидки, купоны и разбор по категориям вещей</div>
+    </div>
+    <div class="hero-image">
+      <img src="hero-shopping.png" alt="">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <nav class="nav-places">
+    <div class="nav-places-label">По категориям ↓</div>
+    <button class="nav-place-btn" data-target="cat-powerbank">Power Bank</button>
+    <button class="nav-place-btn" data-target="cat-knives">Ножи</button>
+    <button class="nav-place-btn" data-target="cat-bags">Сумки</button>
+  </nav>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="t1">Как это работает</button>
+    <button class="tab-btn" data-tab="t2">Купоны по сетям</button>
+    <button class="tab-btn" data-tab="t3">Категории</button>
+    <button class="tab-btn" data-tab="t4">Сводка</button>
+  </nav>
+
+  <!-- TAB 1: Общий механизм -->
+  <section class="tab-panel active" id="t1">
+    <p>Tax-free и купоны сети — это два <strong>независимых</strong> слоя скидки, и они почти всегда складываются. Смысл в том, чтобы не думать об этом заново для каждой вещи — правило одно на всю поездку.</p>
+
+    <div class="notes-grid">
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Tax-free оформляется <strong>по паспорту, в момент покупки</strong>, а не через возврат позже — Япония работает по системе "sales tax exemption at checkout", а не "VAT refund" как в Европе.</div>
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Минимум для tax-free обычно 5 000 ¥ без налога в одном магазине в один день — можно суммировать чеки в течение дня в одной сети, если это оговорено на кассе.</div>
+      <div class="note"><span class="note-tag tag-skip">Что можно пропустить</span><br>Duty-free в аэропорту почти всегда дороже tax-free в городе на ту же вещь — аэропорт стоит рассматривать только для последних покупок, а не как основную точку.</div>
+      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Купонные сайты вроде LiveJapan и TAXFREESHOPS.JP дают цифровой купон без регистрации — просто показываешь экран телефона на кассе.</div>
+    </div>
+
+    <div class="practical-table">
+      <div class="practical-row"><div class="practical-label">Кто имеет право</div><div class="practical-value">Иностранный турист, находящийся в Японии не более 6 месяцев — паспорт проверяют на кассе.</div></div>
+      <div class="practical-row"><div class="practical-label">Упаковка</div><div class="practical-value">Некоторые категории (косметика, еда, алкоголь) запечатывают в спецпакет — открывать нельзя до вылета из Японии.</div></div>
+      <div class="practical-row"><div class="practical-label">Совмещение скидок</div><div class="practical-value">Купон сети + tax-free обычно складываются. Купон сети + распродажа магазина — как правило, нет.</div></div>
+    </div>
+
+    <h4>Как оформить tax-free на кассе — шаги</h4>
+    <div class="steps">
+      <ol>
+        <li><strong>Перед оплатой</strong> скажи "tax-free, please" — оформляется до, а не после чека.</li>
+        <li>Покажи <strong>паспорт</strong> (не фото, физический документ в большинстве сетей).</li>
+        <li>Если есть купон сети — открой его на телефоне заранее по ссылке (например <a href="#">livejapan.com/coupon/biccamera</a>) и покажи вместе с паспортом.</li>
+        <li>Подпишешь электронно на терминале — это согласие не вскрывать упаковку до вылета.</li>
+        <li>Сохрани чек tax-free — иногда спрашивают на паспортном контроле при вылете.</li>
+      </ol>
+    </div>
+    <div class="shot-row">
+      <div class="shot"><div class="shot-img"><span>скрин купона</span></div><div class="shot-cap">Экран купона на кассе</div></div>
+      <div class="shot"><div class="shot-img"><span>чек tax-free</span></div><div class="shot-cap">Как выглядит чек</div></div>
+      <div class="shot"><div class="shot-img"><span>спецпакет</span></div><div class="shot-cap">Запечатанный пакет</div></div>
+    </div>
+  </section>
+
+  <!-- TAB 2: Купоны по сетям -->
+  <section class="tab-panel" id="t2">
+    <p>Таблица растёт по мере того, как проверяем новые сети. Пока — то, что уже подтверждено по нескольким источникам.</p>
+
+    <table class="deal-table">
+      <thead>
+        <tr><th>Сеть</th><th>Где взять купон</th><th>Скидка</th><th>Не действует на</th><th>Статус</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Сеть"><strong>Bic Camera</strong></td>
+          <td data-label="Купон">LiveJapan / показать экран на кассе, без регистрации</td>
+          <td data-label="Скидка" class="num">10% tax-free + 7% электроника / 5% косметика-бытовое / 3% sake</td>
+          <td data-label="Не действует на">Apple, игровые консоли (но tax-free 10% всё равно работает)</td>
+          <td data-label="Статус"><span class="status-pill status-verified">Проверено, июль 2026</span></td>
+        </tr>
+        <tr>
+          <td data-label="Сеть"><strong>Don Quijote</strong></td>
+          <td data-label="Купон">—</td>
+          <td data-label="Скидка">—</td>
+          <td data-label="Не действует на">—</td>
+          <td data-label="Статус"><span class="status-pill status-pending">Ещё не проверяли</span></td>
+        </tr>
+        <tr>
+          <td data-label="Сеть"><strong>Кожа / сумки (сеть уточняется)</strong></td>
+          <td data-label="Купон">—</td>
+          <td data-label="Скидка">—</td>
+          <td data-label="Не действует на">—</td>
+          <td data-label="Статус"><span class="status-pill status-pending">Ещё не проверяли</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="read-more"><span class="read-more-label">Действует до</span>Купон Bic Camera указан как действующий до 31 августа 2026 — перед поездкой проверить, продлили ли.</p>
+  </section>
+
+  <!-- TAB 3: Категории вещей -->
+  <section class="tab-panel" id="t3">
+
+    <h2 class="section-title" id="cat-powerbank">Power Bank для iPhone 15</h2>
+    <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним, когда обсудим модели и магазины.</p>
+    <div class="shot-row">
+      <div class="shot"><div class="shot-img"><span>модель 1</span></div><div class="shot-cap">Anker 737, Yodobashi</div></div>
+      <div class="shot"><div class="shot-img"><span>модель 2</span></div><div class="shot-cap">Ugreen, Bic Camera</div></div>
+    </div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Для этой категории важно заранее проверить провоз в ручной клади (ограничение по Wh) — вернёмся к этому отдельно.</div>
+
+    <hr>
+
+    <h2 class="section-title" id="cat-knives">Ножи</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Ножи</span></div></figure>
+      <div>
+        <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения конкретных марок и района (Kappabashi логично впишется).</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title" id="cat-bags">Сумки</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Сумки</span></div></figure>
+      <div>
+        <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- TAB 4: Сводная таблица -->
+  <section class="tab-panel" id="t4">
+    <p>Итоговый чеклист — вещь, где искать, примерная цена и сколько реально экономим после всех скидок.</p>
+    <table class="deal-table">
+      <thead>
+        <tr><th>Вещь</th><th>Магазин / район</th><th>Цена</th><th>Со скидками</th><th>Привязка к маршруту</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Вещь">Power Bank</td>
+          <td data-label="Магазин">—</td>
+          <td data-label="Цена">—</td>
+          <td data-label="Со скидками">—</td>
+          <td data-label="Маршрут">—</td>
+        </tr>
+        <tr>
+          <td data-label="Вещь">Нож</td>
+          <td data-label="Магазин">Kappabashi (район уже в плане Asakusa Day)</td>
+          <td data-label="Цена">—</td>
+          <td data-label="Со скидками">—</td>
+          <td data-label="Маршрут">Asakusa Day</td>
+        </tr>
+        <tr>
+          <td data-label="Вещь">Сумка</td>
+          <td data-label="Магазин">—</td>
+          <td data-label="Цена">—</td>
+          <td data-label="Со скидками">—</td>
+          <td data-label="Маршрут">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <p class="footnote">Shopping · Japan 2026 · страница дополняется по ходу подготовки</p>
+</main>
+
+<button class="back-btn" id="backBtn">↑ К списку категорий</button>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 20, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.nav-place-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('.tab-btn[data-tab="t3"]').classList.add('active');
+      document.getElementById('t3').classList.add('active');
+      const target = document.getElementById(btn.dataset.target);
+      if (target) {
+        setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+      }
+    });
+  });
+
+  const backBtn = document.getElementById('backBtn');
+  const navPlaces = document.querySelector('.nav-places');
+  const t3Panel = document.getElementById('t3');
+
+  function updateBackBtn() {
+    if (!t3Panel.classList.contains('active')) { backBtn.classList.remove('visible'); return; }
+    const navBottom = navPlaces.getBoundingClientRect().bottom;
+    if (navBottom < 0) { backBtn.classList.add('visible'); } else { backBtn.classList.remove('visible'); }
+  }
+  window.addEventListener('scroll', updateBackBtn, { passive: true });
+  backBtn.addEventListener('click', () => { navPlaces.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+</script>
+
+</body>
+</html>

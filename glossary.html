@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Glossary — Japan 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --paper: #FAF8F4;
+    --paper-deep: #F3F1EA;
+    --ink: #1C1917;
+    --ink-soft: #2E2921;
+    --red: #B23A2E;
+    --red-soft: #C85A4B;
+    --line: #E1DACB;
+    --gold: #A87C4F;
+    --gray-bg: #EEEAE1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light only; }
+  body {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .torii-line {
+    position: fixed; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--red) 8%, var(--red) 92%, transparent 100%);
+    z-index: 50; opacity: 0.85;
+  }
+  @media (max-width: 720px) { .torii-line { display: none; } }
+
+  .top-bar {
+    padding: 1.4rem 8vw;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-bar a.back {
+    font-size: 0.82rem;
+    color: var(--red);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .top-bar .title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+  .intro {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toc {
+    margin-bottom: 3rem;
+  }
+  .toc-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .toc ul { list-style: none; }
+  .toc li { padding: 0.35rem 0; }
+  .toc a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.92rem;
+    border-bottom: 1px dotted var(--line);
+  }
+  .toc a:hover { color: var(--red); border-bottom-color: var(--red-soft); }
+
+  .entry {
+    margin-bottom: 3rem;
+    padding-top: 1rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .entry-source {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .entry h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--red);
+    margin-bottom: 0.9rem;
+  }
+  .entry p { font-size: 0.96rem; color: var(--ink-soft); margin-bottom: 0.9rem; }
+  .entry strong { color: var(--ink); font-weight: 600; }
+  .entry .used-in {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #9A9284;
+  }
+  .entry .used-in a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 0 0 2rem; }
+</style>
+</head>
+<body>
+
+<div class="torii-line" aria-hidden="true"></div>
+
+<div class="top-bar">
+  <a class="back" href="asakusa-day.html">← Asakusa Day</a>
+  <span class="title">Glossary</span>
+  <span></span>
+</div>
+
+<main class="wrap">
+  <p class="intro">Справочник тем, встреченных во время подготовки к поездке — легенды, историческая справка и культурный контекст, которые не поместились в основной план дня, но стоят того, чтобы их сохранить.</p>
+
+  <nav class="toc">
+    <div class="toc-label">Содержание</div>
+    <ul>
+      <li><a href="#fujin-raijin">Fūjin и Raijin — боги ветра и грома</a></li>
+      <li><a href="#nio-guardians">Niō — стражи храмовых ворот</a></li>
+      <li><a href="#edo-asakusa">Асакуса в период Эдо</a></li>
+    </ul>
+  </nav>
+
+  <hr>
+
+  <section class="entry" id="fujin-raijin">
+    <div class="entry-source">Синтоистская и буддийская мифология</div>
+    <h2>Fūjin и Raijin — боги ветра и грома</h2>
+    <p><strong>Fūjin</strong> (風神) — бог ветра, один из старейших синтоистских божеств Японии, часто изображается с мешком ветров на плечах. <strong>Raijin</strong> (雷神) — бог грома и молний, обычно окружён барабанами, ударами по которым он создаёт гром.</p>
+    <p>Пара богов традиционно охраняет входы в буддийские храмы и синтоистские святилища, символизируя защиту священного пространства от злых сил природных стихий. Их парное изображение в нишах Kaminarimon — не просто украшение: это заявление о границе между мирским и сакральным пространством.</p>
+    <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-kaminarimon">Asakusa Day → Kaminarimon</a></div>
+  </section>
+
+  <section class="entry" id="nio-guardians">
+    <div class="entry-source">Буддийская иконография</div>
+    <h2>Niō — стражи храмовых ворот</h2>
+    <p>Niō (仁王) — пара мускулистых стражей-дэвов, охраняющих вход во многие буддийские храмы Восточной Азии. Всегда изображаются парой с контрастными выражениями лица.</p>
+    <p><strong>Агьё</strong> (阿形) — с открытым ртом, произносящим первый звук санскритского алфавита «А» — символ рождения и открытой силы. <strong>Унгьё</strong> (吽形) — с закрытым ртом, произносящим последний звук «Ун» — символ смерти, скрытой мощи и защиты. Вместе они образуют звук «Ом» (Aum), священную мантру, символизирующую полноту всего сущего от начала до конца.</p>
+    <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-kaminarimon">Asakusa Day → Kaminarimon</a></div>
+  </section>
+
+  <section class="entry" id="edo-asakusa">
+    <div class="entry-source">История района</div>
+    <h2>Асакуса в период Эдо</h2>
+    <p>В период Эдо (1603–1868) Асакуса приобрела известность как крупнейший развлекательный район города — сравнимый по функции с современным Синдзюку. Вокруг храма Sensō-ji сформировался целый квартал театров, чайных домов и торговых рядов.</p>
+    <p>До середины XX века здесь концентрировалась жизнь «красных фонарей» и театральная богема Токио. Место ярко описано в романе Ясунари Кавабаты «Алая банда Асакусы» (1930) — авторе, позже получившем Нобелевскую премию по литературе (1968).</p>
+    <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-nakamise">Asakusa Day → Nakamise</a></div>
+  </section>
+
+</main>
+
+</body>
+</html>

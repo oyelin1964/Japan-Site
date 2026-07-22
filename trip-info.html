@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Trip Info</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light only;
+    --paper: #FAF8F4;
+    --paper-deep: #F3F1EA;
+    --card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-soft: #2E2921;
+    --red: #B23A2E;
+    --red-soft: #C85A4B;
+    --line: #E1DACB;
+    --gold: #A87C4F;
+    --gray-bg: #EEEAE1;
+    --blue: #4A6D8C;
+    --green-bg: #E4EDE3;
+    --violet: #6B5B95;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: light only; }
+
+  body {
+    background: var(--paper) !important;
+    color: var(--ink) !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.7;
+  }
+
+  .torii-line {
+    position: fixed;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, var(--red) 8%, var(--red) 92%, transparent 100%);
+    z-index: 50;
+    opacity: 0.85;
+  }
+  @media (max-width: 720px) { .torii-line { display: none; } }
+
+  /* ---------- Hero: quote + ink-wash image ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: var(--paper-deep);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; align-items: center; gap: 2.5rem;
+    padding: 3.2rem 6vw 0;
+  }
+  .hero-text { flex: 1 1 380px; min-width: 280px; padding-bottom: 2.4rem; }
+  .hero-image {
+    flex: 0 0 240px; align-self: stretch;
+    position: relative; overflow: hidden;
+  }
+  .hero-image img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 30% 20%;
+    display: block;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
+    mask-composite: intersect;
+  }
+  @media (max-width: 760px) {
+    .hero-inner { flex-direction: column-reverse; padding-top: 0; }
+    .hero-image { flex-basis: auto; width: 100%; height: 200px; }
+    .hero-image img { object-position: 50% 15%;
+      -webkit-mask-image: linear-gradient(0deg, transparent, black 18%);
+      mask-image: linear-gradient(0deg, transparent, black 18%); mask-composite: normal; -webkit-mask-composite: source-over;
+    }
+    .hero-text { padding-top: 2.2rem; }
+  }
+
+  .eyebrow {
+    color: var(--red); font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
+  .hero-quote { max-width: 560px; }
+  .hero-quote .quote-jp {
+    display: block; font-family: 'Shippori Mincho', serif; font-weight: 500;
+    font-size: 1rem; color: var(--red); opacity: 0.9; margin-bottom: 0.6rem; letter-spacing: 0.02em;
+  }
+  .hero-quote blockquote {
+    font-family: 'Shippori Mincho', serif; font-weight: 600;
+    font-size: clamp(1.8rem, 4.4vw, 2.7rem); color: var(--ink); line-height: 1.15;
+  }
+  .hero-quote .quote-author {
+    display: block; margin-top: 0.6rem; font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  }
+  .hero-text .sub { margin-top: 1.3rem; font-size: 0.95rem; color: var(--ink-soft); max-width: 44ch; }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  /* ---------- Tabs ---------- */
+  .tabs-nav {
+    display: flex;
+    gap: 0.3rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    padding: 0.8rem 1.1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .tab-btn::after {
+    content: "";
+    position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 2px; background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+  .tab-btn.active { color: var(--red); font-weight: 500; }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--red-soft); }
+
+  .tab-panel { display: none; animation: fadeIn 0.3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- Section headings ---------- */
+  h2.section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: var(--red);
+    margin: 2.4rem 0 1.2rem;
+  }
+  h2.section-title:first-child { margin-top: 0; }
+
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 1.4rem 0 0.6rem;
+  }
+
+  p { margin-bottom: 1rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+  }
+  @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
+
+  /* ---------- Unified note system ---------- */
+  .note {
+    padding: 0.9rem 0;
+    margin: 1.3rem 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .note-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.08); }
+  .note-tag.tag-try { color: var(--gold); background: rgba(168,124,79,0.10); }
+  .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
+  .note-tag.tag-tip { color: var(--blue); background: rgba(74,109,140,0.08); }
+  .note-tag.tag-fact { color: var(--violet); background: rgba(107,91,149,0.09); }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+    margin: 1.3rem 0;
+  }
+  .notes-grid .note { margin: 0; padding: 0.9rem 0; }
+  @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  .practical-table { margin: 1.3rem 0; }
+  .practical-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .practical-row:last-child { border-bottom: none; }
+  .practical-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+    padding-top: 0.1rem;
+  }
+  .practical-value { color: var(--ink-soft); }
+  @media (max-width: 560px) {
+    .practical-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+
+  .read-more {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: 1rem 0 1.6rem;
+    padding: 0.7rem 0 0.7rem 1rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(168,124,79,0.06);
+  }
+  .read-more-label {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .callout {
+    position: relative;
+    padding: 1rem 1.3rem 1rem 1.6rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 1.2rem 0;
+    display: flex;
+    gap: 0.7rem;
+    background: linear-gradient(90deg, rgba(178,58,46,0.05) 0%, transparent 100%);
+  }
+  .callout::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+  .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
+  .callout a, .callout strong { color: var(--ink); }
+
+  .blockquote {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-style: italic;
+    position: relative;
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    margin: 1.4rem 0;
+  }
+  .blockquote::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--red-soft);
+  }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+  ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
+  ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  .back-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    padding: 0.65rem 1.3rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(28,25,23,0.25);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .footnote {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    color: #9A9284;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .tab-panel { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="torii-line" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow"><a href="index.html" style="color: var(--red); text-decoration: none;">← Все дни</a> &nbsp;·&nbsp; Japan 2026 · Trip Info</div>
+      <div class="hero-quote">
+        <span class="quote-jp">心得</span>
+        <blockquote>Trip Info</blockquote>
+        <span class="quote-author">Деньги · транспорт · этикет</span>
+      </div>
+      <div class="sub">то, что стоит знать заранее, а не выяснять на месте</div>
+    </div>
+    <div class="hero-image">
+      <img src="hero-trip-info-v2.png" alt="">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="t1">Деньги</button>
+    <button class="tab-btn" data-tab="t2">Мелочи быта</button>
+    <button class="tab-btn" data-tab="t3">Транспорт и этикет</button>
+    <button class="tab-btn" data-tab="t4">Время и праздники</button>
+  </nav>
+
+  <!-- TAB 1: Деньги -->
+  <section class="tab-panel active" id="t1">
+    <p>Япония давно перестала быть страной, где обязательны только наличные — карты принимают почти всюду, включая маленькие кафе и храмовые лавки. Но полностью безналичной она тоже не стала. Разница между этими двумя Япониями и определяет, где вам понадобится купюра, а где — просто телефон.</p>
+
+    <div class="notes-grid">
+      <div class="note"><span class="note-tag tag-attention">Заметка</span><br><strong>Наличные.</strong> ¥20,000–30,000 на человека на первые дни — разумный запас. Пригодятся в небольших кафе, для пожертвований в храмах, в лавках без терминала и на части маленьких раменных, где до сих пор стоит автомат с билетами вместо кассы.</div>
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Карты.</strong> Visa и Mastercard берут почти везде — это изменилось буквально за последние годы, до пандемии всё было куда наличнее. Возьмите одну карту про запас: японские терминалы иногда капризничают именно с иностранными картами, без видимой причины.</div>
+    </div>
+
+    <div class="notes-grid">
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Лучшие банкоматы для снятия наличных</strong> — Seven Bank в 7-Eleven: работают круглосуточно и стабильно принимают иностранные карты, в отличие от большинства обычных банковских банкоматов. Lawson — почти так же надёжно. Банкоматы Japan Post Bank тоже подходят, но у отделений вне крупных станций бывают ограниченные часы.</div>
+      <div class="note"><span class="note-tag tag-skip">Что можно пропустить</span><br>Обмен крупных сумм в аэропорту — курс там обычно хуже, чем в банкомате по карте. Если совсем нужны наличные сразу по прилёте, разумно снять небольшую сумму и обменять по мере необходимости позже.</div>
+    </div>
+
+    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Мелочь в Японии — отдельная тема. Монет много: 1, 5, 10, 50, 100, 500 йен, и через несколько дней кошелёк ощутимо тяжелеет. Многие японцы держат для монет отдельный кошелёк — стоит перенять привычку и, где можно, расплачиваться максимально точно, а не только купюрами.</div>
+  </section>
+
+  <!-- TAB 2: Мелочи быта -->
+  <section class="tab-panel" id="t2">
+
+    <h2 class="section-title">Электричество</h2>
+    <p>Розетки — <strong>Type A</strong> (как в США), напряжение 100V. Если на зарядном устройстве написано Input: 100–240V — а это почти все современные зарядки для телефонов, ноутбуков и камер — конвертер не нужен, только переходник по форме вилки.</p>
+    <div class="note"><span class="note-tag tag-fact">Любопытная деталь</span><br>Токио и Осака живут на разной частоте тока — 50Hz на востоке страны, 60Hz на западе. Причина восходит к 1890-м: Токио тогда закупил немецкие генераторы, Осака — американские, и с тех пор граница между двумя системами так и осталась примерно по реке Fuji River в Shizuoka. Для обычного туриста это не имеет значения, но это неплохой пример того, насколько Япония умеет жить с несовместимыми системами, просто не унифицируя их.</div>
+
+    <hr>
+
+    <h2 class="section-title">Wi-Fi и eSIM</h2>
+    <p>eSIM с мобильным интернетом снимает почти все вопросы связи — активировать можно ещё до вылета, а тарифы вроде Ubigi, Airalo или Sakura Mobile не требуют похода в салон связи по прилёте. Даже без него бесплатный Wi-Fi есть на многих станциях, в конбини и в кафе — но полагаться только на него не стоит: сеть часто требует регистрации по email при каждом новом подключении.</p>
+    <div class="notes-grid">
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Google Maps</strong> — скачайте офлайн-карты нужных районов заранее (профиль → Offline maps → Select your own map): сам маршрут и названия улиц останутся доступны без сети, хотя расписание транспорта и построение маршрута работают только онлайн.</div>
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Google Translate</strong> — загрузите офлайн-пакет японского языка (Settings → Offline translation) и заранее опробуйте камеру-переводчик: она переводит меню и вывески прямо через объектив и тоже работает без сети, если пакет уже скачан.</div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title">Прачечная</h2>
+    <p>Редко проблема, даже если её нет в самом номере: <strong>coin laundry</strong> есть почти в каждом квартале, а многие бизнес-отели держат свои стиральные машины и сушилки прямо на этаже.</p>
+  </section>
+
+  <!-- TAB 3: Транспорт и этикет -->
+  <section class="tab-panel" id="t3">
+
+    <h2 class="section-title">В поездах</h2>
+    <p>Если поезд отправляется в 10:03 — он отправляется именно в 10:03, не позже. В переполненном вагоне рюкзак снимают и держат в руках или у ног — это не формальность, а способ физически освободить место для остальных. На платформу стоит приходить заранее: сначала выходят пассажиры, только потом заходят новые.</p>
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Suica или Pasmo (можно добавить прямо в телефон, в Apple Wallet или Google Wallet, ещё до вылета) избавляют от покупки отдельного билета на каждую поездку и работают почти везде — не только в метро, но и в конбини, автоматах и части такси.</div>
+
+    <hr>
+
+    <h2 class="section-title">Эскалаторы</h2>
+    <p>Простое правило — смотреть, как стоят местные, и повторять: в <strong>Tokyo</strong> принято стоять слева и проходить справа, а в <strong>Kansai</strong> — Kyoto, Osaka — наоборот, стоят справа. Считается, что традиция Осаки старше и восходит к Expo 1970, а токийская сложилась под влиянием Лондона.</p>
+    <p>Стоит знать и другое: в последние годы JR и метро в разных городах официально просят вообще не ходить по эскалаторам — только стоять, с обеих сторон — из соображений безопасности. Привычка проходить слева-справа при этом никуда не делась, так что этой рекомендации следуют скорее спорадически.</p>
+
+    <hr>
+
+    <h2 class="section-title">Очереди</h2>
+    <p>Люди выстраиваются в очередь почти за всем, даже там, где это нигде не обозначено. Никто её не контролирует — она существует просто потому, что все считают это нормой.</p>
+
+    <hr>
+
+    <h2 class="section-title">Мусор</h2>
+    <p>Урн на улицах удивительно мало — один из самых частых вопросов туристов. Причина отчасти историческая: после зариновой атаки в токийском метро в 1995 году множество урн убрали из соображений безопасности, и с тех пор их так и не вернули в прежнем количестве.</p>
+    <p>При этом мусорить на улице по-прежнему не принято: японцы просто носят свой мусор с собой — до дома или до конбини — часто в маленьком пластиковом пакете специально для этого. Если урна всё же нашлась, мусор в ней почти всегда рассортирован — отдельно пластик, банки, стекло и горючий мусор.</p>
+
+    <div class="note"><span class="note-tag tag-attention">Заметка</span><br><strong>Курение</strong> на ходу запрещено во многих районах — курить можно только в отведённых местах. Их достаточно много: у станций, в торговых центрах, в офисных кварталах и на подземных улицах, и Google Maps обычно их показывает.</div>
+
+    <hr>
+
+    <h2 class="section-title">Конбини — больше, чем магазин</h2>
+    <p><strong>7-Eleven</strong>, <strong>FamilyMart</strong> и <strong>Lawson</strong> — это не просто магазин у дома, а маленький узел городской инфраструктуры. Здесь можно снять наличные, оплатить счета, купить билеты на концерт или в музей, распечатать документы, найти лекарства, зонт на случай дождя, зарядное устройство — и заодно неожиданно хороший кофе и завтрак.</p>
+  </section>
+
+  <!-- TAB 4: Время и праздники -->
+  <section class="tab-panel" id="t4">
+
+    <h2 class="section-title">Часы работы — в общих чертах</h2>
+    <p>Единого расписания в Японии нет, но есть закономерность: чем крупнее и современнее место, тем позже оно закрывается. Маленькие семейные лавки — наоборот, часто закрываются рано и совершенно непредсказуемо для конкретного дня недели, просто потому что ими управляет одна семья без сменного персонала.</p>
+
+    <div class="practical-table">
+      <div class="practical-row"><div class="practical-label">Конбини</div><div class="practical-value">Круглосуточно, без выходных — 7-Eleven, FamilyMart, Lawson.</div></div>
+      <div class="practical-row"><div class="practical-label">Универмаги</div><div class="practical-value">Обычно 10:00–20:00, изредка до 21:00. Depachika (продуктовые этажи в подвале) часто работают до самого закрытия и устраивают вечерние скидки ближе к закрытию.</div></div>
+      <div class="practical-row"><div class="practical-value">Супермаркеты</div><div class="practical-value">Обычно 9:00/10:00–21:00–22:00, в крупных городах встречаются и круглосуточные.</div></div>
+      <div class="practical-row"><div class="practical-label">Маленькие лавки</div><div class="practical-value">Часто закрываются между 17:00 и 18:00 — раньше, чем ожидают туристы. Дни закрытия у семейных магазинов и мастерских бывают нерегулярными, лучше проверять заранее в Google Maps.</div></div>
+      <div class="practical-row"><div class="practical-label">Рестораны</div><div class="practical-value">Классическая японская схема — обед 11:30–14:00, затем перерыв, ужин с 17:30–18:00. Последний заказ обычно за 30 минут до закрытия.</div></div>
+      <div class="practical-row"><div class="practical-label">Банки, почта</div><div class="practical-value">Только будни, обычно 9:00–15:00 (банки) и 9:00–17:00 (почта). По выходным — только банкоматы.</div></div>
+      <div class="practical-row"><div class="practical-label">Храмы, святилища</div><div class="practical-value">Территория обычно открыта с раннего утра до вечера, но главные залы и сокровищницы держат отдельные часы — как правило, что-то вроде 9:00–16:30.</div></div>
+    </div>
+
+    <hr>
+
+    <h2 class="section-title">Праздники в даты вашей поездки</h2>
+    <p>Вам повезло почти избежать самых людных дат — но не полностью. В конце сентября в Японии проходит <strong>Silver Week</strong>: 21 сентября (понедельник) — Respect for the Aged Day, 23 сентября (среда) — Autumnal Equinox Day, а 22 сентября объявлено дополнительным выходным просто потому, что оказалось зажато между двумя праздниками. Итого — пять нерабочих дней подряд, с субботы 19-го по среду 23-е.</p>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Ваш прилёт — вечером 22 сентября — приходится ровно на последний будний день этой волны. Дороги из аэропорта и в целом транспорт в этот вечер будут оживлённее обычного: часть страны как раз возвращается домой из поездок. 23 сентября, ваш первый полный день, всё ещё официальный праздник — в популярных храмах и парках стоит закладывать чуть больше людей, чем в обычную среду.</div>
+    <p>После 23 сентября — спокойно почти до самого отлёта. Следующий официальный праздник, <strong>Sports Day</strong>, выпадает на 12 октября (понедельник) — это уже на следующий день после вашего вылета 11 октября, так что на маршрут он не повлияет.</p>
+    <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>1 октября — не государственный праздник, а локальная традиция: <strong>Tokyo Citizen's Day</strong>. В этот день часть музеев, зоопарков и садов Токио (например, Ueno Zoo) открыта бесплатно. Если в этот день у вас запланирован Токио — стоит заранее решить, интересно ли попасть в это бесплатное окно, учитывая, что народу будет больше обычного.</div>
+
+    <hr>
+
+    <h2 class="section-title">Когда бронировать заранее</h2>
+    <p>Для большинства мест из вашего маршрута бронирование не требуется вовсе. Но у нескольких точек — своя логика продаж, и её стоит знать заранее, а не выяснять на месте.</p>
+
+    <div class="cols">
+      <div>
+        <h4>Билеты нарасхват</h4>
+        <ul class="plain">
+          <li><strong>teamLab Planets</strong> — сеансы разбирают за 4–8 недель, особенно на закатные и вечерние часы.</li>
+          <li><strong>Ghibli Museum</strong> — билеты продаются отдельными партиями заранее и нередко заканчиваются в первые часы продаж.</li>
+          <li><strong>Shibuya Sky</strong> — время заката раскупают быстрее всего.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Мелкие, но приятные детали</h4>
+        <ul class="plain">
+          <li><strong>Shinkansen</strong> — если хочется сидеть у окна со стороны Mt. Fuji, это сторона E (места у окна с этой стороны разбирают в первую очередь на популярных маршрутах).</li>
+          <li><strong>Рестораны</strong> — sushi, kaiseki и omakase высокого уровня почти всегда только по записи; отдельно отмечу такие места по мере утверждения маршрута.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="read-more"><span class="read-more-label">В остальном</span>Для музеев и обычных достопримечательностей заранее покупать билеты не обязательно — кроме случаев, когда поездка попадает на длинные японские праздники или вы везёте крупный багаж. В обычные дни достаточно взять билет за несколько дней.</div>
+  </section>
+
+  <p class="footnote">Trip Info · Japan 2026 · собрано вручную</p>
+</main>
+
+<button class="back-btn" id="backBtn">↑ Наверх</button>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 20, behavior: 'smooth' });
+    });
+  });
+
+  const backBtn = document.getElementById('backBtn');
+  const tabsNav = document.querySelector('.tabs-nav');
+
+  function updateBackBtn() {
+    const navBottom = tabsNav.getBoundingClientRect().bottom;
+    if (navBottom < 0) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateBackBtn, { passive: true });
+
+  backBtn.addEventListener('click', () => {
+    tabsNav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+</body>
+</html>
