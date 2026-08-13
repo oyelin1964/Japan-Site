@@ -4,23 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<title>Trip Logistics — Japan 2026</title>
+<title>Kinkaku-ji Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
-    --paper: #FAF8F4;
-    --paper-deep: #F3F1EA;
+    --paper: #FAF9F6;
+    --paper-deep: #F2EFE9;
     --card: #FFFFFF;
     --ink: #1C1917;
-    /* Darkened soft ink to crisp text for improved contrast */
     --ink-soft: #231F1C;
     --red: #B23A2E;
     --red-soft: #C85A4B;
     --line: #E1DACB;
-    --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold: #8C6239;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -35,9 +34,10 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.8; /* Increased line-height for better readability */
+    line-height: 1.8;
   }
 
+  /* ---------- Torii accent line ---------- */
   .torii-line {
     position: fixed;
     top: 0; left: 0;
@@ -48,134 +48,201 @@
   }
   @media (max-width: 720px) { .torii-line { display: none; } }
 
-  /* ---------- Utility strip: compact reference header. No photo (nothing to
-     fail to load, no reserved empty space), no borrowed hero-quote — this
-     page is for looking something up, not for a moment of arrival. ---------- */
+  /* ---------- Hero ---------- */
   .hero {
-    background: var(--paper-deep);
+    position: relative;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #EFEAE0 0%, #E9E4D8 100%);
+    border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
-  .hero-inner {
-    max-width: 1080px; margin: 0 auto;
-    padding: 1.8rem 6vw 2rem;
-    display: flex; align-items: center; gap: 1.1rem;
+  .hero-mark {
+    position: absolute;
+    top: 50%; right: 6%;
+    transform: translateY(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(5.5rem, 15vw, 9.5rem);
+    color: var(--red);
+    opacity: 0.28;
+    line-height: 1;
+    z-index: 1;
+    user-select: none;
   }
-  .hero-glyph {
-    width: 3rem; height: 3rem; border-radius: 50%; flex-shrink: 0;
-    border: 1.5px solid var(--red); color: var(--red);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Shippori Mincho', serif; font-size: 1.1rem;
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 8vw;
+    width: 100%;
   }
-  .hero-text-group { min-width: 0; }
   .eyebrow {
-    color: var(--red); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 0.3rem;
+    color: var(--red);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
   }
-  .hero-title {
-    font-family: 'Shippori Mincho', serif; font-weight: 600;
-    font-size: clamp(1.4rem, 4.6vw, 1.9rem); color: var(--ink); line-height: 1.15;
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
+  .hero h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    color: var(--ink);
+    line-height: 1.05;
   }
-  .hero-sub { margin-top: 0.35rem; font-size: 0.85rem; color: var(--ink-soft); }
+  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
 
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  /* ---------- Route overview: horizontal line + dots ---------- */
-  .route-scroll {
-    overflow-x: auto;
-    margin-bottom: 1rem;
-    -webkit-overflow-scrolling: touch;
-  }
-  .route-line {
-    position: relative;
+  .quote-intro {
+    min-height: 16vh;
     display: flex;
-    min-width: max-content;
-    padding: 1.7rem 0.6rem 0.3rem;
-  }
-  .route-line::before {
-    content: ""; position: absolute; left: 0.6rem; right: 0.6rem; top: 2.15rem;
-    height: 1px; background: var(--line);
-  }
-  .route-point {
-    position: relative;
-    flex: 0 0 112px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 1.6rem 8vw;
     text-align: center;
-    padding: 0 0.5rem;
+    background: var(--paper-deep);
   }
-  .route-point::before {
-    content: ""; display: block;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--red); border: 2px solid var(--paper);
-    box-shadow: 0 0 0 1px var(--red);
-    margin-bottom: 0.55rem;
-    position: relative; z-index: 2;
-  }
-  .route-point .rp-city {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--ink);
-    white-space: nowrap;
-  }
-  .route-point .rp-city .rp-sub {
-    display: block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 0.68rem;
-    color: #5C564E;
-    margin-top: 0.15rem;
-  }
-  .route-point .rp-when {
-    margin-top: 0.4rem;
-    font-size: 0.74rem;
-    color: var(--ink-soft);
+  .quote-intro blockquote {
+    max-width: 560px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
     font-weight: 500;
-    white-space: nowrap;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    color: var(--ink);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
   }
-  .route-caption {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
-    margin-bottom: 2.5rem;
+  .quote-intro .quote-author {
+    display: block;
+    margin-top: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .quote-intro .quote-jp {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--red);
+    opacity: 1;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .quote-intro .quote-note {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: #5C564E;
+    font-style: normal;
+    letter-spacing: 0.02em;
   }
 
-  /* ---------- Tabs ---------- */
-  .tabs-nav {
-    display: flex;
-    gap: 0.3rem;
+  .overview-list { list-style: none; margin-bottom: 3rem; }
+  .overview-list li {
+    position: relative;
+    padding: 0.7rem 0 0.7rem 1.6rem;
     border-bottom: 1px solid var(--line);
-    margin-bottom: 2.5rem;
-    overflow-x: auto;
-    scrollbar-width: none;
+    font-size: 0.98rem;
   }
-  .tabs-nav::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    background: none; border: none;
+  .overview-list li::before {
+    content: "";
+    position: absolute; left: 0; top: 1.15rem;
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+  .overview-list li:last-child { border-bottom: none; }
+  .accent { color: var(--gold); font-weight: 500; }
+
+  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
+  .day-flags {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 1.1rem 1.4rem 1.2rem;
+    margin-bottom: 2.6rem;
+  }
+  .day-flags-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .day-flags ul { list-style: none; }
+  .day-flags li {
+    padding: 0.45rem 0 0.45rem 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+  }
+  .day-flags li:last-child { border-bottom: none; }
+  .day-flags li::before {
+    content: "▸";
+    color: var(--red);
+    position: absolute;
+    left: 0;
+  }
+  .day-flags li strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.86rem;
+    margin-bottom: 0.15rem;
+  }
+
+  /* ---------- Places navigation ---------- */
+  .nav-places { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; }
+  .nav-places-label {
+    width: 100%;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .nav-place-btn {
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
-    letter-spacing: 0.04em;
     color: var(--ink-soft);
-    padding: 0.8rem 1.1rem;
+    background: var(--gray-bg);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
+    transition: all 0.2s ease;
     white-space: nowrap;
-    position: relative;
-    transition: color 0.2s;
   }
-  .tab-btn::after {
-    content: "";
-    position: absolute; bottom: -1px; left: 0; right: 0;
-    height: 2px; background: var(--red);
-    transform: scaleX(0);
-    transition: transform 0.25s ease;
-  }
-  .tab-btn.active { color: var(--red); font-weight: 600; }
-  .tab-btn.active::after { transform: scaleX(1); }
-  .tab-btn:hover { color: var(--red-soft); }
+  .nav-place-btn:hover { color: var(--red); border-color: var(--red-soft); background: rgba(178,58,46,0.06); }
 
-  .tab-panel { display: none; animation: fadeIn 0.3s ease; }
-  .tab-panel.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .connections-jump { margin-bottom: 2.6rem; }
+  .connections-jump-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--gold);
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--gold);
+    padding: 0.2rem 0;
+    cursor: pointer;
+  }
+  .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
   h2.section-title {
@@ -200,133 +267,57 @@
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
 
-  hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+  /* ---------- Two-column blocks ---------- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
+  @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
 
-  /* ---------- Logistics card (booking unit: flight leg / hotel stay) ---------- */
-  .logi-card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 1.3rem 1.5rem;
-    margin-bottom: 1.3rem;
-    box-shadow: 0 2px 12px rgba(28,25,23,0.05);
-  }
-  .logi-card-header {
+  .cols + .note,
+  .cols + .notes-grid,
+  .cols + .read-more { margin-top: 0; }
+
+  .cols img, figure img { width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 12px rgba(28,25,23,0.08); }
+
+  .img-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 2px;
+    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(178,58,46,0.10) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(168,124,79,0.12) 0%, transparent 50%),
+      var(--gray-bg);
+    position: relative;
+    overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--line);
+    align-items: center;
+    justify-content: center;
   }
-  .logi-card-title {
+  .img-placeholder::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(28,25,23,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,25,23,0.04) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .img-placeholder span {
+    position: relative;
     font-family: 'Shippori Mincho', serif;
-    font-weight: 600;
-    font-size: 1.12rem;
-    color: var(--ink);
-  }
-  .logi-card-dates {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .traveler-tag {
-    display: inline-block;
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
     text-transform: uppercase;
-    font-weight: 600;
-    color: #2D5270;
-    background: rgba(74,109,140,0.12);
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
+    border: 1px solid var(--line);
+    padding: 0.5rem 1rem;
+    background: rgba(250,249,246,0.8);
   }
-  .status-tag {
-    display: inline-block;
-    font-size: 0.66rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #285428;
-    background: rgba(78,125,79,0.13);
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-  }
-  .status-tag.pending { color: var(--gold); background: rgba(168,124,79,0.13); }
 
-  .logi-meta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.3rem 1.6rem;
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    margin-bottom: 0.5rem;
-  }
-  @media (max-width: 560px) { .logi-meta { grid-template-columns: 1fr; } }
-  .logi-meta div { padding: 0.25rem 0; }
-  .logi-label {
-    color: var(--red);
-    font-weight: 600;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-right: 0.4rem;
-  }
-  .tax-amount { color: var(--red); font-weight: 700; }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
+  .cols-4 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 680px) { .cols-4 { grid-template-columns: 1fr; } }
 
-  .logi-lines {
-    margin-top: 0.5rem;
-    padding-top: 0.6rem;
-    border-top: 1px dotted var(--line);
-  }
-  .logi-line {
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    padding: 0.3rem 0;
-  }
-  .logi-note {
-    font-size: 0.86rem;
-    color: var(--ink-soft);
-    margin-top: 0.6rem;
-    padding-top: 0.6rem;
-    border-top: 1px dotted var(--line);
-  }
-  .logi-note p { margin: 0 0 0.5rem; font-size: inherit; color: inherit; }
-  .logi-note p:last-child { margin-bottom: 0; }
-
-  .cancel-mini { margin: 0.7rem 0 0.1rem; }
-  .cancel-mini-label {
-    display: block;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--red);
-    margin-bottom: 0.4rem;
-  }
-  .cancel-mini-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 0.8rem;
-    padding: 0.4rem 0;
-    border-bottom: 1px dotted var(--line);
-    font-size: 0.85rem;
-  }
-  .cancel-mini-row:last-child { border-bottom: none; }
-  .cancel-mini-row .tz { color: var(--ink-soft); }
-  .cancel-mini-row .tz b { color: var(--ink); font-weight: 600; }
-  .cancel-mini-row .fee { color: var(--red); font-weight: 500; white-space: nowrap; text-align: right; }
-  .cancel-mini-row .fee.free { color: #4E7D4F; }
-
-  /* ---------- Unified note system (callouts) ---------- */
+  /* ---------- Unified note system ---------- */
   .note {
     padding: 1rem 1.2rem;
     margin: 1rem 0;
@@ -353,7 +344,67 @@
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
 
-  /* Practical info as label/value table */
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
+  .notes-grid .note { margin: 0; }
+  @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Practical info per place: same collapsible language as
+     glossary's subtheme-card, reused across day pages ---------- */
+  details.practical-card {
+    margin: 1.1rem 0 0;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper-deep);
+    overflow: hidden;
+  }
+  details.practical-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.65rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.practical-card > summary::-webkit-details-marker { display: none; }
+  details.practical-card > summary .practical-card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  details.practical-card > summary::after { content: "＋"; color: var(--gold); font-size: 0.95rem; flex-shrink: 0; }
+  details.practical-card[open] > summary::after { content: "－"; }
+  details.practical-card[open] > summary { border-bottom: 1px solid var(--line); }
+  .practical-card-body { padding: 0.85rem 1rem 1rem; }
+  .practical-card-body p { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .practical-card-body p:last-child { margin-bottom: 0; }
+  .practical-card-body strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Essence card: scannable summary before the prose ---------- */
+  .essence-card {
+    padding: 1.1rem 1.3rem;
+    margin: 0.8rem 0 1.4rem;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    border-radius: 6px;
+  }
+  .essence-card .essence-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+  }
+  .essence-card ul { margin: 0; padding-left: 1.1rem; }
+  .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
+  .essence-card li:last-child { margin-bottom: 0; }
+
   .practical-table { margin: 1.5rem 0; }
   .practical-row {
     display: grid;
@@ -374,40 +425,27 @@
     padding-top: 0.1rem;
   }
   .practical-value { color: var(--ink-soft); }
-  @media (max-width: 560px) {
-    .practical-row { grid-template-columns: 1fr; gap: 0.2rem; }
-  }
+  @media (max-width: 560px) { .practical-row { grid-template-columns: 1fr; gap: 0.2rem; } }
 
-  .callout {
-    position: relative;
-    padding: 1rem 1.3rem 1rem 1.6rem;
-    font-size: 0.92rem;
+  .read-more {
+    font-size: 0.88rem;
     color: var(--ink-soft);
-    margin: 1.2rem 0;
-    display: flex;
-    gap: 0.7rem;
-    background: linear-gradient(90deg, rgba(178,58,46,0.06) 0%, transparent 100%);
-    border-radius: 0 4px 4px 0;
+    margin: 1.2rem 0 1.6rem;
+    padding: 0.8rem 1rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(168,124,79,0.08); border-radius: 0 4px 4px 0;
   }
-  .callout::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--gold);
+  .read-more-label {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
   }
-  .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
-  .callout a, .callout strong { color: var(--ink); }
-
-  ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
-  ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
-
-  .footnote {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.82rem;
-    color: #5C564E;
-  }
+  .read-more a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red-soft); }
+  .read-more a:hover { color: var(--red-soft); }
 
   .back-btn {
     position: fixed;
@@ -429,28 +467,56 @@
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .back-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+  .back-btn.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .callout {
+    position: relative;
+    padding: 1rem 1.3rem 1rem 1.6rem;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 1.2rem 0;
+    display: flex;
+    gap: 0.7rem;
+    background: linear-gradient(90deg, rgba(178,58,46,0.06) 0%, transparent 100%);
+    border-radius: 0 4px 4px 0;
   }
+  .callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
+  .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
+  .callout a, .callout strong { color: var(--ink); }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .tab-panel { animation: none; }
+  .blockquote {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-style: italic;
+    position: relative;
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    margin: 1.4rem 0;
   }
+  .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
-  /* ---------- Top bar: consistent site-wide back-to-index nav ---------- */
+  hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
+
+  ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
+  ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  .info-list { list-style: none; }
+  .info-list li {
+    display: flex; gap: 0.9rem; padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line); font-size: 0.94rem; color: var(--ink-soft);
+  }
+  .info-list li::before { content: "→"; color: var(--red); flex-shrink: 0; font-weight: 600; }
+
+  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.82rem; color: #5C564E; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
   .top-bar {
     padding: 1.4rem 6vw;
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     position: sticky; top: 0; z-index: 80; background: var(--paper);
   }
-  .top-bar a.back {
-    font-size: 0.82rem; color: var(--red); text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
-  }
+  .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
@@ -473,21 +539,10 @@
   -webkit-touch-callout: none;
 }
 .nav-toggle:hover { border-color: var(--red-soft); color: var(--red); }
-
-/* iOS WKWebView (Claude's in-app preview, some in-app browsers) shows a native
-   "Open Link" action sheet on link tap/long-press, independent of JS click
-   handling. Disabling the native callout is what actually stops it. */
 .site-nav-drawer a { -webkit-touch-callout: none; }
-
 body.site-nav-locked { overflow: hidden; }
-
-.site-nav-scrim {
-  display: none;
-  position: fixed; inset: 0; background: rgba(28,25,23,0.35);
-  z-index: 90;
-}
+.site-nav-scrim { display: none; position: fixed; inset: 0; background: rgba(28,25,23,0.35); z-index: 90; }
 .site-nav-scrim.visible { display: block; }
-
 .site-nav-drawer {
   position: fixed; top: 0; left: 0; bottom: 0;
   width: min(340px, 86vw);
@@ -500,12 +555,9 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; flex-direction: column;
 }
 .site-nav-drawer.open { transform: translateX(0); }
-
 .site-nav-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.3rem 1.3rem 1rem;
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
+  padding: 1.3rem 1.3rem 1rem; border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
 .site-nav-header .title { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; color: var(--ink); }
 .site-nav-close {
@@ -514,9 +566,7 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; align-items: center; justify-content: center;
 }
 .site-nav-close:hover { color: var(--red); }
-
 .site-nav-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.3rem 2rem; }
-
 .site-nav-search { position: relative; margin-bottom: 1.2rem; }
 .site-nav-search input {
   width: 100%; font-family: 'Inter', sans-serif; font-size: 0.86rem; color: var(--ink);
@@ -528,20 +578,14 @@ body.site-nav-locked { overflow: hidden; }
   content: "⌕"; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
   color: var(--gold); font-size: 0.95rem; pointer-events: none;
 }
-
 .site-nav-empty { display: none; font-size: 0.84rem; color: #5C564E; margin: 0 0 1rem; }
 .site-nav-empty.visible { display: block; }
-
 .site-nav-group { margin-bottom: 1.6rem; }
 .site-nav-group.site-nav-hidden { display: none; }
-.site-nav-label {
-  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
+.site-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
 .site-nav-group ul { list-style: none; }
 .site-nav-group li { margin-bottom: 0.1rem; }
 .site-nav-group li.site-nav-hidden { display: none; }
-
 .site-nav-link {
   display: flex; align-items: baseline; gap: 0.55rem;
   padding: 0.42rem 0.4rem; border-radius: 5px;
@@ -553,18 +597,9 @@ body.site-nav-locked { overflow: hidden; }
 .site-nav-link .glyph { font-family: 'Shippori Mincho', serif; color: var(--gold); font-size: 0.9rem; flex-shrink: 0; width: 1.4em; text-align: center; }
 .site-nav-link .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .site-nav-link .meta { margin-left: auto; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.03em; flex-shrink: 0; }
-
-.site-nav-viewall {
-  display: inline-block; margin-top: 0.5rem;
-  font-size: 0.8rem; color: var(--red); text-decoration: none;
-  border-bottom: 1px dotted var(--red-soft);
-}
+.site-nav-viewall { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--red); text-decoration: none; border-bottom: 1px dotted var(--red-soft); }
 .site-nav-viewall:hover { color: var(--red-soft); }
-
-@media (prefers-reduced-motion: reduce) {
-  .site-nav-drawer { transition: none; }
-}
-
+@media (prefers-reduced-motion: reduce) { .site-nav-drawer { transition: none; } }
 </style>
 </head>
 <body>
@@ -576,274 +611,201 @@ body.site-nav-locked { overflow: hidden; }
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
+<section class="quote-intro">
+  <blockquote>
+    <span class="quote-jp">ゆく河の流れは絶えずして、しかももとの水にあらず</span>
+    Река течёт, не переставая, — но вода в ней никогда не та же, что мгновение назад
+    <span class="quote-author">Камо-но Тёмэй, «Хōдзёки», 1212 год</span>
+    <span class="quote-note">Восемь веков назад — о том же самом, с чем ты столкнёшься сегодня трижды: в золоте, в камне и в керамике</span>
+  </blockquote>
+</section>
+
 <header class="hero">
-  <div class="hero-inner">
-    <span class="hero-glyph" aria-hidden="true">旅</span>
-    <div class="hero-text-group">
-      <div class="eyebrow">Japan 2026</div>
-      <h1 class="hero-title">Logistics</h1>
-      <p class="hero-sub">Перелёты · отели · брони · 22 сентября – 11 октября 2026</p>
-    </div>
+  <div class="hero-mark" aria-hidden="true">金閣</div>
+  <div class="hero-content">
+    <div class="eyebrow">Kyoto · Day Plan</div>
+    <h1>Kinkaku-ji Day</h1>
+    <div class="sub">金閣寺 — золотой павильон, каменный сад, которого нельзя увидеть целиком, и сад из керамических копий, обречённых пережить оригиналы</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- Route overview — replaces a place photo: this page isn't about one place, it's about the whole route -->
-  <div class="route-scroll">
-  <div class="route-line">
-    <div class="route-point">
-      <span class="rp-city">Tel Aviv</span>
-      <span class="rp-when">вылет 22 Sep</span>
-    </div>
-    <div class="route-point">
-      <span class="rp-city">Tokyo<span class="rp-sub">Akasaka</span></span>
-      <span class="rp-when">23–27 Sep · 5 ноч.</span>
-    </div>
-    <div class="route-point">
-      <span class="rp-city">Kyoto</span>
-      <span class="rp-when">27 Sep–4 Oct · 7 ноч.</span>
-    </div>
-    <div class="route-point">
-      <span class="rp-city">Kanazawa</span>
-      <span class="rp-when">4–5 Oct · 1 ноч.</span>
-    </div>
-    <div class="route-point">
-      <span class="rp-city">Tokyo<span class="rp-sub">Ginza</span></span>
-      <span class="rp-when">5–11 Oct · 6 ноч.</span>
-    </div>
-    <div class="route-point">
-      <span class="rp-city">Tel Aviv</span>
-      <span class="rp-when">прилёт 12 Oct</span>
-    </div>
-  </div>
-  </div>
-  <p class="route-caption">Крис присоединяется в Токио 4 октября и живёт отдельно в Ginza с 4-го; остальные — с 5-го. Сэнди прилетает из Кореи отдельно, обратно летит вместе со всеми.</p>
+  <div class="day-flags">
+    <div class="day-flags-label">На сегодня</div>
+    <ul>
+      <li><strong>Kinkaku-ji открывается в 9:00</strong> — время выхода из отеля см. отдельно ниже</li>
+      <li><strong>Оплата наличными</strong> — и в Kinkaku-ji, и в Ryōan-ji карты не принимают, билет выдают в виде бумажной офуда</li>
+      <li><strong>Ryōan-ji рядом</strong> — 18 минут пешком или 5 минут на автобусе от Kinkaku-ji, один кластер, без переезда</li>
+      <li><strong>Garden of Fine Arts — не рядом</strong>, несмотря на то, что день посвящён одному району: это отдельный переезд на север через Kitaoji, около 30–40 минут в одну сторону</li>
+      <li><strong>Последний вход в Garden of Fine Arts — 16:30</strong>, самый жёсткий дедлайн дня — планировать переезд туда заранее, не откладывать на «как получится»</li>
+    </ul>
 
-  <nav class="tabs-nav">
-    <button class="tab-btn active" data-tab="t1">Flights</button>
-    <button class="tab-btn" data-tab="t2">Hotels</button>
-    <button class="tab-btn" data-tab="t3">Bookings To Do</button>
+    <div class="day-flags-label" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line);">Из Kyoto Century Hotel — когда выходить</div>
+    <div class="practical-table" style="margin:0.3rem 0 0;">
+      <div class="practical-row">
+        <div class="practical-label">Оптимально</div>
+        <div class="practical-value">Выйти к <strong>8:15–8:20</strong>. Дорога — subway Karasuma Line до Kitaoji (~15 мин) + автобус 204/205 до Kinkakuji-michi (~10–15 мин) + 5 минут пешком до входа, итого около 40–45 минут. Так вы у пруда ровно к открытию, ещё до групп.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">При выходе 9:00–9:30</div>
+        <div class="practical-value">Приезд к Kinkaku-ji ~9:45–10:15 — план всё ещё рабочий, но именно на этой границе площадка у пруда начинает заполняться автобусными группами.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Крайний срок</div>
+        <div class="practical-value">Не позже <strong>11:00</strong>. Дальше не остаётся запаса на Ryōan-ji, обед и переезд на север — Garden of Fine Arts прекращает пускать в 16:30, и подвинуть этот дедлайн нельзя.</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-places">
+    <div class="nav-places-label">По местам ↓</div>
+    <button class="nav-place-btn" data-target="loc-kinkakuji">Kinkaku-ji</button>
+    <button class="nav-place-btn" data-target="loc-ryoanji">Ryōan-ji</button>
+    <button class="nav-place-btn" data-target="loc-gardenoffinearts">Garden of Fine Arts</button>
   </nav>
 
-  <!-- TAB 1: Flights -->
-  <section class="tab-panel active" id="t1">
+  <div class="connections-jump">
+    <button class="connections-jump-btn" data-target="connections">✦ Как этот день связан с остальной поездкой</button>
+  </div>
 
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">TLV → NRT <span class="traveler-tag">Olga</span></span>
-        <span class="logi-card-dates">22–23 Sep 2026</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Рейс</span>El Al LY91</div>
-        <div><span class="logi-label">Вылет</span>22 Sep 19:45 · Tel Aviv, Terminal 3</div>
-        <div><span class="logi-label">Прилёт</span>23 Sep 13:20 · Narita (NRT), Terminal 1</div>
-        <div><span class="logi-label">PNR</span>YG2T8G</div>
-      </div>
-      <div class="logi-note">Ticket 1142493675486. Этот же PNR покрывает обратный рейс LY92 11 Oct.</div>
-    </div>
+  <hr>
 
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">TLV → NRT <span class="traveler-tag">Крис</span></span>
-        <span class="logi-card-dates">3–4 Oct 2026</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Рейс</span>El Al LY91</div>
-        <div><span class="logi-label">Вылет</span>3 Oct 23:30 · Tel Aviv, Terminal 3</div>
-        <div><span class="logi-label">Прилёт</span>4 Oct 17:05 · Narita (NRT), Terminal 1</div>
-        <div><span class="logi-label">PNR</span>YFMLTB · место 26A</div>
-      </div>
-      <div class="logi-note">Ticket 1142494154278. Крис летит отдельно и присоединяется к остальным в Токио 4 октября.</div>
-    </div>
+  <section id="t2">
+    <h2 class="section-title">Ритм дня</h2>
+    <p>День выглядит цельным на карте — «район Kinkaku-ji» — но на деле распадается на две части. Kinkaku-ji и Ryōan-ji образуют один плотный кластер в Kita-ku: между ними 18 минут неспешным шагом или пять на автобусе, эту часть дня можно пройти пешком, без единой пересадки. Garden of Fine Arts — совсем другая история: он лежит у Kyoto Botanical Garden, ближе к станции Kitayama, и добраться туда можно только отдельным переездом на метро через Kitaoji.</p>
+    <p>Отсюда и логика порядка: начать с Kinkaku-ji к открытию в 9:00, пока автобусные группы ещё не подъехали, затем дойти или доехать до Ryōan-ji — оба места работают в схожем режиме, без жёстких дедлайнов. Оставшуюся часть дня отвести на переезд к Garden of Fine Arts: он закрывается формально в то же время, что и храмы, но вход туда прекращается уже в 16:30 — единственный в этом дне пункт, где опоздание реально закрывает вопрос, а не просто сокращает время на осмотр.</p>
+  </section>
 
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">NRT → TLV <span class="traveler-tag">Olga, Sandy, Крис</span></span>
-        <span class="logi-card-dates">11–12 Oct 2026</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Рейс</span>El Al LY92</div>
-        <div><span class="logi-label">Вылет</span>11 Oct 19:55 · Narita (NRT), Terminal 1</div>
-        <div><span class="logi-label">Прилёт</span>12 Oct 02:40 · Tel Aviv, Terminal 3</div>
-        <div><span class="logi-label">PNR</span>Sandy — YG6FII · Крис — YFMLTB (место 26A)</div>
-      </div>
-      <div class="logi-note">Sandy летит домой этим же рейсом, но её билет — только на обратный путь (TYO→TLV): в Японию она прилетает отдельно, из Кореи.</div>
+  <hr>
+
+  <section id="t3">
+
+    <h2 class="section-title" id="loc-kinkakuji">Kinkaku-ji — павильон, который сгорел, чтобы стать золотее</h2>
+    <div class="essence-card">
+      <span class="essence-label">Коротко</span>
+      <ul>
+        <li>Официальное имя — Rokuon-ji; построен в 1397 году как загородная вилла сёгуна Ashikaga Yoshimitsu, после его смерти по завещанию стал дзен-храмом — тот же ход, что ты уже видела на Ginkaku-ji его внука Yoshimasa</li>
+        <li>В ночь на 2 июля 1950 года 21-летний послушник Hayashi Yoken сжёг постройку, простоявшую 550 лет; мотивом на суде он назвал ненависть к красоте здания, которую не мог вынести</li>
+        <li>То, что ты увидишь сегодня, — реконструкция 1955 года; при реставрации 1987 года золото легло примерно в пять раз толще, чем на оригинале Yoshimitsu, — то есть нынешний «средневековый» павильон золотится сильнее, чем когда-либо золотился настоящий</li>
+      </ul>
     </div>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Kinkaku-ji</span></div></figure>
+      <div>
+        <p>Пожар случился ночью — послушник поджёг здание и попытался покончить с собой на горе за храмом, но выжил. Его заикание и психическое расстройство (persecution complex, по позднейшему диагнозу) стали основой для романа Юкио Мисимы «Золотой Храм» (1956) — не документальной хроники, а попытки понять, как одержимость идеальной красотой может обернуться желанием её уничтожить: если совершенство недостижимо для тебя самого, единственный способ сравняться с ним — стереть его.</p>
+        <p>Статуя самого Yoshimitsu внутри павильона тоже сгорела и была воссоздана заново — то есть здание, интерьер и даже образ его основателя одинаково «ненастоящие» в смысле возраста, и одинаково подлинные в смысле места и формы. Вопрос, который стоит держать в голове весь день: если копию сделали настолько точно, что она полностью замещает утраченное, — в какой момент она перестаёт быть копией?</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-try">Идея вдогонку</span><br>Ise Jingū, главное синтоистское святилище Japan, разбирают и отстраивают заново каждые 20 лет — не потому что ветшает, а потому что подлинность в японской традиции держится не всегда на материале, иногда на непрерывности формы и ритуала. Kinkaku-ji получил то же самое не по плану, а по трагедии.</div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Внутрь павильона не пускают никогда — весь визит сводится к обходу пруда Kyoko-chi с несколькими точками для фото; не спеши к выходу сразу после главного вида, дальше по маршруту — чайный домик Sekkatei и павильон Fudō, которые обходит стороной большинство групп.</div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Открыт <strong>9:00–17:00</strong> ежедневно, без отдельного времени последнего входа — просто закрывается в 17:00. Билет — 500 иен, только наличными, выдаётся в виде бумажной офуда.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#muromachi-shogunate">Сёгунат Muromachi и рождение японской эстетики</a> · Ashikaga Yoshimitsu и культура Kitayama · сравнение с Ginkaku-ji (день 27 сентября) · роман Мисимы «Золотой Храм»</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-ryoanji">Ryōan-ji — сад, который уже объяснён</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Ryōan-ji</span></div></figure>
+      <div>
+        <p>Логику пятнадцати камней, из которых с любой точки видно только четырнадцать, ты уже читала в глоссарии — не буду повторять здесь то, что там сказано точнее. Стоит добавить только контекст: сад заложен в 1450 году при Hosokawa Katsumoto, одном из самых влиятельных даймё эпохи, — и меньше чем через два десятилетия его собственный конфликт с соседом Yamana Sōzen разжёг Ōnin War (1467–1477), ту самую войну, что позже сорвала Yoshimasa серебряный план для Ginkaku-ji. Сад несколько раз горел и перестраивался вслед за храмом; расстановка камней, которую видишь сегодня, — не автограф XV века, а результат наслоившихся реконструкций.</p>
+      </div>
+    </div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Открыт <strong>8:00–17:00</strong> (март–ноябрь). Билет — 600 иен, наличными. Осмотр сада камней занимает 15–20 минут, но территория храма с прудом Kyoyōchi заслуживает отдельной неспешной прогулки.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#ma">Ma и сад камней</a> — полное объяснение композиции и логики пустоты · <a href="glossary.html#muromachi-shogunate">Сёгунат Muromachi и рождение японской эстетики</a></p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-gardenoffinearts">Garden of Fine Arts Kyoto — сад, где копии переживут оригиналы</h2>
+    <div class="essence-card">
+      <span class="essence-label">Коротко</span>
+      <ul>
+        <li>Открыт в 1994 году по проекту Tadao Ando — бывшего боксёра без архитектурного образования, ставшего через год лауреатом Притцкеровской премии; это первый в мире открытый «сад живописи»</li>
+        <li>Восемь мировых шедевров — «Кувшинки» Моне, «Страшный суд» Микеланджело, «Тайная вечеря» да Винчи и другие — воспроизведены на керамических панелях, рассчитанных на пару тысяч лет без выцветания</li>
+        <li>Здание намеренно утоплено под землю в несколько уровней — чтобы не перекрыть вид на горы Higashiyama из соседнего Kyoto Botanical Garden; Ando в буквальном смысле строил не вверх, а вниз</li>
+      </ul>
+    </div>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Garden of Fine Arts</span></div></figure>
+      <div>
+        <p>Оригинал «Тайной вечери» в Милане осыпается уже пять веков — Леонардо экспериментировал с техникой темперы по сухой штукатурке вместо надёжной фрески, и картина начала разрушаться ещё при его жизни; реставраторы борются за неё который век подряд. Керамическая копия в Kyoto, выпущенная промышленным способом на заводе pachinko-компании Daikoku Denki, переживёт её без всякой борьбы — это тот же вопрос подлинности, что и утром в Kinkaku-ji, только вывернутый наизнанку: там копия заменила погибший оригинал, здесь копия заведомо надёжнее оригинала, который ещё жив.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Место маленькое (около 200 м²) и почти неизвестно туристам — рассчитывай на 30–40 минут, не больше, но именно эта тишина после толп у Kinkaku-ji работает как контраст.</div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Открыт <strong>9:00–17:00</strong>, <strong>последний вход в 16:30</strong>. Билет — 100 иен, наличными. Закрыт с 28 декабря по 4 января и в отдельные технические дни.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Tadao Ando и архитектура голого бетона · Kyoto Botanical Garden по соседству, если останется время</p>
 
   </section>
 
-  <!-- TAB 2: Hotels -->
-  <section class="tab-panel" id="t2">
+  <hr>
 
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">Centurion Hotel Residential Akasaka Station <span class="status-tag">Reserved</span></span>
-        <span class="logi-card-dates">22–27 Sep · 5 ночей</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Confirmation</span>#5513.020.097 · PIN 7228</div>
-        <div><span class="logi-label">Заезд / выезд</span>22 Sep 15:00–23:00 — 27 Sep до 11:00</div>
-        <div><span class="logi-label">Телефон отеля</span>+81 3 6229 6336</div>
-        <div><span class="logi-label">Размер номера</span>24 м²</div>
-        <div><span class="logi-label">Цена</span>¥173,160 (₪3,221.63)</div>
-        <div><span class="logi-label">Налог на месте</span><span class="tax-amount">¥2,000 (≈₪37)</span></div>
-      </div>
-      <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Оплата</span>на месте · нужны фото-ID и карта на имя Olga Yelin</div>
-        <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до ~19 Sep (точный час не в подтверждении) · после — 100%</div>
-      </div>
-      <div class="logi-note">Улучшенный номер с queen-size кроватью и балконом, для некурящих, есть стиральная машина. 2 гостя, питание не включено. Сэнди приезжает в отель первой.</div>
-    </div>
-
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">Kyoto Century Hotel <span class="status-tag">Reserved</span></span>
-        <span class="logi-card-dates">27 Sep–4 Oct · 7 ночей</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Confirmation</span>YelTeo8hso26JpKe</div>
-        <div><span class="logi-label">Заезд / выезд</span>27 Sep с 15:00 — 4 Oct до 12:00</div>
-        <div><span class="logi-label">Телефон отеля</span>+81 75-351-0111 · ресепшен 24ч</div>
-        <div><span class="logi-label">Размер номера</span>26 м² (King-Double-Inside, No View)</div>
-        <div><span class="logi-label">Цена</span>¥144,300 (₪2,906.31)</div>
-        <div><span class="logi-label">Налог на месте</span><span class="tax-amount">¥5,600 (≈₪113)</span></div>
-      </div>
-      <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Оплата</span>на месте, полностью · карту не принимают, нужны наличные</div>
-        <div class="logi-line"><span class="logi-label">Отмена</span>JP 26 Sep 18:00 / IL 26 Sep 12:00 · после — 100%</div>
-      </div>
-      <div class="logi-note">2 гостя, без питания. Тариф «60 Days Advance Promotion», мин. 3 ночи.</div>
-    </div>
-
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">Machi No Odoriba (町の踊場), Kanazawa <span class="status-tag">Reserved · оплачено</span></span>
-        <span class="logi-card-dates">4–5 Oct · 1 ночь</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Booking No.</span>1378837306635380 (Trip.com)</div>
-        <div><span class="logi-label">PIN</span>7170</div>
-        <div><span class="logi-label">Заезд / выезд</span>4 Oct 15:00–18:00 — 5 Oct до 10:00</div>
-        <div><span class="logi-label">Телефон отеля</span>+81-76-2083676</div>
-        <div><span class="logi-label">Размер номера</span>60 м²</div>
-        <div><span class="logi-label">Цена</span>₪1,354.02 (¥ на чеке не указан)</div>
-        <div><span class="logi-label">Налог на месте</span><span class="tax-amount">≈¥1,000 (≈₪19)</span></div>
-      </div>
-      <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Оплата</span>оплачено полностью заранее — доплачивать не нужно</div>
-        <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до 29 Sep (JP 12:00 / IL 06:00) · далее штраф ₪270.80–677.01 · после 2 Oct без возврата</div>
-      </div>
-      <div class="logi-note">Corner Japanese-Western Mixed With Bath, Garden View · до 2 гостей. Завтрак на 5 Oct включён на 2 персоны. Была попытка изменить бронь (13 Jul) — отель не смог внести правки, действует исходная бронь, ничего делать не нужно.</div>
-    </div>
-
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">Tokyu Stay Ginza <span class="traveler-tag">Крис</span> <span class="status-tag">Reserved</span></span>
-        <span class="logi-card-dates">4–11 Oct · 7 ночей</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Confirmation</span>TDAE6AA59D549</div>
-        <div><span class="logi-label">Заезд / выезд</span>4 Oct (ETA ~18:30) — 11 Oct</div>
-        <div><span class="logi-label">Телефон отеля</span>03-3541-0109</div>
-        <div><span class="logi-label">Размер номера</span>25 м² (Residential Double)</div>
-        <div><span class="logi-label">Цена</span>¥293,607 (≈₪5,463)</div>
-        <div><span class="logi-label">Налог на месте</span><span class="tax-amount">¥1,400 (≈₪26)</span></div>
-      </div>
-      <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Оплата</span>оплачено полностью заранее</div>
-        <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до ~1 Oct (точный час не в подтверждении) · далее 50% → 80% → 100%</div>
-      </div>
-      <div class="logi-note">Со стиральной машиной, без питания. Отдельная бронь от Olga — Крис прилетает на день раньше и живёт один до 11-го.</div>
-    </div>
-
-    <div class="logi-card">
-      <div class="logi-card-header">
-        <span class="logi-card-title">Tokyu Stay Ginza <span class="status-tag">Reserved</span></span>
-        <span class="logi-card-dates">5–11 Oct · 6 ночей</span>
-      </div>
-      <div class="logi-meta">
-        <div><span class="logi-label">Confirmation</span>#6780.755.326 · PIN 4622</div>
-        <div><span class="logi-label">Заезд / выезд</span>5 Oct с 15:00 — 11 Oct до 11:00</div>
-        <div><span class="logi-label">Телефон отеля</span>+81 3 3541 0109</div>
-        <div><span class="logi-label">Размер номера</span>не указан в брони</div>
-        <div><span class="logi-label">Цена</span>¥268,567 (₪4,996.68)</div>
-        <div><span class="logi-label">Налог на месте</span><span class="tax-amount">¥2,400 (≈₪45)</span></div>
-      </div>
-      <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Оплата</span>на месте · карту не принимают, нужны наличные</div>
-        <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до ~21 Sep (точный час не в подтверждении) · далее 50%, no-show 100%</div>
-      </div>
-      <div class="logi-note">Superior Twin, без стиральной машины (есть в других номерах), 2 гостя, без питания. С 16 июля 2026 по 31 января 2027 в отеле идёт ремонт лобби и ресторана — возможен шум 10:00–18:00. Парковки нет, Wi-Fi бесплатный.</div>
-    </div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Три брони пересекаются по датам заезда/выезда (Крис отдельно с 4-го, остальные с 5-го) — при заселении в Ginza уточните на ресепшене, что это два разных бронирования на одну семью, чтобы не создать путаницу с номерами.</div>
-
+  <section id="t4">
+    <h2 class="section-title">Food & Coffee</h2>
+    <p><strong>Ryōanji Yudōfu (Saigen-in)</strong> — храмовый ресторан прямо на территории Ryōan-ji, подаёт shōjin ryōri с юдофу (варёный тофу) с видом на сад; логичный обед между храмом и переездом на север. Рядом с Kinkaku-ji — квартал kissaten и уличных лотков с matcha-сладостями на подходе к храму, хорош для быстрого перекуса до открытия.</p>
   </section>
 
-  <!-- TAB 3: Trains & Timed Tickets -->
-  <section class="tab-panel" id="t3">
-    <p>Пока ничего из этого списка не забронировано. Раздел готов принять реальные брони по мере их появления — тот же формат карточки: направление/место, дата и время, номер брони, короткая заметка.</p>
+  <hr>
 
-    <h4>Поезда — с датой открытия окна брони</h4>
+  <h2 class="section-title" id="connections">Connections</h2>
+  <p>Сегодняшний день замыкает тему, начатую 27 сентября на Philosopher's Path: тогда Ginkaku-ji отвечал на вопрос о роскоши отказом от неё, сегодня его дед Kinkaku-ji отвечает на тот же вопрос буквальным золотом — и вдобавок оказывается менее «подлинным» физически, чем скромный внук, ни разу не горевший дотла.</p>
+  <p>А тема подделки и подлинности, которая проходит через весь день — сожжённый и восстановленный павильон, сад камней, пересобранный после Ōnin War, керамические копии, которым не грозит разрушение, — это тот же вопрос, что ты уже встречала в глоссарии применительно к kigumi и синтоистским ритуалам обновления: японская культура на удивление легко относится к материальному износу, если форма и смысл передаются дальше.</p>
 
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Никко (день 25 Sep). Лимитед-экспресс Tobu (SPACIA X / Revaty Kegon / Spacia Kegon от Kita-Senju) требует отдельного места, и бронь открывается ровно за месяц: для 25 сентября — <strong>25 августа, 09:00 по Японии = 03:00 по Израилю</strong>. Если хотите именно SPACIA X — это стоит ловить в первые секунды после открытия окна, обычные Kegon можно брать и позже.</div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Tokyo → Kyoto</strong> (день 27 Sep). Shinkansen Nozomi, 2 места, сторона E у окна — вид на Fuji примерно через 44 минуты после отправления. Бронь открывается за 30 дней — <strong>27 августа 2026, 10:00 по Японии = 04:00 по Израилю</strong>.</div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Kyoto → Kanazawa</strong> (день 4 Oct). Thunderbird до Tsuruga + пересадка на Hokuriku Shinkansen до Kanazawa, оба поезда только с местом, итого около 2 часов. Бронь открывается за 30 дней — <strong>4 сентября 2026, 10:00 по Японии = 04:00 по Израилю</strong>.</div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Kanazawa → Tokyo</strong> (день 5 Oct). Прямой Hokuriku Shinkansen без пересадок, около 2.5 часов. Бронь открывается за 30 дней — <strong>5 сентября 2026, 10:00 по Японии = 04:00 по Израилю</strong>.</div>
-
-    <h4>Timed-tickets и галереи — без фиксированного окна, но разбирают заранее</h4>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>teamLab Planets, Toyosu</strong> (день 6 Oct). Билеты с таймслотом на 15 минут через официальный сайт или Klook; на выходные и праздники разбирают заранее. Фиксированного окна открытия продаж нет — бронировать сразу, как определится точная дата визита.</div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Yusai-Tei Gallery, Arashiyama</strong> (день 28 Sep). Вход только по брони на таймслот, около 2000 иен. Ссылка на форму брони уже есть в заметках к поездке.</div>
-
-    <h4>Рестораны и бары — бронь столика</h4>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Mouriya Gion, Kyoto</strong> (день 1 Oct, ужин). Teppanyaki такого уровня разбирают за несколько недель — бронировать как можно раньше, через официальный сайт или Klook.</div>
-
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Beatle Momo, Kyoto</strong> (день 1 Oct, вечер). Маленький бар, около 25 мест, по воскресеньям закрыт. Бронь — через Instagram-аккаунт заведения; без брони лучше приходить к самому открытию.</div>
-
-    <p class="footnote" style="margin-top:0; padding-top:0; border-top:none;">Как забронируете что-то из этого списка — карточка переезжает сюда с реальным номером подтверждения, а в Practical Info соответствующего дня останется только короткая строка-напоминание, без дублирования деталей.</p>
-  </section>
-
-  <p class="footnote">Trip Logistics · Japan 2026 · собрано из Notion (Flight Japan, Hotels Japan) вручную</p>
+  <p class="footnote">Kinkaku-ji Day · Japan 2026 · план дня, собранный вручную</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
+<button class="back-btn" id="backBtn">↑ Наверх</button>
 
 <script>
+  // No tabs — page is one continuous flow. "По местам" buttons just jump
+  // straight to the place's anchor.
+  document.querySelectorAll('.nav-place-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.querySelector('.connections-jump-btn')?.addEventListener('click', function () {
+    const target = document.getElementById(this.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   const backBtn = document.getElementById('backBtn');
-  const tabsNav = document.querySelector('.tabs-nav');
+  const placesNav = document.querySelector('.nav-places');
 
   function updateBackBtn() {
-    const navBottom = tabsNav.getBoundingClientRect().bottom;
-    if (navBottom < 0) {
-      backBtn.classList.add('visible');
-    } else {
-      backBtn.classList.remove('visible');
-    }
+    const navBottom = placesNav.getBoundingClientRect().bottom;
+    backBtn.classList.toggle('visible', navBottom < 0);
   }
   window.addEventListener('scroll', updateBackBtn, { passive: true });
 
-  backBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-</script>
+  backBtn.addEventListener('click', () => { placesNav.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
-<script>
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-      window.scrollTo({ top: document.querySelector('.tabs-nav').offsetTop - 20, behavior: 'smooth' });
-    });
-  });
+  function openDeepLink() {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  }
+  window.addEventListener('DOMContentLoaded', openDeepLink);
+  window.addEventListener('hashchange', openDeepLink);
 </script>
 
 <script>
@@ -1009,7 +971,6 @@ window.SITE_DATA = {
 (function () {
   const DATA = window.SITE_DATA || { days: [], tools: [], places: [] };
 
-  // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
   const TEASER_PLACE_COUNT = 6;
@@ -1133,7 +1094,6 @@ window.SITE_DATA = {
         return;
       }
 
-      // While searching, search across the FULL places list, not just the teaser.
       placesTeaserList.style.display = 'none';
       placesAllList.style.display = '';
 

@@ -4,23 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<title>Asakusa Day</title>
+<title>Higashiyama Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
-    --paper: #FAF8F4;
-    --paper-deep: #F3F1EA;
+    --paper: #FAF9F6;
+    --paper-deep: #F2EFE9;
     --card: #FFFFFF;
     --ink: #1C1917;
-    /* Darkened soft ink to crisp text for improved contrast */
     --ink-soft: #231F1C;
     --red: #B23A2E;
     --red-soft: #C85A4B;
     --line: #E1DACB;
-    --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold: #8C6239;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -35,7 +34,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.8; /* Increased line-height for better readability */
+    line-height: 1.8;
   }
 
   /* ---------- Torii accent line ---------- */
@@ -138,11 +137,17 @@
     margin-bottom: 0.8rem;
     letter-spacing: 0.04em;
   }
-
-  .overview-list {
-    list-style: none;
-    margin-bottom: 3rem;
+  .quote-intro .quote-note {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: #5C564E;
+    font-style: normal;
+    letter-spacing: 0.02em;
   }
+
+  .overview-list { list-style: none; margin-bottom: 3rem; }
   .overview-list li {
     position: relative;
     padding: 0.7rem 0 0.7rem 1.6rem;
@@ -159,13 +164,49 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Places navigation ---------- */
-  .nav-places {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 3rem;
+  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
+  .day-flags {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 1.1rem 1.4rem 1.2rem;
+    margin-bottom: 2.6rem;
   }
+  .day-flags-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .day-flags ul { list-style: none; }
+  .day-flags li {
+    padding: 0.45rem 0 0.45rem 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+  }
+  .day-flags li:last-child { border-bottom: none; }
+  .day-flags li::before {
+    content: "▸";
+    color: var(--red);
+    position: absolute;
+    left: 0;
+  }
+  .day-flags li strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.86rem;
+    margin-bottom: 0.15rem;
+  }
+
+  /* ---------- Places navigation ---------- */
+  .nav-places { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; }
   .nav-places-label {
     width: 100%;
     font-size: 0.75rem;
@@ -173,6 +214,7 @@
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 0.6rem;
+    font-weight: 600;
   }
   .nav-place-btn {
     font-family: 'Inter', sans-serif;
@@ -186,12 +228,21 @@
     transition: all 0.2s ease;
     white-space: nowrap;
   }
-  .nav-place-btn:hover {
-    color: var(--red);
-    border-color: var(--red-soft);
-    background: rgba(178,58,46,0.06);
-  }
+  .nav-place-btn:hover { color: var(--red); border-color: var(--red-soft); background: rgba(178,58,46,0.06); }
 
+  .connections-jump { margin-bottom: 2.6rem; }
+  .connections-jump-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--gold);
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--gold);
+    padding: 0.2rem 0;
+    cursor: pointer;
+  }
+  .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
   h2.section-title {
@@ -217,25 +268,14 @@
   strong { color: var(--ink); font-weight: 600; }
 
   /* ---------- Two-column blocks ---------- */
-  .cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    align-items: start;
-  }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
   @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
 
   .cols + .note,
   .cols + .notes-grid,
   .cols + .read-more { margin-top: 0; }
 
-  .cols img, figure img {
-    width: 100%;
-    border-radius: 2px;
-    display: block;
-    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
-  }
+  .cols img, figure img { width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 12px rgba(28,25,23,0.08); }
 
   .img-placeholder {
     width: 100%;
@@ -304,12 +344,7 @@
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
 
-  .notes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1.3rem 0;
-  }
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
   @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
 
@@ -340,12 +375,7 @@
     text-transform: uppercase;
     color: var(--gold);
   }
-  details.practical-card > summary::after {
-    content: "＋";
-    color: var(--gold);
-    font-size: 0.95rem;
-    flex-shrink: 0;
-  }
+  details.practical-card > summary::after { content: "＋"; color: var(--gold); font-size: 0.95rem; flex-shrink: 0; }
   details.practical-card[open] > summary::after { content: "－"; }
   details.practical-card[open] > summary { border-bottom: 1px solid var(--line); }
   .practical-card-body { padding: 0.85rem 1rem 1rem; }
@@ -353,49 +383,7 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Day flags / rhythm card: quick-scan facts, same visual
-     language used for both "На сегодня" and "Ритм дня" blocks ---------- */
-  .day-flags {
-    background: var(--paper-deep);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
-  }
-  .day-flags-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-  }
-  .day-flags ul { list-style: none; }
-  .day-flags li {
-    padding: 0.45rem 0 0.45rem 1rem;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    border-bottom: 1px dashed var(--line);
-    position: relative;
-  }
-  .day-flags li:last-child { border-bottom: none; }
-  .day-flags li::before {
-    content: "▸";
-    color: var(--red);
-    position: absolute;
-    left: 0;
-  }
-  .day-flags li strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 0.86rem;
-    margin-bottom: 0.15rem;
-  }
-
-  /* ---------- Essence card: scannable summary before the prose, pilot for Asakusa ---------- */
+  /* ---------- Essence card: scannable summary before the prose ---------- */
   .essence-card {
     padding: 1.1rem 1.3rem;
     margin: 0.8rem 0 1.4rem;
@@ -414,15 +402,9 @@
     margin-bottom: 0.6rem;
   }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
-  .essence-card li {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    margin-bottom: 0.4rem;
-  }
+  .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
 
-  /* Practical info as label/value table, not prose-in-a-box */
   .practical-table { margin: 1.5rem 0; }
   .practical-row {
     display: grid;
@@ -443,19 +425,15 @@
     padding-top: 0.1rem;
   }
   .practical-value { color: var(--ink-soft); }
-  @media (max-width: 560px) {
-    .practical-row { grid-template-columns: 1fr; gap: 0.2rem; }
-  }
+  @media (max-width: 560px) { .practical-row { grid-template-columns: 1fr; gap: 0.2rem; } }
 
-  /* Read more as a quiet footnote, not a callout */
   .read-more {
     font-size: 0.88rem;
     color: var(--ink-soft);
     margin: 1.2rem 0 1.6rem;
     padding: 0.8rem 1rem;
     border-left: 3px solid var(--gold);
-    background: rgba(168,124,79,0.08);
-    border-radius: 0 4px 4px 0;
+    background: rgba(168,124,79,0.08); border-radius: 0 4px 4px 0;
   }
   .read-more-label {
     color: var(--gold);
@@ -466,14 +444,9 @@
     display: block;
     margin-bottom: 0.3rem;
   }
-  .read-more a {
-    color: var(--red);
-    text-decoration: none;
-    border-bottom: 1px solid var(--red-soft);
-  }
+  .read-more a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red-soft); }
   .read-more a:hover { color: var(--red-soft); }
 
-  /* Back-to-overview floating button */
   .back-btn {
     position: fixed;
     bottom: 1.5rem;
@@ -494,11 +467,7 @@
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .back-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
+  .back-btn.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   .callout {
     position: relative;
     padding: 1rem 1.3rem 1rem 1.6rem;
@@ -510,12 +479,7 @@
     background: linear-gradient(90deg, rgba(178,58,46,0.06) 0%, transparent 100%);
     border-radius: 0 4px 4px 0;
   }
-  .callout::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--gold);
-  }
+  .callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
   .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
   .callout a, .callout strong { color: var(--ink); }
 
@@ -528,54 +492,31 @@
     padding: 0.3rem 0 0.3rem 1.4rem;
     margin: 1.4rem 0;
   }
-  .blockquote::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--red-soft);
-  }
+  .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
   ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
 
-  /* ---------- Practical info page ---------- */
   .info-list { list-style: none; }
   .info-list li {
-    display: flex;
-    gap: 0.9rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.94rem;
-    color: var(--ink-soft);
+    display: flex; gap: 0.9rem; padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line); font-size: 0.94rem; color: var(--ink-soft);
   }
   .info-list li::before { content: "→"; color: var(--red); flex-shrink: 0; font-weight: 600; }
 
-  /* ---------- Footer ---------- */
-  .footnote {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.82rem;
-    color: #5C564E;
-  }
+  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.82rem; color: #5C564E; }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-  /* ---------- Top bar: consistent site-wide back-to-index nav ---------- */
   .top-bar {
     padding: 1.4rem 6vw;
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     position: sticky; top: 0; z-index: 80; background: var(--paper);
   }
-  .top-bar a.back {
-    font-size: 0.82rem; color: var(--red); text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
-  }
+  .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
@@ -598,21 +539,10 @@
   -webkit-touch-callout: none;
 }
 .nav-toggle:hover { border-color: var(--red-soft); color: var(--red); }
-
-/* iOS WKWebView (Claude's in-app preview, some in-app browsers) shows a native
-   "Open Link" action sheet on link tap/long-press, independent of JS click
-   handling. Disabling the native callout is what actually stops it. */
 .site-nav-drawer a { -webkit-touch-callout: none; }
-
 body.site-nav-locked { overflow: hidden; }
-
-.site-nav-scrim {
-  display: none;
-  position: fixed; inset: 0; background: rgba(28,25,23,0.35);
-  z-index: 90;
-}
+.site-nav-scrim { display: none; position: fixed; inset: 0; background: rgba(28,25,23,0.35); z-index: 90; }
 .site-nav-scrim.visible { display: block; }
-
 .site-nav-drawer {
   position: fixed; top: 0; left: 0; bottom: 0;
   width: min(340px, 86vw);
@@ -625,12 +555,9 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; flex-direction: column;
 }
 .site-nav-drawer.open { transform: translateX(0); }
-
 .site-nav-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.3rem 1.3rem 1rem;
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
+  padding: 1.3rem 1.3rem 1rem; border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
 .site-nav-header .title { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; color: var(--ink); }
 .site-nav-close {
@@ -639,9 +566,7 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; align-items: center; justify-content: center;
 }
 .site-nav-close:hover { color: var(--red); }
-
 .site-nav-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.3rem 2rem; }
-
 .site-nav-search { position: relative; margin-bottom: 1.2rem; }
 .site-nav-search input {
   width: 100%; font-family: 'Inter', sans-serif; font-size: 0.86rem; color: var(--ink);
@@ -653,20 +578,14 @@ body.site-nav-locked { overflow: hidden; }
   content: "⌕"; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
   color: var(--gold); font-size: 0.95rem; pointer-events: none;
 }
-
 .site-nav-empty { display: none; font-size: 0.84rem; color: #5C564E; margin: 0 0 1rem; }
 .site-nav-empty.visible { display: block; }
-
 .site-nav-group { margin-bottom: 1.6rem; }
 .site-nav-group.site-nav-hidden { display: none; }
-.site-nav-label {
-  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
+.site-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
 .site-nav-group ul { list-style: none; }
 .site-nav-group li { margin-bottom: 0.1rem; }
 .site-nav-group li.site-nav-hidden { display: none; }
-
 .site-nav-link {
   display: flex; align-items: baseline; gap: 0.55rem;
   padding: 0.42rem 0.4rem; border-radius: 5px;
@@ -678,18 +597,9 @@ body.site-nav-locked { overflow: hidden; }
 .site-nav-link .glyph { font-family: 'Shippori Mincho', serif; color: var(--gold); font-size: 0.9rem; flex-shrink: 0; width: 1.4em; text-align: center; }
 .site-nav-link .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .site-nav-link .meta { margin-left: auto; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.03em; flex-shrink: 0; }
-
-.site-nav-viewall {
-  display: inline-block; margin-top: 0.5rem;
-  font-size: 0.8rem; color: var(--red); text-decoration: none;
-  border-bottom: 1px dotted var(--red-soft);
-}
+.site-nav-viewall { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--red); text-decoration: none; border-bottom: 1px dotted var(--red-soft); }
 .site-nav-viewall:hover { color: var(--red-soft); }
-
-@media (prefers-reduced-motion: reduce) {
-  .site-nav-drawer { transition: none; }
-}
-
+@media (prefers-reduced-motion: reduce) { .site-nav-drawer { transition: none; } }
 </style>
 </head>
 <body>
@@ -703,18 +613,19 @@ body.site-nav-locked { overflow: hidden; }
 
 <section class="quote-intro">
   <blockquote>
-    <span class="quote-jp">誰にもかれにも、同じ時間が流れていると思うのはまちがいだ</span>
-    Время течёт одинаково для всех вещей, но каждый человек плывёт в нём по-своему
-    <span class="quote-author">Ясунари Кавабата</span>
+    <span class="quote-jp">一期に一度の会のように</span>
+    Каждую встречу стоит проводить так, будто она случится лишь раз в жизни
+    <span class="quote-author">Сэн-но Рикю (в записи ученика, Yamanoue Sōji Ki)</span>
+    <span class="quote-note">Мысль человека, который спроектировал два чайных домика в Kōdai-ji — сегодня ты их увидишь</span>
   </blockquote>
 </section>
 
 <header class="hero">
-  <div class="hero-mark" aria-hidden="true">浅草</div>
+  <div class="hero-mark" aria-hidden="true">東山</div>
   <div class="hero-content">
-    <div class="eyebrow">Tokyo · Day Plan</div>
-    <h1>Asakusa Day</h1>
-    <div class="sub">浅草 — храм Сэнсо-дзи, Накамисэ-дори и старый город</div>
+    <div class="eyebrow">Kyoto · Day Plan</div>
+    <h1>Higashiyama Day</h1>
+    <div class="sub">東山 — Kiyomizu-dera, каменные склоны Higashiyama и вечер в Gion</div>
   </div>
 </header>
 
@@ -723,273 +634,220 @@ body.site-nav-locked { overflow: hidden; }
   <div class="day-flags">
     <div class="day-flags-label">На сегодня</div>
     <ul>
-      <li><strong>Смотровая Tourist Center</strong>бесплатно, лифт/эскалатор — лучше зайти с утра, до толп на Nakamise</li>
-      <li><strong>Sensō-ji</strong>лучше смотреть до 9:00–9:30, пока не пришли группы</li>
-      <li><strong>Nakamise</strong>закрывается в 20:00 — вечером совсем другая улица</li>
-      <li><strong>Kappabashi</strong>по воскресеньям многие магазины закрыты</li>
-      <li><strong>Туалеты и локеры</strong>у Kaminarimon и у главного зала</li>
-      <li><strong>Курение</strong>только за пределами храмовой территории, ближе к Kappabashi-dori</li>
-      <li><strong>NMWA</strong>закрыт по понедельникам (сегодня не актуально), на постоянную коллекцию хватает 1–1.5 часа</li>
+      <li><strong>Kiyomizu-dera</strong> — открывается около 6:00, приходи к открытию: к 9:00–9:30 уже подходят группы</li>
+      <li><strong>Jishu Shrine</strong> — закрыт на реставрацию без объявленной даты, не планируй его в маршруте</li>
+      <li><strong>Sannenzaka</strong> — к полудню сплошной поток людей, пройти лучше до 10 утра</li>
+      <li><strong>Mouriya Gion</strong> — ужин по брони, разбирают за несколько недель; детали и ссылка — в <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Beatle Momo</strong> — по воскресеньям закрыт, в остальные дни 19:00–23:30; бронь через Instagram, детали — в <a href="trip-logistics.html">Logistics</a></li>
     </ul>
   </div>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
-    <button class="nav-place-btn" data-target="loc-kaminarimon">Kaminarimon</button>
-    <button class="nav-place-btn" data-target="loc-nakamise">Nakamise</button>
-    <button class="nav-place-btn" data-target="loc-hozomon">Hōzōmon</button>
-    <button class="nav-place-btn" data-target="loc-sensoji">Sensō-ji</button>
-    <button class="nav-place-btn" data-target="loc-shrine">Asakusa Shrine</button>
-    <button class="nav-place-btn" data-target="loc-kappabashi">Kappabashi</button>
-    <button class="nav-place-btn" data-target="loc-uenopark">Ueno Park</button>
-    <button class="nav-place-btn" data-target="loc-nmwa">NMWA</button>
+    <button class="nav-place-btn" data-target="loc-kiyomizu">Kiyomizu-dera</button>
+    <button class="nav-place-btn" data-target="loc-sannenzaka">Sannenzaka</button>
+    <button class="nav-place-btn" data-target="loc-kodaiji">Kōdai-ji</button>
+    <button class="nav-place-btn" data-target="loc-maruyama">Maruyama Park</button>
+    <button class="nav-place-btn" data-target="loc-mouriya">Mouriya Gion</button>
+    <button class="nav-place-btn" data-target="loc-pontocho">Pontocho Alley</button>
+    <button class="nav-place-btn" data-target="loc-beatlemomo">Beatle Momo</button>
   </nav>
+
+  <div class="connections-jump">
+    <button class="connections-jump-btn" data-target="connections">✦ Как этот день связан с остальной поездкой</button>
+  </div>
 
   <hr>
 
   <section id="t2">
-    <h2 class="section-title">Маршрут</h2>
-    <div class="day-flags">
-      <div class="day-flags-label">Ритм дня</div>
-      <ul>
-        <li><strong>Nakamise → Sensō-ji</strong>компактный участок, 5–10 минут пешком, нагрузки почти нет</li>
-        <li><strong>Если выбиваешься из графика</strong>лучше отказаться от Kappabashi, чем сократить время у храма</li>
-        <li><strong>Sensō-ji → Kappabashi</strong>пешком через жилые кварталы — часть впечатления от дня, не просто переход</li>
-        <li><strong>Kappabashi → Ueno</strong>одна остановка на метро, станция Tawaramachi (Ginza Line) рядом с Kappabashi</li>
-        <li><strong>Ueno Park → NMWA</strong>музей стоит прямо в парке — отдельно искать не нужно, заходишь по пути</li>
-        <li><strong>Вечер</strong>ужин в Ramen Kamo to Negi Ueno, рядом со станцией Ueno</li>
-      </ul>
-    </div>
+    <h2 class="section-title">Ритм дня</h2>
+    <p>Утренняя часть — одна прогулка по склону холма без резких подъёмов: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, суммарно меньше 20 минут ходьбы. Сложность не в расстоянии, а во времени: Kiyomizu-dera стоит поймать в районе открытия, иначе к 9:00–9:30 уже людно, а Sannenzaka к полудню превращается в сплошной поток — лучше пройти её до 10 утра.</p>
+    <div class="blockquote">От Kōdai-ji до Maruyama Park можно спуститься по Nene no Michi — переулку, названному в честь вдовы Hideyoshi, который проходит мимо Ishibei-koji, одной из самых нетронутых улочек старого Kyoto.</div>
+    <p>От Maruyama Park до Gion — 10–15 минут пешком через территорию Yasaka Shrine. После ужина в Mouriya Gion до Pontocho Alley — около 10 минут через Kamo River, а оттуда до бара Beatle Momo — ещё 5–7 минут в сторону Kawaramachi.</p>
   </section>
 
   <hr>
 
   <section id="t3">
-    <h2 class="section-title" style="margin-bottom:1.6rem;">По местам</h2>
 
-    <h2 class="section-title" id="loc-kaminarimon">Kaminarimon — ворота власти</h2>
+    <h2 class="section-title" id="loc-kiyomizu">Kiyomizu-dera — сцена без единого гвоздя</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>Это не просто ворота, а заявление о власти: статуи Fūjin (бог ветра) и Raijin (бог грома) отмечают границу, за которой действуют другие правила</li>
-        <li>Гигантский фонарь исторически был настолько большим, что под ним спешивался даже сёгун — паланкин знати физически не проезжал</li>
-        <li>Присмотрись к основанию ворот — там резные боги ветра и грома, давшие воротам имя</li>
-        <li>У статуй-хранителей Niō задержись: Агьё с открытым ртом и Унгьё с закрытым — рождение и защита, начало и конец</li>
+        <li>Сцена (Butai) выступает на 13 метров над склоном, держится на десятках деревянных колонн, соединённых без единого гвоздя техникой kigumi</li>
+        <li>Фраза «прыгнуть со сцены Kiyomizu» — не метафора: в период Edo с неё прыгнуло не менее 234 задокументированных человека, веря в исполнение желания при удачном приземлении; с 1872 года практика под запретом</li>
+        <li>Три потока Otowa Waterfall традиционно связывают с учёбой, любовью и долголетием — пить из всех трёх сразу считается жадностью</li>
+        <li>Jishu Shrine с «камнями любви» сейчас закрыт на реставрацию без объявленной даты открытия — не планируй его в маршруте</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kaminarimon</span></div></figure>
+      <figure><div class="img-placeholder"><span>Kiyomizu-dera</span></div></figure>
       <div>
-        <p>Красота здесь — оболочка, а функция — расстановка границ власти и статуса.</p>
+        <p>Храм основан в 778 году монахом Enchin, которому было видение источника на горе Otowa. Здесь есть деталь, которая переворачивает привычную логику: Kiyomizu-dera старше самого Kyoto как столицы. Императорский двор перебрался в Heian-kyō только в 794 году — храм на 16 лет старше города, который позже вырастет вокруг него. Главный объект поклонения — статуя Kannon, bodhisattva сострадания: культ милосердия на этом склоне появился раньше, чем государственная власть.</p>
+        <p>Архитектурная слава пришла позже: нынешние постройки — реконструкция 1633 года, заказанная сёгуном Tokugawa Iemitsu после очередного из десятков пожаров. Для Japan это не подделка: как и в Sensō-ji, важна непрерывность места, а не возраст досок.</p>
       </div>
     </div>
-
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>У статуй-хранителей <strong>Niō</strong> в нишах Kaminarimon и Hōzōmon стоит задержаться на пару секунд дольше обычного — их выражения специально утрированы, чтобы отпугивать зло взглядом, а не архитектурой. Статуи всегда парные и воплощают начало и конец: правый страж <strong>Агьё</strong> (阿形) — с открытым ртом, произносящим «А», символ рождения и открытой силы; левый страж <strong>Унгьё</strong> (吽形) — с закрытым ртом, произносящим «Ун», символ смерти, скрытой мощи и защиты от зла.</div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#fujin-raijin">Fūjin и Raijin</a> · <a href="glossary.html#nio-guardians">Niō, стражи ворот</a></p>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Смотровая площадка со стороны Otowa Waterfall — одно из немногих мест, откуда видно саму конструкцию сцены снизу. Большинство туристов фотографируют вид со сцены и уходят, ни разу не взглянув на инженерию, которая её держит.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p><strong>Tourist Center</strong> прямо напротив Kaminarimon — вход и подъём на смотровую (8 этаж) бесплатны, лифт или эскалатор. Открыт <strong>9:00–20:00</strong>, смотровая — до <strong>22:00</strong>. Лучше зайти в начале дня, до толп на Nakamise.</p>
+        <p>Открыт <strong>6:00–18:00</strong>. Приход к открытию почти полностью снимает толпу; к 9:00–9:30 подходят автобусы с группами.</p>
+        <p><strong>Jishu Shrine</strong> сейчас закрыт на реставрацию, дата открытия не объявлена — не планируй его в маршруте.</p>
       </div>
     </details>
 
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · <a href="glossary.html#kigumi-joinery">Kigumi joinery и сейсмостойкая архитектура храмов</a> · Прыжки со сцены Kiyomizu в период Edo · Sakanoue no Tamuramaro и легенда об основании храма</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-sannenzaka">Sannenzaka и Ninenzaka — лестница со страховкой в виде тыквы</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Sannenzaka</span></div></figure>
+      <div>
+        <p>Официальная версия происхождения имени связана с пагодой Koyasu при храме Taishi-ji на середине склона — туда веками приходили молиться о лёгких родах. Но прижилась другая, менее благочестивая легенда: споткнёшься на этой лестнице — умрёшь в течение трёх лет. У подножия до сих пор продают маленькую тыкву-горлянку (hyōtan) как оберег от этой судьбы — суеверие, давно ставшее сувенирным бизнесом.</p>
+        <p>Соседняя Ninenzaka несёт зеркальную, чуть менее суровую версию легенды: упал здесь — жди несчастья два года, а не три.</p>
+      </div>
+    </div>
     <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Посмотри не только на витрины. Многие магазины передаются одной семьёй из поколения в поколение — иногда об этом рассказывают небольшие таблички у входа.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Не стоит покупать еду в первом понравившемся месте.<br><strong>Ningyo-yaki</strong> — бисквитные пирожные со сладкой фасолью.<br><strong>Age-manju</strong> — жареные булочки с начинками.<br><strong>Kibi dango</strong> — рисовые шарики на шпажке.</div>
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Большинство магазинов закрывается раньше, чем ожидают туристы — примерно между 17:00 и 18:00.</div>
-      <div class="note"><span class="note-tag tag-skip">Что можно пропустить</span><br>Не спеши покупать сувениры в первой лавке — похожие товары встретятся ещё много раз. За качественными изделиями лучше дойти до Каппабаси.</div>
+      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Обе улицы застроены в основном в период Taishō, но выглядят гораздо старше — брусчатку сохранили, а линии электропередач специально убрали под землю.</div>
+      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Nama Yatsuhashi</strong> — свежий мочи с начинкой, продают именно на этом отрезке в десятках вариаций.</div>
     </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-nakamise">Nakamise — дорога к храму</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Nakamise-dōri</span></div></figure>
-      <div>
-        <p>Накамисэ — одна из старейших торговых улиц Японии. Идея почти не изменилась: <strong>путь к храму начинается задолго до его ворот</strong>.</p>
-        <p>Asakusa с самого начала развивался не как тихое место паломничества, а как торговый и развлекательный квартал вокруг храма. Nakamise — не позднейшая туристическая надстройка, а прямое продолжение той же логики: паломники всегда шли к богу через торговлю. Buddhism в Japan редко существовал отдельно от коммерции — он её освящал.</p>
-        <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#edo-asakusa">Асакуса в период Эдо</a></p>
-
-        <details class="practical-card">
-          <summary><span class="practical-card-title">Часы и практика</span></summary>
-          <div class="practical-card-body">
-            <p>Закрывается в <strong>20:00</strong> — вечером улица выглядит совершенно иначе. Большинство лавок закрывается раньше, чем ожидают туристы — примерно между <strong>17:00 и 18:00</strong>.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-hozomon">Hōzōmon gate</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Hōzōmon</span></div></figure>
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если увидишь большие соломенные сандалии (waraji), обрати внимание на их размер. По легенде они должны отпугивать демонов: если обувь настолько велика, значит и её владелец ещё больше.</div>
-    </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-sensoji">Sensō-ji</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Старейший буддийский храм Токио (645 год), возникший на месте, где по легенде рыбаки выловили в реке Сумида статую бодхисаттвы Каннон</li>
-        <li>Большинство зданий — послевоенная реконструкция; для японцев это не подделка, важна непрерывность традиции, а не подлинность материала</li>
-        <li>По фэншуй храм защищал замок Эдо с опасного северо-востока («кимон») — поэтому сёгун Токугава Иэясу сделал его официальным молитвенным храмом сёгуната</li>
-        <li>Здесь сохраняют старую систему гаданий, где ~30% омикудзи «плохие» (в других храмах эту долю давно занизили) — плохое не забирают домой, а завязывают на стойке рядом</li>
-      </ul>
-    </div>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Sensō-ji</span></div></figure>
-      <div>
-        <p>По легенде, в 628 году два рыбака выловили в реке Сумида небольшую статую <strong>бодхисаттвы Каннон</strong> — покровительницы сострадания. Каждый раз, когда они пытались вернуть её в реку, статуя снова попадала в сети. Так появилось место, которое позже стало храмом Сэнсо-дзи.</p>
-      </div>
-    </div>
-
-    <div class="cols">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>На обратной стороне многих фонарей, ворот и украшений часто написаны имена жертвователей. Попробуй иногда смотреть не на фасад, а на обратную сторону вещей.</div>
-      <div class="note">
-        <span class="note-tag tag-attention">Обрати внимание</span>
-        <p style="font-size:0.92rem; margin-top:0.5rem">При входе в главный зал висят два двустишия работы Noguchi Setsue, одного из «трёх мастеров Kansei»:</p>
-        <div class="blockquote">«Тело Будды идеально круглое, без спины» и «Все, кто приходит с десяти сторон света, обращены к ней».</div>
-        <p style="font-size:0.9rem">Мысль изящная: у совершенного тела нет изнанки, оно одинаково обращено ко всем — откуда бы паломник ни пришёл, он всегда оказывается лицом к лицу с божеством.</p>
-      </div>
-    </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Origin legend of Sensō-ji and the Sumida River · <a href="glossary.html#kannon">Kannon (Avalokiteśvara) in Japanese Buddhism</a> · Firebombing of Tokyo, March 1945 · <a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · <a href="glossary.html#shikinen-sengu">Shikinen Sengu tradition at Ise Jingu</a></p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Лучше смотреть до <strong>9:00–9:30</strong>, пока не подошли основные группы. Туалеты и локеры — у Kaminarimon и рядом с главным залом.</p>
+        <p>Улица открыта постоянно, но к полудню — сплошной поток людей. Пройти лучше <strong>до 10 утра</strong>.</p>
       </div>
     </details>
 
     <hr>
 
-    <h2 class="section-title" id="loc-shrine">Asakusa Shrine и разделённая память</h2>
+    <h2 class="section-title" id="loc-kodaiji">Kōdai-ji и Bamboo Forest — храм, построенный вдовой</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>Святилище рядом с главным залом посвящено не богам, а трём конкретным людям — тем самым рыбакам и старосте, принявшему статую Kannon</li>
+        <li>Основан в 1606 году Nene (Kita-no-Mandokoro) — вдовой Toyotomi Hideyoshi, человека, который в 1590 году впервые за полтора века объединил Japan</li>
+        <li>Строительство финансировал Tokugawa Ieyasu — соперник и преемник Hideyoshi по власти, что само по себе исторический жест примирения</li>
+        <li>Два чайных домика на территории спроектированы Sen no Rikyū — тем самым мастером, чьё учение о неповторимости каждой встречи легло в основу идеи ichigo ichie</li>
+        <li>Bamboo grove здесь заметно тише знаменитого в Arashiyama — та же атмосфера, но без толп</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Asakusa Shrine</span></div></figure>
+      <figure><div class="img-placeholder"><span>Kōdai-ji Bamboo Forest</span></div></figure>
       <div>
-        <p>До 1868 года храм и святилище управлялись как единое целое: раз в год духи трёх основателей «навещали» Kannon в главном зале, проводили с ней ночь, а затем их несли в паланкинах через реку и по улицам города. Meiji-правительство насильно разделило синто и буддизм — и только тогда святилище стало самостоятельным.</p>
-        <p>Здание при этом — подлинное, одно из двух построек в районе, переживших бомбардировки 1945 года; пока Sensō-ji отстраивали заново, здесь по-прежнему стоит Edo-период.</p>
+        <p>Hideyoshi поднялся из крестьян до фактического правителя Japan — редчайший случай социальной мобильности в средневековой Japan. Nene пережила его на 26 лет и провела остаток жизни, финансируя этот храм и молясь за его душу; сама она тоже здесь похоронена, в мавзолее Otama-ya, украшенном лаком с золотой и серебряной пудрой.</p>
       </div>
     </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja) — как устроено синтоистское святилище</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri, separation of Shinto and Buddhism 1868</a> · <a href="glossary.html#matsuri">Sanja Matsuri festival history</a> · <a href="glossary.html#shinto">что такое Shinto</a> · <a href="glossary.html#kami">kami как обожествлённые люди</a></p>
-    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Место открыто для тихого созерцания сразу за шумом главного зала — komainu (львы-стражи) у входа: один с открытой пастью, другой с закрытой, символизируя начало и конец всех вещей. Отдельная пара komainu под общим зонтом называется Meoto Komainu («женатые львы-собаки») — к ним приходят молиться о счастливом браке.</div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-kappabashi">Kappabashi — легенда о дренаже</h2>
-    <p>Название улицы отсылает не к посуде, а к воде. По легенде, в XIX веке местный купец по имени Kappaya Kihachi взялся прокладывать дренажные каналы, чтобы спасти район от постоянных наводнений. Работа шла тяжело — и, по преданию, ему стали помогать kappa, водяные существа из японского фольклора, приходившие по ночам.</p>
-    <p>Есть и более прозаичная версия: раньше здесь на мосту (bashi) сушили дождевики (kappa) низкоранговых самураев. Обе версии сходятся в одном — именно вода определила имя места, которое сегодня торгует кастрюлями.</p>
-    <div class="essence-card">
-      <span class="essence-label">Ищи на месте</span>
-      <ul>
-        <li>В Kappabashi есть маленький Sogenji Temple в переулках за главной улицей — там хранится мумифицированная кисть kappa под стеклом, и местные до сих пор оставляют статуям огурцы и саке</li>
-        <li>Golden Kappa statue на середине Kappabashi-dori поставлена в 2003 году к 90-летию торговой улицы — своего рода официальное признание мифа маскотом района</li>
-      </ul>
-    </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kappa-yokai">Kappa in Japanese folklore</a> · Sogenji Temple and the mummified kappa hand</p>
+    <p>Обычно Kōdai-ji читают просто как жест вдовьей скорби. Но время постройки говорит о другом. Hideyoshi умер в 1598 году, а уже в 1600-м battle at Sekigahara решила исход борьбы за власть в пользу Tokugawa Ieyasu — того самого человека, что оплатил строительство этого храма. К 1606 году, когда Kōdai-ji был готов, клан Toyotomi доживал последние годы: в 1615-м Tokugawa возьмёт Osaka Castle штурмом и уничтожит род Hideyoshi окончательно.</p>
+    <p>Так что Kōdai-ji — не только памятник мужу. Это памятник человеку, который выиграл почти всё, кроме главного: он так и не смог превратить личную власть в устойчивую династию. Строгий сад камней вокруг храма можно читать как попытку навести порядок именно в тот момент, когда мир Hideyoshi уже разваливался на глазах у его вдовы.</p>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Внутренние стены мавзолея Otama-ya украшены техникой <strong>Kōdai-ji maki-e</strong> — золотым и серебряным напылением по лаку, ставшим фирменным стилем именно этого храма. А бамбук за мавзолеем — не декоративный фон для фото: это резкий переход от камня и архитектуры к живому вертикальному лесу, расположенный так, будто контраст задуман сознательно.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>По <strong>воскресеньям</strong> многие магазины закрыты — для «рабочей» улицы лучше идти в будний день. Курение — только за пределами храмовой территории, ближе к Kappabashi-dori.</p>
+        <p>Открыт <strong>9:00–17:30</strong>, регистрация закрывается в <strong>17:00</strong>. Входной билет включает музей Kōdai-ji Sho; bamboo grove — часть маршрута по территории, отдельно покупать ничего не нужно.</p>
+      </div>
+    </details>
+
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi и объединение Japan</a> · <a href="glossary.html#tokugawa-edo">Battle of Sekigahara 1600 и падение клана Toyotomi</a> · <a href="glossary.html#chado-tea-ceremony">Sen no Rikyū и чайная церемония</a> · <a href="glossary.html#maki-e-lacquer">Kōdai-ji maki-e lacquerwork</a> · <a href="glossary.html#gardens">Karesansui и логика японского сада</a></p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-maruyama">Maruyama Park — старейший парк Kyoto</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Maruyama Park</span></div></figure>
+      <div>
+        <p>Park открылся в 1886 году на земле, когда-то принадлежавшей Yasaka Shrine. Meiji-правительство национализировало территорию и разбило здесь городской парк — почти буквальное повторение истории Asakusa Shrine, где та же эпоха тем же жестом отделяла синто от буддизма и от частных владений.</p>
+        <p>В центре — знаменитая плакучая вишня Gion shidare-zakura. Первое дерево простояло около 220 лет и погибло в 1947 году; нынешнее — уже второе поколение, выращенное из семян, собранных ещё при жизни оригинала. Дерево, которым любуются сегодня, физически моложе многих туристов, но воспринимается как несомненный символ места — тот же принцип непрерывности, что и в Kiyomizu-dera.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Рядом стоят статуи Sakamoto Ryōma и Nakaoka Shintarō — самураев-активистов конца сёгуната, чья гибель в 1867 году ускорила падение старого режима и приход Meiji Restoration.</div>
+
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Вход свободный, парк открыт круглосуточно.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Реставрация Meiji — сверхскоростной прыжок во времени</a></p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-mouriya">Kobe Beef Steak Mouriya Gion — ужин</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Mouriya Gion</span></div></figure>
+      <div>
+        <p>Mouriya — не выдумка для туристов, а настоящий институт Kobe: сеть основана в 1885 году, и филиал в Gion работает по тем же стандартам, что и оригинал. Здесь Kobe beef готовят teppanyaki — на раскалённой стальной пластине прямо перед гостями, техника, которую после войны сделали популярной именно рестораны такого рода.</p>
+      </div>
+    </div>
+
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Открыт <strong>11:30–21:00</strong>. Teppanyaki-рестораны такого уровня обычно разбирают за несколько недель — бронируй как можно раньше, лучше сразу через официальный сайт или Klook.</p>
       </div>
     </details>
 
     <hr>
 
-    <h2 class="section-title" id="loc-uenopark">Ueno Park — там, где сёгунат сгорел за один день</h2>
+    <h2 class="section-title" id="loc-pontocho">Pontocho Alley — переулок шириной в вытянутые руки</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>Весь парк раньше был территорией Kan'ei-ji — фамильного храма-усыпальницы клана Tokugawa, где похоронены шесть из пятнадцати сёгунов</li>
-        <li>Kan'ei-ji построили по образцу Enryaku-ji на горе Hiei — того самого, что сжёг Нобунага: тот же принцип храма-щита с северо-востока, только теперь щит для Edo, а не для Kyoto</li>
-        <li>В 1868 году здесь прошла Битва при Уэно — последний бой сторонников сёгуната (Shōgitai) против императорских войск; храм сгорел почти полностью за один день</li>
-        <li>В 1873-м руины превратили в один из первых в Японии общественных парков западного образца</li>
+        <li>Официальный символ квартала — птица chidori (галстучник), изображена на красных фонарях у входа</li>
+        <li>Летом рестораны выставляют деревянные террасы kawayuka прямо над Kamo River — традиция с 1920-х годов</li>
+        <li>На противоположном берегу реки — Gion, второй геиша-квартал Kyoto; исторически оба квартала конкурировали за одних и тех же гостей</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ueno Park</span></div></figure>
+      <figure><div class="img-placeholder"><span>Pontocho Alley</span></div></figure>
       <div>
-        <p>У южного входа стоит статуя <strong>Saigō Takamori</strong> — полководца, который принял капитуляцию замка Эдо без единого выстрела, а затем лично привёл императорские войска к победе в этой самой битве. Он же позже помог упразднить сословие самураев, к которому сам принадлежал. Десятью годами позже, не приняв темп реформ, Сайго — уже против своей воли — возглавил Сацумское восстание против того самого правительства, которое сам создал, и погиб в 1877 году.</p>
-        <p>Ирония места: человек, чья статуя встречает всех у входа в парк, построенный на обломках старого режима, сам через десять лет стал последним крупным мятежником против нового.</p>
+        <p>Pontocho возник в 1670 году не как спланированный квартал, а как нанос земли после укрепления берегов Kamo River — купцы застроили его почти сразу. Ширина переулка объясняется прозаично: налог считался по ширине фасада, а не по глубине здания, поэтому дома строили узкими и очень длинными. К 1710 году Pontocho уже был официальным hanamachi — одним из пяти районов, где принимают geiko и maiko.</p>
       </div>
     </div>
-
-    <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Tōshō-gū — синтоистское святилище Tokugawa Ieyasu — единственное здание комплекса, пережившее и битву 1868 года, и Великое землетрясение Kantō, и бомбёжки 1945 года.</div>
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Shinobazu Pond на юго-западе — тоже часть замысла монаха Tenkai: пруд специально сделан в подражание озеру Biwa, над которым стоит сам Enryaku-ji в Kyoto.</div>
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Рядом со статуей Saigō — могила Shōgitai, тех самых проигравших самураев, поставленная в 1874 году немногими выжившими.</div>
-    </div>
-
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Meiji Restoration</a></p>
-
-    <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
-      <div class="practical-card-body">
-        <p>Парк открыт <strong>круглосуточно</strong>, вход свободный. Статуя Saigō Takamori — у южного входа, ближе всего к станции Ueno.</p>
-      </div>
-    </details>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Вечером здесь можно случайно встретить maiko, идущую между чайными домами — из уважения к её работе фотографировать в упор и загораживать дорогу не стоит.</div>
 
     <hr>
 
-    <h2 class="section-title" id="loc-nmwa">National Museum of Western Art — коллекция, которая пережила пожар и плен</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>В основе музея — собрание Kōjirō Matsukata, президента Kawasaki Dockyard, который с 1905 года скупал в Европе западное искусство, мечтая построить в Японии музей, чтобы молодым художникам не пришлось ехать за океан ради оригиналов</li>
-        <li>Финансовый кризис 1927 года разорил его — японскую часть коллекции распродали, а то, что хранилось в Лондоне и Париже (~1400 работ), уцелело</li>
-        <li>В 1939-м пожар на лондонском складе Pantechnicon уничтожил около 900 работ; оставшиеся ~400 во Франции после войны конфисковало французское правительство как «вражескую собственность»</li>
-        <li>Мацуката умер в 1950-м, так и не увидев коллекцию — Японии её вернули только в 1959-м, и то с условием построить отдельный музей, чтобы собрание больше не рассеялось</li>
-        <li>Здание спроектировал Ле Корбюзье с тремя японскими архитекторами — своими бывшими учениками; в 2016 году стало объектом ЮНЕСКО</li>
-      </ul>
-    </div>
+    <h2 class="section-title" id="loc-beatlemomo">Beatle Momo — бар одной пластинки за раз</h2>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>NMWA</span></div></figure>
+      <figure><div class="img-placeholder"><span>Beatle Momo</span></div></figure>
       <div>
-        <p>Возврат коллекции не был полным жестом доброй воли. Франция придержала 17 картин, посчитав их слишком значимыми, чтобы расставаться, — включая «Комнату в Арле» Ван Гога и «Гору Сент-Виктуар» Сезанна. Осталось всё равно немало: Моне (включая настоящие «Кувшинки»), Ренуар, Гоген, Рубенс — и около пятидесяти работ Родена, включая «Мыслителя» и «Врата ада», часть из которых стоит прямо во внутреннем дворе, на виду ещё до билета.</p>
+        <p>Record Sakaba Beatle Momo — не тематический бар «Битлз», а винтажный бар с настоящим виниловым проигрывателем и коллекцией из тысяч пластинок, от 1950-х до наших дней. Момо, хозяин, ставит именно то, что просят гости — музыка здесь работает как язык, не требующий перевода.</p>
       </div>
     </div>
-
-    <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Роденовская коллекция музея сопоставима по объёму с музеем Родена в Филадельфии — крупнейшим собранием его работ за пределами Парижа. Токио здесь не побочная нота, а самостоятельно значимая коллекция.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>На постоянную коллекцию хватает 1–1.5 часа без спешки — не пытайся растянуть визит, музей рассчитан на плотный, но короткий заход.</div>
-    </div>
-
-    <p class="read-more"><span class="read-more-label">Подробнее</span>История коллекции Мацуката и репатриации после Второй мировой войны</p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Постоянная коллекция: <strong>9:30–17:30</strong>, по пятницам и субботам до <strong>20:00</strong>. Закрыт по понедельникам (в этот день не актуально). Вход — около <strong>500 иен</strong>. Скульптуры Родена во внутреннем дворе видны бесплатно, без билета.</p>
+        <p>По <strong>воскресеньям закрыт</strong>. В остальные дни работает <strong>19:00–23:30</strong>. Бронь оформляется на один из двух сеансов — на 19:00 или на 21:00.</p>
+        <p>Заведение маленькое — около <strong>25 мест</strong>. Забронировать можно через Instagram-аккаунт бара; без брони лучше приходить к самому открытию.</p>
       </div>
     </details>
+
   </section>
 
   <hr>
 
   <section id="t4">
     <h2 class="section-title">Food & Coffee</h2>
-    <p><strong>Asakusa Menchi</strong> — здесь берут именно за простоту: один продукт, доведённый до совершенства, без попытки удивить. Хорошая точка, чтобы почувствовать вкус старого квартала, а не гостиничный вариант японской кухни.</p>
-    <p>Вечером, уже в Уэно — <strong>Ramen Kamo to Negi Ueno</strong>, рядом со станцией.</p>
+    <p><strong>Nama Yatsuhashi на Sannenzaka</strong> — свежий, а не сувенирный вариант классической сладости, стоит попробовать по дороге, а не покупать упаковку в аэропорту. <strong>Mouriya Gion</strong> — основной ужин дня, подробности в разделе про это место выше.</p>
   </section>
 
-  <p class="footnote">Asakusa Day · Japan 2026 · план дня, собранный вручную</p>
+  <hr>
+
+  <h2 class="section-title" id="connections">Connections</h2>
+  <p>Kōdai-ji построен на деньги Tokugawa Ieyasu — человека, который в 1600 году при Sekigahara разбил сторонников клана Toyotomi, а в 1603-м получил от императора титул сёгуна. Тот же Ieyasu годом позже начал строить Nijō Castle в Kyoto — резиденцию, которая должна была демонстрировать власть его рода. Круг замкнётся в другой день поездки: именно в Nijō Castle в 1867 году последний сёгун из рода Tokugawa, Yoshinobu, объявит Taisei Hōkan — добровольную передачу власти императору. Один и тот же клан профинансировал храм для вдовы своего поверженного соперника и два с половиной века спустя в собственном замке сдал власть, которую отобрал у этого соперника.</p>
+  <p>А Sen no Rikyū, чьи чайные домики стоят на территории Kōdai-ji, — фигура, к которой в поездке возвращаешься не раз: его мысль о неповторимости каждой встречи (ichigo ichie) звучит в сегодняшней вступительной цитате и лежит в основе логики chadō, которую стоит держать в голове в любом японском саду или чайном павильоне.</p>
+
+  <p class="footnote">Higashiyama Day · Japan 2026 · план дня, собранный вручную</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
 
 <script>
-  // No tabs — page is one continuous flow. "По местам" buttons jump
+  // No tabs — page is one continuous flow. "По местам" buttons just jump
   // straight to the place's anchor.
   document.querySelectorAll('.nav-place-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -998,8 +856,11 @@ body.site-nav-locked { overflow: hidden; }
     });
   });
 
-  // Back-to-top floating button: visible once the "По местам" nav has
-  // scrolled out of view.
+  document.querySelector('.connections-jump-btn')?.addEventListener('click', function () {
+    const target = document.getElementById(this.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   const backBtn = document.getElementById('backBtn');
   const placesNav = document.querySelector('.nav-places');
 
@@ -1009,12 +870,8 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('scroll', updateBackBtn, { passive: true });
 
-  backBtn.addEventListener('click', () => {
-    placesNav.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  backBtn.addEventListener('click', () => { placesNav.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
-  // Deep-link support: a location anchor from index.html's "Места" list (or
-  // the site nav drawer) just scrolls straight to it — no tab to activate.
   function openDeepLink() {
     const id = window.location.hash.slice(1);
     if (!id) return;
@@ -1189,7 +1046,6 @@ window.SITE_DATA = {
 (function () {
   const DATA = window.SITE_DATA || { days: [], tools: [], places: [] };
 
-  // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
   const TEASER_PLACE_COUNT = 6;
@@ -1313,7 +1169,6 @@ window.SITE_DATA = {
         return;
       }
 
-      // While searching, search across the FULL places list, not just the teaser.
       placesTeaserList.style.display = 'none';
       placesAllList.style.display = '';
 

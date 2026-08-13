@@ -4,23 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
-<title>Asakusa Day</title>
+<title>Harajuku & Shibuya Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
-    --paper: #FAF8F4;
-    --paper-deep: #F3F1EA;
+    --paper: #FAF9F6;
+    --paper-deep: #F2EFE9;
     --card: #FFFFFF;
     --ink: #1C1917;
-    /* Darkened soft ink to crisp text for improved contrast */
     --ink-soft: #231F1C;
     --red: #B23A2E;
     --red-soft: #C85A4B;
     --line: #E1DACB;
-    --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold: #8C6239;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -35,7 +34,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.8; /* Increased line-height for better readability */
+    line-height: 1.8;
   }
 
   /* ---------- Torii accent line ---------- */
@@ -99,50 +98,7 @@
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
-  }
-  .quote-intro blockquote {
-    max-width: 560px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
-    color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
-  }
-  .quote-intro .quote-author {
-    display: block;
-    margin-top: 0.7rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
-    display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-
-  .overview-list {
-    list-style: none;
-    margin-bottom: 3rem;
-  }
+  .overview-list { list-style: none; margin-bottom: 3rem; }
   .overview-list li {
     position: relative;
     padding: 0.7rem 0 0.7rem 1.6rem;
@@ -159,13 +115,49 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Places navigation ---------- */
-  .nav-places {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-bottom: 3rem;
+  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
+  .day-flags {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 1.1rem 1.4rem 1.2rem;
+    margin-bottom: 2.6rem;
   }
+  .day-flags-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .day-flags ul { list-style: none; }
+  .day-flags li {
+    padding: 0.45rem 0 0.45rem 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+  }
+  .day-flags li:last-child { border-bottom: none; }
+  .day-flags li::before {
+    content: "▸";
+    color: var(--red);
+    position: absolute;
+    left: 0;
+  }
+  .day-flags li strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.86rem;
+    margin-bottom: 0.15rem;
+  }
+
+  /* ---------- Places navigation ---------- */
+  .nav-places { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; }
   .nav-places-label {
     width: 100%;
     font-size: 0.75rem;
@@ -173,6 +165,7 @@
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 0.6rem;
+    font-weight: 600;
   }
   .nav-place-btn {
     font-family: 'Inter', sans-serif;
@@ -186,12 +179,21 @@
     transition: all 0.2s ease;
     white-space: nowrap;
   }
-  .nav-place-btn:hover {
-    color: var(--red);
-    border-color: var(--red-soft);
-    background: rgba(178,58,46,0.06);
-  }
+  .nav-place-btn:hover { color: var(--red); border-color: var(--red-soft); background: rgba(178,58,46,0.06); }
 
+  .connections-jump { margin-bottom: 2.6rem; }
+  .connections-jump-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: var(--gold);
+    background: none;
+    border: none;
+    border-bottom: 1px dotted var(--gold);
+    padding: 0.2rem 0;
+    cursor: pointer;
+  }
+  .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
   h2.section-title {
@@ -217,25 +219,14 @@
   strong { color: var(--ink); font-weight: 600; }
 
   /* ---------- Two-column blocks ---------- */
-  .cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    align-items: start;
-  }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
   @media (max-width: 680px) { .cols { grid-template-columns: 1fr; } }
 
   .cols + .note,
   .cols + .notes-grid,
   .cols + .read-more { margin-top: 0; }
 
-  .cols img, figure img {
-    width: 100%;
-    border-radius: 2px;
-    display: block;
-    box-shadow: 0 2px 12px rgba(28,25,23,0.08);
-  }
+  .cols img, figure img { width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 12px rgba(28,25,23,0.08); }
 
   .img-placeholder {
     width: 100%;
@@ -304,12 +295,7 @@
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
 
-  .notes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1.3rem 0;
-  }
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
   @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
 
@@ -340,12 +326,7 @@
     text-transform: uppercase;
     color: var(--gold);
   }
-  details.practical-card > summary::after {
-    content: "＋";
-    color: var(--gold);
-    font-size: 0.95rem;
-    flex-shrink: 0;
-  }
+  details.practical-card > summary::after { content: "＋"; color: var(--gold); font-size: 0.95rem; flex-shrink: 0; }
   details.practical-card[open] > summary::after { content: "－"; }
   details.practical-card[open] > summary { border-bottom: 1px solid var(--line); }
   .practical-card-body { padding: 0.85rem 1rem 1rem; }
@@ -353,49 +334,7 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Day flags / rhythm card: quick-scan facts, same visual
-     language used for both "На сегодня" and "Ритм дня" blocks ---------- */
-  .day-flags {
-    background: var(--paper-deep);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
-  }
-  .day-flags-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-  }
-  .day-flags ul { list-style: none; }
-  .day-flags li {
-    padding: 0.45rem 0 0.45rem 1rem;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    border-bottom: 1px dashed var(--line);
-    position: relative;
-  }
-  .day-flags li:last-child { border-bottom: none; }
-  .day-flags li::before {
-    content: "▸";
-    color: var(--red);
-    position: absolute;
-    left: 0;
-  }
-  .day-flags li strong {
-    display: block;
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 0.86rem;
-    margin-bottom: 0.15rem;
-  }
-
-  /* ---------- Essence card: scannable summary before the prose, pilot for Asakusa ---------- */
+  /* ---------- Essence card: scannable summary before the prose ---------- */
   .essence-card {
     padding: 1.1rem 1.3rem;
     margin: 0.8rem 0 1.4rem;
@@ -414,15 +353,9 @@
     margin-bottom: 0.6rem;
   }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
-  .essence-card li {
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-    margin-bottom: 0.4rem;
-  }
+  .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
 
-  /* Practical info as label/value table, not prose-in-a-box */
   .practical-table { margin: 1.5rem 0; }
   .practical-row {
     display: grid;
@@ -443,19 +376,15 @@
     padding-top: 0.1rem;
   }
   .practical-value { color: var(--ink-soft); }
-  @media (max-width: 560px) {
-    .practical-row { grid-template-columns: 1fr; gap: 0.2rem; }
-  }
+  @media (max-width: 560px) { .practical-row { grid-template-columns: 1fr; gap: 0.2rem; } }
 
-  /* Read more as a quiet footnote, not a callout */
   .read-more {
     font-size: 0.88rem;
     color: var(--ink-soft);
     margin: 1.2rem 0 1.6rem;
     padding: 0.8rem 1rem;
     border-left: 3px solid var(--gold);
-    background: rgba(168,124,79,0.08);
-    border-radius: 0 4px 4px 0;
+    background: rgba(168,124,79,0.08); border-radius: 0 4px 4px 0;
   }
   .read-more-label {
     color: var(--gold);
@@ -466,14 +395,9 @@
     display: block;
     margin-bottom: 0.3rem;
   }
-  .read-more a {
-    color: var(--red);
-    text-decoration: none;
-    border-bottom: 1px solid var(--red-soft);
-  }
+  .read-more a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red-soft); }
   .read-more a:hover { color: var(--red-soft); }
 
-  /* Back-to-overview floating button */
   .back-btn {
     position: fixed;
     bottom: 1.5rem;
@@ -494,11 +418,7 @@
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
-  .back-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
+  .back-btn.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
   .callout {
     position: relative;
     padding: 1rem 1.3rem 1rem 1.6rem;
@@ -510,12 +430,7 @@
     background: linear-gradient(90deg, rgba(178,58,46,0.06) 0%, transparent 100%);
     border-radius: 0 4px 4px 0;
   }
-  .callout::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--gold);
-  }
+  .callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
   .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
   .callout a, .callout strong { color: var(--ink); }
 
@@ -528,54 +443,31 @@
     padding: 0.3rem 0 0.3rem 1.4rem;
     margin: 1.4rem 0;
   }
-  .blockquote::before {
-    content: "";
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--red-soft);
-  }
+  .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
   ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
 
-  /* ---------- Practical info page ---------- */
   .info-list { list-style: none; }
   .info-list li {
-    display: flex;
-    gap: 0.9rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.94rem;
-    color: var(--ink-soft);
+    display: flex; gap: 0.9rem; padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line); font-size: 0.94rem; color: var(--ink-soft);
   }
   .info-list li::before { content: "→"; color: var(--red); flex-shrink: 0; font-weight: 600; }
 
-  /* ---------- Footer ---------- */
-  .footnote {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.82rem;
-    color: #5C564E;
-  }
+  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.82rem; color: #5C564E; }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-  /* ---------- Top bar: consistent site-wide back-to-index nav ---------- */
   .top-bar {
     padding: 1.4rem 6vw;
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     position: sticky; top: 0; z-index: 80; background: var(--paper);
   }
-  .top-bar a.back {
-    font-size: 0.82rem; color: var(--red); text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
-  }
+  .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
@@ -598,21 +490,10 @@
   -webkit-touch-callout: none;
 }
 .nav-toggle:hover { border-color: var(--red-soft); color: var(--red); }
-
-/* iOS WKWebView (Claude's in-app preview, some in-app browsers) shows a native
-   "Open Link" action sheet on link tap/long-press, independent of JS click
-   handling. Disabling the native callout is what actually stops it. */
 .site-nav-drawer a { -webkit-touch-callout: none; }
-
 body.site-nav-locked { overflow: hidden; }
-
-.site-nav-scrim {
-  display: none;
-  position: fixed; inset: 0; background: rgba(28,25,23,0.35);
-  z-index: 90;
-}
+.site-nav-scrim { display: none; position: fixed; inset: 0; background: rgba(28,25,23,0.35); z-index: 90; }
 .site-nav-scrim.visible { display: block; }
-
 .site-nav-drawer {
   position: fixed; top: 0; left: 0; bottom: 0;
   width: min(340px, 86vw);
@@ -625,12 +506,9 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; flex-direction: column;
 }
 .site-nav-drawer.open { transform: translateX(0); }
-
 .site-nav-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.3rem 1.3rem 1rem;
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
+  padding: 1.3rem 1.3rem 1rem; border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
 .site-nav-header .title { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; color: var(--ink); }
 .site-nav-close {
@@ -639,9 +517,7 @@ body.site-nav-locked { overflow: hidden; }
   display: flex; align-items: center; justify-content: center;
 }
 .site-nav-close:hover { color: var(--red); }
-
 .site-nav-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.3rem 2rem; }
-
 .site-nav-search { position: relative; margin-bottom: 1.2rem; }
 .site-nav-search input {
   width: 100%; font-family: 'Inter', sans-serif; font-size: 0.86rem; color: var(--ink);
@@ -653,20 +529,14 @@ body.site-nav-locked { overflow: hidden; }
   content: "⌕"; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
   color: var(--gold); font-size: 0.95rem; pointer-events: none;
 }
-
 .site-nav-empty { display: none; font-size: 0.84rem; color: #5C564E; margin: 0 0 1rem; }
 .site-nav-empty.visible { display: block; }
-
 .site-nav-group { margin-bottom: 1.6rem; }
 .site-nav-group.site-nav-hidden { display: none; }
-.site-nav-label {
-  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
+.site-nav-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
 .site-nav-group ul { list-style: none; }
 .site-nav-group li { margin-bottom: 0.1rem; }
 .site-nav-group li.site-nav-hidden { display: none; }
-
 .site-nav-link {
   display: flex; align-items: baseline; gap: 0.55rem;
   padding: 0.42rem 0.4rem; border-radius: 5px;
@@ -678,18 +548,9 @@ body.site-nav-locked { overflow: hidden; }
 .site-nav-link .glyph { font-family: 'Shippori Mincho', serif; color: var(--gold); font-size: 0.9rem; flex-shrink: 0; width: 1.4em; text-align: center; }
 .site-nav-link .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .site-nav-link .meta { margin-left: auto; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.03em; flex-shrink: 0; }
-
-.site-nav-viewall {
-  display: inline-block; margin-top: 0.5rem;
-  font-size: 0.8rem; color: var(--red); text-decoration: none;
-  border-bottom: 1px dotted var(--red-soft);
-}
+.site-nav-viewall { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: var(--red); text-decoration: none; border-bottom: 1px dotted var(--red-soft); }
 .site-nav-viewall:hover { color: var(--red-soft); }
-
-@media (prefers-reduced-motion: reduce) {
-  .site-nav-drawer { transition: none; }
-}
-
+@media (prefers-reduced-motion: reduce) { .site-nav-drawer { transition: none; } }
 </style>
 </head>
 <body>
@@ -701,20 +562,12 @@ body.site-nav-locked { overflow: hidden; }
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">誰にもかれにも、同じ時間が流れていると思うのはまちがいだ</span>
-    Время течёт одинаково для всех вещей, но каждый человек плывёт в нём по-своему
-    <span class="quote-author">Ясунари Кавабата</span>
-  </blockquote>
-</section>
-
 <header class="hero">
-  <div class="hero-mark" aria-hidden="true">浅草</div>
+  <div class="hero-mark" aria-hidden="true">森</div>
   <div class="hero-content">
-    <div class="eyebrow">Tokyo · Day Plan</div>
-    <h1>Asakusa Day</h1>
-    <div class="sub">浅草 — храм Сэнсо-дзи, Накамисэ-дори и старый город</div>
+    <div class="eyebrow">Harajuku · Shibuya · Day Plan</div>
+    <h1>Harajuku & Shibuya Day</h1>
+    <div class="sub">Meiji Jingu, Takeshita Street, Omotesando и Shibuya Crossing — рукотворный лес, приведший к самому людному перекрёстку мира</div>
   </div>
 </header>
 
@@ -723,41 +576,45 @@ body.site-nav-locked { overflow: hidden; }
   <div class="day-flags">
     <div class="day-flags-label">На сегодня</div>
     <ul>
-      <li><strong>Смотровая Tourist Center</strong>бесплатно, лифт/эскалатор — лучше зайти с утра, до толп на Nakamise</li>
-      <li><strong>Sensō-ji</strong>лучше смотреть до 9:00–9:30, пока не пришли группы</li>
-      <li><strong>Nakamise</strong>закрывается в 20:00 — вечером совсем другая улица</li>
-      <li><strong>Kappabashi</strong>по воскресеньям многие магазины закрыты</li>
-      <li><strong>Туалеты и локеры</strong>у Kaminarimon и у главного зала</li>
-      <li><strong>Курение</strong>только за пределами храмовой территории, ближе к Kappabashi-dori</li>
-      <li><strong>NMWA</strong>закрыт по понедельникам (сегодня не актуально), на постоянную коллекцию хватает 1–1.5 часа</li>
+      <li><strong>Пятница, не воскресенье</strong> — уличных танцоров и косплееров у Yoyogi Park сегодня не будет: это чисто воскресный ритуал (Hokoten), в будни площадка пустует</li>
+      <li><strong>Meiji Jingu</strong> — лес и храм займут минимум час; в проходе под тории держись сбоку, центр дороги — для ками</li>
+      <li><strong>Takeshita Street</strong> — узкая пешеходная улица, к вечеру пятницы уже плотный поток людей</li>
+      <li><strong>Meikyoku Kissa Lion</strong> — говорить внутри не принято, Wi-Fi и розеток нет, заказы делаются молча по карточкам</li>
+      <li><strong>Grandfather's</strong> — маленький бар у станции Shibuya, пластинки крутят по одной, недорого</li>
     </ul>
   </div>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
-    <button class="nav-place-btn" data-target="loc-kaminarimon">Kaminarimon</button>
-    <button class="nav-place-btn" data-target="loc-nakamise">Nakamise</button>
-    <button class="nav-place-btn" data-target="loc-hozomon">Hōzōmon</button>
-    <button class="nav-place-btn" data-target="loc-sensoji">Sensō-ji</button>
-    <button class="nav-place-btn" data-target="loc-shrine">Asakusa Shrine</button>
-    <button class="nav-place-btn" data-target="loc-kappabashi">Kappabashi</button>
-    <button class="nav-place-btn" data-target="loc-uenopark">Ueno Park</button>
-    <button class="nav-place-btn" data-target="loc-nmwa">NMWA</button>
+    <button class="nav-place-btn" data-target="loc-meijijingu">Meiji Jingu</button>
+    <button class="nav-place-btn" data-target="loc-yoyogipark">Yoyogi Park</button>
+    <button class="nav-place-btn" data-target="loc-takeshita">Takeshita Street</button>
+    <button class="nav-place-btn" data-target="loc-catstreet">Ura-Harajuku / Cat Street</button>
+    <button class="nav-place-btn" data-target="loc-omotesando">Omotesando Avenue</button>
+    <button class="nav-place-btn" data-target="loc-mykita">MYKITA Tokyo</button>
+    <button class="nav-place-btn" data-target="loc-shibuyacrossing">Shibuya Crossing</button>
+    <button class="nav-place-btn" data-target="loc-tsuchiyakaban">TSUCHIYA KABAN</button>
+    <button class="nav-place-btn" data-target="loc-grandfathers">Grandfather's</button>
+    <button class="nav-place-btn" data-target="loc-meikyokulion">Meikyoku Kissa Lion</button>
   </nav>
+
+  <div class="connections-jump">
+    <button class="connections-jump-btn" data-target="connections">✦ Как этот день связан с остальной поездкой</button>
+  </div>
 
   <hr>
 
   <section id="t2">
-    <h2 class="section-title">Маршрут</h2>
+    <h2 class="section-title">Ритм дня</h2>
+    <p>День распадается на два разных ритма, и стоит держать их как единую дугу, а не два случайных пункта: тихий рукотворный лес утром — и самый людный перекрёсток мира вечером. Meiji Jingu и соседний Yoyogi Park логично пройти в начале дня, пока лес не наполнился шумом города; дальше — сплошной шопинг-коридор Takeshita Street → Cat Street → Omotesando → Aoyama, без резких скачков, который можно растягивать или сжимать по настроению.</p>
+    <p>Shibuya Crossing разумнее приберечь на сумерки: именно тогда неон над перекрёстком и толпа под ним начинают работать вместе, а не порознь. Meikyoku Kissa Lion и Grandfather's — оба хороши как вечерний якорь после толчеи, только в разной тональности: один — молчаливая классика, другой — виниловый бар с недорогим виски.</p>
     <div class="day-flags">
-      <div class="day-flags-label">Ритм дня</div>
+      <div class="day-flags-label">Между точками</div>
       <ul>
-        <li><strong>Nakamise → Sensō-ji</strong>компактный участок, 5–10 минут пешком, нагрузки почти нет</li>
-        <li><strong>Если выбиваешься из графика</strong>лучше отказаться от Kappabashi, чем сократить время у храма</li>
-        <li><strong>Sensō-ji → Kappabashi</strong>пешком через жилые кварталы — часть впечатления от дня, не просто переход</li>
-        <li><strong>Kappabashi → Ueno</strong>одна остановка на метро, станция Tawaramachi (Ginza Line) рядом с Kappabashi</li>
-        <li><strong>Ueno Park → NMWA</strong>музей стоит прямо в парке — отдельно искать не нужно, заходишь по пути</li>
-        <li><strong>Вечер</strong>ужин в Ramen Kamo to Negi Ueno, рядом со станцией Ueno</li>
+        <li><strong>Meiji Jingu → Yoyogi Park</strong> — соседние ворота в ворота, без отдельного перехода</li>
+        <li><strong>Harajuku Station → Takeshita Street → Cat Street → Omotesando</strong> — одна связанная прогулка, суммарно около 30–40 минут без остановок</li>
+        <li><strong>Omotesando → Shibuya Crossing</strong> — 15–20 минут пешком или одна остановка на метро</li>
+        <li><strong>Shibuya Crossing → Grandfather's / Meikyoku Kissa Lion</strong> — оба в нескольких минутах от станции, в разные стороны</li>
       </ul>
     </div>
   </section>
@@ -765,231 +622,267 @@ body.site-nav-locked { overflow: hidden; }
   <hr>
 
   <section id="t3">
-    <h2 class="section-title" style="margin-bottom:1.6rem;">По местам</h2>
 
-    <h2 class="section-title" id="loc-kaminarimon">Kaminarimon — ворота власти</h2>
+    <h2 class="section-title" id="loc-meijijingu">Meiji Jingu — лес, которому нарочно не дают выглядеть новым</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>Это не просто ворота, а заявление о власти: статуи Fūjin (бог ветра) и Raijin (бог грома) отмечают границу, за которой действуют другие правила</li>
-        <li>Гигантский фонарь исторически был настолько большим, что под ним спешивался даже сёгун — паланкин знати физически не проезжал</li>
-        <li>Присмотрись к основанию ворот — там резные боги ветра и грома, давшие воротам имя</li>
-        <li>У статуй-хранителей Niō задержись: Агьё с открытым ртом и Унгьё с закрытым — рождение и защита, начало и конец</li>
+        <li>Лес вокруг храма не природный, а рукотворный: в 1920 году свыше 100 000 деревьев 365 видов посадили 110 000 добровольцев — включая японские общины Кореи, Тайваня и Сахалина</li>
+        <li>С момента посадки лес считается священным и его не трогают вообще: упавшие деревья просто оставляют гнить, поэтому за век он стал самоподдерживающейся экосистемой с дикими птицами и енотовидными собаками</li>
+        <li>Главные тории — 12 метров высотой, из 1500-летнего тайваньского кипариса; первые ворота 1920 года сгорели от удара молнии в 1966-м</li>
+        <li>На подходе — два ряда бочек лицом друг к другу: японское саке от пивоварен со всей страны и бургундское вино — жест в честь увлечения императора Мэйдзи западной культурой</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kaminarimon</span></div></figure>
+      <figure><div class="img-placeholder"><span>Meiji Jingu</span></div></figure>
       <div>
-        <p>Красота здесь — оболочка, а функция — расстановка границ власти и статуса.</p>
+        <p>До 1920 года здесь были не древние рощи, а болото, поля и редкий сосняк — ничего священного. Проектировщики во главе с Honda Seiroku (тем же лесоводом, что спроектировал Hibiya Park) сознательно выбирали не то, как деревья будут выглядеть при посадке, а то, как они будут выглядеть через сто и двести лет: сосны первого поколения должны были уступить место дубу и камфорному дереву, и лес — состариться в вечнозелёный, будто он тут всегда стоял. Самый «древний на вид» лес Токио на деле моложе метро.</p>
+        <p>Тории пережили похожую историю обновления: оригинальные ворота 1920 года сделали из 1200-летнего тайваньского кипариса — и молния разбила правый столб в июле 1966-го. Токийский торговец лесом несколько лет искал замену на Тайване, пока не нашёл на склоне горы Danda дерево возрастом 1500 лет; нынешние ворота из него стоят с 1975 года.</p>
       </div>
     </div>
-
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>У статуй-хранителей <strong>Niō</strong> в нишах Kaminarimon и Hōzōmon стоит задержаться на пару секунд дольше обычного — их выражения специально утрированы, чтобы отпугивать зло взглядом, а не архитектурой. Статуи всегда парные и воплощают начало и конец: правый страж <strong>Агьё</strong> (阿形) — с открытым ртом, произносящим «А», символ рождения и открытой силы; левый страж <strong>Унгьё</strong> (吽形) — с закрытым ртом, произносящим «Ун», символ смерти, скрытой мощи и защиты от зла.</div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#fujin-raijin">Fūjin и Raijin</a> · <a href="glossary.html#nio-guardians">Niō, стражи ворот</a></p>
-
-    <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
-      <div class="practical-card-body">
-        <p><strong>Tourist Center</strong> прямо напротив Kaminarimon — вход и подъём на смотровую (8 этаж) бесплатны, лифт или эскалатор. Открыт <strong>9:00–20:00</strong>, смотровая — до <strong>22:00</strong>. Лучше зайти в начале дня, до толп на Nakamise.</p>
-      </div>
-    </details>
-
     <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Посмотри не только на витрины. Многие магазины передаются одной семьёй из поколения в поколение — иногда об этом рассказывают небольшие таблички у входа.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Не стоит покупать еду в первом понравившемся месте.<br><strong>Ningyo-yaki</strong> — бисквитные пирожные со сладкой фасолью.<br><strong>Age-manju</strong> — жареные булочки с начинками.<br><strong>Kibi dango</strong> — рисовые шарики на шпажке.</div>
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Большинство магазинов закрывается раньше, чем ожидают туристы — примерно между 17:00 и 18:00.</div>
-      <div class="note"><span class="note-tag tag-skip">Что можно пропустить</span><br>Не спеши покупать сувениры в первой лавке — похожие товары встретятся ещё много раз. За качественными изделиями лучше дойти до Каппабаси.</div>
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Перед тории принято один раз поклониться и пройти сбоку, а не по центру дороги — центр традиционно оставляют для ками.</div>
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Донаты бургундского вина идут с 2006 года: раз в год делегация французского ордена Confrérie des Chevaliers du Tastevin приезжает провести церемонию подношения прямо у бочек.</div>
     </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-nakamise">Nakamise — дорога к храму</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Nakamise-dōri</span></div></figure>
-      <div>
-        <p>Накамисэ — одна из старейших торговых улиц Японии. Идея почти не изменилась: <strong>путь к храму начинается задолго до его ворот</strong>.</p>
-        <p>Asakusa с самого начала развивался не как тихое место паломничества, а как торговый и развлекательный квартал вокруг храма. Nakamise — не позднейшая туристическая надстройка, а прямое продолжение той же логики: паломники всегда шли к богу через торговлю. Buddhism в Japan редко существовал отдельно от коммерции — он её освящал.</p>
-        <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#edo-asakusa">Асакуса в период Эдо</a></p>
-
-        <details class="practical-card">
-          <summary><span class="practical-card-title">Часы и практика</span></summary>
-          <div class="practical-card-body">
-            <p>Закрывается в <strong>20:00</strong> — вечером улица выглядит совершенно иначе. Большинство лавок закрывается раньше, чем ожидают туристы — примерно между <strong>17:00 и 18:00</strong>.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-hozomon">Hōzōmon gate</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Hōzōmon</span></div></figure>
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если увидишь большие соломенные сандалии (waraji), обрати внимание на их размер. По легенде они должны отпугивать демонов: если обувь настолько велика, значит и её владелец ещё больше.</div>
-    </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-sensoji">Sensō-ji</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Старейший буддийский храм Токио (645 год), возникший на месте, где по легенде рыбаки выловили в реке Сумида статую бодхисаттвы Каннон</li>
-        <li>Большинство зданий — послевоенная реконструкция; для японцев это не подделка, важна непрерывность традиции, а не подлинность материала</li>
-        <li>По фэншуй храм защищал замок Эдо с опасного северо-востока («кимон») — поэтому сёгун Токугава Иэясу сделал его официальным молитвенным храмом сёгуната</li>
-        <li>Здесь сохраняют старую систему гаданий, где ~30% омикудзи «плохие» (в других храмах эту долю давно занизили) — плохое не забирают домой, а завязывают на стойке рядом</li>
-      </ul>
-    </div>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Sensō-ji</span></div></figure>
-      <div>
-        <p>По легенде, в 628 году два рыбака выловили в реке Сумида небольшую статую <strong>бодхисаттвы Каннон</strong> — покровительницы сострадания. Каждый раз, когда они пытались вернуть её в реку, статуя снова попадала в сети. Так появилось место, которое позже стало храмом Сэнсо-дзи.</p>
-      </div>
-    </div>
-
-    <div class="cols">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>На обратной стороне многих фонарей, ворот и украшений часто написаны имена жертвователей. Попробуй иногда смотреть не на фасад, а на обратную сторону вещей.</div>
-      <div class="note">
-        <span class="note-tag tag-attention">Обрати внимание</span>
-        <p style="font-size:0.92rem; margin-top:0.5rem">При входе в главный зал висят два двустишия работы Noguchi Setsue, одного из «трёх мастеров Kansei»:</p>
-        <div class="blockquote">«Тело Будды идеально круглое, без спины» и «Все, кто приходит с десяти сторон света, обращены к ней».</div>
-        <p style="font-size:0.9rem">Мысль изящная: у совершенного тела нет изнанки, оно одинаково обращено ко всем — откуда бы паломник ни пришёл, он всегда оказывается лицом к лицу с божеством.</p>
-      </div>
-    </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Origin legend of Sensō-ji and the Sumida River · <a href="glossary.html#kannon">Kannon (Avalokiteśvara) in Japanese Buddhism</a> · Firebombing of Tokyo, March 1945 · <a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · <a href="glossary.html#shikinen-sengu">Shikinen Sengu tradition at Ise Jingu</a></p>
-
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Лучше смотреть до <strong>9:00–9:30</strong>, пока не подошли основные группы. Туалеты и локеры — у Kaminarimon и рядом с главным залом.</p>
+        <p>Открыт от рассвета до заката, часы меняются по сезону (примерно 5:00–6:30 открытие). Вход бесплатный. Полный круг от южного (Harajuku) входа — около 90 минут с прогулкой по лесу. Северный (Yoyogi) и западный (Sangūbashi) входы заметно тише.</p>
       </div>
     </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja)</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri и рождение современного синто</a> · <a href="glossary.html#torii-vs-mon">Torii vs. mon</a> · Honda Seiroku и рукотворные леса эпохи Meiji</p>
 
     <hr>
 
-    <h2 class="section-title" id="loc-shrine">Asakusa Shrine и разделённая память</h2>
+    <h2 class="section-title" id="loc-yoyogipark">Yoyogi Park — от военного городка до Олимпийской деревни</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>Святилище рядом с главным залом посвящено не богам, а трём конкретным людям — тем самым рыбакам и старосте, принявшему статую Kannon</li>
+        <li>С 1946 по 1963 год здесь стоял Washington Heights — жилой городок для офицеров союзных войск на 800+ домов</li>
+        <li>Именно близость к базе невольно запустила моду Harajuku: магазин Kiddy Land на Omotesando начинал с продажи посуды и мелочей семьям американских военных</li>
+        <li>В 1964-м опустевшие казармы стали Олимпийской деревней для более чем 5000 спортсменов; один барак — тот, что занимала голландская команда, — уцелел и стоит в парке до сих пор как памятник</li>
+        <li>С конца 1970-х это же место — родина Takenoko-zoku, «племени бамбуковых ростков»: но танцуют они по воскресеньям, не сегодня</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Asakusa Shrine</span></div></figure>
+      <figure><div class="img-placeholder"><span>Yoyogi Park</span></div></figure>
       <div>
-        <p>До 1868 года храм и святилище управлялись как единое целое: раз в год духи трёх основателей «навещали» Kannon в главном зале, проводили с ней ночь, а затем их несли в паланкинах через реку и по улицам города. Meiji-правительство насильно разделило синто и буддизм — и только тогда святилище стало самостоятельным.</p>
-        <p>Здание при этом — подлинное, одно из двух построек в районе, переживших бомбардировки 1945 года; пока Sensō-ji отстраивали заново, здесь по-прежнему стоит Edo-период.</p>
+        <p>До всего этого здесь был военный плац: именно на этом поле в 1910 году капитан Yoshitoshi Tokugawa совершил первый в Japan успешный полёт на моторном самолёте. После 1945-го плац стал американским жилым городком, а в 1964-м, когда территорию вернули Japan к Олимпиаде, часть казарм превратили в Олимпийскую деревню, а рядом Kenzō Tange построил гимнастический комплекс для плавания и баскетбола — его двойной изгиб крыши до сих пор один из самых узнаваемых силуэтов города. Публичным парком место стало только в 1967-м.</p>
+        <p>С конца 1970-х по середину 1990-х ближайшая к парку пешеходная зона на Omotesando каждые выходные превращалась в стихийную сцену: Takenoko-zoku в ярких «харлемских костюмах» и рокабилли-группы в стиле 1950-х танцевали под переносные колонки. Разгонять их власти начали из-за шума грузовиков с аппаратурой, а не из-за самих костюмов.</p>
       </div>
     </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja) — как устроено синтоистское святилище</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri, separation of Shinto and Buddhism 1868</a> · <a href="glossary.html#matsuri">Sanja Matsuri festival history</a> · <a href="glossary.html#shinto">что такое Shinto</a> · <a href="glossary.html#kami">kami как обожествлённые люди</a></p>
-    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Место открыто для тихого созерцания сразу за шумом главного зала — komainu (львы-стражи) у входа: один с открытой пастью, другой с закрытой, символизируя начало и конец всех вещей. Отдельная пара komainu под общим зонтом называется Meoto Komainu («женатые львы-собаки») — к ним приходят молиться о счастливом браке.</div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-kappabashi">Kappabashi — легенда о дренаже</h2>
-    <p>Название улицы отсылает не к посуде, а к воде. По легенде, в XIX веке местный купец по имени Kappaya Kihachi взялся прокладывать дренажные каналы, чтобы спасти район от постоянных наводнений. Работа шла тяжело — и, по преданию, ему стали помогать kappa, водяные существа из японского фольклора, приходившие по ночам.</p>
-    <p>Есть и более прозаичная версия: раньше здесь на мосту (bashi) сушили дождевики (kappa) низкоранговых самураев. Обе версии сходятся в одном — именно вода определила имя места, которое сегодня торгует кастрюлями.</p>
-    <div class="essence-card">
-      <span class="essence-label">Ищи на месте</span>
-      <ul>
-        <li>В Kappabashi есть маленький Sogenji Temple в переулках за главной улицей — там хранится мумифицированная кисть kappa под стеклом, и местные до сих пор оставляют статуям огурцы и саке</li>
-        <li>Golden Kappa statue на середине Kappabashi-dori поставлена в 2003 году к 90-летию торговой улицы — своего рода официальное признание мифа маскотом района</li>
-      </ul>
-    </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kappa-yokai">Kappa in Japanese folklore</a> · Sogenji Temple and the mummified kappa hand</p>
-
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Уцелевший барак Washington Heights — единственное здание городка, пережившее снос 1960-х; сегодня это тихий музейный экспонат посреди парка, мимо которого проходят, не замечая.</div>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>По <strong>воскресеньям</strong> многие магазины закрыты — для «рабочей» улицы лучше идти в будний день. Курение — только за пределами храмовой территории, ближе к Kappabashi-dori.</p>
+        <p>Вход свободный, парк открыт круглосуточно, но после темноты освещение слабое. Соседствует с южным входом Meiji Jingu — логично проходить одним заходом.</p>
       </div>
     </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Washington Heights и оккупационный период Japan · Kenzō Tange и Yoyogi National Gymnasium · Takenoko-zoku и уличная культура Hokoten 1977–1996</p>
 
     <hr>
 
-    <h2 class="section-title" id="loc-uenopark">Ueno Park — там, где сёгунат сгорел за один день</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Весь парк раньше был территорией Kan'ei-ji — фамильного храма-усыпальницы клана Tokugawa, где похоронены шесть из пятнадцати сёгунов</li>
-        <li>Kan'ei-ji построили по образцу Enryaku-ji на горе Hiei — того самого, что сжёг Нобунага: тот же принцип храма-щита с северо-востока, только теперь щит для Edo, а не для Kyoto</li>
-        <li>В 1868 году здесь прошла Битва при Уэно — последний бой сторонников сёгуната (Shōgitai) против императорских войск; храм сгорел почти полностью за один день</li>
-        <li>В 1873-м руины превратили в один из первых в Японии общественных парков западного образца</li>
-      </ul>
-    </div>
+    <h2 class="section-title" id="loc-takeshita">Takeshita Street — улица, названная бамбуком раньше, чем стала «племенем ростков»</h2>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ueno Park</span></div></figure>
+      <figure><div class="img-placeholder"><span>Takeshita Street</span></div></figure>
       <div>
-        <p>У южного входа стоит статуя <strong>Saigō Takamori</strong> — полководца, который принял капитуляцию замка Эдо без единого выстрела, а затем лично привёл императорские войска к победе в этой самой битве. Он же позже помог упразднить сословие самураев, к которому сам принадлежал. Десятью годами позже, не приняв темп реформ, Сайго — уже против своей воли — возглавил Сацумское восстание против того самого правительства, которое сам создал, и погиб в 1877 году.</p>
-        <p>Ирония места: человек, чья статуя встречает всех у входа в парк, построенный на обломках старого режима, сам через десять лет стал последним крупным мятежником против нового.</p>
+        <p>Название буквально значит «под бамбуком» — задолго до кавайной моды здесь росли бамбуковые рощи Meiji-эпохи. Совпадение сработало дважды: когда в 1978 году на этой же улице открылся магазин Boutique Takenoko («Бамбуковый росток»), его костюмами увлеклись танцоры из Yoyogi Park — и субкультура получила имя Takenoko-zoku, «племя бамбуковых ростков», по чистой случайности рифмуясь с самим названием улицы.</p>
+        <p>Коммерческая история короче: тихая жилая улочка 1950-х начала обрастать бутиками в 1970–80-х, когда сюда стянулась молодёжная мода — готическая лолита, decora, gyaru, visual kei, задокументированные уличными фотографами 1990–2000-х. 350 метров сегодня — одна из самых плотных пешеходных зон Токио.</p>
       </div>
     </div>
-
     <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Tōshō-gū — синтоистское святилище Tokugawa Ieyasu — единственное здание комплекса, пережившее и битву 1868 года, и Великое землетрясение Kantō, и бомбёжки 1945 года.</div>
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Shinobazu Pond на юго-западе — тоже часть замысла монаха Tenkai: пруд специально сделан в подражание озеру Biwa, над которым стоит сам Enryaku-ji в Kyoto.</div>
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Рядом со статуей Saigō — могила Shōgitai, тех самых проигравших самураев, поставленная в 1874 году немногими выжившими.</div>
+      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Marion Crepes</strong>, открывшийся здесь в 1976–77-м, изобрёл сам жанр «харадзюкского крепа» — витрину десертов, которую теперь копируют по всей Japan.</div>
+      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br><strong>2nd STREET</strong> — один из немногих магазинов на этой улице, где вместо кавайного новья продают винтаж и секонд-хенд; забавный контраст с остальным потоком.</div>
     </div>
-
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Meiji Restoration</a></p>
-
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Парк открыт <strong>круглосуточно</strong>, вход свободный. Статуя Saigō Takamori — у южного входа, ближе всего к станции Ueno.</p>
+        <p>Большинство магазинов работают с 10:30–11:00 до 20:00. К вечеру пятницы уже плотно; по субботам-воскресеньям почти невозможно идти свободным шагом.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Кавайная культура и японские молодёжные «племена» (zoku) · история района Harajuku как площадки для моды</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-catstreet">Ura-Harajuku / Cat Street — променад над закованной в бетон рекой</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Cat Street</span></div></figure>
+      <div>
+        <p>Официальное название — Kyū-Shibuya-gawa Yūhodō, «променад вдоль старой реки Shibuya»: под мостовой в буквальном смысле течёт закованная в бетон река, убранная под землю в 1964 году той же олимпийской подготовкой, что превратила Washington Heights в Yoyogi Park. Прозвище «Cat Street» с историей не связано вовсе — версий три, и ни одна не доказана: то ли от кошек, живших у бывшей реки, то ли от узких извилистых поворотов «как у кошки», то ли от рок-н-ролльной группы Black Cats, выступавшей здесь в 1950-х.</p>
+        <p>Сегодня это Ura-Harajuku — «изнанка Harajuku»: независимые бутики и подобранный винтаж вместо толчеи Takeshita Street и вместо роскоши Omotesando в двух шагах отсюда.</p>
+      </div>
+    </div>
+    <div class="essence-card">
+      <span class="essence-label">По пути на Cat Street</span>
+      <ul>
+        <li><strong>Iyoshi Cola</strong> — крафтовый лимонад с неожиданной родословной: основатель Kobayashi нашёл рецепт столетней давности, а вкус довёл до ума, разбирая мастерскую покойного деда — мастера традиционной китайской медицины wakanpō. Инструменты и логику трав из этой мастерской он и перенёс в рецептуру колы; второй магазин бренда открылся именно здесь, на Cat Street, в 2021 году</li>
+      </ul>
+    </div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Река под ногами объясняет заодно и название следующей на сегодня точки: Shibuya (渋谷) переводится как «терпкая/мутная долина» — сам район стоит в русле бывших рек, сходившихся здесь до застройки.</div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Магазины вдоль улицы обычно работают 11:00–20:00. Часы Iyoshi Cola меняются — сверься при подходе, бренд держит негустой график.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Река Shibuya и токийские реки, убранные под землю к Олимпиаде-1964 · независимая бутик-сцена Ura-Harajuku</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-omotesando">Omotesando Avenue — вторая часть того же жеста 1920 года</h2>
+    <div class="essence-card">
+      <span class="essence-label">Коротко</span>
+      <ul>
+        <li>Проложен в 1919–1920 годах как парадный подход (sandō) к только что построенному Meiji Jingu — с самого начала не улица, а часть храмового ритуала</li>
+        <li>Деревья zelkova вдоль проспекта посажены тогда же, специально под конечный рост через полвека-век — та же логика долгого планирования, что и в самом лесу Meiji Jingu по соседству</li>
+        <li>В 2006 году Tadao Ando построил на месте снесённых Dōjunkai Aoyama Apartments (1927, соцжильё после землетрясения Kantō) комплекс Omotesando Hills, специально вкопанный в землю, чтобы не быть выше окружающих деревьев</li>
+      </ul>
+    </div>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Omotesando Avenue</span></div></figure>
+      <div>
+        <p>Если Meiji Jingu — лес, спроектированный на век вперёд, то Omotesando — тот же жест, растянутый в проспект: единая композиция храма и подхода к нему, а не два отдельных проекта в разное время. Снос Dōjunkai Aoyama Apartments в начале 2000-х вызвал споры именно поэтому — здание было не просто памятником архитектуры 1920-х, а частью того же исторического слоя, что и сам проспект.</p>
+        <p>Ando частично признал это в проекте: восточное крыло Omotesando Hills воссоздаёт фасад одного из снесённых корпусов Dōjunkai — фрагмент разрушенного здания в буквальном смысле встроен обратно в новое.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br><strong>MoMA Design Store</strong> на третьем этаже комплекса GYRE — первый филиал музейного магазина MoMA за пределами Нью-Йорка, товары отбирают кураторы самого музея.</div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Магазины обычно работают 11:00–20:00. Проспект длиной около 1 км — прогулка туда-обратно займёт около часа; с заходом в боковые улицы и Nezu Museum (Kengo Kuma) — 2–3 часа.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Tadao Ando и японский бетонный минимализм · землетрясение Kantō 1923 года и соцжильё Dōjunkai</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-mykita">MYKITA Tokyo</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>MYKITA</span></div></figure>
+      <div>
+        <p>Немецкий бренд очков, основанный в 2003 году в Берлине — название происходит от «Kita» (Kindertagesstätte, детский сад): первая мастерская буквально занимала бывшее здание яслей. Первая коллекция была вырезана из тонкого листового металла и согнута вручную без единого винта или пайки — техника, которую основатели напрямую позаимствовали у японского оригами.</p>
+        <p>Получается небольшой круг: немецкий бренд построил инженерию на японской логике складывания, а теперь держит витрину в двух шагах от Meiji Jingu — там, где эта логика родилась.</p>
+      </div>
+    </div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Обычные часы бутиков Omotesando/Aoyama — около 11:00–20:00.</p>
       </div>
     </details>
 
     <hr>
 
-    <h2 class="section-title" id="loc-nmwa">National Museum of Western Art — коллекция, которая пережила пожар и плен</h2>
+    <h2 class="section-title" id="loc-shibuyacrossing">Shibuya Crossing — дно долины, ставшее самым людным местом планеты</h2>
     <div class="essence-card">
       <span class="essence-label">Коротко</span>
       <ul>
-        <li>В основе музея — собрание Kōjirō Matsukata, президента Kawasaki Dockyard, который с 1905 года скупал в Европе западное искусство, мечтая построить в Японии музей, чтобы молодым художникам не пришлось ехать за океан ради оригиналов</li>
-        <li>Финансовый кризис 1927 года разорил его — японскую часть коллекции распродали, а то, что хранилось в Лондоне и Париже (~1400 работ), уцелело</li>
-        <li>В 1939-м пожар на лондонском складе Pantechnicon уничтожил около 900 работ; оставшиеся ~400 во Франции после войны конфисковало французское правительство как «вражескую собственность»</li>
-        <li>Мацуката умер в 1950-м, так и не увидев коллекцию — Японии её вернули только в 1959-м, и то с условием построить отдельный музей, чтобы собрание больше не рассеялось</li>
-        <li>Здание спроектировал Ле Корбюзье с тремя японскими архитекторами — своими бывшими учениками; в 2016 году стало объектом ЮНЕСКО</li>
+        <li>Пять переходов включаются одновременно: за один цикл зелёного (около 2 минут) здесь успевает пройти до 3000 человек — считается самым людным пешеходным перекрёстком в мире</li>
+        <li>Название района, Shibuya (渋谷), буквально значит «терпкая/мутная долина» — перекрёсток в буквальном смысле стоит на дне долины, где раньше сходилось несколько токийских рек, включая ту, что течёт под Cat Street</li>
+        <li>У выхода Hachikō — бронзовая статуя пса, который десять лет после смерти хозяина каждый вечер приходил встречать его на этом самом месте</li>
       </ul>
     </div>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>NMWA</span></div></figure>
+      <figure><div class="img-placeholder"><span>Shibuya Crossing</span></div></figure>
       <div>
-        <p>Возврат коллекции не был полным жестом доброй воли. Франция придержала 17 картин, посчитав их слишком значимыми, чтобы расставаться, — включая «Комнату в Арле» Ван Гога и «Гору Сент-Виктуар» Сезанна. Осталось всё равно немало: Моне (включая настоящие «Кувшинки»), Ренуар, Гоген, Рубенс — и около пятидесяти работ Родена, включая «Мыслителя» и «Врата ада», часть из которых стоит прямо во внутреннем дворе, на виду ещё до билета.</p>
+        <p>История перекрёстка начинается со станции Shibuya 1885 года; движение росло вместе со станцией, и в 1973-м ввели саму систему «scramble» — все машины останавливаются разом со всех сторон, и пешеходы заливают перекрёсток по диагонали, а не только прямо. С тех пор место снималось в десятках фильмов, от «Трудностей перевода» до «Форсажа», и стало почти синонимом Tokyo для тех, кто в Japan никогда не был.</p>
+        <p>Профессор Hidesaburō Ueno завёл щенка акиты по кличке Hachikō в 1923 году; пёс каждый день провожал и встречал хозяина на этой станции. В мае 1925-го Ueno скончался на работе от кровоизлияния — и Hachikō ещё почти десять лет, до самой своей смерти в марте 1935-го, приходил встречать поезд, которым хозяин уже никогда не вернётся. Бронзовую статую поставили в 1934-м, пока пёс был ещё жив, — редкий случай прижизненного памятника.</p>
       </div>
     </div>
-
-    <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Роденовская коллекция музея сопоставима по объёму с музеем Родена в Филадельфии — крупнейшим собранием его работ за пределами Парижа. Токио здесь не побочная нота, а самостоятельно значимая коллекция.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>На постоянную коллекцию хватает 1–1.5 часа без спешки — не пытайся растянуть визит, музей рассчитан на плотный, но короткий заход.</div>
-    </div>
-
-    <p class="read-more"><span class="read-more-label">Подробнее</span>История коллекции Мацуката и репатриации после Второй мировой войны</p>
-
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Mag's Park</strong> — бесплатная смотровая площадка на крыше Magnet by Shibuya109 (7 этаж), даёт вид на перекрёсток сверху без очереди, которая обычно стоит в Starbucks напротив.</div>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Постоянная коллекция: <strong>9:30–17:30</strong>, по пятницам и субботам до <strong>20:00</strong>. Закрыт по понедельникам (в этот день не актуально). Вход — около <strong>500 иен</strong>. Скульптуры Родена во внутреннем дворе видны бесплатно, без билета.</p>
+        <p>Общественное пространство, открыто всегда. Пик толпы — вечер и выходные. Для съёмки лучше сумерки: неон уже виден, но естественного света ещё достаточно.</p>
       </div>
     </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span>Происхождение названия «Shibuya» · «Трудности перевода» и другие фильмы, снятые на перекрёстке</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-tsuchiyakaban">TSUCHIYA KABAN Shibuya Store</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Tsuchiya Kaban</span></div></figure>
+      <div>
+        <p>Основан в 1965 году Kunio Tsuchiya, мастером из префектуры Gifu, изначально как мастерская randoseru — тех самых жёстких кожаных ранцев, которые каждый первоклассник в Japan носит ровно шесть лет без права на замену. Именно дисциплина «должен выдержать шесть лет ежедневной жизни ребёнка» легла в основу линии взрослых кожаных изделий, которую бренд запустил в 2000-х — та же строчка, та же одержимость тем, как кожа стареет.</p>
+        <p>В 2022 году сам Tsuchiya, которому тогда было за восемьдесят, получил звание «Современного мастера-ремесленника» от японского Министерства здравоохранения, труда и благосостояния.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Кожу здесь выбирают и обрабатывают так, чтобы она красиво старела, а не выглядела вечно новой — та же логика, что уже встречалась в глоссарии.</div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Обычные часы магазина — около 11:00–20:00.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> — эстетика честного старения материала</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-grandfathers">Grandfather's — бар, где пластинку не ставят фоном</h2>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Grandfather's</span></div></figure>
+      <div>
+        <p>Открылся в 1971 году в двух шагах от станции Shibuya и с тех пор почти не менялся. Здесь не включают плейлист — диджей ставит пластинки по одной, трек за треком, начав когда-то с рок-н-ролла 1950–60-х и постепенно добавив фанк, соул и фолк 1970-х. Разговоров здесь немного не потому, что это запрещено, а потому что внимание по умолчанию обращено к музыке, а не к соседу за стойкой.</p>
+        <p>Это уже третье за поездку место с той же логикой «один трек за раз» — после Little Soul Cafe в Shimokitazawa и Beatle Momo в Higashiyama, только с виски вместо коктейлей и ромов.</p>
+      </div>
+    </div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Стакан Suntory виски — от 500 иен, цены в целом невысокие для такого расположения. Бронь обычно не нужна, но мест немного.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и традиция ongaku kissa</p>
+
+    <hr>
+
+    <h2 class="section-title" id="loc-meikyokulion">Meikyoku Kissa Lion — сто лет тишины и Баха</h2>
+    <div class="essence-card">
+      <span class="essence-label">Коротко</span>
+      <ul>
+        <li>Открыт в 1926 году 24-летним Yanosuke Yamadera вместе с матерью — почти сто лет здесь играют исключительно классику</li>
+        <li>Оригинальное здание сгорело при бомбардировках 1945-го; нынешнее — точная реконструкция 1950 года, включая трёхметровые самодельные колонки, спроектированные как церковный орган</li>
+        <li>Разговаривать внутри не принято: заказ кофе без сиропа или просьба счёта делаются молча, через специальные карточки на столе</li>
+      </ul>
+    </div>
+    <div class="cols">
+      <figure><div class="img-placeholder"><span>Meikyoku Kissa Lion</span></div></figure>
+      <div>
+        <p>Meikyoku kissa — «кафе шедевров», классический родственник jazz kissa: та же логика 1920–30-х (пластинка стоит как месячная зарплата, значит слушать её лучше сообща в специальном кафе), только для симфонической, а не джазовой музыки. Lion — старейшее из уцелевших в Tokyo: свыше 5000 пластинок разложены по алфавиту композиторов, а с 15:00 до 19:00 играет не по заявкам, а по кураторской программе дня — «концерт Lion».</p>
+        <p>Это уже четвёртое место за поездку, построенное вокруг одной и той же идеи нераздельного внимания к одному треку — после Little Soul Cafe, Beatle Momo и сегодняшнего Grandfather's, но здесь дисциплина строже всего: тут не просто тихо, тут по правилам нельзя говорить вообще.</p>
+      </div>
+    </div>
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Открыт ежедневно <strong>11:00–22:30</strong>. Курение разрешено. Wi-Fi и розеток нет. Напитки — 550–720 иен. С 15:00 до 19:00 заявки не принимаются — играет собранная заранее программа.</p>
+      </div>
+    </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и родственная традиция ongaku kissa</p>
+
   </section>
 
   <hr>
 
   <section id="t4">
     <h2 class="section-title">Food & Coffee</h2>
-    <p><strong>Asakusa Menchi</strong> — здесь берут именно за простоту: один продукт, доведённый до совершенства, без попытки удивить. Хорошая точка, чтобы почувствовать вкус старого квартала, а не гостиничный вариант японской кухни.</p>
-    <p>Вечером, уже в Уэно — <strong>Ramen Kamo to Negi Ueno</strong>, рядом со станцией.</p>
+    <p><strong>Juan Bowl & Tea Tokyo</strong> хорошо ложится на паузу между Omotesando и Shibuya — простое меню боул-блюд и чая, не требует отдельного крюка в маршруте. Возле Cat Street и Omotesando стоит взглянуть на <strong>AMORE Vintage AOYAMA</strong>, если интересен винтажный люкс: Chanel, Hermès, Louis Vuitton в состоянии, которое сложно отличить от нового, часто дешевле новой вещи в бутике бренда.</p>
   </section>
 
-  <p class="footnote">Asakusa Day · Japan 2026 · план дня, собранный вручную</p>
+  <hr>
+
+  <h2 class="section-title" id="connections">Connections</h2>
+  <p>Meiji Jingu и Yoyogi Park — два разных ответа на один и тот же вопрос: как правительство Meiji строило ощущение вечной традиции с нуля. Тот же 1868–1920-е годов жест, что насильно развёл синто и буддизм по разным зданиям (см. Shinbutsu Bunri у Asakusa Shrine), спроектировал лес, которому нарочно не давали выглядеть новым — а полвека спустя та же логика превратила бывший военный городок в городской парк. Under Cat Street и под всем районом Shibuya лежит ещё один слой той же истории: реку, убранную под бетон к Олимпиаде-1964, — та же Олимпиада, что превратила Washington Heights в Yoyogi Park.</p>
+  <p>А четыре «одна пластинка за раз» места этой поездки — Little Soul Cafe в Shimokitazawa, Beatle Momo в Higashiyama, сегодняшние Grandfather's и Meikyoku Kissa Lion — стоит держать в голове как один сюжет, а не совпадение: японская привычка слушать музыку целиком, не фоном, живёт минимум с 1920-х и явно не собирается заканчиваться.</p>
+
+  <p class="footnote">Harajuku & Shibuya Day · Japan 2026 · план дня, собранный вручную</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
 
 <script>
-  // No tabs — page is one continuous flow. "По местам" buttons jump
+  // No tabs — page is one continuous flow. "По местам" buttons just jump
   // straight to the place's anchor.
   document.querySelectorAll('.nav-place-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -998,8 +891,11 @@ body.site-nav-locked { overflow: hidden; }
     });
   });
 
-  // Back-to-top floating button: visible once the "По местам" nav has
-  // scrolled out of view.
+  document.querySelector('.connections-jump-btn')?.addEventListener('click', function () {
+    const target = document.getElementById(this.dataset.target);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   const backBtn = document.getElementById('backBtn');
   const placesNav = document.querySelector('.nav-places');
 
@@ -1009,12 +905,8 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('scroll', updateBackBtn, { passive: true });
 
-  backBtn.addEventListener('click', () => {
-    placesNav.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  backBtn.addEventListener('click', () => { placesNav.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
-  // Deep-link support: a location anchor from index.html's "Места" list (or
-  // the site nav drawer) just scrolls straight to it — no tab to activate.
   function openDeepLink() {
     const id = window.location.hash.slice(1);
     if (!id) return;
@@ -1189,7 +1081,6 @@ window.SITE_DATA = {
 (function () {
   const DATA = window.SITE_DATA || { days: [], tools: [], places: [] };
 
-  // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
   const TEASER_PLACE_COUNT = 6;
@@ -1313,7 +1204,6 @@ window.SITE_DATA = {
         return;
       }
 
-      // While searching, search across the FULL places list, not just the teaser.
       placesTeaserList.style.display = 'none';
       placesAllList.style.display = '';
 

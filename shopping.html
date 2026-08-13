@@ -15,18 +15,19 @@
     --paper-deep: #F3F1EA;
     --card: #FFFFFF;
     --ink: #1C1917;
-    --ink-soft: #2E2921;
+    /* Darkened soft ink to crisp text for improved contrast */
+    --ink-soft: #231F1C;
     --red: #B23A2E;
     --red-soft: #C85A4B;
     --line: #E1DACB;
-    --gold: #A87C4F;
-    --gray-bg: #EEEAE1;
+    --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; color-scheme: light only; }
+  html { scroll-behavior: smooth; color-scheme: light only; scroll-padding-top: 96px; }
 
   body {
     background: var(--paper) !important;
@@ -34,7 +35,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    line-height: 1.7;
+    line-height: 1.8; /* Increased line-height for better readability */
   }
 
   .torii-line {
@@ -45,60 +46,34 @@
   }
   @media (max-width: 720px) { .torii-line { display: none; } }
 
-  /* ---------- Hero: text + ink-wash image, side by side ---------- */
+  /* ---------- Utility strip: compact reference header. No photo (nothing to
+     fail to load, no reserved empty space), no borrowed hero-quote — this
+     page is for looking something up, not for a moment of arrival. ---------- */
   .hero {
-    position: relative; overflow: hidden;
     background: var(--paper-deep);
     border-bottom: 1px solid var(--line);
   }
   .hero-inner {
     max-width: 1080px; margin: 0 auto;
-    display: flex; align-items: center; gap: 2.5rem;
-    padding: 3.2rem 6vw 0;
+    padding: 1.8rem 6vw 2rem;
+    display: flex; align-items: center; gap: 1.1rem;
   }
-  .hero-text { flex: 1 1 380px; min-width: 280px; padding-bottom: 2.4rem; }
-  .hero-image {
-    flex: 0 0 240px; align-self: stretch;
-    position: relative; overflow: hidden;
+  .hero-glyph {
+    width: 3rem; height: 3rem; border-radius: 50%; flex-shrink: 0;
+    border: 1.5px solid var(--red); color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Shippori Mincho', serif; font-size: 1.1rem;
   }
-  .hero-image img {
-    width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
-    display: block;
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(90deg, transparent, black 30%), linear-gradient(0deg, transparent, black 18%);
-    mask-composite: intersect;
-  }
-  @media (max-width: 760px) {
-    .hero-inner { flex-direction: column-reverse; padding-top: 0; }
-    .hero-image { flex-basis: auto; width: 100%; height: 200px; }
-    .hero-image img { object-position: 50% 15%;
-      -webkit-mask-image: linear-gradient(0deg, transparent, black 18%);
-      mask-image: linear-gradient(0deg, transparent, black 18%); mask-composite: normal; -webkit-mask-composite: source-over;
-    }
-    .hero-text { padding-top: 2.2rem; }
-  }
-
+  .hero-text-group { min-width: 0; }
   .eyebrow {
-    color: var(--red); font-size: 0.72rem; letter-spacing: 0.28em;
-    text-transform: uppercase; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--red); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.3rem;
   }
-  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--red); display: inline-block; }
-  .hero-quote { max-width: 560px; }
-  .hero-quote .quote-jp {
-    display: block; font-family: 'Shippori Mincho', serif; font-weight: 500;
-    font-size: 1rem; color: var(--red); opacity: 0.9; margin-bottom: 0.6rem; letter-spacing: 0.02em;
-  }
-  .hero-quote blockquote {
+  .hero-title {
     font-family: 'Shippori Mincho', serif; font-weight: 600;
-    font-size: clamp(1.8rem, 4.4vw, 2.7rem); color: var(--ink); line-height: 1.15;
+    font-size: clamp(1.4rem, 4.6vw, 1.9rem); color: var(--ink); line-height: 1.15;
   }
-  .hero-quote .quote-author {
-    display: block; margin-top: 0.6rem; font-family: 'Inter', sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
-  }
-  .hero-text .sub { margin-top: 1.1rem; font-size: 0.95rem; color: var(--ink-soft); max-width: 44ch; }
+  .hero-sub { margin-top: 0.35rem; font-size: 0.85rem; color: var(--ink-soft); }
 
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
@@ -143,7 +118,7 @@
     content: ""; position: absolute; bottom: -1px; left: 0; right: 0;
     height: 2px; background: var(--red); transform: scaleX(0); transition: transform 0.25s ease;
   }
-  .tab-btn.active { color: var(--red); font-weight: 500; }
+  .tab-btn.active { color: var(--red); font-weight: 600; }
   .tab-btn.active::after { transform: scaleX(1); }
   .tab-btn:hover { color: var(--red-soft); }
 
@@ -159,10 +134,11 @@
 
   h4 {
     font-family: 'Inter', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--gold); margin: 1.4rem 0 0.6rem;
+    text-transform: uppercase; color: var(--gold); margin: 1.6rem 0 0.8rem;
+    font-weight: 600;
   }
 
-  p { margin-bottom: 1rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
+  p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
 
   .cols {
@@ -191,7 +167,7 @@
   .img-placeholder span {
     position: relative; font-family: 'Shippori Mincho', serif; font-size: 0.78rem;
     letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase;
-    border: 1px solid var(--line); padding: 0.5rem 1rem; background: rgba(247,243,236,0.6);
+    border: 1px solid var(--line); padding: 0.5rem 1rem; background: rgba(250,249,246,0.8);
   }
 
   /* ---------- Technical thumbnails: screenshots / product shots ---------- */
@@ -218,7 +194,7 @@
     letter-spacing: 0.06em; color: var(--gold); text-transform: uppercase;
     text-align: center; padding: 0 0.4rem;
   }
-  .shot-cap { font-size: 0.72rem; color: #9A9284; margin-top: 0.4rem; text-align: center; line-height: 1.3; }
+  .shot-cap { font-size: 0.72rem; color: #5C564E; margin-top: 0.4rem; text-align: center; line-height: 1.3; }
 
   /* ---------- Step-by-step redemption block ---------- */
   .steps { margin: 1.2rem 0 1.6rem; }
@@ -244,25 +220,34 @@
   .steps li strong { color: var(--ink); }
   .steps a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red-soft); }
 
-  .note { padding: 0.9rem 0; margin: 1.3rem 0; font-size: 0.92rem; color: var(--ink-soft); }
+    .note {
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+  }
   .note-tag {
     display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.68rem;
     letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
-    padding: 0.15rem 0.55rem; border-radius: 2px; margin-bottom: 0.5rem;
+    padding: 0.15rem 0.55rem; border-radius: 3px; margin-bottom: 0.4rem;
   }
-  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.08); }
-  .note-tag.tag-try { color: var(--gold); background: rgba(168,124,79,0.10); }
+  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.10); }
+  .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
-  .note-tag.tag-tip { color: var(--blue); background: rgba(74,109,140,0.08); }
+  .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
 
-  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; margin: 1.3rem 0; }
-  .notes-grid .note { margin: 0; padding: 0.9rem 0; }
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
+  .notes-grid .note { margin: 0; }
   @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
 
-  .practical-table { margin: 1.3rem 0; }
+  .practical-table { margin: 1.5rem 0; }
   .practical-row {
     display: grid; grid-template-columns: 160px 1fr; gap: 1rem;
-    padding: 0.65rem 0; border-bottom: 1px solid var(--line); font-size: 0.9rem;
+    padding: 0.85rem 0; border-bottom: 1px solid var(--line); font-size: 0.92rem;
   }
   .practical-row:last-child { border-bottom: none; }
   .practical-label {
@@ -273,9 +258,9 @@
   @media (max-width: 560px) { .practical-row { grid-template-columns: 1fr; gap: 0.2rem; } }
 
   .read-more {
-    font-size: 0.86rem; color: var(--ink-soft); margin: 1rem 0 1.6rem;
-    padding: 0.7rem 0 0.7rem 1rem; border-left: 2px solid var(--gold);
-    background: rgba(168,124,79,0.06);
+    font-size: 0.88rem; color: var(--ink-soft); margin: 1.2rem 0 1.6rem;
+    padding: 0.8rem 1rem; border-left: 3px solid var(--gold);
+    background: rgba(168,124,79,0.08); border-radius: 0 4px 4px 0;
   }
   .read-more-label {
     color: var(--gold); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em;
@@ -285,7 +270,8 @@
   .callout {
     position: relative; padding: 1rem 1.3rem 1rem 1.6rem; font-size: 0.92rem;
     color: var(--ink-soft); margin: 1.2rem 0; display: flex; gap: 0.7rem;
-    background: linear-gradient(90deg, rgba(178,58,46,0.05) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(178,58,46,0.06) 0%, transparent 100%);
+    border-radius: 0 4px 4px 0;
   }
   .callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); }
   .callout .icon { flex-shrink: 0; font-size: 1rem; opacity: 0.75; }
@@ -296,29 +282,29 @@
   ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
 
   /* ---------- Comparison / coupon table ---------- */
-  .deal-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0 1.8rem; font-size: 0.88rem; }
-  .deal-table th, .deal-table td { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .deal-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0 1.8rem; font-size: 0.9rem; }
+  .deal-table th, .deal-table td { text-align: left; padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
   .deal-table th {
-    font-family: 'Inter', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--gold); font-weight: 600; border-bottom: 1px solid var(--red-soft);
+    font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); font-weight: 600; border-bottom: 2px solid var(--red-soft);
   }
   .deal-table td.num { color: var(--red); font-weight: 600; white-space: nowrap; }
   .deal-table tr:last-child td { border-bottom: none; }
-  .deal-table .muted { color: #9A9284; font-size: 0.82rem; }
+  .deal-table .muted { color: #5C564E; font-size: 0.82rem; }
   @media (max-width: 680px) {
     .deal-table thead { display: none; }
     .deal-table, .deal-table tbody, .deal-table tr, .deal-table td { display: block; width: 100%; }
     .deal-table tr { border-bottom: 1px solid var(--line); padding: 0.6rem 0; }
     .deal-table td { border-bottom: none; padding: 0.2rem 0; }
-    .deal-table td::before { content: attr(data-label); display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; }
+    .deal-table td::before { content: attr(data-label); display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.15rem; font-weight: 600; }
   }
 
   .status-pill {
     display: inline-block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 0.15rem 0.55rem; border-radius: 2px; font-weight: 600;
   }
-  .status-verified { color: #3D6B3D; background: rgba(61,107,61,0.10); }
-  .status-pending { color: var(--gold); background: rgba(168,124,79,0.12); }
+  .status-verified { color: #285428; background: rgba(61,107,61,0.12); }
+  .status-pending { color: var(--gold); background: rgba(168,124,79,0.14); }
 
   .back-btn {
     position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(20px);
@@ -329,31 +315,182 @@
   }
   .back-btn.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
 
-  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.8rem; color: #9A9284; }
+  .footnote { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.82rem; color: #5C564E; }
+
+  .back-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    padding: 0.65rem 1.3rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(28,25,23,0.25);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .tab-panel { animation: none; }
   }
+
+  /* ---------- Top bar: consistent site-wide back-to-index nav ---------- */
+  .top-bar {
+    padding: 1.4rem 6vw;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    position: sticky; top: 0; z-index: 80; background: var(--paper);
+  }
+  .top-bar a.back {
+    font-size: 0.82rem; color: var(--red); text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
+  }
+  .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar .spacer { width: 90px; flex-shrink: 0; }
+  @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+</style>
+<style>
+/* ============================================================
+   Site-wide navigation drawer — shared across every page.
+   Reads content from site-data.js via site-nav.js.
+   Relies on each page's own :root variables (--paper, --ink, --red, etc.)
+   which are kept consistent across the site.
+   ============================================================ */
+
+.nav-toggle {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: var(--card); color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  -webkit-touch-callout: none;
+}
+.nav-toggle:hover { border-color: var(--red-soft); color: var(--red); }
+
+/* iOS WKWebView (Claude's in-app preview, some in-app browsers) shows a native
+   "Open Link" action sheet on link tap/long-press, independent of JS click
+   handling. Disabling the native callout is what actually stops it. */
+.site-nav-drawer a { -webkit-touch-callout: none; }
+
+body.site-nav-locked { overflow: hidden; }
+
+.site-nav-scrim {
+  display: none;
+  position: fixed; inset: 0; background: rgba(28,25,23,0.35);
+  z-index: 90;
+}
+.site-nav-scrim.visible { display: block; }
+
+.site-nav-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: min(340px, 86vw);
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+  box-shadow: 8px 0 28px rgba(0,0,0,0.10);
+  z-index: 95;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  display: flex; flex-direction: column;
+}
+.site-nav-drawer.open { transform: translateX(0); }
+
+.site-nav-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.3rem 1.3rem 1rem;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.site-nav-header .title { font-family: 'Shippori Mincho', serif; font-size: 1.05rem; color: var(--ink); }
+.site-nav-close {
+  width: 32px; height: 32px; border: none; background: none; cursor: pointer;
+  color: var(--ink-soft); font-size: 1.1rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.site-nav-close:hover { color: var(--red); }
+
+.site-nav-body { flex: 1; overflow-y: auto; padding: 1.1rem 1.3rem 2rem; }
+
+.site-nav-search { position: relative; margin-bottom: 1.2rem; }
+.site-nav-search input {
+  width: 100%; font-family: 'Inter', sans-serif; font-size: 0.86rem; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+  padding: 0.55rem 0.9rem 0.55rem 2.1rem; outline: none; transition: border-color 0.2s;
+}
+.site-nav-search input:focus { border-color: var(--red-soft); }
+.site-nav-search::before {
+  content: "⌕"; position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%);
+  color: var(--gold); font-size: 0.95rem; pointer-events: none;
+}
+
+.site-nav-empty { display: none; font-size: 0.84rem; color: #5C564E; margin: 0 0 1rem; }
+.site-nav-empty.visible { display: block; }
+
+.site-nav-group { margin-bottom: 1.6rem; }
+.site-nav-group.site-nav-hidden { display: none; }
+.site-nav-label {
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.site-nav-group ul { list-style: none; }
+.site-nav-group li { margin-bottom: 0.1rem; }
+.site-nav-group li.site-nav-hidden { display: none; }
+
+.site-nav-link {
+  display: flex; align-items: baseline; gap: 0.55rem;
+  padding: 0.42rem 0.4rem; border-radius: 5px;
+  text-decoration: none; color: var(--ink-soft); font-size: 0.88rem;
+  transition: background 0.15s, color 0.15s;
+  flex-wrap: nowrap; white-space: nowrap; overflow: hidden;
+}
+.site-nav-link:hover { color: var(--red); background: rgba(178,58,46,0.05); }
+.site-nav-link .glyph { font-family: 'Shippori Mincho', serif; color: var(--gold); font-size: 0.9rem; flex-shrink: 0; width: 1.4em; text-align: center; }
+.site-nav-link .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.site-nav-link .meta { margin-left: auto; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.03em; flex-shrink: 0; }
+
+.site-nav-viewall {
+  display: inline-block; margin-top: 0.5rem;
+  font-size: 0.8rem; color: var(--red); text-decoration: none;
+  border-bottom: 1px dotted var(--red-soft);
+}
+.site-nav-viewall:hover { color: var(--red-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-drawer { transition: none; }
+}
+
 </style>
 </head>
 <body>
 
 <div class="torii-line" aria-hidden="true"></div>
 
+<div class="top-bar">
+  <span class="title">Japan 2026</span>
+  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+</div>
+
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-text">
-      <div class="eyebrow"><a href="index.html" style="color: var(--red); text-decoration: none;">← Все дни</a> &nbsp;·&nbsp; Japan 2026 · Shopping</div>
-      <div class="hero-quote">
-        <span class="quote-jp">買い物</span>
-        <blockquote>Shopping</blockquote>
-        <span class="quote-author">Tax-free · купоны · категории</span>
-      </div>
-      <div class="sub">скидки, купоны и разбор по категориям вещей</div>
-    </div>
-    <div class="hero-image">
-      <img src="hero-shopping.png" alt="">
+    <span class="hero-glyph" aria-hidden="true">買</span>
+    <div class="hero-text-group">
+      <div class="eyebrow">Japan 2026</div>
+      <h1 class="hero-title">Shopping</h1>
+      <p class="hero-sub">Tax-free · купоны · категории — скидки, купоны и разбор по категориям вещей</p>
     </div>
   </div>
 </header>
@@ -447,7 +584,7 @@
   <section class="tab-panel" id="t3">
 
     <h2 class="section-title" id="cat-powerbank">Power Bank для iPhone 15</h2>
-    <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним, когда обсудим модели и магазины.</p>
+    <p class="muted" style="color:#5C564E; font-size:0.88rem;">Раздел-заглушка — наполним, когда обсудим модели и магазины.</p>
     <div class="shot-row">
       <div class="shot"><div class="shot-img"><span>модель 1</span></div><div class="shot-cap">Anker 737, Yodobashi</div></div>
       <div class="shot"><div class="shot-img"><span>модель 2</span></div><div class="shot-cap">Ugreen, Bic Camera</div></div>
@@ -460,7 +597,7 @@
     <div class="cols">
       <figure><div class="img-placeholder"><span>Ножи</span></div></figure>
       <div>
-        <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения конкретных марок и района (Kappabashi логично впишется).</p>
+        <p class="muted" style="color:#5C564E; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения конкретных марок и района (Kappabashi логично впишется).</p>
       </div>
     </div>
 
@@ -470,7 +607,7 @@
     <div class="cols">
       <figure><div class="img-placeholder"><span>Сумки</span></div></figure>
       <div>
-        <p class="muted" style="color:#9A9284; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения.</p>
+        <p class="muted" style="color:#5C564E; font-size:0.88rem;">Раздел-заглушка — наполним после обсуждения.</p>
       </div>
     </div>
 
@@ -512,7 +649,26 @@
   <p class="footnote">Shopping · Japan 2026 · страница дополняется по ходу подготовки</p>
 </main>
 
-<button class="back-btn" id="backBtn">↑ К списку категорий</button>
+<button class="back-btn" id="backBtn">↑ Наверх</button>
+
+<script>
+  const backBtn = document.getElementById('backBtn');
+  const tabsNav = document.querySelector('.tabs-nav');
+
+  function updateBackBtn() {
+    const navBottom = tabsNav.getBoundingClientRect().bottom;
+    if (navBottom < 0) {
+      backBtn.classList.add('visible');
+    } else {
+      backBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateBackBtn, { passive: true });
+
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 
 <script>
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -537,19 +693,323 @@
       }
     });
   });
-
-  const backBtn = document.getElementById('backBtn');
-  const navPlaces = document.querySelector('.nav-places');
-  const t3Panel = document.getElementById('t3');
-
-  function updateBackBtn() {
-    if (!t3Panel.classList.contains('active')) { backBtn.classList.remove('visible'); return; }
-    const navBottom = navPlaces.getBoundingClientRect().bottom;
-    if (navBottom < 0) { backBtn.classList.add('visible'); } else { backBtn.classList.remove('visible'); }
-  }
-  window.addEventListener('scroll', updateBackBtn, { passive: true });
-  backBtn.addEventListener('click', () => { navPlaces.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 </script>
 
+<script>
+/* Single source of truth for site-wide navigation: days, reference tools, and
+   places. Used by site-nav.js (the global drawer, on every page). Edit this
+   file only — everything else reads from it, so a place added once shows up everywhere. */
+
+window.SITE_DATA = {
+
+  days: [
+    { file: "asakusa-day.html",       kanji: "浅", title: "Asakusa Day",       area: "Taitō" },
+    { file: "shimokitazawa-day.html", kanji: "猫",   title: "Shimokitazawa Day", area: "Setagaya" },
+    { file: "philosophers-path-day.html", kanji: "哲", title: "Philosopher's Path Day",  area: "North Higashiyama" },
+    { file: "fushimi-nijo-day.html",         kanji: "狐",   title: "Fushimi & Nijō Day",         area: "Fushimi/Gion" },
+    { file: "higashiyama-day.html",   kanji: "東", title: "Higashiyama Day",   area: "Higashiyama-ku" },
+    { file: "harajuku-shibuya-day.html",kanji: "森", title: "Harajuku & Shibuya Day", area: "Shibuya-ku" },
+    { file: "shinjuku-day.html",   kanji: "新", title: "Shinjuku Day",         area: "Shinjuku-ku" },
+    { file: "kinkaku-day.html",    kanji: "金", title: "Kinkaku-ji Day",       area: "Kita-ku" },
+    { file: "kanazawa-day.html",   kanji: "箔", title: "Kanazawa Day",         area: "Kanazawa" },
+    { file: "kenrokuen-day.html",  kanji: "六", title: "Kenrokuen Day",        area: "Kanazawa → Tokyo" },
+    { file: "teamlab-odaiba-day.html", kanji: "波", title: "teamLab & Odaiba Day", area: "Kōtō · Minato" },
+    { file: "akihabara-day.html",  kanji: "神", title: "Kanda & Akihabara Day", area: "Chiyoda" },
+    { file: "ginza-day.html",      kanji: "銀", title: "Ginza Day",           area: "Chiyoda · Chūō" },
+    { file: "arashiyama-day.html", kanji: "嵐", title: "Arashiyama Day",      area: "Ukyō-ku" },
+    { file: "omihachiman-day.html",kanji: "近", title: "Omihachiman Day",     area: "Shiga" },
+    { file: "osaka-day.html",      kanji: "大阪", title: "Osaka Day",           area: "Osaka" },
+    { file: "kamakura-day.html",   kanji: "鎌倉", title: "Kamakura Day",        area: "Kamakura" },
+    // Add future days here as they're built — the drawer picks them up automatically.
+  ],
+
+  tools: [
+    { file: "trip-logistics.html", glyph: "旅",   title: "Logistics" },
+    { file: "trip-info.html",      glyph: "心",   title: "Info" },
+    { file: "shopping.html",       glyph: "買",   title: "Shopping" },
+    { file: "glossary.html",       glyph: "語",   title: "Glossary" }
+  ],
+
+  /* Places are listed in itinerary order within each day (not alphabetical);
+     the drawer sorts them separately at render time for its A-Z search. */
+  places: [
+    { name: "Kaminarimon",        file: "asakusa-day.html",       anchor: "loc-kaminarimon", day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Nakamise",           file: "asakusa-day.html",       anchor: "loc-nakamise",    day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Hōzōmon",            file: "asakusa-day.html",       anchor: "loc-hozomon",     day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Sensō-ji",           file: "asakusa-day.html",       anchor: "loc-sensoji",     day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Asakusa Shrine",     file: "asakusa-day.html",       anchor: "loc-shrine",      day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Kappabashi",         file: "asakusa-day.html",       anchor: "loc-kappabashi",  day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "Ueno Park",          file: "asakusa-day.html",       anchor: "loc-uenopark",    day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+    { name: "National Museum of Western Art", file: "asakusa-day.html", anchor: "loc-nmwa",  day: "Asakusa Day",       dayFile: "asakusa-day.html" },
+
+    { name: "Gōtoku-ji Temple",       file: "shimokitazawa-day.html", anchor: "loc-gotokuji",   day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "Nerdy Dogs",             file: "shimokitazawa-day.html", anchor: "loc-nerdydogs",  day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "Desk Labo",              file: "shimokitazawa-day.html", anchor: "loc-desklabo",   day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "APFR TOKYO",             file: "shimokitazawa-day.html", anchor: "loc-apfr",       day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "Ōzeki Shimokitazawa",    file: "shimokitazawa-day.html", anchor: "loc-ozeki",      day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "Little Soul Cafe",       file: "shimokitazawa-day.html", anchor: "loc-littlesoul", day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
+    { name: "Nanzen-ji",         file: "philosophers-path-day.html", anchor: "loc-nanzenji",     day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
+    { name: "Eikan-dō",          file: "philosophers-path-day.html", anchor: "loc-eikando",      day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
+    { name: "Hōnen-in",          file: "philosophers-path-day.html", anchor: "loc-honenin",      day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
+    { name: "Ōtoyo Shrine",      file: "philosophers-path-day.html", anchor: "loc-otoyoshrine",  day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
+    { name: "Ginkaku-ji",        file: "philosophers-path-day.html", anchor: "loc-ginkakuji",    day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
+
+    { name: "Fushimi Inari Taisha",   file: "fushimi-nijo-day.html", anchor: "loc-fushimiinari", day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+    { name: "Vermillion Cafe",        file: "fushimi-nijo-day.html", anchor: "loc-vermillion",   day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+    { name: "Nishiki Market",         file: "fushimi-nijo-day.html", anchor: "loc-nishiki",       day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+    { name: "Nijō Castle",            file: "fushimi-nijo-day.html", anchor: "loc-nijocastle",    day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+    { name: "Gion Tsujiri Main Store",file: "fushimi-nijo-day.html", anchor: "loc-giontsujiri",   day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+    { name: "Kiyomizu-dera",     file: "higashiyama-day.html", anchor: "loc-kiyomizu",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Sannenzaka",        file: "higashiyama-day.html", anchor: "loc-sannenzaka",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Kōdai-ji",          file: "higashiyama-day.html", anchor: "loc-kodaiji",     day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Maruyama Park",     file: "higashiyama-day.html", anchor: "loc-maruyama",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Mouriya Gion",      file: "higashiyama-day.html", anchor: "loc-mouriya",     day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Pontocho Alley",    file: "higashiyama-day.html", anchor: "loc-pontocho",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Beatle Momo",       file: "higashiyama-day.html", anchor: "loc-beatlemomo",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
+    { name: "Meiji Jingu",              file: "harajuku-shibuya-day.html", anchor: "loc-meijijingu",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Yoyogi Park",              file: "harajuku-shibuya-day.html", anchor: "loc-yoyogipark",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Takeshita Street",         file: "harajuku-shibuya-day.html", anchor: "loc-takeshita",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Ura-Harajuku / Cat Street",file: "harajuku-shibuya-day.html", anchor: "loc-catstreet",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Omotesando Avenue",        file: "harajuku-shibuya-day.html", anchor: "loc-omotesando",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "MYKITA Tokyo",             file: "harajuku-shibuya-day.html", anchor: "loc-mykita",           day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Shibuya Crossing",         file: "harajuku-shibuya-day.html", anchor: "loc-shibuyacrossing",  day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "TSUCHIYA KABAN",           file: "harajuku-shibuya-day.html", anchor: "loc-tsuchiyakaban",    day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Grandfather's",            file: "harajuku-shibuya-day.html", anchor: "loc-grandfathers",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Meikyoku Kissa Lion",      file: "harajuku-shibuya-day.html", anchor: "loc-meikyokulion",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Shinjuku Gyoen",            file: "shinjuku-day.html", anchor: "loc-gyoen",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "LE TALON GRISE",            file: "shinjuku-day.html", anchor: "loc-talongrise",   day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Udon Shin",                 file: "shinjuku-day.html", anchor: "loc-udonshin",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Beams Japan",               file: "shinjuku-day.html", anchor: "loc-beams",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "The Giant 3D Cat",          file: "shinjuku-day.html", anchor: "loc-cat3d",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "2nd Street Shinjuku 2",     file: "shinjuku-day.html", anchor: "loc-2ndstreet",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Suehiro-dori Street",       file: "shinjuku-day.html", anchor: "loc-suehiro",      day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Hanazono Shrine",           file: "shinjuku-day.html", anchor: "loc-hanazono",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Keio Department Store",     file: "shinjuku-day.html", anchor: "loc-keio",         day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Tokyo Metropolitan Government Building", file: "shinjuku-day.html", anchor: "loc-tocho", day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Omoide Yokocho",            file: "shinjuku-day.html", anchor: "loc-omoide",       day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Kabukicho",                 file: "shinjuku-day.html", anchor: "loc-kabukicho",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Godzilla Head",             file: "shinjuku-day.html", anchor: "loc-godzilla",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Gyopao Gyoza Shinjuku",     file: "shinjuku-day.html", anchor: "loc-gyopao",       day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Shinjuku Golden-Gai",       file: "shinjuku-day.html", anchor: "loc-goldengai",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+    { name: "Ramen Nagi Golden Gai Honkan", file: "shinjuku-day.html", anchor: "loc-nagi",      day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+
+    { name: "Kinkaku-ji",           file: "kinkaku-day.html", anchor: "loc-kinkakuji",         day: "Kinkaku-ji Day", dayFile: "kinkaku-day.html" },
+    { name: "Ryōan-ji",             file: "kinkaku-day.html", anchor: "loc-ryoanji",           day: "Kinkaku-ji Day", dayFile: "kinkaku-day.html" },
+    { name: "Garden of Fine Arts",  file: "kinkaku-day.html", anchor: "loc-gardenoffinearts",  day: "Kinkaku-ji Day", dayFile: "kinkaku-day.html" },
+
+    { name: "Omicho Market",           file: "kanazawa-day.html", anchor: "loc-omicho",          day: "Kanazawa Day", dayFile: "kanazawa-day.html" },
+    { name: "Nagamachi Samurai District", file: "kanazawa-day.html", anchor: "loc-nagamachi",    day: "Kanazawa Day", dayFile: "kanazawa-day.html" },
+    { name: "Kanazawa Castle Park",    file: "kanazawa-day.html", anchor: "loc-kanazawacastle",  day: "Kanazawa Day", dayFile: "kanazawa-day.html" },
+    { name: "21st Century Museum",     file: "kanazawa-day.html", anchor: "loc-21stcentury",     day: "Kanazawa Day", dayFile: "kanazawa-day.html" },
+    { name: "Higashi Chaya",           file: "kanazawa-day.html", anchor: "loc-higashichaya",    day: "Kanazawa Day", dayFile: "kanazawa-day.html" },
+
+    { name: "Kenrokuen",               file: "kenrokuen-day.html", anchor: "loc-kenrokuen",      day: "Kenrokuen Day", dayFile: "kenrokuen-day.html" },
+
+    { name: "teamLab Planets",         file: "teamlab-odaiba-day.html", anchor: "loc-teamlab",     day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
+    { name: "Toyosu Market",           file: "teamlab-odaiba-day.html", anchor: "loc-toyosu",      day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
+    { name: "Odaiba waterfront",       file: "teamlab-odaiba-day.html", anchor: "loc-odaiba",      day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
+    { name: "Hamarikyu Gardens",       file: "teamlab-odaiba-day.html", anchor: "loc-hamarikyu",   day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
+
+    { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+
+    { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
+    { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
+    { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
+
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+
+    { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+    { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+    { name: "Himure Hachimangu Shrine",file: "omihachiman-day.html", anchor: "loc-himure",        day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+
+    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Namba Yasaka Jinja",     file: "osaka-day.html", anchor: "loc-yasaka",       day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Dotonbori",              file: "osaka-day.html", anchor: "loc-dotonbori",    day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Amerikamura",            file: "osaka-day.html", anchor: "loc-amemura",      day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
+
+    { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+  ]
+};
+
+</script>
+<script>
+/* Global navigation drawer — injected into every page. Reads window.SITE_DATA
+   (site-data.js, load that first). Expects a <button id="navToggle"> to exist
+   somewhere on the page (normally in .top-bar) to trigger it. */
+(function () {
+  const DATA = window.SITE_DATA || { days: [], tools: [], places: [] };
+
+  // Figure out the current file so the drawer can skip a self-link.
+  const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+
+  const TEASER_PLACE_COUNT = 6;
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function dayLinkHtml(d) {
+    const current = d.file === currentFile ? ' style="color:var(--red);"' : '';
+    return `<li><a class="site-nav-link" href="${d.file}" data-search="${escapeHtml(d.title + ' ' + d.area)}"${current}>
+      <span class="glyph">${d.kanji}</span><span class="label">${escapeHtml(d.title)}</span>
+      <span class="meta">${escapeHtml(d.area)}</span>
+    </a></li>`;
+  }
+
+  function toolLinkHtml(t) {
+    const current = t.file === currentFile ? ' style="color:var(--red);"' : '';
+    return `<li><a class="site-nav-link" href="${t.file}" data-search="${escapeHtml(t.title)}"${current}>
+      <span class="glyph">${t.glyph}</span><span class="label">${escapeHtml(t.title)}</span>
+    </a></li>`;
+  }
+
+  function placeLinkHtml(p) {
+    return `<li><a class="site-nav-link" href="${p.file}#${p.anchor}" data-search="${escapeHtml(p.name + ' ' + p.day)}">
+      <span class="label">${escapeHtml(p.name)}</span>
+      <span class="meta">${escapeHtml(p.day)}</span>
+    </a></li>`;
+  }
+
+  function buildDrawer() {
+    const scrim = document.createElement('div');
+    scrim.className = 'site-nav-scrim';
+    scrim.id = 'siteNavScrim';
+
+    const drawer = document.createElement('aside');
+    drawer.className = 'site-nav-drawer';
+    drawer.id = 'siteNavDrawer';
+
+    const daysHtml = DATA.days.map(dayLinkHtml).join('');
+    const toolsHtml = DATA.tools.map(toolLinkHtml).join('');
+    const placesTeaser = DATA.places.slice(0, TEASER_PLACE_COUNT).map(placeLinkHtml).join('');
+    const placesAll = DATA.places.map(placeLinkHtml).join('');
+
+    drawer.innerHTML = `
+      <div class="site-nav-header">
+        <span class="title">Japan 2026</span>
+        <button class="site-nav-close" id="siteNavClose" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="site-nav-body">
+        <div class="site-nav-search">
+          <input id="siteNavSearch" type="text" placeholder="Поиск по сайту…" autocomplete="off">
+        </div>
+        <p class="site-nav-empty" id="siteNavEmpty">Ничего не найдено.</p>
+
+        <div class="site-nav-group" data-group="days">
+          <div class="site-nav-label">Дни поездки</div>
+          <ul>${daysHtml}</ul>
+        </div>
+
+        <div class="site-nav-group" data-group="tools">
+          <div class="site-nav-label">Общее и справочники</div>
+          <ul>${toolsHtml}</ul>
+        </div>
+
+        <div class="site-nav-group" data-group="places">
+          <div class="site-nav-label">Места</div>
+          <ul id="siteNavPlacesTeaser">${placesTeaser}</ul>
+          <ul id="siteNavPlacesAll" style="display:none;">${placesAll}</ul>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(scrim);
+    document.body.appendChild(drawer);
+    return { scrim, drawer };
+  }
+
+  function init() {
+    const toggle = document.getElementById('navToggle');
+    if (!toggle) return;
+
+    const { scrim, drawer } = buildDrawer();
+    const closeBtn = document.getElementById('siteNavClose');
+    const search = document.getElementById('siteNavSearch');
+    const empty = document.getElementById('siteNavEmpty');
+    const placesTeaserList = document.getElementById('siteNavPlacesTeaser');
+    const placesAllList = document.getElementById('siteNavPlacesAll');
+    const groups = drawer.querySelectorAll('.site-nav-group');
+
+    function open() {
+      drawer.classList.add('open');
+      scrim.classList.add('visible');
+      document.body.classList.add('site-nav-locked');
+    }
+    function close() {
+      drawer.classList.remove('open');
+      scrim.classList.remove('visible');
+      document.body.classList.remove('site-nav-locked');
+    }
+
+    toggle.addEventListener('click', () => drawer.classList.contains('open') ? close() : open());
+    closeBtn.addEventListener('click', close);
+    scrim.addEventListener('click', close);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+    search.addEventListener('input', () => {
+      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[-\s]+/g, '').toLowerCase();
+      const q = normalize(search.value.trim());
+
+      if (q === '') {
+        placesTeaserList.style.display = '';
+        placesAllList.style.display = 'none';
+        groups.forEach(g => {
+          g.classList.remove('site-nav-hidden');
+          g.querySelectorAll('li').forEach(li => li.classList.remove('site-nav-hidden'));
+        });
+        empty.classList.remove('visible');
+        return;
+      }
+
+      // While searching, search across the FULL places list, not just the teaser.
+      placesTeaserList.style.display = 'none';
+      placesAllList.style.display = '';
+
+      let anyVisible = false;
+      groups.forEach(g => {
+        let groupVisible = false;
+        g.querySelectorAll('li').forEach(li => {
+          const link = li.querySelector('a');
+          const hay = normalize(link.dataset.search || '');
+          const match = hay.includes(q);
+          li.classList.toggle('site-nav-hidden', !match);
+          if (match) groupVisible = true;
+        });
+        g.classList.toggle('site-nav-hidden', !groupVisible);
+        if (groupVisible) anyVisible = true;
+      });
+      empty.classList.toggle('visible', !anyVisible);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
 </body>
 </html>
