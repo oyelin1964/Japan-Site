@@ -7,7 +7,7 @@
 <title>Osaka Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,58 +94,71 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -312,6 +379,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +450,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -383,24 +506,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +633,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +695,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,32 +785,32 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">京の着倒れ、大阪の食い倒れ</span>
-    Kyoto разоряется на одежде, Osaka — на еде
-    <span class="quote-author">Старая поговорка Kansai</span>
-    <span class="quote-note">Ты въезжаешь в этот принцип буквально — в вагоне, наряженном под старый Kyoto, чтобы через 45 минут выйти в город с прямо противоположной философией</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">大阪</div>
   <div class="hero-content">
     <div class="eyebrow">Osaka · Day Trip</div>
     <h1>Osaka Day</h1>
-    <div class="sub">大阪 — от тихих переулков Karahori до неонового kuidaore в Namba, и обратно на красивом поезде</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">京の着倒れ、大阪の食い倒れ</span>
+    <blockquote>Kyoto разоряется на одежде, Osaka — на еде</blockquote>
+    <span class="quote-author">Старая поговорка Kansai</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>Kyo-train Garaku</strong> — ходит только по субботам, воскресеньям и праздникам, брони не нужно, обычный тариф ¥410. Из Kawaramachi в Osaka-Umeda: 10:41 (наш поезд), 12:41, 14:41, 16:41 — назад можно любым обычным Hankyu-поездом, без привязки к расписанию</li>
       <li><strong>От отеля до Kawaramachi</strong> — subway Karasuma line до Shijo (2 остановки) + 5 минут пешком; заложи ~20–25 минут, выйти из отеля не позже 9:50</li>
@@ -640,7 +818,8 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>tokito</strong> в Karahori — обед только walk-in, 11:00–15:00, без брони</li>
       <li><strong>Kitan Hibiki</strong> — ужин по брони, желательно закрыть за 2–3 недели через Tabelog или по телефону; детали — в <a href="trip-logistics.html">Logistics</a></li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -661,35 +840,42 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>День держится на двух непохожих кластерах и одном красивом поезде между ними. Утро — тихое: субботним поездом Garaku едем в Osaka, оттуда сразу в Karahori и Tanimachi — старый купеческий район без туристов, обед в tokito, короткий взгляд на Osaka Castle снаружи. После полудня город меняет тональность: спускаемся в Namba, и дальше — рынок, храм, неон Dotonbori и винтажные лавки Amerikamura, всё в 5–10 минутах ходьбы друг от друга.</p>
-    <div class="blockquote">Именно в Osaka Castle замыкается сюжет, начатый в день Higashiyama: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu — того самого человека, что в 1615 году возьмёт этот замок штурмом.</div>
-    <p>Вечер — ужин в Kitan Hibiki рядом со станцией Namba, затем короткий коктейль в Bar Nayuta в паре минут ходьбы, и обратно в Umeda на любом Hankyu-поезде — без гонки за расписанием.</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>День держится на двух непохожих кластерах и одном красивом поезде между ними. Утро — тихое: субботним поездом Garaku едем в Osaka, оттуда сразу в Karahori и Tanimachi — старый купеческий район без туристов, обед в tokito, короткий взгляд на Osaka Castle снаружи. После полудня город меняет тональность: спускаемся в Namba, и дальше — рынок, храм, неон Dotonbori и винтажные лавки Amerikamura, всё в 5–10 минутах ходьбы друг от друга.</p>
+      <div class="blockquote">Именно в Osaka Castle замыкается сюжет, начатый в день Higashiyama: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu — того самого человека, что в 1615 году возьмёт этот замок штурмом.</div>
+      <p>Вечер — ужин в Kitan Hibiki рядом со станцией Namba, затем короткий коктейль в Bar Nayuta в паре минут ходьбы, и обратно в Umeda на любом Hankyu-поезде — без гонки за расписанием.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-garaku">Kyo-train Garaku — Kyoto, упакованный в шесть вагонов</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Поезд</span>
+    <h2 class="section-title -major" id="loc-garaku">Kyo-train Garaku</h2>
+    <span class="place-caption">Kyoto, упакованный в шесть вагонов</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Запущен Hankyu Railway в марте 2019 года — к юбилею 1200-летия Kyoto как столицы</li>
         <li>Каждый из шести вагонов оформлен под своё время года: клён и красные листья, зимний бамбук, весенняя сакура — татами-сиденья, круглые окна, миниатюрные сухие сады прямо в вагоне</li>
         <li>Бронь не нужна, тариф — обычный, ¥410 в одну сторону; ходит только по субботам, воскресеньям и праздникам</li>
         <li>45 минут между Kawaramachi и Osaka-Umeda — ровно тот путь, что несколько веков занимал у купцов, но с чайным садом за окном вместо тракта</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kyo-train Garaku</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Kyo-train Garaku</span></div></figure>
       <div>
         <p>Garaku — это обычная коммерческая линия Hankyu Kyoto Line, просто в этот состав включили шесть вагонов, каждый из которых декорирован как маленький Kyoto: деревянные оконные рамы, татами вместо части сидений, noren-занавески между вагонами. Дополнительных денег за это не берут — платишь ровно столько же, сколько за обычную электричку.</p>
         <p>Есть лёгкая ирония в самом жесте: город, зарабатывающий на «подлинности» старого Kyoto, экспортирует эту атмосферу в соседний город на рельсах, за 45 минут и по цене автобусного билета.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Мест без брони достаточно, но по субботам вагон с сакурой (весенняя тема) и зимний бамбуковый — самые популярные; если очень хочется конкретный вагон, можно просто пройтись по составу на первой станции и выбрать место.</div>
+    <p><span class="inline-label">Совет</span>Мест без брони достаточно, но по субботам вагон с сакурой (весенняя тема) и зимний бамбуковый — самые популярные; если очень хочется конкретный вагон, можно просто пройтись по составу на первой станции и выбрать место.</p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Расписание и практика</span></summary>
@@ -701,15 +887,17 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-karahori">Karahori и tokito — обед в квартале, которого нет в путеводителях</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Квартал</span>
+    <h2 class="section-title -minor" id="loc-karahori">Karahori · tokito</h2>
+    <span class="place-caption">Обед в квартале, которого нет в путеводителях</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Karahori (空堀) — «пустой ров»: название от несохранившегося внешнего рва замка Osaka, который проходил здесь до эпохи Edo</li>
         <li>Район почти не пострадал от бомбёжек 1945 года — сохранил довоенную застройку и узкие переулки, редкость для центра Osaka</li>
         <li>tokito работает на обед только с улицы, без брони, 11:00–15:00</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Karahori shotengai</span></div></figure>
       <div>
@@ -728,23 +916,29 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-osakacastle">Osaka Castle — крепость, которую строили заново дважды</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Крепость</span>
+    <h2 class="section-title -major" id="loc-osakacastle">Osaka Castle</h2>
+    <span class="place-caption">Крепость, которую строили заново дважды</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Заложен в 1583 году Toyotomi Hideyoshi на месте храма-крепости Ishiyama Hongan-ji, который до этого 11 лет осаждал и в итоге сжёг Oda Nobunaga</li>
         <li>В 1615 году замок взят штурмом войсками Tokugawa — клан Toyotomi уничтожен полностью, включая сына Hideyoshi</li>
         <li>Нынешняя башня — железобетонная реконструкция 1931 года, с реставрацией после войны; не оригинал ни по одной доске</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Osaka Castle</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Osaka Castle</span></div></figure>
       <div>
         <p>Сегодня — только снаружи, без очереди в музей: и по времени разумнее, и по сюжету честнее. Внутри давно не крепость, а бетонный музей с лифтом. Настоящая история — в том, что случилось на этом месте, а не в интерьере.</p>
         <p>Hideyoshi построил замок как демонстрацию новой власти — крестьянин, поднявшийся до фактического правителя Japan, возводит крепость на месте, которое до него защищали 11 лет. Через три десятилетия здесь же будет уничтожен род его наследников — теми самыми людьми, что годом раньше в Kyoto профинансировали храм для его вдовы.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Это прямое продолжение сюжета Higashiyama Day: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu — того самого человека, чьи войска в 1615-м штурмовали именно эту крепость и положили конец роду Hideyoshi.</div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Это прямое продолжение сюжета Higashiyama Day: Kōdai-ji в Kyoto построен на деньги <strong>Tokugawa Ieyasu</strong> — того самого человека, чьи войска в 1615 году штурмовали именно эту крепость и положили конец роду Hideyoshi.</p>
+    </div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -757,9 +951,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kuromon">Kuromon Ichiba Market — «кухня Osaka», которая давно готовит для туристов</h2>
+    <span class="place-kicker">Рынок</span>
+    <h2 class="section-title" id="loc-kuromon">Kuromon Ichiba Market</h2>
+    <span class="place-caption">«Кухня Osaka», которая давно готовит для туристов</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kuromon Ichiba</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Kuromon Ichiba</span></div></figure>
       <div>
         <p>Рынок вырос стихийно около 1822 года как неформальная рыбная торговля у чёрных ворот (kuromon) соседнего храма — отсюда и имя. Официальным рынком стал только в 1912-м. Долгое время Kuromon снабжал рыбой и продуктами рестораны и домашние кухни района — «кухня Osaka» в буквальном смысле.</p>
         <p>Сегодня баланс сместился: большинство ларьков вдоль 580-метровой крытой галереи готовят порционные шпажки — крабовые ноги, морской ёж, wagyu на гриле — на вынос, специально под туристический поток. Это не подделка, просто другой рынок: смотреть стоит и на прилавки для местных вглубь галереи, не только на витрины у входа.</p>
@@ -775,7 +971,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-yasaka">Namba Yasaka Jinja — храм с головой льва размером со здание</h2>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title" id="loc-yasaka">Namba Yasaka Jinja</h2>
+    <span class="place-caption">Храм с головой льва размером со здание</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Namba Yasaka Jinja</span></div></figure>
       <div>
@@ -795,30 +993,30 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-dotonbori">Dotonbori — канал, который стал витриной города</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Dotonbori</span></div></figure>
-      <div>
-        <p>Канал прорыт в 1612 году купцом Yasui Doton — отсюда имя. С периода Edo вдоль берега стояли театры kabuki, и квартал изначально строился как развлекательный, а не жилой. Знаменитая вывеска «бегущего человека» Glico висит здесь с 1935 года — нынешняя версия уже далеко не первая по счёту, но силуэт сохраняют неизменным.</p>
-        <p>Сегодня проходим здесь просто пешком, ради вечерних огней и самого канала — ужинать будем в другом месте.</p>
-      </div>
-    </div>
+    <span class="place-kicker">Канал</span>
+    <h2 class="section-title -minor" id="loc-dotonbori">Dotonbori</h2>
+    <span class="place-caption">Канал, который стал витриной города</span>
+    <div class="photo-break"><span class="mark">道</span><span class="cap">Dotonbori · вечерний неон</span></div>
+    <p>Канал прорыт в 1612 году купцом Yasui Doton — отсюда имя. С периода Edo вдоль берега стояли театры kabuki, и квартал изначально строился как развлекательный, а не жилой. Знаменитая вывеска «бегущего человека» Glico висит здесь с 1935 года — нынешняя версия уже далеко не первая по счёту, но силуэт сохраняют неизменным.</p>
+    <p>Сегодня проходим здесь просто пешком, ради вечерних огней и самого канала — ужинать будем в другом месте.</p>
 
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Лучшее время — уже после захода солнца, когда включается неон; днём канал выглядит гораздо обычнее.</div>
+    <p><span class="inline-label">Совет</span>Лучшее время — уже после захода солнца, когда включается неон; днём канал выглядит гораздо обычнее.</p>
 
     <hr>
 
-    <h2 class="section-title" id="loc-amemura">Amerikamura — квартал американской мечты образца 1970-х</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title -minor" id="loc-amemura">Amerikamura</h2>
+    <span class="place-caption">Квартал американской мечты образца 1970-х</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Название и дух квартала родились в 1970-х, когда молодые торговцы начали привозить сюда американский секонд-хенд и армейский surplus</li>
         <li>日宝三ッ寺会館 — рядовое офисное здание Nishi-Shinsaibashi, на деле — улей из нескольких независимых винтажных лавок под одной крышей</li>
         <li>BB Amemura — одна из старожилов района, барахолка/thrift в самом сердце Amerikamura, у Triangle Park</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Amerikamura</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Amerikamura</span></div></figure>
       <div>
         <p>Послевоенное увлечение Japan американской культурой нашло здесь материальную форму: в 1970-х пара торговцев начала возить сюда джинсы и куртки из Штатов, и вокруг этого стихийно вырос целый квартал. Сейчас Amerikamura — самая плотная концентрация винтажных и секонд-хенд лавок в Kansai, но без глянца Shinsaibashi по соседству: тут по-прежнему улица для тех, кто копается в вешалках, а не разглядывает витрины.</p>
         <p>日宝三ッ寺会館 — типичный для района приём: снаружи ничем не примечательное офисное здание, внутри — несколько этажей маленьких независимых магазинов, каждый со своей специализацией. Заходить стоит с расчётом на охоту, а не на быстрый обзор.</p>
@@ -834,17 +1032,19 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kitanhibiki">Kitan Hibiki — ужин с wagyu, которое не боится температуры</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Ужин</span>
+    <h2 class="section-title -major" id="loc-kitanhibiki">Kitan Hibiki</h2>
+    <span class="place-caption">Ужин с wagyu, которое не боится температуры</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Открыт в июне 2024 года Kitan Group — той же командой, что с 2019-го держит сеть якинику Kitan</li>
         <li>Фирменная техника — сухая выдержка wagyu без холодильника, мясо готовят прямо перед гостями на углях</li>
         <li>На втором этаже — стойка вокруг традиционного очага irori и живой джаз по вечерам</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kitan Hibiki</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Kitan Hibiki</span></div></figure>
       <div>
         <p>Это не якинику в привычном смысле — здесь не жаришь сам, шеф готовит на углях прямо у стойки, объясняя, откуда конкретный кусок и сколько он выдерживался. Формат рассчитан на то, чтобы ужин был событием, а не просто едой — подходящая точка для вечера, где хочется закрыть день чем-то запоминающимся, а не просто перекусить.</p>
       </div>
@@ -860,9 +1060,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-nayuta">Bar Nayuta — коктейль без меню за незаметной дверью</h2>
+    <span class="place-kicker">Бар</span>
+    <h2 class="section-title" id="loc-nayuta">Bar Nayuta</h2>
+    <span class="place-caption">Коктейль без меню за незаметной дверью</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Bar Nayuta</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Bar Nayuta</span></div></figure>
       <div>
         <p>Вход не помечен ничем, кроме геометрического символа на вывеске здания Mario — дальше лифт на пятый этаж и очень низкая дверь. Меню в баре нет: рассказываешь бартендеру, что любишь, и получаешь коктейль, придуманный специально под этот разговор, часто на основе собственных настоек и биттеров бара. Nayuta входит в список Asia's 50 Best Bars — заслуженно, но без пафоса витрины: место маленькое и совсем не старается выглядеть эксклюзивным.</p>
       </div>

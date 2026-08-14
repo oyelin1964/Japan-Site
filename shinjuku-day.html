@@ -7,7 +7,7 @@
 <title>Shinjuku Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,10 +94,70 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  /* ---------- Opening quote — pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
+  }
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
+    color: var(--ink);
+    line-height: 1.18;
+  }
+  .opening-quote .quote-author {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+  }
+  .opening-quote .quote-source {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
   .overview-list li {
@@ -115,16 +176,59 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
+  /* Small boxed sub-card used inside a collapsible day-section body (e.g.
+     "Между кластерами" nested in "Ритм дня") — distinct box from the
+     outer details element, so it doesn't double up visually when day-flags
+     rides bare inside day-section-body elsewhere. */
+  .inset-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem 1rem;
+    margin-top: 1rem;
+  }
+  .inset-card-label {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -132,6 +236,7 @@
     font-weight: 600;
     margin-bottom: 0.6rem;
   }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -196,6 +301,30 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker — pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -204,6 +333,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -263,6 +395,45 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment — pattern locked with higashiyama-day.html. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -294,6 +465,21 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label — pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -334,24 +520,38 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: collapsible, gold accent — pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -445,6 +645,43 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -469,6 +706,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -558,7 +796,7 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
@@ -567,14 +805,23 @@ body.site-nav-locked { overflow: hidden; }
   <div class="hero-content">
     <div class="eyebrow">Shinjuku · Day Plan</div>
     <h1>Shinjuku Day</h1>
-    <div class="sub">Shinjuku Gyoen, Kabukicho и Golden-Gai — императорский сад в центре мегаполиса и квартал, выросший из чёрного рынка</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">和魂洋才</span>
+    <blockquote>Дух — японский, ремесло — с Запада</blockquote>
+    <span class="quote-author">Лозунг эпохи Meiji</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>Старт не с утра</strong> — сад и часть точек днём и так недоступны раньше 9:00, а вечерние места (Omoide Yokocho, Golden-Gai) откроются только к вечеру; спешить некуда, можно выйти к 10:30–11:00</li>
       <li><strong>Shinjuku Gyoen</strong> — вход платный, последний вход в 16:00; закрыт по понедельникам (сегодня пятница — не актуально)</li>
@@ -582,7 +829,8 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Omoide Yokocho</strong> — большинство точек открывается не раньше 16:00–17:00, днём там почти пусто</li>
       <li><strong>Golden-Gai</strong> — почти в каждом баре отдельная плата за место (table charge, 500–1000 иен), указана у входа</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -610,36 +858,43 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Shinjuku распадается на понятные кластеры вокруг одной станции, и весь день укладывается в радиус 10–15 минут ходьбы — переходы между выходами подземные, а не отдельные поездки. Логика простая: сад и шопинг — пока светло, западная сторона (Keio, смотровая площадка мэрии) — на закат, а Omoide Yokocho, Kabukicho и Golden-Gai — только с темнотой, потому что раньше там физически нечего делать.</p>
-    <p>Получается один сплошной заход по кругу: юг и восток днём, запад к закату, снова восток — уже вечером и ночью. Единственное настоящее пересечение станции за день — переход от Omoide Yokocho (запад) к Kabukicho (восток), и оно логично совпадает со сменой аперитива на ужин.</p>
-    <div class="day-flags">
-      <div class="day-flags-label">Между кластерами</div>
-      <ul>
-        <li><strong>Shinjuku Gyoen → Lumine/южный выход</strong> — около 10 минут пешком</li>
-        <li><strong>Lumine → восточный выход (Beams, кот, San-chome)</strong> — одна связанная прогулка через станцию</li>
-        <li><strong>San-chome → западный выход (Keio, смотровая)</strong> — через станцию, 10–15 минут</li>
-        <li><strong>Западный выход → Kabukicho</strong> — 10 минут, единственный настоящий переход через станцию вечером</li>
-      </ul>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Shinjuku распадается на понятные кластеры вокруг одной станции, и весь день укладывается в радиус 10–15 минут ходьбы — переходы между выходами подземные, а не отдельные поездки. Логика простая: сад и шопинг — пока светло, западная сторона (Keio, смотровая площадка мэрии) — на закат, а Omoide Yokocho, Kabukicho и Golden-Gai — только с темнотой, потому что раньше там физически нечего делать.</p>
+      <p>Получается один сплошной заход по кругу: юг и восток днём, запад к закату, снова восток — уже вечером и ночью. Единственное настоящее пересечение станции за день — переход от Omoide Yokocho (запад) к Kabukicho (восток), и оно логично совпадает со сменой аперитива на ужин.</p>
+      <div class="inset-card day-flags">
+        <div class="inset-card-label">Между кластерами</div>
+        <ul>
+          <li><strong>Shinjuku Gyoen → Lumine/южный выход</strong> — около 10 минут пешком</li>
+          <li><strong>Lumine → восточный выход (Beams, кот, San-chome)</strong> — одна связанная прогулка через станцию</li>
+          <li><strong>San-chome → западный выход (Keio, смотровая)</strong> — через станцию, 10–15 минут</li>
+          <li><strong>Западный выход → Kabukicho</strong> — 10 минут, единственный настоящий переход через станцию вечером</li>
+        </ul>
+      </div>
     </div>
-  </section>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-gyoen">Shinjuku Gyoen — сад, который не может определиться со страной</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Сад</span>
+    <h2 class="section-title -major" id="loc-gyoen">Shinjuku Gyoen</h2>
+    <span class="place-caption">Сад, который не может определиться со страной</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Земля принадлежала клану Naitō с 1590 года — подарок самого Tokugawa Ieyasu своему вассалу; сад в современном виде появился только в 1906-м</li>
         <li>Единственный крупный сад Tokyo, где буквально в одном парке сосуществуют три разные традиции: японский пейзажный сад, французский регулярный парк и английский ландшафтный газон</li>
         <li>Проект вёл французский ландшафтный архитектор Henri Martinet вместе с японцем Hayato Fukuba — тем самым специалистом, что прославил японские хризантемы на Всемирной выставке в Париже</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Shinjuku Gyoen</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Shinjuku Gyoen</span></div></figure>
       <div>
         <p>В 1872 году, в разгар модернизации Meiji, здесь открыли не сад, а сельскохозяйственную опытную станцию — изучали западные методы разведения фруктов, шелкопряда и скота. Только в 1906-м, после почти десятилетия перепланировки, станция стала императорским садом — и стала им сразу в трёх стилях одновременно, а не в одном.</p>
         <p>Это тот же жест эпохи Meiji, что и барочные бочки у Meiji Jingu: не выбирать между Japan и Западом, а демонстративно вместить оба. Сад сильно пострадал во Вторую мировую войну и открылся заново уже как национальный, а не императорский, в 1949 году.</p>
@@ -655,7 +910,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-talongrise">LE TALON GRISE ルミネ新宿店</h2>
+    <span class="place-kicker">Обувь</span>
+    <h2 class="section-title" id="loc-talongrise">LE TALON GRISE</h2>
+    <span class="place-caption">«Серый каблук» на 2 этаже Lumine 2</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>LE TALON GRISE</span></div></figure>
       <div>
@@ -671,7 +928,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-udonshin">Udon Shin</h2>
+    <span class="place-kicker">Обед</span>
+    <h2 class="section-title -minor" id="loc-udonshin">Udon Shin</h2>
+    <span class="place-caption">Michelin-удон в переулке на 12 мест</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Udon Shin</span></div></figure>
       <div>
@@ -688,16 +947,18 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-beams">Beams Japan</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Магазин</span>
+    <h2 class="section-title -minor" id="loc-beams">Beams Japan</h2>
+    <span class="place-caption">Магазин, который развернул собственную историю наоборот</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Первый магазин Beams открылся в 1976 году в Harajuku — крошечные 21,5 м², оформленные как комната студенческого общежития UCLA, вся идея была в том, чтобы привезти в Japan американский образ жизни</li>
         <li>Флагман BEAMS JAPAN в Shinjuku, открытый в 2016-м к 40-летию бренда, разворачивает эту логику ровно наоборот: шесть этажей курируют не американское, а японское — ремёсла и сувениры всех 47 префектур под одной крышей</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Beams Japan</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Beams Japan</span></div></figure>
       <div>
         <p>Основатель Etsuzo Shitara начинал вообще не с моды — с производства картонных коробок в 1953 году. Нефтяной кризис 1970-х подтолкнул диверсификацию, и в 1976-м появился «American Life Shop Beams»: магазинчик размером с комнату, продававший американскую повседневность японской молодёжи, которой тогда было почти неоткуда её взять.</p>
         <p>Сорок лет спустя тот же бренд, разросшийся в крупного ритейлера, открыл в Shinjuku прямо противоположный проект — не завозить чужую культуру, а экспортировать внутрь страны и наружу собственную, от народных ремёсел до поп-культуры, под лозунгом «Appare, Nippon!!».</p>
@@ -712,14 +973,12 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Экран</span>
     <h2 class="section-title" id="loc-cat3d">The Giant 3D Cat</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>The Giant 3D Cat</span></div></figure>
-      <div>
-        <p>Официально — «Кошка восточного выхода Shinjuku», экран Cross Shinjuku Vision на крыше здания напротив станции. Дебютировала в июле 2021 года и мгновенно стала вирусной: изогнутый LED-экран площадью свыше 150 м² создаёт эффект, что кошка физически сидит внутри коробки на углу здания, а не просто показана на плоском экране — тот же принцип анаморфной иллюзии, что у первых 3D-биллбордов на Таймс-сквер, но доведённый до бытовой обыденности японской рекламы.</p>
-        <p>У кошки есть собственный распорядок: экран включается около 7 утра, кошка «просыпается» и появляется короткими эпизодами весь день — потягивается, зевает, мурлычет, — а к часу ночи «засыпает» и гаснет.</p>
-      </div>
-    </div>
+    <span class="place-caption">Кошка, которая живёт по расписанию</span>
+    <div class="photo-break"><span class="mark">猫</span><span class="cap">Cross Shinjuku Vision · восточный выход</span></div>
+    <p>Официально — «Кошка восточного выхода Shinjuku», экран Cross Shinjuku Vision на крыше здания напротив станции. Дебютировала в июле 2021 года и мгновенно стала вирусной: изогнутый LED-экран площадью свыше 150 м² создаёт эффект, что кошка физически сидит внутри коробки на углу здания, а не просто показана на плоском экране — тот же принцип анаморфной иллюзии, что у первых 3D-биллбордов на Таймс-сквер, но доведённый до бытовой обыденности японской рекламы.</p>
+    <p>У кошки есть собственный распорядок: экран включается около 7 утра, кошка «просыпается» и появляется короткими эпизодами весь день — потягивается, зевает, мурлычет, — а к часу ночи «засыпает» и гаснет.</p>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
@@ -729,13 +988,16 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Винтаж</span>
     <h2 class="section-title" id="loc-2ndstreet">2nd Street Shinjuku 2</h2>
+    <span class="place-caption">Секонд-хенд, где хорошее не залёживается</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>2nd Street</span></div></figure>
       <div>
-        <p>Филиал крупной сети секонд-хенда — четыре плотно забитых этажа, мужская одежда на первом. Люксовые и дизайнерские бренды здесь встречаются чаще, чем в других отделениях сети, хотя за японскими марками лучше идти в другие точки. Хорошие вещи разбирают быстро — если понравилось, не откладывай.</p>
+        <p>Филиал крупной сети секонд-хенда — четыре плотно забитых этажа, мужская одежда на первом. Люксовые и дизайнерские бренды здесь встречаются чаще, чем в других отделениях сети, хотя за японскими марками лучше идти в другие точки.</p>
       </div>
     </div>
+    <p><span class="inline-label">Совет</span>Хорошие вещи разбирают быстро — если понравилось, не откладывай.</p>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
@@ -745,9 +1007,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Улица</span>
     <h2 class="section-title" id="loc-suehiro">Suehiro-dori Street</h2>
+    <span class="place-caption">Квартал красных фонарей, ставший улицей ракуго</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Suehiro-dori</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Suehiro-dori</span></div></figure>
       <div>
         <p>Узкий переулок между Shinjuku-dori и Yasukuni-dori, названный в честь театра rakugo <strong>Suehiro-tei</strong> — тот переехал сюда в 1921 году и работает до сих пор, один из немногих постоянных залов этого разговорного жанра в Tokyo. Около 1951 года это была лицензированная зона красных фонарей; после закрытия квартал не заглох, а просто сменил профиль на рестораны и бары.</p>
         <p>По атмосфере это осознанная альтернатива соседнему Kabukicho — те же полсотни метров нейтральной территории, только тише, без зазывал и с почти локальной публикой.</p>
@@ -762,7 +1026,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Храм</span>
     <h2 class="section-title" id="loc-hanazono">Hanazono Shrine</h2>
+    <span class="place-caption">Зелёный остров посреди Kabukicho</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Hanazono Shrine</span></div></figure>
       <div>
@@ -778,7 +1044,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-keio">Keio Department Store Shinjuku</h2>
+    <span class="place-kicker">Универмаг</span>
+    <h2 class="section-title" id="loc-keio">Keio Department Store</h2>
+    <span class="place-caption">Последний универмаг у западного выхода</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Keio Department Store</span></div></figure>
       <div>
@@ -795,17 +1063,19 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-tocho">Tokyo Metropolitan Government Building</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Смотровая</span>
+    <h2 class="section-title -minor" id="loc-tocho">Tokyo Metropolitan Government Building</h2>
+    <span class="place-caption">Печатная плата и готический собор в одном фасаде</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Спроектировано Kenzō Tange — тем же архитектором, что построил гимнастический комплекс Yoyogi для Олимпиады-1964, только на этот раз, в 1990-м, для мэрии, а не для спорта</li>
         <li>202 метра, две смотровые площадки на 45 этаже каждой из башен — вход свободный, несмотря на статус официального правительственного здания</li>
         <li>На момент открытия было самым высоким зданием Japan</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Tokyo Metropolitan Government Building</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Tokyo Metropolitan Government Building</span></div></figure>
       <div>
         <p>Здание задумано похожим одновременно на печатную плату и на готический собор — Tange явно не выбирал между технологией и торжественностью, а совместил оба образа в одном фасаде. Внутри работает досмотр сумок, как в любом госучреждении, но после него — бесплатный панорамный вид на весь город с высоты птичьего полёта, включая Shinjuku Gyoen, Meiji Jingu и, в ясный день, гору Fuji.</p>
       </div>
@@ -819,17 +1089,19 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-omoide">Omoide Yokocho</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Переулок</span>
+    <h2 class="section-title -minor" id="loc-omoide">Omoide Yokocho</h2>
+    <span class="place-caption">Переулок, оживающий только ночью</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Около 80 крошечных якитори-стойл в двух параллельных переулках сразу за железнодорожными путями у западного выхода — родом из послевоенного чёрного рынка конца 1940-х</li>
         <li>Неформальное английское прозвище «Piss Alley» — наследие тех лет, когда в квартале не было общественных туалетов; сегодня они есть, но название прижилось</li>
         <li>Квартал почти полностью выгорел при пожаре 1999 года и был отстроен заново — атмосфера подлинная, но конкретные деревянные стены моложе, чем кажутся</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Omoide Yokocho</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Omoide Yokocho</span></div></figure>
       <div>
         <p>Место оживает только с приходом вечера — днём здесь буквально нечего делать, большинство стоек ещё закрыты. Меню в основном якитори и субпродукты (motsuyaki), но встречаются суши, унаги, фугу и совсем экзотические позиции вроде лягушки или сырой печени — спросить омакасэ у продавца обычно самый простой способ не мучиться выбором.</p>
       </div>
@@ -844,21 +1116,28 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kabukicho">Kabukicho — квартал, названный театром, которого никогда не было</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Квартал</span>
+    <h2 class="section-title -major" id="loc-kabukicho">Kabukicho</h2>
+    <span class="place-caption">Квартал, названный театром, которого никогда не было</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Название буквально значит «квартал kabuki» — послевоенный застройщик Kihei Suzuki планировал построить здесь театр на 1850 мест по имени Kikuza; денег не хватило, театр так и не построили, а название осталось</li>
         <li>До войны на месте, где сегодня стоит статуя Godzilla, была школа для девочек — совсем другой квартал, каким его сегодня уже невозможно представить</li>
         <li>Первый послевоенный чёрный рынок Tokyo родился именно здесь; часть его торговцев позже перебралась в ряды домиков в полукилометре от станции — так появился Golden-Gai</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kabukicho</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Kabukicho</span></div></figure>
       <div>
         <p>После американских бомбардировок квартал Tsunohazu лежал в руинах, и урбанист Ishikawa Hideaki вместе с местным предпринимателем Suzuki задумали превратить обломки в респектабельный театральный район наподобие Бродвея. К 1956 году построили кинотеатры и дворец Koma Theater, но большой kabuki-театр так и остался идеей на бумаге — Suzuki обанкротился раньше, чем успел его достроить.</p>
         <p>Дальше квартал развивался уже без исходного плана: черный рынок 1940-х постепенно превратился в развлекательный район, часть которого контролировали якудза, использовавшие вакуум послевоенной полиции для своей версии порядка. Сегодняшний Kabukicho официально называют «городом, который не спит» — и это буквально его рабочий график, а не метафора.</p>
       </div>
+    </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Kabukicho и Omoide Yokocho — не просто соседи, а версии одной истории с разным финалом: оба выросли из одного и того же послевоенного чёрного рынка конца 1940-х. Один стал кварталом еды под открытым небом, другой — при участии <strong>якудза</strong> — развлекательным районом, часть которого позже отпочковалась в Golden-Gai.</p>
     </div>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -869,9 +1148,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Аттракцион</span>
     <h2 class="section-title" id="loc-godzilla">Godzilla Head</h2>
+    <span class="place-caption">Голова, которая рычит по расписанию</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Godzilla Head</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Godzilla Head</span></div></figure>
       <div>
         <p>12-метровая голова Godzilla установлена в 2015 году на террасе 8 этажа Shinjuku Toho Building — того самого здания на месте бывшей школы для девочек, о которой уже никто не вспоминает, проходя мимо ревущего монстра. С полудня до восьми вечера голова каждый час «оживает»: глаза загораются, раздаётся рёв, из пасти идёт дым.</p>
       </div>
@@ -880,9 +1161,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-gyopao">Gyopao Gyoza Shinjuku</h2>
+    <span class="place-kicker">Идзакая</span>
+    <h2 class="section-title" id="loc-gyopao">Gyopao Gyoza</h2>
+    <span class="place-caption">Суп в тесте на третьем этаже без вывески</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Gyopao Gyoza</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Gyopao Gyoza</span></div></figure>
       <div>
         <p>Тайваньско-японская идзакая на третьем этаже неприметного здания в Shinjuku 3-chome — фирменное блюдо, gyopao, крупные пельмени на пару с насыщенным бульоном внутри, буквально суп в тесте. Атмосфера скорее вечеринка, чем тихий ужин: персонал шумно приветствует гостей, часто есть безлимит по напиткам.</p>
       </div>
@@ -896,17 +1179,19 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-goldengai">Shinjuku Golden-Gai</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Бары</span>
+    <h2 class="section-title -major" id="loc-goldengai">Shinjuku Golden-Gai</h2>
+    <span class="place-caption">Двести баров размером с два теннисных корта</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Шесть узких переулков, около 200 баров на пространстве размером с два теннисных корта — большинство рассчитаны на 4–8 человек одновременно</li>
         <li>Здания — прямые архитектурные потомки послевоенных рядов чёрного рынка: торговцев со стороны восточного выхода в 1949–50-х переселили именно сюда</li>
         <li>Изначально многие из этих домиков были борделями; запрет проституции 1956 года заставил их владельцев сменить профиль на бары — так квартал и получил нынешний вид</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Golden-Gai</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Golden-Gai</span></div></figure>
       <div>
         <p>В отличие от неонового, цифрового Kabukicho вокруг, Golden-Gai — аналоговое и тесное пространство: деревянные лачуги, в которых сидишь коленка к коленке с незнакомцами. Девелоперы годами пытались снести квартал под очередную башню, но сложная структура собственности (у каждого крошечного бара — свой отдельный владелец) раз за разом останавливала редевелопмент.</p>
         <p>У каждого бара — своя тема и своя постоянная публика: кино, музыка, спорт, десятилетия одного и того же хозяина за стойкой. Плата за место (table charge, обычно 500–1000 иен) — стандартная практика, всегда указана у входа.</p>
@@ -921,22 +1206,24 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-nagi">Sugoi Niboshi Ramen Nagi Shinjuku Golden Gai Honkan</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Рамен</span>
+    <h2 class="section-title -minor" id="loc-nagi">Ramen Nagi</h2>
+    <span class="place-caption">Рамен, который начинался с восьми мест в неделю</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Основатель Satoshi Ikuta начал в 2004 году, в 27 лет, с того что раз в неделю арендовал место в одном из баров Golden-Gai и готовил рамен на 8 гостей — сегодня у бренда больше 35 точек по всему миру, а флагман по-прежнему здесь</li>
         <li>Фирменный вкус — niboshi (сушёная мелкая рыба): идею Ikuta привёз из поездки в префектуру Aomori, где рамен на этом бульоне — местная классика</li>
         <li>На одну порцию уходит больше 70 г niboshi из более чем 20 сортов со всей Japan</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ramen Nagi</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Ramen Nagi</span></div></figure>
       <div>
         <p>История начиналась почти как эксперимент: 4 tsubo (около 13 м²) арендованного пространства, один день в неделю, друзья в качестве первых дегустаторов. Постепенно очередь выросла до сотни человек, а рамен получил Гран-при TRY Grand Prize в 2012 году. Здание всё то же — крутая лестница, десяток мест за стойкой, — но сегодня это уже не эксперимент, а признанный текст в истории токийского рамена.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Фирменная «Unbelievable NIBOSHI Ramen» или её версия tsukemen (лапша отдельно от бульона для макания) — обе с уникальным топпингом из «полосок теста» (ittan-men).</div>
+    <p><span class="inline-label">Попробуй</span>Фирменную «Unbelievable NIBOSHI Ramen» или её версию tsukemen (лапша отдельно от бульона для макания) — обе с уникальным топпингом из «полосок теста» (ittan-men).</p>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
@@ -950,7 +1237,7 @@ body.site-nav-locked { overflow: hidden; }
 
   <h2 class="section-title" id="connections">Connections</h2>
   <p>Tokyo Metropolitan Government Building и Yoyogi National Gymnasium с Harajuku & Shibuya Day — работа одного и того же архитектора, Kenzō Tange, с разницей в 26 лет: сперва спортивный символ Олимпиады-1964, потом административная башня новой, богатой Japan 1990 года. Это два разных момента одной и той же национальной уверенности в себе, выраженной через архитектуру.</p>
-  <p>А Kabukicho и Omoide Yokocho — версии одной истории с разным финалом: оба выросли из одного и того же послевоенного чёрного рынка конца 1940-х, но пошли разными путями — один стал кварталом еды под открытым небом, другой при участии якудза превратился в развлекательный квартал, часть которого (после запрета проституции 1956 года) стала Golden-Gai. Разные ответы на одну и ту же нищету и один и тот же правовой вакуум первых послевоенных лет.</p>
+  <p>А про Kabukicho и Omoide Yokocho — общий чёрный рынок, два разных финала — уже было сказано выше: разные ответы на одну и ту же нищету и один и тот же правовой вакуум первых послевоенных лет.</p>
 
   <p class="footnote">Shinjuku Day · Japan 2026 · план дня, собранный вручную</p>
 </main>

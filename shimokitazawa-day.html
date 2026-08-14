@@ -7,7 +7,7 @@
 <title>Shimokitazawa Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -22,6 +22,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -100,6 +101,68 @@
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
+  /* ---------- Opening quote — pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
+  }
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
+    color: var(--ink);
+    line-height: 1.18;
+  }
+  .opening-quote .quote-author {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+  }
+  .opening-quote .quote-source {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
   .quote-intro {
     min-height: 16vh;
     display: flex;
@@ -169,16 +232,60 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, tab-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
+  /* Small boxed sub-card used inside a collapsible day-section body (e.g.
+     "Пешком между точками" nested in "Ритм дня") — distinct box from the
+     outer details element, so it doesn't double up visually when day-flags
+     rides bare inside day-section-body elsewhere. Pattern locked with
+     shinjuku-day.html. */
+  .inset-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem 1rem;
+    margin-top: 1rem;
+  }
+  .inset-card-label {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -186,6 +293,7 @@
     font-weight: 600;
     margin-bottom: 0.6rem;
   }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -260,6 +368,30 @@
 
 
   /* ---------- Section headings ---------- */
+  /* Place kicker — pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -268,6 +400,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -338,6 +473,47 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment — pattern locked with higashiyama-day.html.
+     Not used on this page: every one of the six places here carries real
+     content, not pure atmosphere. Kept for site-wide CSS consistency. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -370,6 +546,21 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label — pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid {
     display: grid;
@@ -421,24 +612,38 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: collapsible, gold accent — pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li {
     font-size: 0.9rem;
@@ -560,6 +765,43 @@
     background: var(--red-soft);
   }
 
+  /* ---------- Dark panel — pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -603,6 +845,7 @@
     display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
   }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -723,32 +966,33 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">一期一会</span>
-    «одна жизнь, одна встреча»
-    <span class="quote-author">Ии Наосукэ, «Тяною итиэсю» (1858)</span>
-    <span class="quote-note">Каждая встреча случается один раз и в точности никогда не повторится — прими её так, будто это единственный шанс</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">猫</div>
   <div class="hero-content">
     <div class="eyebrow">Setagaya · Day Plan</div>
     <h1>Shimokitazawa Day</h1>
-    <div class="sub">Gōtoku-ji, Shimokitazawa — тысячи котов, винтаж и район, где ничто не называется тем, чем является</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">一期一会</span>
+    <blockquote>Одна жизнь, одна встреча</blockquote>
+    <span class="quote-author">Ии Наосукэ</span>
+    <span class="quote-source">«Тяною итиэсю», 1858</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>IC-карта</strong> — нужна весь день: метро, Odakyu Line, трамвай Setagaya</li>
       <li><strong>Little Soul Cafe</strong> — только наличные, открыто с 19:00 (днём закрыто)</li>
@@ -756,7 +1000,8 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Магазины Shimokitazawa</strong> — открываются не раньше 11:00; Desk Labo закрыт по понедельникам</li>
       <li><strong>Gōtoku-ji</strong> — офис с котиками и goshuin только до 15:00, лучше приезжать утром</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -774,36 +1019,42 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Маршрут</h2>
-    <p><strong>Ритм дня:</strong> Gōtoku-ji — с утра. Магазины Reload и Nerdy Dogs открываются позже, ближе к полудню, так что после храма спешить некуда. А вот Little Soul Cafe — работает только вечером, и если туда хочется, разумнее после магазинов вернуться в отель и выйти заново, а не тянуть один долгий заход.</p>
-    <p><strong>Бонус:</strong> со станции Yamashita иногда можно поймать «кошачий» трамвай — ходит без расписания, 1–2 раза в час, тариф около 160–170 иен, оплата IC-картой при входе через переднюю дверь.</p>
-    <div class="day-flags">
-      <div class="day-flags-label">Пешком между точками</div>
-      <ul>
-        <li><strong>Gōtoku-ji → Nerdy Dogs</strong>12 минут пешком</li>
-        <li><strong>Nerdy Dogs → Reload (Desk Labo / APFR)</strong>10 минут на Odakyu Line — оба магазина в одном здании, отдельно искать не нужно</li>
-        <li><strong>Reload → Ōzeki</strong>пара минут пешком</li>
-        <li><strong>Обратно до отеля</strong>около 30 минут</li>
-      </ul>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">маршрут по часам</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Gōtoku-ji — с утра. Магазины Reload и Nerdy Dogs открываются позже, ближе к полудню, так что после храма спешить некуда. А вот Little Soul Cafe работает только вечером, и если туда хочется, разумнее после магазинов вернуться в отель и выйти заново, а не тянуть один долгий заход.</p>
+      <p>Бонус: со станции Yamashita иногда можно поймать «кошачий» трамвай — ходит без расписания, 1–2 раза в час, тариф около 160–170 иен, оплата IC-картой при входе через переднюю дверь.</p>
+      <div class="inset-card day-flags">
+        <div class="inset-card-label">Пешком между точками</div>
+        <ul>
+          <li><strong>Gōtoku-ji → Nerdy Dogs</strong>12 минут пешком</li>
+          <li><strong>Nerdy Dogs → Reload (Desk Labo / APFR)</strong>10 минут на Odakyu Line — оба магазина в одном здании, отдельно искать не нужно</li>
+          <li><strong>Reload → Ōzeki</strong>пара минут пешком</li>
+          <li><strong>Обратно до отеля</strong>около 30 минут</li>
+        </ul>
+      </div>
     </div>
-  </section>
+  </details>
 
   <hr>
 
   <section id="t3">
-    <h2 class="section-title" style="margin-bottom:1.6rem;">По местам</h2>
 
-    <h2 class="section-title" id="loc-gotokuji">Gōtoku-ji Temple</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-gotokuji">Gōtoku-ji Temple</h2>
+    <span class="place-caption">Храм, который начался с удара молнии</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Не просто «храм с котиками»: за фасадом — драма эпохи Эдо, идея goryō (умиротворение неупокоенных духов) и могила человека, открывшего Японию миру</li>
         <li>Потомок Наотаки, Ii Naosuke, подписал в 1858 году договор Харриса, открывший японские порты для торговли с США — в 1860 году его убили у ворот Сакурада замка Эдо, что многие историки считают началом конца сёгуната Tokugawa</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Gōtoku-ji</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Gōtoku-ji</span></div></figure>
       <div>
         <p>Храм принадлежит школе <strong>Sōtō Zen</strong>. По легенде, около 1620 года местный кот поманил лапой даймё <strong>Ii Naotaka</strong>, приглашая зайти на территорию храма. Наотака последовал за ним — и в тот же миг молния ударила в дерево, под которым он только что стоял. Поэтому поднятая лапа manekineko означает не приветствие, а <strong>приглашение подойти ближе</strong>. В благодарность Наотака сделал храм родовым храмом клана Ii, а после его смерти в 1659 году храм переименовали в его честь — так началась история манэки-нэко.</p>
       </div>
@@ -813,6 +1064,11 @@ body.site-nav-locked { overflow: hidden; }
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>На обратной стороне многих кошек написаны имена людей, которые принесли их после исполнения желания.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Загляни на кладбище клана Ii — около 300 захоронений, включая и Наотаку, и Наосукэ.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>В отличие от сувенирных кошек по всей Японии, кошки Gōtoku-ji держат поднятой исключительно <strong>правую лапу</strong> и никогда не держат монету koban.</div>
+    </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Тот самый потомок Наотаки, <strong>Ii Naosuke</strong>, чья могила лежит здесь же, в 1858 году подписал договор Харриса — открыл японские порты для торговли с США. В 1860-м его убили у ворот Сакурада замка Эдо: многие историки считают это началом конца сёгуната Tokugawa. Храм, который весь мир знает по мультяшным котикам, хранит могилу человека, чья смерть запустила отсчёт до конца эпохи.</p>
     </div>
 
     <div class="blockquote">Философия храма: кошка лишь даёт тебе шанс и призывает удачу, но то, как ты им воспользуешься, зависит исключительно от твоих собственных усилий.</div>
@@ -828,9 +1084,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Винтаж</span>
     <h2 class="section-title" id="loc-nerdydogs">Nerdy Dogs</h2>
+    <span class="place-caption">Секонд-хенд, который обманывает названием</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Nerdy Dogs</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Nerdy Dogs</span></div></figure>
       <div>
         <p>Название обманывает — «собаки-ботаники» на деле оказываются крошечным независимым секонд-хендом, который переворачивает представление о японском винтаже. Вместо привычных джинсов и оверсайз-футболок бывшие байеры крупных токийских концепт-сторов сделали ставку на редкую эстетику <strong>«resort & outdoor vintage»</strong>: архивные куртки, флис и техничная одежда 90-х от Patagonia, L.L. Bean и Lands' End.</p>
         <p>Это яркий пример того, как японский селективный подход превращает обычную утилитарную одежду прошлых десятилетий в объект коллекционирования.</p>
@@ -853,7 +1111,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Канцелярия</span>
     <h2 class="section-title" id="loc-desklabo">Desk Labo</h2>
+    <span class="place-caption">Музей функционального дизайна на бывших рельсах</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Desk Labo</span></div></figure>
       <div>
@@ -865,7 +1125,6 @@ body.site-nav-locked { overflow: hidden; }
     <div class="notes-grid">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Многие изделия сделаны небольшими японскими мастерскими, которые существуют десятилетиями и почти неизвестны за пределами страны.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Приглядись к минималистичным японским латунным держателям для ручек. Металл со временем темнеет, приобретая патину — живое воплощение эстетики <strong>wabi-sabi</strong>.</div>
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Desk Labo и APFR TOKYO стоят в одном комплексе Reload — искать их по отдельным адресам не нужно.</div>
     </div>
 
     <details class="practical-card">
@@ -879,9 +1138,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Парфюмерия</span>
     <h2 class="section-title" id="loc-apfr">APFR TOKYO</h2>
+    <span class="place-caption">Где запах не нюхают, а слушают</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>APFR TOKYO</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>APFR TOKYO</span></div></figure>
       <div>
         <p>Флагманский магазин парфюмерного бренда, основанного Keita Sugasawa в 2011 году — раньше он назывался Apotheke Fragrance. Почти вся продукция до сих пор производится небольшими партиями вручную.</p>
         <p>Японская культура запахов долгое время развивалась иначе, чем европейская. В традиции <strong>kōdō</strong> аромат не столько украшает пространство, сколько становится предметом созерцания — почти как чайная церемония или каллиграфия.</p>
@@ -890,9 +1151,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <div class="notes-grid">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Сравнивай ароматы медленно. В японской традиции считается, что запах нужно не «нюхать», а «слушать».</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Ароматические палочки обмакивают здесь вручную и горят они около 100 минут — стоит понюхать несколько вариантов на месте, прежде чем выбирать.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Бренд работает с традиционными мотивами — бамбук, сандал (byakudan), сезонные цитрусы вроде yuzu — в современных урбанистических композициях.</div>
     </div>
+    <p><span class="inline-label">Попробуй</span>Ароматические палочки обмакивают здесь вручную, и горят они около 100 минут — стоит понюхать несколько вариантов на месте, прежде чем выбирать.</p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -905,7 +1166,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Супермаркет</span>
     <h2 class="section-title" id="loc-ozeki">Ōzeki Shimokitazawa</h2>
+    <span class="place-caption">Овощи как ювелирные изделия</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Ōzeki</span></div></figure>
       <div>
@@ -931,9 +1194,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-littlesoul">Little Soul Cafe</h2>
+    <span class="place-kicker">Бар</span>
+    <h2 class="section-title -minor" id="loc-littlesoul">Little Soul Cafe</h2>
+    <span class="place-caption">Для тех, кто пришёл послушать, а не выпить</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Little Soul Cafe</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Little Soul Cafe</span></div></figure>
       <div>
         <p>Несмотря на название, кофе здесь не главное. С 1999 года это узкий бар с более чем 15 000 виниловых пластинок — коллекцией, которую владелец Nobuo Miyamae начал собирать ещё студентом, — и списком примерно из 450 коктейлей и спиртных напитков, включая большую ромовую коллекцию.</p>
         <p>Это классический пример японского <strong>listening bar</strong> (ongaku kissa) — традиции, уходящей корнями в 1920-е годы, когда пластинки стоили слишком дорого, и люди приходили в специальные кафе просто послушать музыку. Хозяин сам стоит за пультом, создавая аналоговую атмосферу.</p>
@@ -941,10 +1206,10 @@ body.site-nav-locked { overflow: hidden; }
     </div>
 
     <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Кафе открывается только в 19:00 — если прийти днём, дверь будет закрыта. Планировать как вечернюю точку, а не промежуточную остановку.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если играет винил, прислушайся к подбору музыки — во многих небольших японских барах коллекция пластинок это часть личности владельца.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Стены от пола до потолка забиты пластинками, а посадочных мест всего около 8–10. Обрати внимание на коллекцию рома — больше 100 видов со всего мира.</div>
     </div>
+    <p><span class="inline-label">Совет</span>Кафе открывается только в 19:00 — если прийти днём, дверь будет закрыта. Планировать как вечернюю точку, а не промежуточную остановку.</p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -967,7 +1232,7 @@ body.site-nav-locked { overflow: hidden; }
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Интересно сравнить Gōtoku-ji с Meiji Jingu, который ещё будет в поездке: один почти незаметен на карте истории Японии, другой связан с рождением современной нации — но оба показывают, как японцы умеют превращать место памяти в живое пространство. Связь прямее, чем кажется: Ii Naosuke, чья могила ждёт тебя сегодня, подписал в 1858 году договор Харриса — прямое следствие прихода Black Ships коммодора Перри и один из первых шагов к Meiji Restoration. Если день с Kaminarimon и Sensō-ji показывал старую, ритуальную Японию, то сегодня — момент, когда эта Япония начала открываться миру, причём ценой жизни человека, который это подписал.</p>
+  <p>Интересно сравнить Gōtoku-ji с Meiji Jingu, который ещё будет в поездке: один почти незаметен на карте истории Японии, другой связан с рождением современной нации — но оба показывают, как японцы умеют превращать место памяти в живое пространство. Если день с Kaminarimon и Sensō-ji показывал старую, ритуальную Японию, то сегодня — момент, когда эта Япония начала открываться миру, причём ценой жизни человека, который это подписал.</p>
   <p>А сам район Shimokitazawa стоит в стороне от больших храмов и государственных сюжетов: это другая Япония — страна маленьких независимых проектов, где ценность создаётся не масштабом, а качеством исполнения.</p>
 
   <p class="footnote">Shimokitazawa Day · Japan 2026 · план дня, собранный вручную</p>

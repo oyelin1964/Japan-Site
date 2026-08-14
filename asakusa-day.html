@@ -7,7 +7,7 @@
 <title>Asakusa Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -21,6 +21,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -99,44 +100,66 @@
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list {
@@ -194,6 +217,30 @@
 
 
   /* ---------- Section headings ---------- */
+  /* Place kicker — pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -202,6 +249,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -272,6 +322,47 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment — pattern locked with higashiyama-day.html.
+     Not used on this page (every place here carries real content, not
+     pure atmosphere) but kept for site-wide CSS consistency. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -303,6 +394,21 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label — pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid {
     display: grid;
@@ -353,24 +459,47 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Day flags / rhythm card: quick-scan facts, same visual
-     language used for both "На сегодня" and "Ритм дня" blocks ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -395,24 +524,38 @@
     margin-bottom: 0.15rem;
   }
 
-  /* ---------- Essence card: scannable summary before the prose, pilot for Asakusa ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: collapsible, gold accent — pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li {
     font-size: 0.9rem;
@@ -535,6 +678,43 @@
     background: var(--red-soft);
   }
 
+  /* ---------- Dark panel — pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -577,6 +757,7 @@
     display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
   }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -697,31 +878,32 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">誰にもかれにも、同じ時間が流れていると思うのはまちがいだ</span>
-    Время течёт одинаково для всех вещей, но каждый человек плывёт в нём по-своему
-    <span class="quote-author">Ясунари Кавабата</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">浅草</div>
   <div class="hero-content">
     <div class="eyebrow">Tokyo · Day Plan</div>
     <h1>Asakusa Day</h1>
-    <div class="sub">浅草 — храм Сэнсо-дзи, Накамисэ-дори и старый город</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">誰にもかれにも、同じ時間が流れていると思うのはまちがいだ</span>
+    <blockquote>Время течёт одинаково для всех вещей, но каждый человек плывёт в нём по-своему</blockquote>
+    <span class="quote-author">Ясунари Кавабата</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">7 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>Смотровая Tourist Center</strong>бесплатно, лифт/эскалатор — лучше зайти с утра, до толп на Nakamise</li>
       <li><strong>Sensō-ji</strong>лучше смотреть до 9:00–9:30, пока не пришли группы</li>
@@ -731,7 +913,8 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Курение</strong>только за пределами храмовой территории, ближе к Kappabashi-dori</li>
       <li><strong>NMWA</strong>закрыт по понедельникам (сегодня не актуально), на постоянную коллекцию хватает 1–1.5 часа</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -747,38 +930,40 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Маршрут</h2>
-    <div class="day-flags">
-      <div class="day-flags-label">Ритм дня</div>
-      <ul>
-        <li><strong>Nakamise → Sensō-ji</strong>компактный участок, 5–10 минут пешком, нагрузки почти нет</li>
-        <li><strong>Если выбиваешься из графика</strong>лучше отказаться от Kappabashi, чем сократить время у храма</li>
-        <li><strong>Sensō-ji → Kappabashi</strong>пешком через жилые кварталы — часть впечатления от дня, не просто переход</li>
-        <li><strong>Kappabashi → Ueno</strong>одна остановка на метро, станция Tawaramachi (Ginza Line) рядом с Kappabashi</li>
-        <li><strong>Ueno Park → NMWA</strong>музей стоит прямо в парке — отдельно искать не нужно, заходишь по пути</li>
-        <li><strong>Вечер</strong>ужин в Ramen Kamo to Negi Ueno, рядом со станцией Ueno</li>
-      </ul>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">маршрут по часам</span>
+    </summary>
+    <div class="day-section-body day-flags">
+    <ul>
+      <li><strong>Nakamise → Sensō-ji</strong>компактный участок, 5–10 минут пешком, нагрузки почти нет</li>
+      <li><strong>Если выбиваешься из графика</strong>лучше отказаться от Kappabashi, чем сократить время у храма</li>
+      <li><strong>Sensō-ji → Kappabashi</strong>пешком через жилые кварталы — часть впечатления от дня, не просто переход</li>
+      <li><strong>Kappabashi → Ueno</strong>одна остановка на метро, станция Tawaramachi (Ginza Line) рядом с Kappabashi</li>
+      <li><strong>Ueno Park → NMWA</strong>музей стоит прямо в парке — отдельно искать не нужно, заходишь по пути</li>
+      <li><strong>Вечер</strong>ужин в Ramen Kamo to Negi Ueno, рядом со станцией Ueno</li>
+    </ul>
     </div>
-  </section>
+  </details>
 
   <hr>
 
   <section id="t3">
-    <h2 class="section-title" style="margin-bottom:1.6rem;">По местам</h2>
-
-    <h2 class="section-title" id="loc-kaminarimon">Kaminarimon — ворота власти</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Ворота</span>
+    <h2 class="section-title -minor" id="loc-kaminarimon">Kaminarimon</h2>
+    <span class="place-caption">Ворота власти</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Это не просто ворота, а заявление о власти: статуи Fūjin (бог ветра) и Raijin (бог грома) отмечают границу, за которой действуют другие правила</li>
         <li>Гигантский фонарь исторически был настолько большим, что под ним спешивался даже сёгун — паланкин знати физически не проезжал</li>
         <li>Присмотрись к основанию ворот — там резные боги ветра и грома, давшие воротам имя</li>
         <li>У статуй-хранителей Niō задержись: Агьё с открытым ртом и Унгьё с закрытым — рождение и защита, начало и конец</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kaminarimon</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Kaminarimon</span></div></figure>
       <div>
         <p>Красота здесь — оболочка, а функция — расстановка границ власти и статуса.</p>
       </div>
@@ -803,7 +988,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-nakamise">Nakamise — дорога к храму</h2>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title -minor" id="loc-nakamise">Nakamise</h2>
+    <span class="place-caption">Дорога к храму</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Nakamise-dōri</span></div></figure>
       <div>
@@ -822,7 +1009,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-hozomon">Hōzōmon gate</h2>
+    <span class="place-kicker">Ворота</span>
+    <h2 class="section-title" id="loc-hozomon">Hōzōmon</h2>
+    <span class="place-caption">Сандалии, которые должны напугать демона</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Hōzōmon</span></div></figure>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если увидишь большие соломенные сандалии (waraji), обрати внимание на их размер. По легенде они должны отпугивать демонов: если обувь настолько велика, значит и её владелец ещё больше.</div>
@@ -830,18 +1019,20 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-sensoji">Sensō-ji</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-sensoji">Sensō-ji</h2>
+    <span class="place-caption">Место, где рыбаки выловили бога</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Старейший буддийский храм Токио (645 год), возникший на месте, где по легенде рыбаки выловили в реке Сумида статую бодхисаттвы Каннон</li>
         <li>Большинство зданий — послевоенная реконструкция; для японцев это не подделка, важна непрерывность традиции, а не подлинность материала</li>
         <li>По фэншуй храм защищал замок Эдо с опасного северо-востока («кимон») — поэтому сёгун Токугава Иэясу сделал его официальным молитвенным храмом сёгуната</li>
         <li>Здесь сохраняют старую систему гаданий, где ~30% омикудзи «плохие» (в других храмах эту долю давно занизили) — плохое не забирают домой, а завязывают на стойке рядом</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Sensō-ji</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Sensō-ji</span></div></figure>
       <div>
         <p>По легенде, в 628 году два рыбака выловили в реке Сумида небольшую статую <strong>бодхисаттвы Каннон</strong> — покровительницы сострадания. Каждый раз, когда они пытались вернуть её в реку, статуя снова попадала в сети. Так появилось место, которое позже стало храмом Сэнсо-дзи.</p>
       </div>
@@ -867,17 +1058,13 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-shrine">Asakusa Shrine и разделённая память</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Святилище рядом с главным залом посвящено не богам, а трём конкретным людям — тем самым рыбакам и старосте, принявшему статую Kannon</li>
-      </ul>
-    </div>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -minor" id="loc-shrine">Asakusa Shrine</h2>
+    <span class="place-caption">Разделённая память</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Asakusa Shrine</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Asakusa Shrine</span></div></figure>
       <div>
-        <p>До 1868 года храм и святилище управлялись как единое целое: раз в год духи трёх основателей «навещали» Kannon в главном зале, проводили с ней ночь, а затем их несли в паланкинах через реку и по улицам города. Meiji-правительство насильно разделило синто и буддизм — и только тогда святилище стало самостоятельным.</p>
+        <p>Святилище рядом с главным залом посвящено не богам, а трём конкретным людям — тем самым рыбакам и старосте, принявшему статую Kannon. До 1868 года храм и святилище управлялись как единое целое: раз в год духи трёх основателей «навещали» Kannon в главном зале, проводили с ней ночь, а затем их несли в паланкинах через реку и по улицам города. Meiji-правительство насильно разделило синто и буддизм — и только тогда святилище стало самостоятельным.</p>
         <p>Здание при этом — подлинное, одно из двух построек в районе, переживших бомбардировки 1945 года; пока Sensō-ji отстраивали заново, здесь по-прежнему стоит Edo-период.</p>
       </div>
     </div>
@@ -886,16 +1073,18 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kappabashi">Kappabashi — легенда о дренаже</h2>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title -minor" id="loc-kappabashi">Kappabashi</h2>
+    <span class="place-caption">Легенда о дренаже</span>
     <p>Название улицы отсылает не к посуде, а к воде. По легенде, в XIX веке местный купец по имени Kappaya Kihachi взялся прокладывать дренажные каналы, чтобы спасти район от постоянных наводнений. Работа шла тяжело — и, по преданию, ему стали помогать kappa, водяные существа из японского фольклора, приходившие по ночам.</p>
     <p>Есть и более прозаичная версия: раньше здесь на мосту (bashi) сушили дождевики (kappa) низкоранговых самураев. Обе версии сходятся в одном — именно вода определила имя места, которое сегодня торгует кастрюлями.</p>
-    <div class="essence-card">
-      <span class="essence-label">Ищи на месте</span>
-      <ul>
+    <details class="essence-card">
+      <summary><span class="essence-label">Ищи на месте</span></summary>
+      <div class="essence-card-body"><ul>
         <li>В Kappabashi есть маленький Sogenji Temple в переулках за главной улицей — там хранится мумифицированная кисть kappa под стеклом, и местные до сих пор оставляют статуям огурцы и саке</li>
         <li>Golden Kappa statue на середине Kappabashi-dori поставлена в 2003 году к 90-летию торговой улицы — своего рода официальное признание мифа маскотом района</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kappa-yokai">Kappa in Japanese folklore</a> · Sogenji Temple and the mummified kappa hand</p>
 
     <details class="practical-card">
@@ -907,22 +1096,28 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-uenopark">Ueno Park — там, где сёгунат сгорел за один день</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Парк</span>
+    <h2 class="section-title -major" id="loc-uenopark">Ueno Park</h2>
+    <span class="place-caption">Там, где сёгунат сгорел за один день</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Весь парк раньше был территорией Kan'ei-ji — фамильного храма-усыпальницы клана Tokugawa, где похоронены шесть из пятнадцати сёгунов</li>
         <li>Kan'ei-ji построили по образцу Enryaku-ji на горе Hiei — того самого, что сжёг Нобунага: тот же принцип храма-щита с северо-востока, только теперь щит для Edo, а не для Kyoto</li>
         <li>В 1868 году здесь прошла Битва при Уэно — последний бой сторонников сёгуната (Shōgitai) против императорских войск; храм сгорел почти полностью за один день</li>
         <li>В 1873-м руины превратили в один из первых в Японии общественных парков западного образца</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ueno Park</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Ueno Park</span></div></figure>
       <div>
-        <p>У южного входа стоит статуя <strong>Saigō Takamori</strong> — полководца, который принял капитуляцию замка Эдо без единого выстрела, а затем лично привёл императорские войска к победе в этой самой битве. Он же позже помог упразднить сословие самураев, к которому сам принадлежал. Десятью годами позже, не приняв темп реформ, Сайго — уже против своей воли — возглавил Сацумское восстание против того самого правительства, которое сам создал, и погиб в 1877 году.</p>
-        <p>Ирония места: человек, чья статуя встречает всех у входа в парк, построенный на обломках старого режима, сам через десять лет стал последним крупным мятежником против нового.</p>
+        <p>У южного входа стоит статуя <strong>Saigō Takamori</strong> — полководца, который принял капитуляцию замка Эдо без единого выстрела, а затем лично привёл императорские войска к победе в этой самой битве. Он же позже помог упразднить сословие самураев, к которому сам принадлежал.</p>
       </div>
+    </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Через десять лет, не приняв темп реформ, <strong>Сайго</strong> — уже против своей воли — возглавил Сацумское восстание против того самого правительства, которое сам создал, и погиб в 1877 году. Человек, чья статуя встречает всех у входа в парк, построенный на обломках старого режима, сам стал последним крупным мятежником против нового.</p>
     </div>
 
     <div class="notes-grid">
@@ -942,28 +1137,28 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-nmwa">National Museum of Western Art — коллекция, которая пережила пожар и плен</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Музей</span>
+    <h2 class="section-title -major" id="loc-nmwa">National Museum of Western Art</h2>
+    <span class="place-caption">Коллекция, которая пережила пожар и плен</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>В основе музея — собрание Kōjirō Matsukata, президента Kawasaki Dockyard, который с 1905 года скупал в Европе западное искусство, мечтая построить в Японии музей, чтобы молодым художникам не пришлось ехать за океан ради оригиналов</li>
         <li>Финансовый кризис 1927 года разорил его — японскую часть коллекции распродали, а то, что хранилось в Лондоне и Париже (~1400 работ), уцелело</li>
         <li>В 1939-м пожар на лондонском складе Pantechnicon уничтожил около 900 работ; оставшиеся ~400 во Франции после войны конфисковало французское правительство как «вражескую собственность»</li>
         <li>Мацуката умер в 1950-м, так и не увидев коллекцию — Японии её вернули только в 1959-м, и то с условием построить отдельный музей, чтобы собрание больше не рассеялось</li>
         <li>Здание спроектировал Ле Корбюзье с тремя японскими архитекторами — своими бывшими учениками; в 2016 году стало объектом ЮНЕСКО</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>NMWA</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>NMWA</span></div></figure>
       <div>
         <p>Возврат коллекции не был полным жестом доброй воли. Франция придержала 17 картин, посчитав их слишком значимыми, чтобы расставаться, — включая «Комнату в Арле» Ван Гога и «Гору Сент-Виктуар» Сезанна. Осталось всё равно немало: Моне (включая настоящие «Кувшинки»), Ренуар, Гоген, Рубенс — и около пятидесяти работ Родена, включая «Мыслителя» и «Врата ада», часть из которых стоит прямо во внутреннем дворе, на виду ещё до билета.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Роденовская коллекция музея сопоставима по объёму с музеем Родена в Филадельфии — крупнейшим собранием его работ за пределами Парижа. Токио здесь не побочная нота, а самостоятельно значимая коллекция.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>На постоянную коллекцию хватает 1–1.5 часа без спешки — не пытайся растянуть визит, музей рассчитан на плотный, но короткий заход.</div>
-    </div>
+    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Роденовская коллекция музея сопоставима по объёму с музеем Родена в Филадельфии — крупнейшим собранием его работ за пределами Парижа. Токио здесь не побочная нота, а самостоятельно значимая коллекция.</div>
+    <p><span class="inline-label">Совет</span>На постоянную коллекцию хватает 1–1.5 часа без спешки — не пытайся растянуть визит, музей рассчитан на плотный, но короткий заход.</p>
 
     <p class="read-more"><span class="read-more-label">Подробнее</span>История коллекции Мацуката и репатриации после Второй мировой войны</p>
 
