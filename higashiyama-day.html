@@ -7,7 +7,7 @@
 <title>Higashiyama Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -51,7 +52,7 @@
   /* ---------- Hero ---------- */
   .hero {
     position: relative;
-    min-height: 260px;
+    min-height: 220px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -65,16 +66,32 @@
     transform: translateY(-50%);
     font-family: 'Shippori Mincho', serif;
     font-size: clamp(5.5rem, 15vw, 9.5rem);
-    color: var(--red);
-    opacity: 0.28;
     line-height: 1;
     z-index: 1;
     user-select: none;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.4;
+  }
+  .hero-mark::after {
+    /* soft warm glow contained behind the kanji only, never reaching the
+       title text on the left, so the two never fight for contrast */
+    content: "";
+    position: absolute; inset: -30% -20%;
+    background: radial-gradient(circle, rgba(255,244,214,0.7) 0%, rgba(255,244,214,0) 65%);
+    z-index: -1;
+  }
+  @media (max-width: 640px) {
+    /* On narrow screens the kanji sits behind wrapped title text — pull
+       it back so it never competes with legibility. */
+    .hero-mark { opacity: 0.22; font-size: 7.5rem; right: -4%; }
   }
   .hero-content {
     position: relative;
     z-index: 2;
-    padding: 3rem 8vw;
+    padding: 2.1rem 8vw;
     width: 100%;
   }
   .eyebrow {
@@ -98,53 +115,71 @@
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — moved out of the hero zone entirely.
+     Lives in .wrap, after the title, as a quiet literary epigraph.
+     A soft warm container (echoing the hero's tone) keeps it from
+     reading as bare whitespace with two marks floating in it — the
+     quote marks share the hero kanji's red-to-gold gradient, tying
+     the two "signature glyph" moments of the page together. */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "“"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "”"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +199,49 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня" open
+     into a summary-first pattern like practical-card, so neither eats a
+     full mobile screen before the reader reaches the first place. Each
+     variant gets its own accent so they don't read as the same object. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "＋"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "－"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +306,35 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* ---------- Place kicker: names the kind of stop before naming the stop.
+     Breaks the "every heading looks the same" pattern by content, not
+     decoration — храм reads differently from бар before you even hit the name. ---------- */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  /* Small quiet caption under a place name — subordinate on purpose:
+     small enough it never competes with the h2, and never at risk of
+     being mistaken for a second heading. */
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +343,11 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  /* Headline stops — the two or three places each day actually turns on —
+     get a visibly bigger mark. Everything else stays at the base size. */
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -266,6 +361,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -277,6 +374,9 @@
 
   .cols img, figure img { width: 100%; border-radius: 2px; display: block; box-shadow: 0 2px 12px rgba(28,25,23,0.08); }
 
+  /* ---------- Image placeholder — three moods instead of one repeated tile.
+     Default keeps the old grid (used sparingly); -warm and -deep drop the
+     grid entirely and read as a colour moment, not a technical hole. ---------- */
   .img-placeholder {
     width: 100%;
     aspect-ratio: 4 / 3;
@@ -312,40 +412,101 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
   @media (max-width: 680px) { .cols-4 { grid-template-columns: 1fr; } }
 
-  /* ---------- Unified note system ---------- */
+  /* Asymmetric variant of .cols — photo takes more room than text, or vice
+     versa. Used instead of a permanent 1fr/1fr so pages breathe unevenly. */
+  .cols-golden { grid-template-columns: 3fr 2fr; }
+  .cols-golden.-text-lead { grid-template-columns: 2fr 3fr; }
+  @media (max-width: 680px) { .cols-golden, .cols-golden.-text-lead { grid-template-columns: 1fr; } }
+
+  /* ---------- Note system — three different objects, not one card
+     with a coloured label. The eye should tell them apart before reading. ---------- */
+
+  /* Attention — the only one that still reads as a "card": something you
+     could actually miss or get wrong. Kept heavy on purpose. */
   .note {
-    padding: 1rem 1.2rem;
-    margin: 1rem 0;
+    padding: 0.9rem 1.2rem 0.9rem 1.1rem;
+    margin: 1.3rem 0;
     font-size: 0.92rem;
     color: var(--ink-soft);
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    background: rgba(178,58,46,0.05);
+    border: none;
+    border-left: 3px solid var(--red);
+    border-radius: 0 4px 4px 0;
   }
   .note-tag {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: var(--red);
+  }
+
+  /* Small inline label before a sentence — for tips and try-this notes that
+     don't need their own box. Pill-shaped so it still registers at a
+     glance without becoming a full card. */
+  .inline-label {
     display: inline-block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
-    letter-spacing: 0.14em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-weight: 600;
-    padding: 0.15rem 0.55rem;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
     border-radius: 3px;
-    margin-bottom: 0.4rem;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
   }
-  .note-tag.tag-attention { color: var(--red); background: rgba(178,58,46,0.10); }
-  .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
-  .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
-  .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
-  .notes-grid .note { margin: 0; }
   @media (max-width: 680px) { .notes-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Practical info per place: same collapsible language as
@@ -383,24 +544,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent — distinct from red (flags) and
+     blue (rhythm). Closed by default; open it if you want the highlights
+     before the story, skip it if you'd rather just read. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "＋"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "－"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +671,45 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — the one deliberate reversal per page. Use once,
+     maybe twice, for the sentence that reframes everything before it.
+     Full-bleed within .wrap, so it interrupts the cream rhythm on purpose. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +734,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,40 +824,42 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">一期に一度の会のように</span>
-    Каждую встречу стоит проводить так, будто она случится лишь раз в жизни
-    <span class="quote-author">Сэн-но Рикю (в записи ученика, Yamanoue Sōji Ki)</span>
-    <span class="quote-note">Мысль человека, который спроектировал два чайных домика в Kōdai-ji — сегодня ты их увидишь</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">東山</div>
   <div class="hero-content">
     <div class="eyebrow">Kyoto · Day Plan</div>
     <h1>Higashiyama Day</h1>
-    <div class="sub">東山 — Kiyomizu-dera, каменные склоны Higashiyama и вечер в Gion</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
-    <ul>
-      <li><strong>Kiyomizu-dera</strong> — открывается около 6:00, приходи к открытию: к 9:00–9:30 уже подходят группы</li>
-      <li><strong>Jishu Shrine</strong> — закрыт на реставрацию без объявленной даты, не планируй его в маршруте</li>
-      <li><strong>Sannenzaka</strong> — к полудню сплошной поток людей, пройти лучше до 10 утра</li>
-      <li><strong>Mouriya Gion</strong> — ужин по брони, разбирают за несколько недель; детали и ссылка — в <a href="trip-logistics.html">Logistics</a></li>
-      <li><strong>Beatle Momo</strong> — по воскресеньям закрыт, в остальные дни 19:00–23:30; бронь через Instagram, детали — в <a href="trip-logistics.html">Logistics</a></li>
-    </ul>
+  <div class="opening-quote">
+    <span class="quote-jp">一期に一度の会のように</span>
+    <blockquote>Каждую встречу стоит проводить так, будто она случится лишь раз в жизни</blockquote>
+    <span class="quote-author">Сэн-но Рикю</span>
+    <span class="quote-source">В записи ученика, Yamanoue Sōji Ki</span>
   </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
+      <ul>
+        <li><strong>Kiyomizu-dera</strong> — открывается около 6:00, приходи к открытию: к 9:00–9:30 уже подходят группы</li>
+        <li><strong>Jishu Shrine</strong> — закрыт на реставрацию без объявленной даты, не планируй его в маршруте</li>
+        <li><strong>Sannenzaka</strong> — к полудню сплошной поток людей, пройти лучше до 10 утра</li>
+        <li><strong>Mouriya Gion</strong> — ужин по брони, разбирают за несколько недель; детали и ссылка — в <a href="trip-logistics.html">Logistics</a></li>
+        <li><strong>Beatle Momo</strong> — по воскресеньям закрыт, в остальные дни 19:00–23:30; бронь через Instagram, детали — в <a href="trip-logistics.html">Logistics</a></li>
+      </ul>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -659,35 +878,42 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Утренняя часть — одна прогулка по склону холма без резких подъёмов: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, суммарно меньше 20 минут ходьбы. Сложность не в расстоянии, а во времени: Kiyomizu-dera стоит поймать в районе открытия, иначе к 9:00–9:30 уже людно, а Sannenzaka к полудню превращается в сплошной поток — лучше пройти её до 10 утра.</p>
-    <div class="blockquote">От Kōdai-ji до Maruyama Park можно спуститься по Nene no Michi — переулку, названному в честь вдовы Hideyoshi, который проходит мимо Ishibei-koji, одной из самых нетронутых улочек старого Kyoto.</div>
-    <p>От Maruyama Park до Gion — 10–15 минут пешком через территорию Yasaka Shrine. После ужина в Mouriya Gion до Pontocho Alley — около 10 минут через Kamo River, а оттуда до бара Beatle Momo — ещё 5–7 минут в сторону Kawaramachi.</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Утренняя часть — одна прогулка по склону холма без резких подъёмов: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, суммарно меньше 20 минут ходьбы. Сложность не в расстоянии, а во времени: Kiyomizu-dera стоит поймать в районе открытия, иначе к 9:00–9:30 уже людно, а Sannenzaka к полудню превращается в сплошной поток — лучше пройти её до 10 утра.</p>
+      <div class="blockquote">От Kōdai-ji до Maruyama Park можно спуститься по Nene no Michi — переулку, названному в честь вдовы Hideyoshi, который проходит мимо Ishibei-koji, одной из самых нетронутых улочек старого Kyoto.</div>
+      <p>От Maruyama Park до Gion — 10–15 минут пешком через территорию Yasaka Shrine. После ужина в Mouriya Gion до Pontocho Alley — около 10 минут через Kamo River, а оттуда до бара Beatle Momo — ещё 5–7 минут в сторону Kawaramachi.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-kiyomizu">Kiyomizu-dera — сцена без единого гвоздя</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-kiyomizu">Kiyomizu-dera</h2>
+    <span class="place-caption">Сцена без единого гвоздя</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Сцена (Butai) выступает на 13 метров над склоном, держится на десятках деревянных колонн, соединённых без единого гвоздя техникой kigumi</li>
         <li>Фраза «прыгнуть со сцены Kiyomizu» — не метафора: в период Edo с неё прыгнуло не менее 234 задокументированных человека, веря в исполнение желания при удачном приземлении; с 1872 года практика под запретом</li>
         <li>Три потока Otowa Waterfall традиционно связывают с учёбой, любовью и долголетием — пить из всех трёх сразу считается жадностью</li>
         <li>Jishu Shrine с «камнями любви» сейчас закрыт на реставрацию без объявленной даты открытия — не планируй его в маршруте</li>
-      </ul>
-    </div>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Kiyomizu-dera</span></div></figure>
+      </ul></div>
+    </details>
+    <div class="cols cols-golden">
+      <figure><div class="img-placeholder -warm"><span>Kiyomizu-dera</span></div></figure>
       <div>
         <p>Храм основан в 778 году монахом Enchin, которому было видение источника на горе Otowa. Здесь есть деталь, которая переворачивает привычную логику: Kiyomizu-dera старше самого Kyoto как столицы. Императорский двор перебрался в Heian-kyō только в 794 году — храм на 16 лет старше города, который позже вырастет вокруг него. Главный объект поклонения — статуя Kannon, bodhisattva сострадания: культ милосердия на этом склоне появился раньше, чем государственная власть.</p>
         <p>Архитектурная слава пришла позже: нынешние постройки — реконструкция 1633 года, заказанная сёгуном Tokugawa Iemitsu после очередного из десятков пожаров. Для Japan это не подделка: как и в Sensō-ji, важна непрерывность места, а не возраст досок.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Смотровая площадка со стороны Otowa Waterfall — одно из немногих мест, откуда видно саму конструкцию сцены снизу. Большинство туристов фотографируют вид со сцены и уходят, ни разу не взглянув на инженерию, которая её держит.</div>
+    <div class="note"><span class="note-tag">Обрати внимание</span>Смотровая площадка со стороны Otowa Waterfall — одно из немногих мест, откуда видно саму конструкцию сцены снизу. Большинство туристов фотографируют вид со сцены и уходят, ни разу не взглянув на инженерию, которая её держит.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -701,7 +927,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-sannenzaka">Sannenzaka и Ninenzaka — лестница со страховкой в виде тыквы</h2>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title -minor" id="loc-sannenzaka">Sannenzaka</h2>
+    <span class="place-caption">И соседняя Ninenzaka — лестница со страховкой в виде тыквы</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Sannenzaka</span></div></figure>
       <div>
@@ -709,10 +937,8 @@ body.site-nav-locked { overflow: hidden; }
         <p>Соседняя Ninenzaka несёт зеркальную, чуть менее суровую версию легенды: упал здесь — жди несчастья два года, а не три.</p>
       </div>
     </div>
-    <div class="notes-grid">
-      <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Обе улицы застроены в основном в период Taishō, но выглядят гораздо старше — брусчатку сохранили, а линии электропередач специально убрали под землю.</div>
-      <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Nama Yatsuhashi</strong> — свежий мочи с начинкой, продают именно на этом отрезке в десятках вариаций.</div>
-    </div>
+    <p><span class="inline-label">Совет</span> Обе улицы застроены в основном в период Taishō, но выглядят гораздо старше — брусчатку сохранили, а линии электропередач специально убрали под землю.</p>
+    <p><span class="inline-label">Попробуй</span> <strong>Nama Yatsuhashi</strong> — свежий мочи с начинкой, продают именно на этом отрезке в десятках вариаций, и это совсем не то же самое, что коробка из аэропорта.</p>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -723,25 +949,32 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kodaiji">Kōdai-ji и Bamboo Forest — храм, построенный вдовой</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-kodaiji">Kōdai-ji</h2>
+    <span class="place-caption">И Bamboo Forest — храм, построенный вдовой</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Основан в 1606 году Nene (Kita-no-Mandokoro) — вдовой Toyotomi Hideyoshi, человека, который в 1590 году впервые за полтора века объединил Japan</li>
         <li>Строительство финансировал Tokugawa Ieyasu — соперник и преемник Hideyoshi по власти, что само по себе исторический жест примирения</li>
         <li>Два чайных домика на территории спроектированы Sen no Rikyū — тем самым мастером, чьё учение о неповторимости каждой встречи легло в основу идеи ichigo ichie</li>
         <li>Bamboo grove здесь заметно тише знаменитого в Arashiyama — та же атмосфера, но без толп</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kōdai-ji Bamboo Forest</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Kōdai-ji Bamboo Forest</span></div></figure>
       <div>
         <p>Hideyoshi поднялся из крестьян до фактического правителя Japan — редчайший случай социальной мобильности в средневековой Japan. Nene пережила его на 26 лет и провела остаток жизни, финансируя этот храм и молясь за его душу; сама она тоже здесь похоронена, в мавзолее Otama-ya, украшенном лаком с золотой и серебряной пудрой.</p>
       </div>
     </div>
     <p>Обычно Kōdai-ji читают просто как жест вдовьей скорби. Но время постройки говорит о другом. Hideyoshi умер в 1598 году, а уже в 1600-м battle at Sekigahara решила исход борьбы за власть в пользу Tokugawa Ieyasu — того самого человека, что оплатил строительство этого храма. К 1606 году, когда Kōdai-ji был готов, клан Toyotomi доживал последние годы: в 1615-м Tokugawa возьмёт Osaka Castle штурмом и уничтожит род Hideyoshi окончательно.</p>
-    <p>Так что Kōdai-ji — не только памятник мужу. Это памятник человеку, который выиграл почти всё, кроме главного: он так и не смог превратить личную власть в устойчивую династию. Строгий сад камней вокруг храма можно читать как попытку навести порядок именно в тот момент, когда мир Hideyoshi уже разваливался на глазах у его вдовы.</p>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Внутренние стены мавзолея Otama-ya украшены техникой <strong>Kōdai-ji maki-e</strong> — золотым и серебряным напылением по лаку, ставшим фирменным стилем именно этого храма. А бамбук за мавзолеем — не декоративный фон для фото: это резкий переход от камня и архитектуры к живому вертикальному лесу, расположенный так, будто контраст задуман сознательно.</div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Kōdai-ji — не только памятник мужу. Это памятник человеку, который выиграл почти всё, кроме главного: он так и не смог превратить личную власть в устойчивую династию. Строгий сад камней вокруг храма можно читать как попытку навести порядок именно в тот момент, когда мир <strong>Hideyoshi</strong> уже разваливался на глазах у его вдовы.</p>
+    </div>
+
+    <div class="note"><span class="note-tag">Обрати внимание</span>Внутренние стены мавзолея Otama-ya украшены техникой <strong>Kōdai-ji maki-e</strong> — золотым и серебряным напылением по лаку, ставшим фирменным стилем именно этого храма. А бамбук за мавзолеем — не декоративный фон для фото: это резкий переход от камня и архитектуры к живому вертикальному лесу, расположенный так, будто контраст задуман сознательно.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -754,15 +987,13 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-maruyama">Maruyama Park — старейший парк Kyoto</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Maruyama Park</span></div></figure>
-      <div>
-        <p>Park открылся в 1886 году на земле, когда-то принадлежавшей Yasaka Shrine. Meiji-правительство национализировало территорию и разбило здесь городской парк — почти буквальное повторение истории Asakusa Shrine, где та же эпоха тем же жестом отделяла синто от буддизма и от частных владений.</p>
-        <p>В центре — знаменитая плакучая вишня Gion shidare-zakura. Первое дерево простояло около 220 лет и погибло в 1947 году; нынешнее — уже второе поколение, выращенное из семян, собранных ещё при жизни оригинала. Дерево, которым любуются сегодня, физически моложе многих туристов, но воспринимается как несомненный символ места — тот же принцип непрерывности, что и в Kiyomizu-dera.</p>
-      </div>
-    </div>
-    <div class="note"><span class="note-tag tag-attention">Заметка</span><br>Рядом стоят статуи Sakamoto Ryōma и Nakaoka Shintarō — самураев-активистов конца сёгуната, чья гибель в 1867 году ускорила падение старого режима и приход Meiji Restoration.</div>
+    <span class="place-kicker">Парк</span>
+    <h2 class="section-title" id="loc-maruyama">Maruyama Park</h2>
+    <span class="place-caption">Старейший парк Kyoto</span>
+    <div class="photo-break"><span class="mark">円</span><span class="cap">Maruyama Park · Gion shidare-zakura</span></div>
+    <p>Park открылся в 1886 году на земле, когда-то принадлежавшей Yasaka Shrine. Meiji-правительство национализировало территорию и разбило здесь городской парк — почти буквальное повторение истории Asakusa Shrine, где та же эпоха тем же жестом отделяла синто от буддизма и от частных владений.</p>
+    <p>В центре — знаменитая плакучая вишня Gion shidare-zakura. Первое дерево простояло около 220 лет и погибло в 1947 году; нынешнее — уже второе поколение, выращенное из семян, собранных ещё при жизни оригинала. Дерево, которым любуются сегодня, физически моложе многих туристов, но воспринимается как несомненный символ места — тот же принцип непрерывности, что и в Kiyomizu-dera.</p>
+    <div class="note"><span class="note-tag">Заметка</span>Рядом стоят статуи Sakamoto Ryōma и Nakaoka Shintarō — самураев-активистов конца сёгуната, чья гибель в 1867 году ускорила падение старого режима и приход Meiji Restoration.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -774,7 +1005,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-mouriya">Kobe Beef Steak Mouriya Gion — ужин</h2>
+    <span class="place-kicker">Ужин</span>
+    <h2 class="section-title -minor" id="loc-mouriya">Mouriya Gion</h2>
+    <span class="place-caption">Kobe beef teppanyaki на ужин</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Mouriya Gion</span></div></figure>
       <div>
@@ -791,28 +1024,32 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-pontocho">Pontocho Alley — переулок шириной в вытянутые руки</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title" id="loc-pontocho">Pontocho Alley</h2>
+    <span class="place-caption">Переулок шириной в вытянутые руки</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Официальный символ квартала — птица chidori (галстучник), изображена на красных фонарях у входа</li>
         <li>Летом рестораны выставляют деревянные террасы kawayuka прямо над Kamo River — традиция с 1920-х годов</li>
         <li>На противоположном берегу реки — Gion, второй геиша-квартал Kyoto; исторически оба квартала конкурировали за одних и тех же гостей</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Pontocho Alley</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Pontocho Alley</span></div></figure>
       <div>
         <p>Pontocho возник в 1670 году не как спланированный квартал, а как нанос земли после укрепления берегов Kamo River — купцы застроили его почти сразу. Ширина переулка объясняется прозаично: налог считался по ширине фасада, а не по глубине здания, поэтому дома строили узкими и очень длинными. К 1710 году Pontocho уже был официальным hanamachi — одним из пяти районов, где принимают geiko и maiko.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Вечером здесь можно случайно встретить maiko, идущую между чайными домами — из уважения к её работе фотографировать в упор и загораживать дорогу не стоит.</div>
+    <div class="note"><span class="note-tag">Обрати внимание</span>Вечером здесь можно случайно встретить maiko, идущую между чайными домами — из уважения к её работе фотографировать в упор и загораживать дорогу не стоит.</div>
 
     <hr>
 
-    <h2 class="section-title" id="loc-beatlemomo">Beatle Momo — бар одной пластинки за раз</h2>
+    <span class="place-kicker">Бар</span>
+    <h2 class="section-title -minor" id="loc-beatlemomo">Beatle Momo</h2>
+    <span class="place-caption">Бар одной пластинки за раз</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Beatle Momo</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Beatle Momo</span></div></figure>
       <div>
         <p>Record Sakaba Beatle Momo — не тематический бар «Битлз», а винтажный бар с настоящим виниловым проигрывателем и коллекцией из тысяч пластинок, от 1950-х до наших дней. Момо, хозяин, ставит именно то, что просят гости — музыка здесь работает как язык, не требующий перевода.</p>
       </div>
@@ -1000,19 +1237,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -1028,13 +1265,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 
@@ -1100,6 +1337,10 @@ window.SITE_DATA = {
           <input id="siteNavSearch" type="text" placeholder="Поиск по сайту…" autocomplete="off">
         </div>
         <p class="site-nav-empty" id="siteNavEmpty">Ничего не найдено.</p>
+
+        <div class="site-nav-group" data-group="home">
+          <ul><li><a href="index.html">На главную</a></li></ul>
+        </div>
 
         <div class="site-nav-group" data-group="days">
           <div class="site-nav-label">Дни поездки</div>

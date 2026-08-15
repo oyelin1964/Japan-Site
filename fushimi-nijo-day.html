@@ -7,7 +7,7 @@
 <title>Fushimi & Nijō Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,58 +94,71 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -266,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -312,6 +381,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +452,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -383,24 +508,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +635,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +697,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,23 +787,33 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">狐</div>
   <div class="hero-content">
-    <div class="eyebrow">Fushimi · Gion · Day Plan</div>
+    <div class="eyebrow">Fushimi · Gion · Kyoto · Day Plan</div>
     <h1>Fushimi & Nijō Day</h1>
-    <div class="sub">Fushimi Inari Taisha, Nishiki Market, Nijō Castle и Gion — гора из десяти тысяч ворот, рынок без моря и замок, переживший рождение и конец сёгуната</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">人の一生は重荷を負うて遠き道を行くが如し、急ぐべからず</span>
+    <blockquote>Жизнь человека — как нести тяжёлый груз по длинной дороге. Спешить не стоит</blockquote>
+    <span class="quote-author">Приписывается Tokugawa Ieyasu как его предсмертное завещание</span>
+    <span class="quote-source">На деле — подделка эпохи Meiji, выданная за слова сёгуна; замок, где сёгунат Ieyasu начался и закончился, — сегодня в маршруте</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>Fushimi Inari</strong> — выходи пораньше, около 7:00–7:30: дальше на маршруте прибавляются толпы и жара, полный подъём и спуск занимают 2–3 часа</li>
       <li><strong>Vermillion Cafe</strong> — закрывается рано, около 15:00–15:30, кухня и того раньше; заходи сразу после спуска с горы, а не под вечер</li>
@@ -631,7 +821,8 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Nijō Castle</strong> — последний вход в 16:00, дворец Ninomaru закрывается тогда же; закладывай на дневную часть, не на вечер</li>
       <li><strong>IC-карта</strong> — нужна весь день: JR Nara Line, метро, автобусы и Keihan Line; немного наличных пригодится в Nishiki Market и Gion Tsujiri</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -648,33 +839,32 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Утро — самый плотный отрезок: подниматься на Fushimi Inari разумнее пораньше, а сразу после спуска — идти в Vermillion, а не откладывать кофе на потом: кухня кафе закрывается ещё раньше, чем основной зал.</p>
-    <p>Nijō Castle стоит закладывать на дневную часть маршрута, не на вечер — последний вход туда в 16:00. Gion Tsujiri, наоборот, хорошо ложится под конец дня: чайный зал на втором этаже работает допоздна, и это логичная точка для десерта, а не отдельный поход.</p>
-    <div class="day-flags">
-      <div class="day-flags-label">Между точками</div>
-      <ul>
-        <li><strong>Fushimi Inari + Vermillion → Nishiki Market</strong> — около 20 минут (JR + метро)</li>
-        <li><strong>Nishiki Market → Nijō Castle</strong> — 15–20 минут на метро</li>
-        <li><strong>Nijō Castle → Gion Tsujiri</strong> — около 30 минут</li>
-        <li><strong>Gion → отель</strong> — 15–20 минут пешком вдоль Kamo River, если день не слишком жаркий</li>
-      </ul>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Утро — самый плотный отрезок: подниматься на Fushimi Inari разумнее пораньше, а сразу после спуска — в Vermillion, а не откладывать кофе на потом: кухня кафе закрывается ещё раньше, чем основной зал. Дальше — около 20 минут на JR и метро до Nishiki Market, оттуда ещё 15–20 минут на метро до Nijō Castle.</p>
+      <div class="blockquote">А скрипучий «соловьиный пол» замка — не хитрая ловушка против ниндзя, как гласит легенда, а просто побочный эффект конструкции.</div>
+      <p>Nijō Castle стоит закладывать на дневную часть маршрута, не на вечер — последний вход туда в 16:00. Gion Tsujiri, наоборот, хорошо ложится под конец дня, минут тридцать от замка: чайный зал на втором этаже работает допоздна, и это логичная точка для десерта, а не отдельный поход. От Gion до отеля — 15–20 минут пешком вдоль Kamo River, если день не слишком жаркий.</p>
     </div>
-  </section>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-fushimiinari">Fushimi Inari Taisha</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Святилище</span>
+    <h2 class="section-title -major" id="loc-fushimiinari">Fushimi Inari Taisha</h2>
+    <span class="place-caption">Гора из десяти тысяч ворот, которая никогда не бывает одного возраста</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Главное святилище всех ~30 000 храмов Inari в Японии, основанное в 711 году — но почти все ворота torii, которые ты увидишь, моложе тебя самой</li>
         <li>Это не аттракцион, а живой реестр благодарностей: около десяти тысяч ворот, и на обороте каждой — имя того, кто её подарил</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Fushimi Inari</span></div></figure>
       <div>
@@ -700,9 +890,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-vermillion">Vermillion Cafe</h2>
+    <span class="place-kicker">Кофе</span>
+    <h2 class="section-title -minor" id="loc-vermillion">Vermillion Cafe</h2>
+    <span class="place-caption">Флэт-уайт у подножия горы тысяч богов</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Vermillion</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Vermillion</span></div></figure>
       <div>
         <p>Семья, которая держит кафе, начинала не с эспрессо-бара, а со столетнего чайного домика <strong>Yakurikitei</strong> на самой вершине горы — им управляют родители нынешнего владельца, Shigeo Kimura. Сам Shigeo восемнадцать лет прожил в Мельбурне и, вернувшись, привёз с собой то, чего в те годы у подножия Fushimi Inari не было вовсе — эспрессо-машину и культуру австралийской кофейни.</p>
         <p>Получилось редкое сочетание: место, укоренённое в семейной истории горы, но говорящее на совершенно интернациональном языке — кофе здесь варят так же серьёзно, как в лучших кофейнях Мельбурна.</p>
@@ -725,7 +917,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
+    <span class="place-kicker">Рынок</span>
     <h2 class="section-title" id="loc-nishiki">Nishiki Market</h2>
+    <span class="place-caption">Рыбный рынок в городе без моря</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Nishiki Market</span></div></figure>
       <div>
@@ -751,20 +945,27 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-nijocastle">Nijō Castle</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Замок</span>
+    <h2 class="section-title -major" id="loc-nijocastle">Nijō Castle</h2>
+    <span class="place-caption">Замок, который помнит и рождение, и конец сёгуната</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Замок, в котором сёгунат Tokugawa родился в 1603 году и в котором же формально прекратил существование в 1867-м — редкий случай, когда одно здание помнит и начало, и конец целой эпохи</li>
         <li>Знаменитый «соловьиный пол» — не хитрая ловушка против ниндзя, как гласит расхожая легенда, а побочный эффект самой конструкции пола</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Nijō Castle</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Nijō Castle</span></div></figure>
       <div>
-        <p>Замок построен в 1601–1603 годах по приказу <strong>Tokugawa Ieyasu</strong> — не как крепость, а как демонстрация силы: официальная резиденция сёгуна в императорском городе, куда он приезжал производить впечатление на двор, а не обороняться. Коридоры дворца Ninomaru скрипят при каждом шаге — знаменитый uguisubari, «соловьиный пол». Популярная версия гласит, что скрип специально задумали как сигнализацию против шпионов и ассасинов; на деле же это просто эффект того, как деревянные скобы трутся о гвозди в половицах — заметный, но не спроектированный намеренно результат конструкции.</p>
+        <p>Замок построен в 1601–1603 годах по приказу <strong>Tokugawa Ieyasu</strong> — не как крепость, а как демонстрация силы: официальная резиденция сёгуна в императорском городе, куда он приезжал производить впечатление на двор, а не обороняться. Коридоры дворца Ninomaru скрипят при каждом шаге — знаменитый uguisubari, «соловьиный пол».</p>
         <p>Спустя 264 года, в 1867-м, именно в зале для приёмов Ninomaru пятнадцатый и последний сёгун <strong>Tokugawa Yoshinobu</strong> объявил о возврате власти императору — акт, известный как Taisei Hōkan. Так замок, построенный ради демонстрации силы клана Tokugawa, стал местом, где эта сила была официально сложена.</p>
       </div>
+    </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Скрипучий «соловьиный пол» Ninomaru обычно объясняют как систему сигнализации против шпионов и убийц — специально придуманную ловушку. На деле это просто эффект того, как деревянные скобы трутся о гвозди в половицах: заметный побочный результат конструкции, а не спроектированная защита.</p>
     </div>
 
     <div class="notes-grid">
@@ -784,9 +985,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-giontsujiri">Gion Tsujiri Main Store</h2>
+    <span class="place-kicker">Чай</span>
+    <h2 class="section-title -minor" id="loc-giontsujiri">Gion Tsujiri Main Store</h2>
+    <span class="place-caption">Жернова мелют матчу тем же способом полтора века</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Gion Tsujiri</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Gion Tsujiri</span></div></figure>
       <div>
         <p>История началась в 1860 году в деревне Uji, когда Tsuji Riemon открыл лавку по продаже местного чая — того самого <strong>Uji tea</strong>, который до сих пор считается эталоном японской чайной культуры. Название «Gion Tsujiri» магазин получил только в 1948 году, когда третье поколение семьи открыло флагманский магазин в квартале Gion.</p>
         <p>Каменные жернова здесь до сих пор мелют матчу тем же неспешным способом, что и полтора века назад — на выходе получается около 40 граммов порошка в час. Это не маркетинговый жест: более быстрый помол нагревает лист и разрушает и цвет, и аромат матчи.</p>
@@ -811,10 +1014,8 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t4">
-    <h2 class="section-title">Food & Coffee</h2>
-    <p>Vermillion — лучшая точка для завтрака или раннего перекуса: маленькое меню, но сильный кофе и веганские опции вроде гранолы и хумуса. На Nishiki Market логичнее устроить обед — пробовать понемногу у разных прилавков, не садясь за стол. В Gion Tsujiri вечером хорошо зайти именно за десертом — matcha soft serve или парфе в чайном зале Saryō Tsujiri на втором этаже.</p>
-  </section>
+  <h2 class="section-title" id="t4">Food & Coffee</h2>
+  <p>Vermillion — лучшая точка для завтрака или раннего перекуса: маленькое меню, но сильный кофе и веганские опции вроде гранолы и хумуса. На Nishiki Market логичнее устроить обед — пробовать понемногу у разных прилавков, не садясь за стол. В Gion Tsujiri вечером хорошо зайти именно за десертом — matcha soft serve или парфе в чайном зале Saryō Tsujiri на втором этаже.</p>
 
   <hr>
 
@@ -981,19 +1182,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -1009,13 +1210,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 

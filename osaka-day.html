@@ -333,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -1251,19 +1253,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -1279,13 +1281,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 

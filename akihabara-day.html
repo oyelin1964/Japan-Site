@@ -7,7 +7,7 @@
 <title>Kanda & Akihabara Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,58 +94,71 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -266,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -312,6 +381,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +452,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -383,24 +508,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +635,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +697,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,32 +787,33 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">天は人の上に人を造らず、人の下に人を造らずと云えり</span>
-    Небо не создаёт человека выше человека и не создаёт человека ниже человека
-    <span class="quote-author">Фукудзава Юкити, «Призыв к учению», 1872 год</span>
-    <span class="quote-note">Самая знаменитая фраза японского Просвещения — и прямая причина, по которой в Kanda выросли университеты, а вокруг них — сотни книжных лавок</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">神田</div>
   <div class="hero-content">
     <div class="eyebrow">Chiyoda · Kōtō · Day Plan</div>
     <h1>Kanda & Akihabara Day</h1>
-    <div class="sub">Книжный квартал Jimbocho — и Akihabara, куда сегодня у каждого свой маршрут</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">天は人の上に人を造らず、人の下に人を造らずと云えり</span>
+    <blockquote>Небо не создаёт человека выше человека и не создаёт человека ниже человека</blockquote>
+    <span class="quote-author">Фукудзава Юкити, «Призыв к учению», 1872 год</span>
+    <span class="quote-source">Самая знаменитая фраза японского Просвещения — и прямая причина, по которой в Kanda выросли университеты, а вокруг них — сотни книжных лавок</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>День с развилкой</strong> — утро вместе в Kanda/Jimbocho, дальше Kris идёт по всем магазинам Akihabara сам, вы с Sandy — в своём темпе</li>
       <li><strong>Kanda Myojin — убрана из маршрута</strong>: святилище стоит на холме, к нему ведут ступени и неровные дорожки, по отзывам посетителей — не самый удобный подъём</li>
@@ -640,13 +821,15 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Akihabara — не общая часть дня</strong>, а скорее пункт Kris; для вас с Sandy ниже — более лёгкий вариант той же территории</li>
       <li><strong>Вечер — два варианта на выбор</strong>, оба ниже: Ameyoko (просто и рядом) или Yanaka (отдельная небольшая прогулка); решаете на месте, по самочувствию</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
     <button class="nav-place-btn" data-target="loc-jimbocho">Jimbocho</button>
     <button class="nav-place-btn" data-target="loc-akihabara">Akihabara</button>
-    <button class="nav-place-btn" data-target="loc-evening">Вечер: Ameyoko / Yanaka</button>
+    <button class="nav-place-btn" data-target="loc-ameyoko">Ameyoko</button>
+    <button class="nav-place-btn" data-target="loc-yanaka">Yanaka</button>
   </nav>
 
   <div class="connections-jump">
@@ -655,27 +838,35 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Единственная общая часть дня — Jimbocho, и это скорее плюс, чем ограничение: квартал создан для медленного блуждания без цели, а не для галочек в списке. После него маршрут естественно расходится — Kris уходит в Akihabara на несколько часов вглубь, а вам с Sandy нет смысла повторять его темп; лучше выбрать свой кусок того же района или уйти в сторону раньше.</p>
-    <p>Вечером логично встретиться уже не в Akihabara, а рядом — оба варианта ниже в одной-двух остановках. Выбор зависит от того, сколько осталось сил: Ameyoko — это просто ужин с уличной атмосферой, без обязательной программы; Yanaka — уже небольшая самостоятельная прогулка со своим сюжетом.</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Единственная общая часть дня — Jimbocho, и это скорее плюс, чем ограничение: квартал создан для медленного блуждания без цели, а не для галочек в списке. После него маршрут естественно расходится — Kris уходит в Akihabara на несколько часов вглубь, а вам с Sandy нет смысла повторять его темп; лучше выбрать свой кусок того же района или уйти в сторону раньше.</p>
+      <div class="blockquote">И сам квартал Akihabara дважды полностью сменил профессию — от радиодеталей до аниме и манги, — не изменившись как место ни разу.</div>
+      <p>Вечером логично встретиться уже не в Akihabara, а рядом — оба варианта ниже в одной-двух остановках. Выбор зависит от того, сколько осталось сил: Ameyoko — это просто ужин с уличной атмосферой, без обязательной программы; Yanaka — уже небольшая самостоятельная прогулка со своим сюжетом.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-jimbocho">Jimbocho — квартал, который построило Просвещение</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Квартал</span>
+    <h2 class="section-title -major" id="loc-jimbocho">Jimbocho</h2>
+    <span class="place-caption">Квартал, который построило Просвещение</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Крупнейшее в мире скопление букинистических магазинов — около 130–150 лавок, треть всех подержанных книготорговцев Japan на паре улиц вокруг перекрёстка Yasukuni-dori и Hakusan-dori</li>
         <li>Квартал вырос не стихийно, а вслед за университетами: после Meiji Restoration здесь одна за другой открывались юридические и гуманитарные школы, включая будущий Tokyo University — спрос студентов на книги создал предложение</li>
         <li>Здесь же в 1913 году, после квартального пожара, Shigeo Iwanami открыл маленькую лавку, которая стала издательством Iwanami Shoten — одним из главных издателей современной японской мысли</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Jimbocho</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Jimbocho</span></div></figure>
       <div>
         <p>Название района восходит к самураю Nagaharu Jimbo, чья резиденция стояла здесь в конце XVII века — но настоящую судьбу кварталу задал не он, а взрыв образования эпохи Meiji, тот самый, о котором писал Fukuzawa Yukichi в цитате наверху страницы. Идея, что учиться может и должен каждый, а не только самурайское сословие, требовала книг в невиданных прежде масштабах — и Jimbocho стал их естественным складом.</p>
         <p>Сегодня лавки специализируются до предела: есть магазин только про кошек, только про альпинизм, только старые географические карты. К северу, в сторону Ochanomizu, та же логика привела к музыкальному кварталу — сначала книги для студентов, потом ноты, потом сами инструменты; сейчас там сосредоточены магазины гитар и струнных, от винтажных до совсем новых.</p>
@@ -686,22 +877,30 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-akihabara">Akihabara — квартал, который сегодня не совсем ваш</h2>
+    <span class="place-kicker">Квартал</span>
+    <h2 class="section-title -major" id="loc-akihabara">Akihabara</h2>
+    <span class="place-caption">Квартал, который сегодня не совсем ваш</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Akihabara</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Akihabara</span></div></figure>
       <div>
         <p>После войны здесь был чёрный рынок радиодеталей — солдаты и инженеры распродавали списанную технику прямо с земли у станции. К 1980-м это превратилось в крупнейший в Japan квартал бытовой электроники, а к 2000-м, когда электронику подвинул смартфон, торговцы переориентировались на то, что осталось растущим рынком, — аниме, мангу, видеоигры и всё, что вокруг них выросло: от специализированных магазинов до maid-кафе.</p>
         <p>Это тот редкий пункт поездки, где Kris — не сопровождающий, а тот, кто ведёт: пройти все профильные магазины Akihabara вдумчиво — само по себе полноценный день, и втискивать это в общий темп смысла нет.</p>
       </div>
     </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Квартал не выжил, а дважды полностью сменил профессию — от списанных радиодеталей до бытовой электроники, а затем до аниме и манги, — оставаясь при этом на одном и том же пятачке земли у одной и той же станции. Не место держится за товар, а товар меняется вокруг места.</p>
+    </div>
+
     <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Если хочется увидеть район, не тратя на него полдня, — 15–20 минут неспешным шагом по главной Chuo-dori, с её вертикальными неоновыми вывесками, дают почти всё ощущение места без глубокого захода в отдельные магазины.</div>
 
     <hr>
 
-    <h2 class="section-title" id="loc-evening">Вечер — два варианта, выбор на месте</h2>
-    <p>Оба варианта — одна станция от Akihabara, оба не требуют брони или расписания. Разница только в том, сколько сил осталось к вечеру.</p>
-
-    <h4>Ameyoko (Ueno) — если сил на программу уже нет</h4>
+    <span class="place-kicker">Вечер</span>
+    <h2 class="section-title -minor" id="loc-ameyoko">Ameyoko</h2>
+    <span class="place-caption">Просто ужин с уличной атмосферой, без программы</span>
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Оба вечерних варианта — одна станция от Akihabara, оба не требуют брони или расписания. Разница только в том, сколько сил осталось к вечеру: этот — если программы уже не хочется.</div>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Ameyoko</span></div></figure>
       <div>
@@ -709,17 +908,22 @@ body.site-nav-locked { overflow: hidden; }
       </div>
     </div>
 
-    <h4>Yanaka — если ещё есть запал на небольшую прогулку</h4>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <hr>
+
+    <span class="place-kicker">Вечер</span>
+    <h2 class="section-title -major" id="loc-yanaka">Yanaka</h2>
+    <span class="place-caption">Район, которого не коснулись ни землетрясение, ни бомбёжки</span>
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Второй вечерний вариант — если ещё есть запал на небольшую самостоятельную прогулку со своим сюжетом, не просто на ужин.</div>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Один из немногих районов Tokyo, не тронутых ни землетрясением 1923 года, ни бомбардировками 1945-го — деревянная застройка довоенного Tokyo здесь не реконструкция, а оригинал</li>
         <li>Yanaka Ginza — шотэнгай длиной 170 метров, лавки местами торгуют больше века подряд; на входе со стороны станции Nippori — лестница Yuyake Dandan, «лестница заката», названная так за вид, который с неё открывается ближе к вечеру</li>
         <li>На кладбище Yanaka Reien похоронен Tokugawa Yoshinobu — последний сёгун, тот самый, что в 1867 году в Nijō Castle в Kyoto объявил Taisei Hōkan и добровольно передал власть императору</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Yanaka</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Yanaka</span></div></figure>
       <div>
         <p>Логичный маршрут — от станции Nippori через кладбище (это не мрачное место, а скорее тихий сад с соснами и — по вечерам — множеством уличных кошек, живущих здесь свободно) к лестнице Yuyake Dandan, и вниз по ней прямо в Yanaka Ginza за уличной едой: менчи-кацу, якитори, мороженое с дыней.</p>
       </div>
@@ -733,12 +937,11 @@ body.site-nav-locked { overflow: hidden; }
 
   <h2 class="section-title" id="connections">Connections</h2>
   <p>Fukuzawa Yukichi, чья фраза открывает сегодняшний день, писал в эпоху, когда Japan срочно училась у Запада после насильственного открытия страны «чёрными кораблями» коммодора Perry — тот же исторический разлом, который вчера привёл к переделке форта Odaiba в развлекательный квартал. Разница в том, что Perry открыл Japan силой, а университеты вокруг Jimbocho — это то, что страна сделала с этой открытостью по собственной инициативе, превратив внешнее давление в внутренний проект самообразования.</p>
-  <p>А смена специализации Akihabara — с радиодеталей на аниме — структурно похожа на то, что вы видели в Kanazawa с золотой фольгой: ремесло выживает не потому, что не меняется, а потому что успевает поменять предмет, сохранив квартал и навык адаптации.</p>
+  <p>А смена специализации Akihabara — с радиодеталей на аниме — структурно похожа на то, что ты видела в Kanazawa с золотой фольгой: ремесло выживает не потому, что не меняется, а потому что успевает поменять предмет, сохранив квартал и навык адаптации.</p>
 
   <p class="footnote">Kanda & Akihabara Day · Japan 2026 · план дня, собранный вручную</p>
 </main>
 
-<button class="back-btn" id="backBtn">↑ Наверх</button>
 <button class="back-btn" id="backBtn">↑ Наверх</button>
 
 <script>
@@ -895,19 +1098,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -923,13 +1126,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 

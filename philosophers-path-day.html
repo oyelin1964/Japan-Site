@@ -7,7 +7,7 @@
 <title>Philosopher's Path Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,10 +94,72 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
+  }
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
+    color: var(--ink);
+    line-height: 1.18;
+  }
+  .opening-quote .quote-author {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+  }
+  .opening-quote .quote-source {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
   .overview-list li {
@@ -115,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -196,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -204,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -217,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -263,6 +381,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -294,6 +452,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -334,24 +508,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -445,6 +635,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -469,6 +697,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -558,31 +787,42 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">哲</div>
   <div class="hero-content">
-    <div class="eyebrow">North Higashiyama · Day Plan</div>
+    <div class="eyebrow">North Higashiyama · Kyoto · Day Plan</div>
     <h1>Philosopher's Path Day</h1>
-    <div class="sub">Nanzen-ji, Eikan-dō и Ginkaku-ji — день переезда Tokyo → Kyoto, который заканчивается прогулкой вдоль канала техника, ставшего философской тропой</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">人は人 吾はわれ也 とにかくに 吾行く道を 吾は行くなり</span>
+    <blockquote>Люди — это люди, я — это я. Что бы ни случилось, я иду своей дорогой</blockquote>
+    <span class="quote-author">Нисида Китаро, философ, в честь которого названа тропа</span>
+    <span class="quote-source">Танка высечена на камне у тропы, рядом с Hōnen-in — написана в новогодний день 1934 года, когда автору было 64</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">5 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
       <li><strong>День переезда</strong> — выезд из Centurion Hotel Akasaka до 11:00 (это дедлайн, не требование: чем раньше выйдете, тем спокойнее день в Kyoto)</li>
-      <li><strong>Shinkansen Nozomi Tokyo → Kyoto</strong> — бронь мест, детали и точное время открытия окна см. в <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Shinkansen Nozomi Tokyo → Kyoto</strong> — бронь мест, детали и точное время открытия окна — в <a href="trip-logistics.html">Logistics</a></li>
       <li><strong>Kyoto Century Hotel</strong> — номер с 15:00, но багаж принимают раньше; 5 минут пешком от Kyoto Station</li>
       <li><strong>Eikan-dō</strong> — последний вход в 16:00, самый строгий дедлайн дня — если время поджимает, идите сюда первым делом</li>
       <li><strong>Ginkaku-ji</strong> — последний вход в 16:45, самый мягкий дедлайн — логично оставить напоследок</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
@@ -599,25 +839,34 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Из Kyoto Station сюда ведут два разных маршрута — медленный автобус прямо до Ginkaku-ji (северный конец тропы) и метро до станции Keage (южный конец, рядом с Nanzen-ji) с пересадкой Karasuma → Tozai, около 20 минут. Разница в скорости и определяет порядок: стартовать логично с южного конца через метро, а не тащиться автобусом на север.</p>
-    <p>Дальше маршрут идёт от самого строгого дедлайна к самому мягкому: Nanzen-ji (бесплатная территория, без спешки) → Eikan-dō (вход до 16:00 — закрываем этот вопрос первым) → Hōnen-in и Ōtoyo Shrine (без ограничений по времени, можно задержаться) → Ginkaku-ji в конце (вход до 16:45). Если выехать из Tokyo пораньше, всё это можно пройти в куда более спокойном темпе — порядок работает и как страховка на случай опозданий, и просто как логичный маршрут в целом.</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Из Kyoto Station сюда ведут два разных маршрута — медленный автобус прямо до Ginkaku-ji (северный конец тропы) и метро до станции Keage (южный конец, рядом с Nanzen-ji) с пересадкой Karasuma → Tozai, около 20 минут. Разница в скорости и определяет порядок: стартовать логично с южного конца через метро, а не тащиться автобусом на север.</p>
+      <p>Дальше маршрут идёт от самого строгого дедлайна к самому мягкому: Nanzen-ji (бесплатная территория, без спешки) → Eikan-dō (вход до 16:00 — закрываем этот вопрос первым) → Hōnen-in и Ōtoyo Shrine (без ограничений по времени, можно задержаться) → Ginkaku-ji в конце (вход до 16:45).</p>
+      <div class="blockquote">А «серебряный» павильон в конце тропы, которым всё завершится, — на самом деле никогда не видел ни грамма серебра, ни разу за 500 с лишним лет.</div>
+      <p>Если выехать из Tokyo пораньше, всё это можно пройти в куда более спокойном темпе — порядок работает и как страховка на случай опозданий, и просто как логичный маршрут в целом.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-nanzenji">Nanzen-ji — храм с римским акведуком внутри</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-nanzenji">Nanzen-ji</h2>
+    <span class="place-caption">Римский акведук внутри дзен-монастыря XIII века</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Основан в 1291 году на месте виллы императора Kameyama, который сам передал резиденцию под дзен-храм — редкий случай, когда монастырь начинается с отречения императора, а не с указа сёгуна</li>
-        <li>Огромные ворота Sanmon (1628) — сцена знаменитой пьесы кабуки, где легендарный разбойник Ishikawa Goemon произносит «какой великолепный вид!», не подозревая, что его вот-вот схватят и сварят заживо</li>
+        <li>Огромные ворота Sanmon (1628) — сцена знаменитой пьесы кабуки, где разбойник Ishikawa Goemon произносит «какой великолепный вид!», не подозревая, что его вот-вот схватят и сварят заживо</li>
         <li>Через территорию храма в 1890 году провели кирпичный акведук Suirokaku — часть канала Lake Biwa, инженерного проекта эпохи Meiji, который спроектировал 20-с-небольшим-летний инженер Tanabe Sakurō</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Nanzen-ji</span></div></figure>
       <div>
@@ -636,9 +885,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-eikando">Eikan-dō — храм с Буддой, который обернулся</h2>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -minor" id="loc-eikando">Eikan-dō</h2>
+    <span class="place-caption">Будда, который обернулся и поторопил монаха</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Eikan-dō</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Eikan-dō</span></div></figure>
       <div>
         <p>Основан в 853 году как школа эзотерического буддизма Shingon, но известен по имени монаха XI века Eikan, который однажды во время ритуального обхода зала увидел, как статуя Amida Buddha сошла с пьедестала и пошла впереди него — а обернувшись через плечо, произнесла: «Eikan, ты слишком медлишь». С тех пор главный объект поклонения храма — <strong>Mikaeri Amida</strong>, «обернувшийся Amida»: редчайшая иконография, где голова статуи повёрнута вбок, а не смотрит прямо на молящегося.</p>
       </div>
@@ -653,7 +904,9 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-honenin">Hōnen-in — храм за соломенными воротами</h2>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -minor" id="loc-honenin">Hōnen-in</h2>
+    <span class="place-caption">Соломенные ворота, заросшие мхом до неузнаваемости</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Hōnen-in</span></div></figure>
       <div>
@@ -672,9 +925,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-otoyoshrine">Ōtoyo Shrine — святилище, которое стерегут мыши</h2>
+    <span class="place-kicker">Святилище</span>
+    <h2 class="section-title -minor" id="loc-otoyoshrine">Ōtoyo Shrine</h2>
+    <span class="place-caption">Святилище, которое стерегут не львы, а мыши</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ōtoyo Shrine</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Ōtoyo Shrine</span></div></figure>
       <div>
         <p>Основано в 887 году как молитва об исцелении императора Uda. Почти в любом синтоистском святилище Japan вход стерегут komainu — каменные львы-собаки. Здесь у малого святилища Daikoku-sha эту роль неожиданно взяли на себя мыши: по легенде из «Кодзики», бог Ōkuninushi укрылся от лесного пожара в норе, которую прямо у него на глазах вырыла мышь, — и с тех пор мыши считаются его защитниками.</p>
         <p>На территории есть ещё пара стражей-обезьян у соседнего святилища и птицы-коршуна у святилища бога огня — но именно мыши, единственные в своём роде во всей Japan, сделали Ōtoyo местом, которое туристы находят почти случайно, свернув с тропы.</p>
@@ -691,22 +946,30 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-ginkakuji">Ginkaku-ji — серебряный павильон, который никогда не был серебряным</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Павильон</span>
+    <h2 class="section-title -major" id="loc-ginkakuji">Ginkaku-ji</h2>
+    <span class="place-caption">Серебряный павильон, который никогда не видел серебра</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Построен в 1482 году сёгуном Ashikaga Yoshimasa как загородная вилла для отставки — и, несмотря на название «Серебряный павильон», серебром никогда не покрывался, ни изначально, ни впоследствии</li>
         <li>Задуман как более скромный ответ Kinkaku-ji («Золотому павильону»), построенному его дедом Yoshimitsu — и эта скромность считается манифестом эстетики wabi-sabi задолго до того, как термин закрепился</li>
         <li>После смерти Yoshimasa вилла, согласно его завещанию, стала храмом — тем же путём, что и Kōdai-ji и другие резиденции, которые ты уже встречала в этой поездке</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Ginkaku-ji</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Ginkaku-ji</span></div></figure>
       <div>
-        <p>Почему «серебряный» без серебра — вопрос без единого ответа. По одной версии, Yoshimasa планировал покрыть павильон серебряной фольгой, но не успел — гражданская война Ōnin (1467–1477) и последующая бедность казны сорвали план. По другой, более убедительной, — название появилось только в период Edo, спустя века после постройки, просто как поэтическая пара к «золотому» соседу, без всякого реального намерения покрывать здание металлом.</p>
-        <p>Так или иначе, отсутствие серебра стало частью легенды места: лунный свет, отражающийся в песчаном саду Ginshadan перед павильоном, назвали «достаточно серебряным» заменителем — эстетика недосказанности вместо буквальной роскоши, тот самый принцип wabi-sabi, с которым ты уже встречалась в глоссарии.</p>
+        <p>По одной версии, Yoshimasa планировал покрыть павильон серебряной фольгой, но не успел — гражданская война Ōnin (1467–1477) и последующая бедность казны сорвали план. По другой, более убедительной, — название появилось только в период Edo, спустя века после постройки, просто как поэтическая пара к «золотому» соседу, без всякого реального намерения покрывать здание металлом.</p>
+        <p>Лунный свет, отражающийся в песчаном саду Ginshadan перед павильоном, назвали «достаточно серебряным» заменителем — эстетика недосказанности вместо буквальной роскоши, тот самый принцип wabi-sabi.</p>
       </div>
     </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>За пятьсот с лишним лет истории «Серебряный павильон» ни разу не видел ни грамма серебра — ни при постройке, ни позже. Само название появилось спустя века, в эпоху Edo, просто как красивая пара к золотому Kinkaku-ji, без всякого намерения когда-либо посеребрить здание.</p>
+    </div>
+
     <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>За главным садом есть тропа наверх, к смотровой площадке над всем комплексом и видом на город — большинство туристов до неё не доходят, ограничиваясь нижним кругом у пруда.</div>
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -883,19 +1146,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -911,13 +1174,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 

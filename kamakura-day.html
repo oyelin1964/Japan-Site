@@ -7,7 +7,7 @@
 <title>Kamakura Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,58 +94,71 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -266,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -312,6 +381,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +452,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -383,24 +508,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +635,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +697,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,51 +787,54 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">祇園精舎の鐘の声、諸行無常の響きあり</span>
-    Звон колоколов монастыря Gion отзывается вечностью: ничто не пребывает неизменным
-    <span class="quote-author">«Повесть о доме Тайра» (Heike Monogatari), открывающие строки</span>
-    <span class="quote-note">Строки о падении клана Taira — а сегодняшний день весь о клане, который на этом падении поднялся: Minamoto</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">鎌倉</div>
   <div class="hero-content">
     <div class="eyebrow">Kamakura · Day Trip</div>
     <h1>Kamakura Day</h1>
-    <div class="sub">鎌倉 — столица первого сёгуната: храм, Будда под открытым небом, лесная тропа к пещере с деньгами и переезд из аниме</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
+  <div class="opening-quote">
+    <span class="quote-jp">栄枯盛衰</span>
+    <blockquote>Расцвет и упадок сменяют друг друга — таков порядок вещей</blockquote>
+    <span class="quote-author">Классический японский идиом (yojijukugo)</span>
+    <span class="quote-source">Сегодняшний день — его иллюстрация в одном городе: от первого сёгуната до последнего вздоха рода Hōjō, 150 лет между двумя концами одной кривой</span>
+  </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">7 моментов</span>
+    </summary>
+    <div class="day-section-body day-flags">
     <ul>
-      <li><strong>Zeniarai Benten</strong> — опционально: лесная тропа Daibutsu Hiking Trail от Kōtoku-in, около часа с крутым подъёмом в начале; если пропускаете, день ощутимо легче</li>
+      <li><strong>Komachi St и Hachiman-gu — с утра</strong>, а не вечером: сувенирные лавки закрываются к 18:00, а вечер занят закатом на переезде — если оставить улицу на потом, магазины уже не застать</li>
       <li><strong>JR Tokyo → Kamakura</strong> — Yokosuka Line, около часа, без пересадок, брони не нужно</li>
       <li><strong>Kōtoku-in</strong> — октябрь: 8:00–17:00, внутрь статуи можно зайти отдельно за небольшую плату</li>
-      <li><strong>Zeniarai Benten</strong> — открыт 8:00–16:30, вход свободный, ¥100 за корзинку для мытья денег</li>
-      <li><strong>Kamakurakōkō-mae</strong> — это действующий ж/д переезд, а не аттракцион: снимать аккуратно, не задерживаться на путях</li>
-      <li><strong>Komachi St</strong> — сувенирные лавки закрываются к 18:00, но еда и рестораны работают позже</li>
+      <li><strong>Hase-dera</strong> — открыт до 17:00, но с октября по февраль последний вход уже в 16:30 — заложи это время, а не общее закрытие</li>
+      <li><strong>Zeniarai Benten — опционально</strong>: лесная тропа Daibutsu Hiking Trail от Kōtoku-in, крутой подъём в начале и дальше неровная грунтовка около часа — решай на месте, по самочувствию, не по плану</li>
+      <li><strong>Kamakurakōkō-mae</strong> — это действующий ж/д переезд, а не аттракцион: снимать аккуратно, не задерживаться на путях; закат 7 октября — около 17:17</li>
+      <li><strong>Ужин — без привязки к часам</strong>: рестораны и стрит-фуд на Komachi St и у Yuigahama работают допоздна, шопинг уже будет закрыт позади</li>
     </ul>
-  </div>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
-    <button class="nav-place-btn" data-target="loc-hachimangu">Tsurugaoka Hachiman-gu</button>
+    <button class="nav-place-btn" data-target="loc-komachi">Komachi St</button>
+    <button class="nav-place-btn" data-target="loc-hachimangu">Tsurugaoka Hachiman-gu (опц.)</button>
     <button class="nav-place-btn" data-target="loc-kotokuin">Kōtoku-in</button>
     <button class="nav-place-btn" data-target="loc-hasedera">Hase-dera</button>
     <button class="nav-place-btn" data-target="loc-yuigahama">Yuigahama Beach</button>
     <button class="nav-place-btn" data-target="loc-zeniarai">Zeniarai Benten (опц.)</button>
     <button class="nav-place-btn" data-target="loc-kokomae">Kamakurakōkō-mae</button>
-    <button class="nav-place-btn" data-target="loc-komachi">Komachi St</button>
   </nav>
 
   <div class="connections-jump">
@@ -660,27 +843,56 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>День держится на двух слоях: власть и вера. Начинаем с Tsurugaoka Hachiman-gu у самой станции — это ядро города и его политическая история. Дальше Enoden уносит на запад, в Hase, к Kōtoku-in и Hase-dera — два храма в пяти минутах друг от друга, статуя под открытым небом и статуя, приплывшая по морю. Рядом — Yuigahama Beach, пляж, откуда всё в буквальном смысле началось.</p>
-    <div class="blockquote">Опционально: от Kōtoku-in начинается Daibutsu Hiking Trail — лесная тропа через холмы к Zeniarai Benten, пещерному святилищу, где моют деньги. Около часа, с крутым подъёмом в начале. Если день и так плотный — пропустить не жалко, но если есть время и настроение на лес после туристического потока у Будды, это того стоит.</div>
-    <p>Дальше — Enoden ещё раз, уже в другую сторону, к Kamakurakōkō-mae, ловить закат на переезде у моря. И финал — Komachi St прямо у станции, ужин и стрит-фуд перед поездом обратно в Tokyo.</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>День держится на двух слоях: вера и власть, но начинается не с них, а с логистики — Komachi St и Hachiman-gu идут первыми не потому, что так драматичнее, а потому что это единственный способ застать сувенирные лавки открытыми. Дальше Enoden уносит на запад, в Hase, к Kōtoku-in и Hase-dera — два храма в пяти минутах друг от друга, статуя под открытым небом и статуя, приплывшая по морю. Рядом — Yuigahama Beach, пляж, откуда всё в буквальном смысле началось.</p>
+      <div class="blockquote">Опционально: от Kōtoku-in начинается Daibutsu Hiking Trail — лесная тропа через холмы к Zeniarai Benten, пещерному святилищу, где моют деньги. Около часа, с крутым подъёмом в начале и неровной грунтовкой дальше — решать по самочувствию, не по плану.</div>
+      <p>Финал дня — снова Enoden, уже дальше на запад, к Kamakurakōkō-mae: закат 7 октября около 17:17, и это единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно. Возвращение к вокзалу — ужин где придётся, в Komachi St или у Yuigahama; шопинг к этому часу уже позади, и это не потеря, а часть плана.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-hachimangu">Tsurugaoka Hachiman-gu — храм, с которого начался сёгунат</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title" id="loc-komachi">Komachi St</h2>
+    <span class="place-caption">Улица, с которой начинается и заканчивается день</span>
+    <div class="cols">
+      <figure><div class="img-placeholder -warm"><span>Komachi St</span></div></figure>
+      <div>
+        <p>350-метровая пешеходная улица прямо от восточного выхода станции Kamakura, идёт параллельно парадному подходу к Tsurugaoka Hachiman-gu. Начиналась как скромный рынок много веков назад, а сегодня — плотная концентрация из примерно 250 лавок: стрит-фуд, сувениры, кафе, десерты на любой вкус.</p>
+        <p>Место шумное и туристическое — 18 миллионов посетителей в год, по официальным подсчётам, так что рассчитывать на тишину здесь не стоит ни утром, ни вечером. Логика захода дважды за день простая: утром — за покупками, пока лавки открыты; вечером сюда же (или к Yuigahama) — уже просто поесть, без ожидания от места чего-то большего.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Shirasu don</strong> — миска риса с мелкой свежей рыбкой, локальный деликатес побережья Shonan; в сезон подают и сырой, и варёный вариант вместе.</div>
+
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Сувенирные лавки закрываются к <strong>18:00</strong>, рестораны и стрит-фуд работают позже. Улица начинается сразу у восточного выхода станции Kamakura, отмечена красными воротами torii.</p>
+      </div>
+    </details>
+
+    <hr>
+
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -minor" id="loc-hachimangu">Tsurugaoka Hachiman-gu <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;">опционально</span></h2>
+    <span class="place-caption">Храм, с которого начался сёгунат</span>
+    <div class="note"><span class="note-tag tag-skip">Опционально</span><br>В конце Komachi St, буквально по пути — заходить или нет, зависит только от того, сколько времени и сил хочется потратить на храмы именно сегодня. Пропустишь — ничего не потеряешь логистически, просто дальше по Enoden сразу в Hase.</div>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Основан в 1063 году, но по-настоящему важным стал в 1180-м, когда Minamoto no Yoritomo перенёс его сюда и сделал духовным центром своей новой военной столицы</li>
         <li>В 1219 году на каменной лестнице храма зарезали сёгуна Minamoto no Sanetomo — собственный племянник, метивший на его место; убийцу обезглавили в тот же день</li>
         <li>Тысячелетнюю гинкго у лестницы, за которой якобы прятался убийца, повалило штормом в 2010 году — дерево проросло заново из пня</li>
         <li>В 1591 году Toyotomi Hideyoshi похлопал по плечу статую Yoritomo в святилище Shirahata и заявил, что превзошёл его — поднявшись к власти вообще без знатных предков</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Tsurugaoka Hachiman-gu</span></div></figure>
       <div>
@@ -693,7 +905,7 @@ body.site-nav-locked { overflow: hidden; }
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта с рассвета до заката, вход свободный. Доступ в Главный зал (Honden) — ¥200. 10 минут пешком от станции Kamakura.</p>
+        <p>Территория открыта с рассвета до заката, вход свободный. Доступ в Главный зал (Honden) — ¥200. В конце Komachi St, 10 минут пешком от станции Kamakura.</p>
       </div>
     </details>
 
@@ -701,23 +913,30 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kotokuin">Kōtoku-in — Будда, которому пятьсот лет не нужна крыша</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Будда</span>
+    <h2 class="section-title -major" id="loc-kotokuin">Kōtoku-in</h2>
+    <span class="place-caption">Будда, которому пятьсот лет не нужна крыша</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>Бронзовая статуя Amida Buddha отлита около 1252 года, высота 13,35 метра, вес около 121 тонны — второй по величине бронзовый Будда Japan после Nara</li>
         <li>Первоначальный деревянный вариант статуи повредило штормом; нынешний бронзовый заменил его</li>
         <li>Зал, в котором стояла статуя, разрушало штормами дважды, а в 1495 или 1498 году (источники расходятся) — цунами. С тех пор зал просто не стали отстраивать</li>
         <li>Внутрь статуи можно зайти — она полая</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kōtoku-in Great Buddha</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Kōtoku-in Great Buddha</span></div></figure>
       <div>
-        <p>Прямая параллель Higashiyama Day: точно так же, как сцена Kiyomizu-dera держится веками, не будучи оригинальными досками, этот Будда — памятник тому, что уцелело, а не тому, что было задумано изначально. Иронии в этом больше, чем кажется: статую Amida, будды западного рая Sukhavati, строили под крышей, а именно отсутствие крыши стало её самой узнаваемой чертой на пятьсот лет вперёд.</p>
-        <p>Решение не восстанавливать зал после цунами — то ли прагматизм (дорого отстраивать в сейсмоопасной зоне), то ли жест: статуя, пережившая огонь, штормы и Great Kanto Earthquake 1923 года, не нуждается в защите — она сама стала памятником стойкости.</p>
+        <p>Прямая параллель Higashiyama Day: точно так же, как сцена Kiyomizu-dera держится веками, не будучи оригинальными досками, этот Будда — памятник тому, что уцелело, а не тому, что было задумано изначально. Статую Amida, будды западного рая Sukhavati, строили под крышей — и именно отсутствие крыши стало её самой узнаваемой чертой на пятьсот лет вперёд.</p>
       </div>
     </div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Решение не восстанавливать зал после цунами — то ли прагматизм (дорого отстраивать в сейсмоопасной зоне), то ли жест: статуя, пережившая огонь, штормы и Great Kanto Earthquake 1923 года, не нуждается в защите. Самая узнаваемая черта Будды под открытым небом — не архитектурный замысел, а то, что осталось после того, как замысел трижды разрушили.</p>
+    </div>
+
     <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>53 каменных основания, разбросанных по территории — единственное, что осталось от разрушенного зала: буквальный отпечаток здания, которого больше нет.</div>
 
     <details class="practical-card">
@@ -731,18 +950,20 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-hasedera">Hase-dera — статуя, которую бросили в море ради удачи</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-hasedera">Hase-dera</h2>
+    <span class="place-caption">Статуя, которую бросили в море ради удачи</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>По легенде, в 721 году монах Tokudō вырезал две статуи Kannon из ствола одного камфорного дерева — одну оставил в Nara, вторую бросил в море с молитвой, чтобы она сама нашла своё место</li>
         <li>Через 15 лет статую прибило к берегу неподалёку от Kamakura — так, в 736 году, был основан этот храм</li>
         <li>9,18-метровая деревянная статуя с одиннадцатью головами — одна из крупнейших деревянных статуй Japan</li>
         <li>С обзорной площадки храма открывается вид на Yuigahama Beach — ту самую бухту, куда должна была приплыть статуя</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Hase-dera Kannon</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Hase-dera Kannon</span></div></figure>
       <div>
         <p>Одиннадцать голов статуи — не украшение, а функция: Kannon, бодхисаттва сострадания, буквально «слышит крики мира» со всех сторон одновременно. Легенда о двух статуях из одного дерева работает как красивая метафора самой Japan этого периода: страна, до последнего смотрящая на Nara и Kyoto как на культурный центр, но всё активнее отправляющая собственные смыслы «в свободное плавание» — в данном случае в буквальном смысле, вплавь.</p>
         <p>Историчность легенды под вопросом: документальных подтверждений почти нет, а самое раннее твёрдое свидетельство существования храма — надпись на колоколе 1264 года. Но, как и в случае с гинкго у Hachiman-gu, точность истории здесь вторична по отношению к тому, что она объясняет городу о самом себе.</p>
@@ -752,7 +973,7 @@ body.site-nav-locked { overflow: hidden; }
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>8:00–17:00</strong> (октябрь–февраль до 16:30 последний вход). 5 минут пешком от Kōtoku-in. На территории также пещеры Benten-kutsu, посвящённые богине Benzaiten — той же, что встретится позже сегодня в Zeniarai Benten.</p>
+        <p>Открыт <strong>8:00–17:00</strong>, но с октября по февраль <strong>последний вход в 16:30</strong> — на дату этой поездки это уже действующее правило, закладывай его, а не общее время закрытия. 5 минут пешком от Kōtoku-in. На территории также пещеры Benten-kutsu, посвящённые богине Benzaiten — той же, что встретится позже сегодня в Zeniarai Benten.</p>
       </div>
     </details>
 
@@ -760,12 +981,13 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-yuigahama">Yuigahama Beach — пляж, с которого всё началось</h2>
+    <span class="place-kicker">Пляж</span>
+    <h2 class="section-title -minor" id="loc-yuigahama">Yuigahama Beach</h2>
+    <span class="place-caption">Пляж, с которого всё началось</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Yuigahama Beach</span></div></figure>
+      <figure><div class="img-placeholder" style=""><span>Yuigahama Beach</span></div></figure>
       <div>
         <p>Короткая пауза у воды между двумя храмовыми кластерами — но не просто пляж. Именно здесь, в деревне Yui, стоял самый первый вариант Tsurugaoka Hachiman-gu, до того как Yoritomo в 1180 году перенёс его вглубь города. Стоя на песке, ты в буквальном смысле стоишь на месте, откуда стартовала вся сегодняшняя история про сёгунат.</p>
-        <p>Сегодня это обычный городской пляж — сёрферы, семьи, рестораны с shirasu (мелкая свежая рыбка, местный деликатес) вдоль набережной. После двух храмов подряд — честный контраст: море вместо камня.</p>
       </div>
     </div>
 
@@ -778,25 +1000,25 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-zeniarai">Zeniarai Benten — пещера, где моют деньги <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;">опционально</span></h2>
-    <div class="note"><span class="note-tag tag-skip">Опционально</span><br>Это не часть основного маршрута дня — крюк примерно на 1–1,5 часа сверх плана. Стоит идти, если день не выбивается из графика и есть желание после туристического потока у Будды побыть в лесу в тишине. Если пропускаете — после Hase-dera и Yuigahama Beach просто едете дальше на Enoden к Kamakurakōkō-mae.</div>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
+    <span class="place-kicker">Святилище</span>
+    <h2 class="section-title -minor" id="loc-zeniarai">Zeniarai Benten <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;">опционально</span></h2>
+    <span class="place-caption">Пещера, где моют деньги</span>
+    <div class="note"><span class="note-tag tag-skip">Опционально</span><br>Это не часть основного маршрута дня — крюк примерно на 1–1,5 часа сверх плана, и физически не самый лёгкий: тропа Daibutsu Hiking Trail от Kōtoku-in начинается крутым 10–15-минутным подъёмом, дальше — неровная лесная грунтовка, без асфальта и перил. Решай на месте, по коленям и настроению, а не заранее по плану — и учти, что тропа ведёт вниз к вокзалу, а не в сторону Kamakurakōkō-mae, так что вместе с закатом на переезде в один день эти два пункта не складываются без петли назад.</div>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
         <li>По легенде, в 1185 году Yoritomo получил во сне указание построить храм у священного источника — сделал это, и дела в стране пошли на лад</li>
         <li>Официальное имя — Zeniarai Benzaiten Ugafuku Jinja: святилище смешанного синто-буддийского божества Ugafukujin (тело дракона, голова человека) в сочетании с богиней Benzaiten</li>
         <li>Вход — через узкий тоннель, прорубленный в скале; внутри пещера с источником, где по легенде деньги удваиваются, если их там вымыть</li>
-        <li>Добираемся не по дороге, а лесной тропой Daibutsu Hiking Trail от Kōtoku-in — если решите идти, это часть маршрута, а не крюк по асфальту</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Zeniarai Benten</span></div></figure>
+      <figure><div class="img-placeholder -deep"><span>Zeniarai Benten</span></div></figure>
       <div>
         <p>Тот же Yoritomo, что построил Tsurugaoka Hachiman-gu как политический манифест новой столицы, здесь строит нечто совсем другое — приватное, суеверное, спрятанное в скале. Редкий случай, когда сохранилось прямое смешение синто и буддизма, не разделённое указом Meiji 1868 года, как это произошло почти со всеми остальными храмами страны.</p>
-        <p>Ритуал простой: берёшь плетёную корзину, зачерпываешь воду источника, моешь монеты или банкноты, вытираешь и убираешь в кошелёк — по легенде, вымытые здесь деньги вернутся с прибавкой. Работает это, разумеется, не буквально, но как ритуал — безотказно: несколько минут тишины в пещере после дня, полного туристических толп, само по себе неплохая инвестиция.</p>
+        <p>Ритуал простой: берёшь плетёную корзину, зачерпываешь воду источника, моешь монеты или банкноты, вытираешь и убираешь в кошелёк — по легенде, вымытые здесь деньги вернутся с прибавкой.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Тропа от Kōtoku-in начинается с крутого 10–15-минутного подъёма, дальше — пологий лесной путь. Занимает в сумме около 40–60 минут до Zeniarai Benten с учётом остановок в Genjiyama Park по дороге.</div>
 
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
@@ -809,9 +1031,11 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-kokomae">Kamakurakōkō-mae — переезд из открывающей заставки Slam Dunk</h2>
+    <span class="place-kicker">Переезд</span>
+    <h2 class="section-title -minor" id="loc-kokomae">Kamakurakōkō-mae</h2>
+    <span class="place-caption">Переезд из открывающей заставки Slam Dunk</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Kamakurakōkō-mae crossing</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Kamakurakōkō-mae crossing</span></div></figure>
       <div>
         <p>Обычный железнодорожный переезд прямо у выхода со станции — море за спиной, одноколейный трамвайчик Enoden проезжает раз в 10–12 минут. Ничего особенного, если бы не аниме: именно этот переезд появляется в заставке культовой баскетбольной манги и аниме Slam Dunk, и с тех пор сюда едут специально ради одного кадра — уходящий вдаль поезд на фоне океана.</p>
         <p>Это не музей и не аттракцион, а действующая инфраструктура: местные здесь просто едут на работу, а туристы стоят с телефонами наготове в ожидании следующего состава.</p>
@@ -822,26 +1046,7 @@ body.site-nav-locked { overflow: hidden; }
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Прямо у выхода со станции Kamakurakōkō-mae. Лучший свет — ближе к закату, но и в любое время дня место работает.</p>
-      </div>
-    </details>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-komachi">Komachi St — улица, которая и есть ужин</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Komachi St</span></div></figure>
-      <div>
-        <p>350-метровая пешеходная улица прямо от восточного выхода станции Kamakura, идёт параллельно парадному подходу к Tsurugaoka Hachiman-gu. Начиналась как скромный рынок много веков назад, а сегодня — плотная концентрация из примерно 250 лавок: стрит-фуд, сувениры, кафе, десерты на любой вкус.</p>
-        <p>Место шумное и туристическое — 18 миллионов посетителей в год, по официальным подсчётам. Но именно это делает Komachi логичным финалом: после тихого леса и пещеры хочется ровно обратного — толпы, огней и еды на ходу перед поездом домой.</p>
-      </div>
-    </div>
-    <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Shirasu don</strong> — миска риса с мелкой свежей рыбкой, локальный деликатес побережья Shonan; в сезон подают и сырой, и варёный вариант вместе.</div>
-
-    <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
-      <div class="practical-card-body">
-        <p>Сувенирные лавки закрываются к <strong>18:00</strong>, рестораны и стрит-фуд работают позже. Улица начинается сразу у восточного выхода станции Kamakura, отмечена красными воротами torii.</p>
+        <p>Прямо у выхода со станции Kamakurakōkō-mae. Закат 7 октября — около <strong>17:17</strong>, единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно.</p>
       </div>
     </details>
 
@@ -849,15 +1054,13 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t4">
-    <h2 class="section-title">Food & Coffee</h2>
-    <p><strong>Shirasu don</strong> у Yuigahama Beach или на Komachi St — местная рыбка, свежая только здесь и только в сезон. <strong>Komachi St</strong> — основной вечерний стрит-фуд и ужин дня, подробности выше.</p>
-  </section>
+  <h2 class="section-title" id="t4">Food & Coffee</h2>
+  <p><strong>Shirasu don</strong> у Yuigahama Beach или на Komachi St — местная рыбка, свежая только здесь и только в сезон. Ужин без жёсткой привязки к месту: Komachi St и окрестности Yuigahama работают допоздна, шопинг к этому часу уже позади.</p>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Сегодняшний день закрывает сюжет, который начался задолго до него: клан Taira уничтожен в войне Genpei, победитель Minamoto no Yoritomo строит здесь, в Kamakura, первый в истории Japan военный сёгунат — систему двоевластия, при которой император остаётся символом в Kyoto, а реальная власть сосредоточена у воинов. Тот же Yoritomo, что превратил скромный храм Yui в политический манифест новой столицы (Tsurugaoka Hachiman-gu), по легенде, стоит и за пещерным святилищем Zeniarai Benten — если дойдёте туда сегодня, увидите совсем другой регистр той же фигуры: не демонстрация власти, а личная удача.</p>
+  <p>Сегодняшний день закрывает сюжет, который начался задолго до него: клан Taira уничтожен в войне Genpei, победитель Minamoto no Yoritomo строит здесь, в Kamakura, первый в истории Japan военный сёгунат — систему двоевластия, при которой император остаётся символом в Kyoto, а реальная власть сосредоточена у воинов. Тот же Yoritomo, что превратил скромный храм Yui в политический манифест новой столицы (Tsurugaoka Hachiman-gu), по легенде, стоит и за пещерным святилищем Zeniarai Benten — если дойдёшь туда сегодня, увидишь совсем другой регистр той же фигуры: не демонстрация власти, а личная удача.</p>
   <p>Сёгунат, начатый здесь в 1180-х, закончится тоже в Kamakura: в 1333 году последний регент клана Hōjō вместе с 800 самураями совершит массовое сэппуку в пещерах Tōshō-ji, не пережив падения города. Ритуальное самоубийство ради чести, впервые задокументированное ещё во время войны Genpei у храма Byōdō-in, здесь проходит полный круг — от единичного жеста одного полководца до финала целой эпохи.</p>
 
   <p class="footnote">Kamakura Day · Japan 2026 · план дня, собранный вручную</p>
@@ -1019,19 +1222,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -1047,13 +1250,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 

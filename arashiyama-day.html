@@ -7,7 +7,7 @@
 <title>Arashiyama Day</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light only;
@@ -20,6 +20,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239;
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -93,58 +94,71 @@
     color: var(--ink);
     line-height: 1.05;
   }
-  .hero .sub { margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft); }
-
   /* ---------- Layout ---------- */
   .wrap { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-  .quote-intro {
-    min-height: 16vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6rem 8vw;
-    text-align: center;
-    background: var(--paper-deep);
+  /* ---------- Opening quote — quiet literary epigraph in .wrap, after
+     the hero, before "На сегодня". Quote marks share hero kanji's
+     red-to-gold gradient. Pattern locked with higashiyama-day.html. ---------- */
+  .opening-quote {
+    position: relative;
+    padding: 2.4rem 2rem 2rem;
+    margin: 0 0 2.8rem;
+    max-width: 680px;
+    background: linear-gradient(155deg, #F6F2E8 0%, #F1EBDC 100%);
+    border-radius: 3px;
   }
-  .quote-intro blockquote {
-    max-width: 560px;
+  .opening-quote::before,
+  .opening-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 6rem);
+    line-height: 1;
+    font-weight: 600;
+    background: linear-gradient(160deg, var(--red) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.65;
+    user-select: none;
+  }
+  .opening-quote::before { content: "\201C"; left: 0.9rem; top: -1.7rem; }
+  .opening-quote::after  { content: "\201D"; right: 1rem; bottom: -2rem; }
+  .opening-quote .quote-jp {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .opening-quote blockquote {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.7rem);
     color: var(--ink);
-    line-height: 1.65;
-    letter-spacing: 0.01em;
+    line-height: 1.18;
   }
-  .quote-intro .quote-author {
+  .opening-quote .quote-author {
     display: block;
-    margin-top: 0.7rem;
+    margin-top: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--gold-dark);
   }
-  .quote-intro .quote-jp {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--red);
-    opacity: 1;
-    line-height: 1.5;
+  .opening-quote .quote-source {
     display: block;
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.04em;
-  }
-  .quote-intro .quote-note {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    color: #5C564E;
-    font-style: normal;
-    letter-spacing: 0.02em;
+    margin-top: 0.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
   }
 
   .overview-list { list-style: none; margin-bottom: 3rem; }
@@ -164,23 +178,48 @@
   .overview-list li:last-child { border-bottom: none; }
   .accent { color: var(--gold); font-weight: 500; }
 
-  /* ---------- Day flags: compact must-not-forget card, page-independent ---------- */
-  .day-flags {
-    background: var(--paper-deep);
+  /* ---------- Collapsible day sections: "На сегодня" and "Ритм дня".
+     Closed by default so neither eats a full mobile screen before the
+     reader reaches the first place. Pattern locked with higashiyama-day.html. ---------- */
+  details.day-section {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
     border-radius: 4px;
-    padding: 1.1rem 1.4rem 1.2rem;
-    margin-bottom: 2.6rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
-  .day-flags-label {
+  details.day-section > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.9rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.day-section > summary::-webkit-details-marker { display: none; }
+  details.day-section > summary::after { content: "\FF0B"; font-size: 1rem; flex-shrink: 0; }
+  details.day-section[open] > summary::after { content: "\FF0D"; }
+  details.day-section[open] > summary { border-bottom: 1px solid var(--line); }
+  details.day-section .day-section-body { padding: 1rem 1.3rem 1.2rem; }
+
+  details.day-section.-flags { border-left: 3px solid var(--red); }
+  details.day-section.-flags > summary .day-section-title { color: var(--red); }
+  details.day-section.-flags > summary::after { color: var(--red); }
+  details.day-section.-flags > summary .day-section-hint { color: var(--ink-soft); }
+
+  details.day-section.-rhythm { border-left: 3px solid var(--blue); background: #EEF1EC; }
+  details.day-section.-rhythm > summary .day-section-title { color: var(--blue); }
+  details.day-section.-rhythm > summary::after { color: var(--blue); }
+
+  .day-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
     font-weight: 600;
-    margin-bottom: 0.6rem;
   }
+  .day-section-hint { font-size: 0.78rem; color: #7A776D; }
+
   .day-flags ul { list-style: none; }
   .day-flags li {
     padding: 0.45rem 0 0.45rem 1rem;
@@ -245,6 +284,31 @@
   .connections-jump-btn:hover { color: var(--red); border-color: var(--red-soft); }
 
   /* ---------- Section headings ---------- */
+  /* Place kicker: names the kind of stop before naming the stop.
+     Pattern locked with higashiyama-day.html. */
+  .place-kicker {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.4rem 0 0.3rem;
+  }
+  .place-kicker:first-child { margin-top: 0; }
+  .place-kicker + h2.section-title { margin-top: 0; }
+  .place-caption {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.2rem;
+  }
+
   h2.section-title {
     font-family: 'Shippori Mincho', serif;
     font-weight: 600;
@@ -253,6 +317,9 @@
     margin: 2.4rem 0 1.2rem;
   }
   h2.section-title:first-child { margin-top: 0; }
+
+  h2.section-title.-major { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 1.05; }
+  h2.section-title.-minor { font-size: 1.35rem; }
 
   h4 {
     font-family: 'Inter', sans-serif;
@@ -266,6 +333,8 @@
 
   p { margin-bottom: 1.2rem; font-size: 0.98rem; color: var(--ink-soft); letter-spacing: 0.005em; }
   strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   /* ---------- Two-column blocks ---------- */
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; align-items: start; }
@@ -312,6 +381,46 @@
     background: rgba(250,249,246,0.8);
   }
 
+  .img-placeholder.-warm {
+    aspect-ratio: 3 / 2;
+    background: linear-gradient(150deg, #E7C9A9 0%, #D8A97C 55%, #C9895C 100%);
+  }
+  .img-placeholder.-warm::before { display: none; }
+  .img-placeholder.-warm span { border-color: rgba(250,249,246,0.5); background: rgba(28,25,23,0.15); color: #FAF6EE; }
+
+  .img-placeholder.-deep {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(155deg, #6E4A3E 0%, #4A2E28 60%, #2E1B18 100%);
+  }
+  .img-placeholder.-deep::before { display: none; }
+  .img-placeholder.-deep span { border-color: rgba(250,249,246,0.3); background: rgba(0,0,0,0.2); color: #F2E6D8; }
+
+  /* Full-bleed photo moment: spans the whole .wrap width, breaks the two-column
+     rhythm, sits between prose blocks like a real pause in a magazine spread. */
+  .photo-break {
+    margin: 2.2rem 0;
+    aspect-ratio: 21 / 9;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(28,25,23,0.14);
+    background: linear-gradient(120deg, #C9895C 0%, #B2634A 55%, #8C4A3A 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo-break .mark {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: #FAF6EE;
+    opacity: 0.9;
+  }
+  .photo-break .cap {
+    position: absolute; left: 1.4rem; bottom: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #FAF6EE; background: rgba(28,25,23,0.35);
+    padding: 0.35rem 0.7rem;
+  }
+
   .cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 680px) { .cols-3 { grid-template-columns: 1fr; } }
   .cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -343,6 +452,22 @@
   .note-tag.tag-try { color: #7A5328; background: rgba(168,124,79,0.14); }
   .note-tag.tag-skip { color: var(--ink-soft); background: var(--gray-bg); }
   .note-tag.tag-tip { color: #2D5270; background: rgba(74,109,140,0.12); }
+
+  /* Small inline label before a sentence — tips that don't need their own
+     box. Pattern locked with higashiyama-day.html. */
+  .inline-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    background: rgba(168,124,79,0.18);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.3rem 0; }
   .notes-grid .note { margin: 0; }
@@ -383,24 +508,40 @@
   .practical-card-body p:last-child { margin-bottom: 0; }
   .practical-card-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ---------- Essence card: scannable summary before the prose ---------- */
-  .essence-card {
-    padding: 1.1rem 1.3rem;
-    margin: 0.8rem 0 1.4rem;
-    background: var(--paper-deep);
+  /* ---------- Essence: scannable summary before the prose. Same collapsible
+     family as day-section, gold accent. Closed by default — open it for the
+     highlights before the story, skip it to just read. Pattern locked with
+     higashiyama-day.html. ---------- */
+  details.essence-card {
     border: 1px solid var(--line);
-    border-left: 3px solid var(--red);
-    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: 0.8rem 0 1.4rem;
+    overflow: hidden;
+    background: var(--paper-deep);
   }
+  details.essence-card > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  details.essence-card > summary::-webkit-details-marker { display: none; }
+  details.essence-card > summary::after { content: "\FF0B"; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+  details.essence-card[open] > summary::after { content: "\FF0D"; }
+  details.essence-card[open] > summary { border-bottom: 1px solid var(--line); }
   .essence-card .essence-label {
-    display: block;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    font-weight: 600;
   }
+  .essence-card-body { padding: 0.9rem 1.2rem 1rem; }
   .essence-card ul { margin: 0; padding-left: 1.1rem; }
   .essence-card li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 0.4rem; }
   .essence-card li:last-child { margin-bottom: 0; }
@@ -494,6 +635,44 @@
   }
   .blockquote::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red-soft); }
 
+  /* ---------- Dark panel — one deliberate reversal for the sentence that
+     reframes everything before it. Pattern locked with higashiyama-day.html. ---------- */
+  .panel-dark {
+    background: linear-gradient(155deg, #241E1A 0%, #1C1917 100%);
+    color: #F2EAD9;
+    margin: 2.4rem 0;
+    padding: 2.2rem 2rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-dark::before {
+    content: "";
+    position: absolute; top: -20%; right: -8%;
+    width: 220px; height: 220px;
+    border: 1px solid rgba(242,234,217,0.08);
+    border-radius: 50%;
+  }
+  .panel-dark .panel-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red-soft);
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .panel-dark p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    color: #F2EAD9;
+    line-height: 1.55;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .panel-dark strong { color: #FFFFFF; font-weight: 600; }
+
   hr { border: none; border-top: 1px solid var(--line); margin: 2rem 0; }
 
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
@@ -518,6 +697,7 @@
   }
   .top-bar a.back { font-size: 0.82rem; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
 </style>
@@ -607,48 +787,49 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
-
-<section class="quote-intro">
-  <blockquote>
-    <span class="quote-jp">祇園精舎の鐘の声、諸行無常の響きあり</span>
-    В звоне колокола Гион Сёдзя слышен отзвук непостоянства всех вещей
-    <span class="quote-author">Открывающая строка «Повести о доме Тайра» («Хэйкэ моногатари»), XIII век</span>
-    <span class="quote-note">Тот самый род Taira, чей глава сегодня появится дважды — один раз как разрушитель чужой жизни, другой раз как повод для тысяч безымянных могил</span>
-  </blockquote>
-</section>
 
 <header class="hero">
   <div class="hero-mark" aria-hidden="true">嵐山</div>
   <div class="hero-content">
-    <div class="eyebrow">Ukyō-ku, Kyoto · Day Plan</div>
+    <div class="eyebrow">Ukyō-ku · Kyoto · Day Plan</div>
     <h1>Arashiyama Day</h1>
-    <div class="sub">Западная, тихая часть Sagano — от зеркальной галереи до тысяч каменных изваяний в лесу</div>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="day-flags">
-    <div class="day-flags-label">На сегодня</div>
-    <ul>
-      <li><strong>Yusai-Tei Gallery — по брони</strong>, вход по таймслоту, около 2000 иен (без осенней надбавки — сентябрь ещё не сезон клёнов); ссылка на форму брони — в <a href="trip-logistics.html">Logistics</a></li>
-      <li><strong>Tenryu-ji сознательно не в маршруте</strong> — самый раскрученный и самый людный храм района; весь день выстроен вокруг тихой западной части Sagano вместо него</li>
-      <li><strong>Порядок против толпы</strong>: начать с Yusai-Tei рано, пока основной поток туристов ещё стоит в очереди у бамбуковой рощи — это не совпадение, а логика маршрута</li>
-      <li><strong>Про заметку про Gōtokuji</strong> — в источнике данных к этому дню приклеилась пометка про кошачий храм в Setagaya (Tokyo); это, похоже, случайный обрывок от дня 26 сентября, к Arashiyama отношения не имеет — игнорирую</li>
-    </ul>
+  <div class="opening-quote">
+    <span class="quote-jp">祇園精舎の鐘の声、諸行無常の響きあり</span>
+    <blockquote>В звоне колокола Гион Сёдзя слышен отзвук непостоянства всех вещей</blockquote>
+    <span class="quote-author">«Повесть о доме Тайра» (Хэйкэ моногатари), открывающая строка, XIII век</span>
+    <span class="quote-source">Клан Taira, чей глава сегодня появится дважды — как разрушитель одной жизни и как повод для тысяч безымянных могил</span>
   </div>
+
+  <details class="day-section -flags">
+    <summary>
+      <span class="day-section-title">На сегодня</span>
+      <span class="day-section-hint">3 момента</span>
+    </summary>
+    <div class="day-section-body day-flags">
+    <ul>
+      <li><strong>Маршрут идёт от Otagi, а не к нему</strong> — такси или автобус сразу к открытию (9:00), дальше весь день пешком в сторону вокзала, а не наоборот</li>
+      <li><strong>Yusai-Tei Gallery — по брони</strong>, вход по таймслоту, около ¥2000 (без осенней надбавки — сентябрь ещё не сезон клёнов); она теперь последняя точка дня, слот стоит бронировать на вторую половину дня; ссылка на форму брони — в <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Tenryu-ji сознательно не в маршруте</strong> — самый раскрученный и людный храм района; весь день выстроен вокруг тихой западной части Sagano вместо него</li>
+    </ul>
+    </div>
+  </details>
 
   <nav class="nav-places">
     <div class="nav-places-label">По местам ↓</div>
-    <button class="nav-place-btn" data-target="loc-yusaitei">Yusai-Tei Gallery</button>
-    <button class="nav-place-btn" data-target="loc-bamboo">Bamboo Forest</button>
-    <button class="nav-place-btn" data-target="loc-gioji">Gio-ji</button>
-    <button class="nav-place-btn" data-target="loc-toriimoto">Saga-Toriimoto</button>
-    <button class="nav-place-btn" data-target="loc-adashino">Adashino Nenbutsuji</button>
     <button class="nav-place-btn" data-target="loc-otagi">Otagi Nenbutsuji</button>
+    <button class="nav-place-btn" data-target="loc-adashino">Adashino Nenbutsuji</button>
+    <button class="nav-place-btn" data-target="loc-toriimoto">Saga-Toriimoto</button>
+    <button class="nav-place-btn" data-target="loc-gioji">Gio-ji</button>
+    <button class="nav-place-btn" data-target="loc-bamboo">Bamboo Forest</button>
+    <button class="nav-place-btn" data-target="loc-yusaitei">Yusai-Tei Gallery</button>
   </nav>
 
   <div class="connections-jump">
@@ -657,95 +838,73 @@ body.site-nav-locked { overflow: hidden; }
 
   <hr>
 
-  <section id="t2">
-    <h2 class="section-title">Ритм дня</h2>
-    <p>Маршрут идёт по прямой на запад, вглубь Sagano, и с каждым шагом становится тише: от Yusai-Tei у самой воды — через туристический эпицентр бамбуковой рощи — дальше, к Gio-ji и Saga-Toriimoto, а после — в самую спокойную часть дня, к Adashino и Otagi Nenbutsuji, куда доходит уже меньшинство туристов. Логика обратная тому, что делает большинство: раньше всего — то, что требует брони и тишины (Yusai-Tei), позже — то, что и так многолюдно (бамбук), и напоследок — то, что вознаграждает именно за то, что вы дошли до конца маршрута.</p>
-    <p>Между Otagi Nenbutsuji и остальными точками — реальное расстояние, минут 20 неспешным шагом от бамбуковой рощи в один конец; закладывай на это время, а не пытайся успеть туда «между делом».</p>
-  </section>
+  <details class="day-section -rhythm">
+    <summary>
+      <span class="day-section-title">Ритм дня</span>
+      <span class="day-section-hint">как всё связано по времени</span>
+    </summary>
+    <div class="day-section-body">
+      <p>Маршрут идёт не от вокзала, а к нему: такси или автобус сразу забрасывает в самую глубину Sagano, к Otagi Nenbutsuji, а весь день дальше — это спуск обратно к реке, с каждым шагом ближе к людям. Логика обратная тому, что делает большинство: они идут от бамбука вглубь и упираются в тихие места уже уставшими и в разгар дня; мы начинаем с самого дальнего и самого тихого, а бамбуковую рощу проходим уже во второй половине дня, когда она в любом случае многолюдна — но это всего десять минут ходьбы, так что не страшно.</p>
+      <div class="blockquote">И самая тихая точка дня — не самая старая: 1200-летний на вид Otagi Nenbutsuji на деле вырезан заново сорок лет назад, руками обычных прихожан.</div>
+      <p>От Otagi до соседних точек — Adashino, Toriimoto, Gio-ji — расстояния небольшие. А вот дорога от отеля до самого Otagi на такси или автобусе может занять прилично времени; закладывай его заранее, а не пытайся успеть точно к открытию впритык.</p>
+    </div>
+  </details>
 
   <hr>
 
   <section id="t3">
 
-    <h2 class="section-title" id="loc-yusaitei">Yusai-Tei Gallery — дом, где писал Кавабата, и мастерская, где красят шёлк водой</h2>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-otagi">Otagi Nenbutsuji</h2>
+    <span class="place-caption">1200 изваяний, которым всего сорок лет</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
+        <li>Храм основан ещё в VIII веке, но то, ради чего сюда идут, — вовсе не древность</li>
+        <li>К 1980-м годам постройка обветшала почти полностью, пока скульптор Kōchō Nishimura не предложил обучить резьбе по камню обычных посетителей и прихожан вместо найма мастеров</li>
+        <li>За десять лет около 1200 учеников вырезали 1200 статуй rakan (учеников Будды) — каждую свою, без единого повторяющегося лица: кто-то смеётся, кто-то держит кота, кто-то играет на инструменте</li>
+      </ul></div>
+    </details>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Yusai-Tei Gallery</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Otagi Nenbutsuji</span></div></figure>
       <div>
-        <p>Зданию около 150 лет — построено в эпоху Meiji на месте виллы императора Kameyama, сначала как рёкан под именем Chidori, где, по легенде, Кавабата Ясунари писал роман «Стон горы». Двадцать лет назад дом выкупил красильщик тканей Okuda Yusai и превратил в галерею собственных работ — с характерными круглыми окнами, в которых отражается сад и река Hozugawa, создавая эффект «водного зеркала»: одно и то же изображение сразу и за окном, и в отражении на чёрном лакированном столе.</p>
+        <p>Первая точка дня — и сразу слом ожиданий. Каждая статуя сделана рукой не мастера, а случайного человека, который однажды пришёл в полуразрушенный храм и остался на несколько выходных с зубилом. Мшистый, «древний» на вид ансамбль оказывается новоделом одного поколения — задел на весь день, который дальше будет то и дело возвращаться к вопросу, что делает вещь подлинной.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>В стоимость входа включена чашка matcha на террасе — не спешить после осмотра галереи, именно эта пауза с видом на реку часто запоминается больше самих окон.</div>
+
+    <div class="panel-dark">
+      <div class="panel-label">Поворот</div>
+      <p>Весь этот мшистый, «древний» на вид ансамбль — на самом деле новодел одного поколения: тысяча двести статуй, вырезанных не монахами и не резчиками по камню, а руками случайных прихожан за одно десятилетие в 1980-х.</p>
+    </div>
+
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Вход только по предварительной брони на таймслот. Около 2000 иен (в сезон осенних клёнов — 3000). Фотографировать интерьер обычно нельзя — съёмка разрешена только во внутреннем дворе.</p>
+        <p>Открыт <strong>9:00–16:30</strong>. Добираться удобнее на такси или автобусе — от станции Saga-Arashiyama около 10–15 минут; пешком в одну сторону — минут 25–30. Первый час после открытия — самое тихое время во всём районе.</p>
       </div>
     </details>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a> (и чем rakan отличается от bodhisattva) · сравнение с Kinkaku-ji и Ryōan-ji (день 2 октября) — снова вопрос о том, что делает вещь подлинной</p>
 
     <hr>
 
-    <h2 class="section-title" id="loc-bamboo">Bamboo Forest — самая известная и самая короткая точка дня</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Bamboo Forest</span></div></figure>
-      <div>
-        <p>Проход через рощу занимает 10–15 минут в любом темпе — сама достопримечательность короче, чем очередь на вход в пиковые часы. Здесь стоит просто пройти насквозь, без плана: сфотографировать, если хочется, но не задерживаться специально — впереди по маршруту места, которые вознаграждают за время куда щедрее.</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-gioji">Gio-ji — храм, в который ушла брошенная танцовщица клана Taira</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Основан в конце периода Heian как женский монастырь; известен по «Повести о доме Тайра» — истории Gio, придворной танцовщицы shirabyōshi</li>
-        <li>Taira no Kiyomori — тот самый военачальник, чей род на пике власти фактически управлял императорским двором, а падение вскоре после этой истории запустило войну Genpei и приход к власти рода Minamoto</li>
-        <li>Внутри единственного зала храма — деревянные статуи Gio, её матери, сестры, соперницы Hotoke Gozen и самого Kiyomori, поставленного отдельно, вне общего ряда</li>
-      </ul>
-    </div>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Gio-ji</span></div></figure>
-      <div>
-        <p>Gio была фавориткой Kiyomori, пока его внимание не переключилось на молодую танцовщицу Hotoke Gozen. Униженная, Gio удалилась в этот монастырь вместе с матерью и сестрой — а позже к ним присоединилась и сама Hotoke Gozen, которую тот же Kiyomori со временем тоже разлюбил. Четыре женщины, разделившие одного мужчину, доживали свой век под одной крышей — сюжет, который «Повесть о доме Тайра» использует как миниатюру всей философии текста: величие Taira было временным, и цитата в начале сегодняшнего дня — про это же.</p>
-        <p>Сад мхов, разросшийся вокруг храма за века, — не эффектная декорация, а побочный эффект тишины: место настолько маленькое и отдалённое, что мох просто никто не тревожил.</p>
-      </div>
-    </div>
-    <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
-      <div class="practical-card-body">
-        <p>Осмотр занимает 20–30 минут. Небольшой вход, обычно совместно с соседним Adashino Nenbutsuji по единому билету предлагается не всегда — уточнять на месте.</p>
-      </div>
-    </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a> · «Повесть о доме Тайра» как источник японской эстетики бренности</p>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-toriimoto">Saga-Toriimoto — улица соломенных крыш перед полем безымянных могил</h2>
-    <div class="cols">
-      <figure><div class="img-placeholder"><span>Saga-Toriimoto</span></div></figure>
-      <div>
-        <p>Короткая улица традиционной застройки, местами с настоящими соломенными крышами — редкость даже для Kyoto, где большинство «исторических» кварталов давно перекрыты черепицей. Перед большим красным torii нужно повернуть направо, чтобы найти вход в Adashino — сам поворот легко пропустить, если не искать целенаправленно.</p>
-      </div>
-    </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#torii-vs-mon">Torii vs. Mon — два разных способа войти в священное</a></p>
-
-    <hr>
-
-    <h2 class="section-title" id="loc-adashino">Adashino Nenbutsuji — восемь тысяч каменных изваяний, у которых никогда не было имени</h2>
-    <div class="essence-card">
-      <span class="essence-label">Коротко</span>
-      <ul>
-        <li>Название «Adashino» означает «пустота», «бренность» — сама местность веками служила местом, куда сносили тела тех, кого некому было хоронить: бедняков, странников, умерших без семьи</li>
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -minor" id="loc-adashino">Adashino Nenbutsuji</h2>
+    <span class="place-caption">Восемь тысяч имён, которых никто не запомнил</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
+        <li>Название «Adashino» означает «пустота», «бренность» — местность веками служила местом, куда сносили тела тех, кого некому было хоронить: бедняков, странников, умерших без семьи</li>
         <li>Около 8000 каменных изваяний и малых пагод — не изначально единый ансамбль, а собранные за столетия со всей округи разрозненные надгробия безымянных могил, сведённые в одно поле</li>
         <li>Раз в год, в августе, здесь проводят церемонию Sentō Kuyō — зажигают тысячи свечей в память об этих людях; вне церемонии место тихое и почти безлюдное</li>
-      </ul>
-    </div>
+      </ul></div>
+    </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Adashino Nenbutsuji</span></div></figure>
       <div>
-        <p>Это не кладбище в привычном смысле, а скорее собранная по крупицам память о тех, кого некому было запомнить лично, — практика буддийской заботы о душах без потомков, для которых само поминовение возможно только коллективно. За полем — короткая тропа через бамбук, гораздо меньше знаменитой рощи, но почти всегда пустая.</p>
+        <p>После Otagi, где новодел выдаёт себя за древность, здесь ровно наоборот: настоящие века, но без единого имени. Это не кладбище в привычном смысле, а скорее собранная по крупицам память о тех, кого некому было запомнить лично, — практика буддийской заботы о душах без потомков, для которых само поминовение возможно только коллективно. За полем — короткая тропа через бамбук, гораздо меньше знаменитой рощи, но почти всегда пустая.</p>
       </div>
     </div>
+
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
@@ -755,34 +914,95 @@ body.site-nav-locked { overflow: hidden; }
 
     <hr>
 
-    <h2 class="section-title" id="loc-otagi">Otagi Nenbutsuji — 1200 изваяний, которым всего сорок лет</h2>
+    <span class="place-kicker">Улица</span>
+    <h2 class="section-title -minor" id="loc-toriimoto">Saga-Toriimoto</h2>
+    <span class="place-caption">Улица, которую эпоха черепицы обошла стороной</span>
     <div class="cols">
-      <figure><div class="img-placeholder"><span>Otagi Nenbutsuji</span></div></figure>
+      <figure><div class="img-placeholder -warm"><span>Saga-Toriimoto</span></div></figure>
       <div>
-        <p>Храм основан ещё в VIII веке, но то, ради чего сюда идут, — вовсе не древность. К 1980-м годам постройка обветшала почти полностью, пока скульптор Kōchō Nishimura не предложил необычное решение: не нанимать мастеров, а обучить резьбе по камню обычных посетителей и прихожан. За десять лет около 1200 учеников вырезали 1200 статуй rakan (учеников Будды) — каждую свою, без единого повторяющегося лица: кто-то смеётся, кто-то держит кота, кто-то играет на инструменте.</p>
-        <p>То есть весь мшистый, «древний» на вид ансамбль храма — на самом деле новодел одного поколения, сделанный не монахами, а руками случайных людей. После Adashino, где безымянность — трагедия, здесь безымянность (в смысле — отсутствие профессионального авторства) становится источником живости, а не грусти.</p>
+        <p>Короткая улица традиционной застройки, местами с настоящими соломенными крышами — редкость даже для Kyoto, где большинство «исторических» кварталов давно перекрыты черепицей. После двух храмов подряд, каждый со своим уроком о подлинности и памяти, здесь можно просто идти и ничего не считывать — пауза без сообщения.</p>
       </div>
     </div>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#torii-vs-mon">Torii vs. Mon — два разных способа войти в священное</a></p>
+
+    <hr>
+
+    <span class="place-kicker">Храм</span>
+    <h2 class="section-title -major" id="loc-gioji">Gio-ji</h2>
+    <span class="place-caption">Четыре женщины одного мужчины под одной крышей</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
+        <li>Основан в конце периода Heian как женский монастырь; известен по «Повести о доме Тайра» — истории Gio, придворной танцовщицы shirabyōshi</li>
+        <li>Taira no Kiyomori — военачальник, чей род на пике власти фактически управлял императорским двором, а падение вскоре после этой истории запустило войну Genpei и приход к власти рода Minamoto</li>
+        <li>Внутри единственного зала храма — деревянные статуи Gio, её матери, сестры, соперницы Hotoke Gozen и самого Kiyomori, поставленного отдельно, вне общего ряда</li>
+      </ul></div>
+    </details>
+    <div class="cols">
+      <figure><div class="img-placeholder -deep"><span>Gio-ji</span></div></figure>
+      <div>
+        <p>Gio была фавориткой Kiyomori, пока его внимание не переключилось на молодую танцовщицу Hotoke Gozen. Униженная, Gio удалилась в этот монастырь вместе с матерью и сестрой — а позже к ним присоединилась и сама Hotoke Gozen, которую тот же Kiyomori со временем тоже разлюбил. Четыре женщины, разделившие одного мужчину, доживали свой век под одной крышей — сюжет, который «Повесть о доме Тайра» использует как миниатюру всей философии текста: величие Taira было временным, и цитата в начале сегодняшнего дня — про это же.</p>
+        <p>Сад мхов, разросшийся вокруг храма за века, — не эффектная декорация, а побочный эффект тишины: место настолько маленькое и отдалённое, что мох просто никто не тревожил.</p>
+      </div>
+    </div>
+
     <details class="practical-card">
       <summary><span class="practical-card-title">Часы и практика</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–16:30</strong>. Около 20 минут пешком от бамбуковой рощи, в стороне от основного туристического потока — самая тихая точка всего дня.</p>
+        <p>Осмотр занимает 20–30 минут. Небольшой вход; совместный билет с соседним Adashino Nenbutsuji предлагается не всегда — уточнять на месте.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a> (и чем rakan отличается от bodhisattva) · сравнение с Kinkaku-ji и Ryōan-ji (день 2 октября) — снова вопрос о том, что делает вещь подлинной</p>
+    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a> · «Повесть о доме Тайра» как источник японской эстетики бренности</p>
+
+    <hr>
+
+    <span class="place-kicker">Роща</span>
+    <h2 class="section-title -minor" id="loc-bamboo">Bamboo Forest</h2>
+    <span class="place-caption">Достопримечательность короче, чем очередь на вход</span>
+    <div class="photo-break"><span class="mark">竹</span><span class="cap">Arashiyama Bamboo Forest</span></div>
+    <p>Проход насквозь занимает 10–15 минут в любом темпе. К этому моменту дня роща уже многолюдна — она в двух шагах от станции и от Tenryu-ji, и толпа собирается тут с самого утра, независимо от того, в какую сторону идёшь. Это нормально: сюда идём не за тишиной — вся тишина уже досталась раньше, у Otagi и Adashino.</p>
+    <p><span class="inline-label">Совет</span>Не пытайся ловить пустые кадры — просто пройди насквозь и иди дальше, к реке.</p>
+
+    <hr>
+
+    <span class="place-kicker">Галерея</span>
+    <h2 class="section-title" id="loc-yusaitei">Yusai-Tei Gallery</h2>
+    <span class="place-caption">Зеркало из чёрного лака и настоящая река за окном</span>
+    <details class="essence-card">
+      <summary><span class="essence-label">Коротко</span></summary>
+      <div class="essence-card-body"><ul>
+        <li>Зданию около 150 лет — построено в эпоху Meiji на месте виллы императора Kameyama; сначала — рёкан Chidori, где, по легенде, Кавабата Ясунари писал роман «Стон горы»</li>
+        <li>Двадцать лет назад дом выкупил красильщик тканей Okuda Yusai и превратил в галерею собственных работ</li>
+        <li>Круглые окна отражают сад и реку Hozugawa на чёрном лакированном столе — эффект «водного зеркала»: одно и то же изображение сразу и за окном, и в отражении</li>
+      </ul></div>
+    </details>
+    <div class="cols">
+      <figure><div class="img-placeholder -warm"><span>Yusai-Tei Gallery</span></div></figure>
+      <div>
+        <p>Дом несколько раз менял профессию, прежде чем стать тем, что он есть сейчас: сначала императорская вилла, потом рёкан с литературной легендой, потом — мастерская и витрина одного художника. Каждый следующий владелец не сносил прежнее, а достраивал поверх — и круглые окна с видом на Hozugawa стали финальным слоем этой истории.</p>
+        <p>Вход по таймслоту — здесь удобно бронировать на вторую половину дня: после четырёх храмов и рощи это первая точка, где можно просто сесть и ничего не смотреть по расписанию.</p>
+      </div>
+    </div>
+    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>В стоимость входа включена чашка matcha на террасе — не спеши после осмотра галереи: именно эта пауза с видом на реку часто запоминается больше самих окон, и это хороший способ закрыть день.</div>
+
+    <details class="practical-card">
+      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <div class="practical-card-body">
+        <p>Вход только по предварительной брони на таймслот. Около <strong>¥2000</strong> (в сезон осенних клёнов — ¥3000). Фотографировать интерьер обычно нельзя — съёмка разрешена только во внутреннем дворе.</p>
+      </div>
+    </details>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Taira no Kiyomori, который сегодня появляется в истории Gio, — фигура, вокруг которой строится вся «Повесть о доме Тайра»: пик могущества клана, а затем стремительное падение в войне Genpei, которая привела к власти род Minamoto и открыла путь к системе сёгуната, определившей Japan на следующие 700 лет — вплоть до того самого Tokugawa, о котором вы слышали в Nijō Castle и Kanazawa. Личная трагедия одной танцовщицы здесь — миниатюра исторического слома, который перекроил всю страну.</p>
+  <p>Taira no Kiyomori, который сегодня появляется в истории Gio, — фигура, вокруг которой строится вся «Повесть о доме Тайра»: пик могущества клана, а затем стремительное падение в войне Genpei, которая привела к власти род Minamoto и открыла путь к системе сёгуната, определившей Japan на следующие 700 лет — вплоть до того самого Tokugawa, о котором ты слышал в Nijō Castle и Kanazawa. Личная трагедия одной танцовщицы здесь — миниатюра исторического слома, который перекроил всю страну.</p>
   <p>А контраст между Otagi Nenbutsuji (новодел сорокалетней давности, выглядящий как древность) и Adashino Nenbutsuji (подлинные века, но без единого имени) — ещё одна вариация темы подлинности, которая шла через Kinkaku-ji, Ryōan-ji и Garden of Fine Arts: иногда важнее не то, сколько вещи лет, а то, кто и зачем её сделал.</p>
 
   <p class="footnote">Arashiyama Day · Japan 2026 · план дня, собранный вручную</p>
 </main>
 
-<button class="back-btn" id="backBtn">↑ Наверх</button>
 <button class="back-btn" id="backBtn">↑ Наверх</button>
 
 <script>
@@ -939,19 +1159,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -967,13 +1187,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 
