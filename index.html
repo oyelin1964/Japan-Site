@@ -41,30 +41,28 @@
   }
   @media (max-width: 720px) { .torii-line { display: none; } }
 
-  /* ---------- Hero: no photo at all — the signature is typographic.
-     道 ("path/way") is the actual word from the quote below, blown up as a
-     faint watermark. It's pure CSS text, not an image: nothing to fail to
-     load, nothing to leave a gap if it doesn't render. Height comes only
-     from the quote content, so this can never reserve empty space. ---------- */
+  .entry-screen {
+    display: flex; flex-direction: column;
+    min-height: 100vh; min-height: 100dvh;
+  }
+  .hero { flex: 0 0 auto; }
+
+  /* ---------- Hero: the one deliberate reversal, borrowed from the site's
+     own panel-dark component (used on every day page for the sentence that
+     reframes everything). Here it reframes the whole trip: dark threshold,
+     then the paper world begins at the dashboard below. ---------- */
   .hero {
     position: relative; overflow: hidden;
-    background: var(--paper-deep);
-    border-bottom: 1px solid var(--line);
+    background: linear-gradient(160deg, #241E1A 0%, #1C1917 100%);
   }
   .hero-glyph {
     position: absolute; right: -0.06em; top: -0.16em;
     font-family: 'Shippori Mincho', serif; font-weight: 600;
     font-size: clamp(9rem, 32vw, 20rem); line-height: 1;
-    color: var(--red); opacity: 0.05;
+    color: var(--red-soft); opacity: 0.32;
     pointer-events: none; user-select: none; z-index: 0;
   }
-  .hero-sun {
-    position: absolute; top: 2.6rem; right: 12vw;
-    width: 13px; height: 13px; border-radius: 50%;
-    background: var(--red); opacity: 0.75; z-index: 0;
-  }
   @media (max-width: 640px) {
-    .hero-sun { top: 1.6rem; right: 8vw; }
     .hero-glyph { font-size: clamp(6.5rem, 30vw, 11rem); right: -0.08em; top: -0.03em; }
   }
 
@@ -74,44 +72,40 @@
     padding: 2.4rem 6vw 2.6rem;
   }
 
-  .hero-title {
-    font-family: 'Shippori Mincho', serif; font-weight: 600;
-    font-size: clamp(1.5rem, 5vw, 2rem); color: var(--ink);
-    margin-bottom: 1rem; letter-spacing: 0.01em;
+  .hero-quote {
+    position: relative;
+    max-width: 560px;
+    padding: 0.4rem 1.6rem;
   }
-  .hero-quote { max-width: 560px; }
+  .hero-quote::before,
+  .hero-quote::after {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 8vw, 4.6rem);
+    line-height: 1; font-weight: 600;
+    background: linear-gradient(160deg, var(--red-soft) 0%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    opacity: 0.85; user-select: none;
+  }
+  .hero-quote::before { content: "“"; left: -0.6rem; top: -1rem; }
+  .hero-quote::after  { content: "”"; right: -0.5rem; bottom: -1.5rem; }
   .hero-quote .quote-jp {
     display: block; font-family: 'Shippori Mincho', serif; font-weight: 600;
-    font-size: 1.05rem; color: var(--red); margin-bottom: 0.5rem; letter-spacing: 0.02em;
+    font-size: 1.05rem; color: var(--red-soft); margin-bottom: 0.5rem; letter-spacing: 0.02em;
   }
   .hero-quote blockquote {
     font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
-    font-size: clamp(1.15rem, 2.6vw, 1.6rem); color: var(--ink); line-height: 1.5;
-    white-space: nowrap;
+    font-size: clamp(1.15rem, 2.6vw, 1.6rem); color: #F2EAD9; line-height: 1.5;
+    white-space: nowrap; position: relative; z-index: 1;
   }
   @media (max-width: 560px) { .hero-quote blockquote { white-space: normal; } }
 
-  /* the index-tab bar: literal table of contents, doubles as the page's visual signature */
-  .index-bar {
-    position: relative; z-index: 2;
-    max-width: 1080px; margin: 0 auto; padding: 0 6vw 2.2rem;
-    display: flex; align-items: center;
-  }
-  .index-bar .stop { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; color: var(--ink-soft); flex-shrink: 0; }
-  .index-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); flex-shrink: 0; transition: transform 0.15s; }
-  .index-bar .stop:hover .dot { transform: scale(1.3); }
-  .index-bar .stop-label {
-    font-size: 0.78rem; letter-spacing: 0.05em; white-space: nowrap;
-  }
-  .index-bar .stop:hover .stop-label { color: var(--red); }
-  .index-bar .connector { flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 9px); margin: 0 0.9rem; opacity: 0.8; }
-  @media (max-width: 640px) { .index-bar { flex-wrap: wrap; gap: 0.8rem; } .index-bar .connector { display: none; } }
-
   /* ---------- Dashboard panel: quick facts grid + route ---------- */
   .dashboard {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
     max-width: 1080px; margin: 0 auto; padding: 1.5rem 6vw 1.7rem;
-    border-bottom: 1px solid var(--line);
     background: var(--paper);
+    width: 100%; box-sizing: border-box;
   }
   .dash-grid {
     display: grid; grid-template-columns: repeat(4, auto);
@@ -132,7 +126,6 @@
     font-family: 'Shippori Mincho', serif; font-size: 0.98rem; color: var(--ink);
   }
   .route-arrow { color: var(--red); opacity: 0.6; font-family: 'Inter', sans-serif; font-size: 0.85rem; }
-  .route-note { display: block; margin-top: 0.35rem; font-size: 0.74rem; color: #5C564E; }
 
   @media (max-width: 640px) {
     .dash-grid { grid-template-columns: repeat(2, 1fr); gap: 1.3rem 1.2rem; }
@@ -220,6 +213,129 @@
   .footnote {
     margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
     font-size: 0.82rem; color: #5C564E;
+  }
+
+  /* ---------- Chapters: accordion, closed by default — same summary-first
+     convention as details.day-section on the day pages (＋ / － marker). ---------- */
+  details.chapter {
+    border: 1px solid var(--line); border-radius: 4px;
+    margin-bottom: 1.5rem; overflow: hidden; background: var(--card);
+  }
+  details.chapter:last-of-type { margin-bottom: 0; }
+  details.chapter > summary {
+    list-style: none; cursor: pointer;
+    padding: 1.05rem 1.2rem; display: flex; align-items: center; gap: 1.1rem;
+  }
+  details.chapter > summary::-webkit-details-marker { display: none; }
+  details.chapter > summary::after {
+    content: "＋"; color: var(--gold); font-size: 1.1rem; flex-shrink: 0; margin-left: auto;
+  }
+  details.chapter[open] > summary::after { content: "－"; }
+  details.chapter[open] > summary { border-bottom: 1px solid var(--line); }
+  details.chapter .chapter-body { padding: 1.2rem 1.2rem 1.4rem; }
+
+  .chapter-glyph {
+    font-family: 'Shippori Mincho', serif; font-weight: 600;
+    font-size: 2.1rem; color: var(--red); opacity: 0.85; line-height: 1;
+    flex-shrink: 0; width: 1.25em; text-align: center;
+  }
+  .chapter-kicker {
+    display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .chapter-title {
+    font-family: 'Shippori Mincho', serif; font-weight: 600; font-size: 1.18rem; color: var(--ink);
+  }
+  .chapter-intro {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: 1.1rem; color: var(--ink-soft); line-height: 1.5; max-width: 48ch;
+    margin-top: 0.9rem;
+  }
+
+
+  .day-card {
+    display: flex; align-items: baseline; gap: 1rem;
+    padding: 0.95rem 0; text-decoration: none; color: inherit;
+    border-bottom: 1px solid var(--line);
+  }
+  .chapter .day-card:last-of-type { border-bottom: none; }
+  .day-card .day-date {
+    font-family: 'Shippori Mincho', serif; font-size: 0.82rem; color: var(--gold);
+    flex-shrink: 0; width: 4.4em; line-height: 1.3;
+  }
+  .day-card .day-date .dow {
+    display: block; font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7;
+  }
+  .day-card .day-date .unconfirmed { color: var(--red-soft); }
+  .day-card .day-kanji {
+    font-family: 'Shippori Mincho', serif; font-size: 1.15rem; color: var(--ink-soft);
+    flex-shrink: 0; width: 1.5em; text-align: center;
+  }
+  .day-card .day-body h3 {
+    font-family: 'Shippori Mincho', serif; font-weight: 600; font-size: 1.04rem; color: var(--ink);
+  }
+  .day-card .day-hook {
+    display: block; font-size: 0.87rem; color: var(--ink-soft); margin-top: 0.25rem;
+    font-style: italic; font-family: 'Cormorant Garamond', serif; line-height: 1.4;
+  }
+  .day-card .arrow {
+    margin-left: auto; color: var(--red); opacity: 0.5; flex-shrink: 0; align-self: center;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .day-card:hover .arrow { opacity: 1; transform: translateX(3px); }
+  .day-card:hover h3 { color: var(--red); }
+
+  .chapter-footnote {
+    margin-top: 0.9rem; font-size: 0.76rem; color: #8a8378;
+  }
+
+  /* ---------- Общее и справочники: distinct tool, distinct accent —
+     four of the site's own colors (red / red-soft / gold / blue), nothing new. ---------- */
+  .tool-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
+  }
+  .tool-card {
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 0.45rem;
+    padding: 1.15rem 1.15rem 1.3rem;
+    border-radius: 4px; border: 1px solid var(--line);
+    background: #FFFFFF;
+    text-decoration: none; color: inherit;
+  }
+  .tool-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+  }
+  .tool-card.-blue { --accent: var(--blue); }
+  .tool-card.-gold { --accent: var(--gold); }
+  .tool-card.-red  { --accent: var(--red); }
+  .tool-card.-ink  { --accent: var(--ink); }
+  .tool-card .tool-kanji {
+    font-family: 'Shippori Mincho', serif; font-weight: 600;
+    font-size: 1.6rem; color: var(--accent); line-height: 1;
+  }
+  .tool-card h3 {
+    font-family: 'Shippori Mincho', serif; font-weight: 600;
+    font-size: 1.02rem; color: var(--accent); margin: 0.15rem 0 0;
+  }
+  .tool-card .tool-desc {
+    font-size: 0.78rem; color: var(--ink-soft); line-height: 1.4; flex: 1;
+  }
+  .tool-card .tool-arrow {
+    align-self: flex-end; color: var(--accent); opacity: 0.7;
+    font-size: 0.95rem; transition: transform 0.2s, opacity 0.2s;
+  }
+  .tool-card:hover .tool-arrow { opacity: 1; transform: translateX(3px); }
+
+  @media (max-width: 480px) {
+    .tool-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .tool-card { padding: 1rem 1rem 1.1rem; }
+  }
+
+  @media (max-width: 560px) {
+    .day-card { gap: 0.7rem; }
+    .day-card .day-date { width: 3.5em; font-size: 0.72rem; }
+    .chapter-glyph { font-size: 1.8rem; }
   }
 
   /* ---------- Top bar: consistent site-wide nav strip ---------- */
@@ -337,6 +453,21 @@ body.site-nav-locked { overflow: hidden; }
 }
 .site-nav-viewall:hover { color: var(--red-soft); }
 
+.site-nav-chapter { margin-bottom: 0.2rem; }
+.site-nav-chapter > summary {
+  display: flex; align-items: center; justify-content: space-between;
+  list-style: none; cursor: pointer;
+  padding: 0.42rem 0.4rem; border-radius: 5px;
+  font-family: 'Shippori Mincho', serif; font-size: 0.86rem; color: var(--ink);
+}
+.site-nav-chapter > summary::-webkit-details-marker { display: none; }
+.site-nav-chapter > summary::after {
+  content: "＋"; color: var(--gold); font-size: 0.82rem; flex-shrink: 0; margin-left: 0.6rem;
+}
+.site-nav-chapter[open] > summary::after { content: "－"; }
+.site-nav-chapter > summary:hover { color: var(--red); background: rgba(178,58,46,0.05); }
+.site-nav-chapter ul { list-style: none; padding-left: 0.3rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .site-nav-drawer { transition: none; }
 }
@@ -347,6 +478,7 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="torii-line" aria-hidden="true"></div>
 
+<div class="entry-screen">
 <div class="top-bar">
   <span class="title">Japan 2026</span>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
@@ -354,21 +486,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <header class="hero">
   <span class="hero-glyph" aria-hidden="true">道</span>
-  <span class="hero-sun" aria-hidden="true"></span>
 
   <div class="hero-inner">
-    <h1 class="hero-title">Japan 2026</h1>
     <div class="hero-quote">
       <span class="quote-jp">道に迷うことこそ、道を知ることだ</span>
       <blockquote>Заблудиться — это и есть способ найти дорогу</blockquote>
     </div>
   </div>
-
-  <nav class="index-bar">
-    <a class="stop" href="#section-days"><span class="dot"></span><span class="stop-label">Дни</span></a>
-    <span class="connector" aria-hidden="true"></span>
-    <a class="stop" href="#section-common"><span class="dot"></span><span class="stop-label">Общее</span></a>
-  </nav>
 </header>
 
 <section class="dashboard">
@@ -391,200 +515,289 @@ body.site-nav-locked { overflow: hidden; }
     </div>
   </div>
   <div class="dash-route">
+    <span class="dash-label">Погода</span>
+    <div class="route-line" id="weatherLine">+24…27° днём · +18…20° ночью · тайфуны позади</div>
+  </div>
+  <div class="dash-route">
     <span class="dash-label">Маршрут</span>
     <div class="route-line">
       <span>Tokyo</span><span class="route-arrow">→</span><span>Kyoto</span><span class="route-arrow">→</span><span>Kanazawa</span><span class="route-arrow">→</span><span>Tokyo</span>
     </div>
-    <span class="route-note">Osaka — day trip из Kyoto</span>
   </div>
 </section>
+</div>
 
 <main class="wrap">
 
   <h2 class="section-label" id="section-days">Дни поездки</h2>
-  <p class="section-note" id="daysReadyNote">Готово 17 дней из маршрута — остальные появятся по мере подготовки.</p>
-  <div class="day-route">
 
-    <a class="day-stop" href="asakusa-day.html">
-      <span class="day-kanji">浅</span>
-      <span class="day-text">
-        <h3>Asakusa Day</h3>
-        <span class="day-area">Taitō</span>
-      </span>
-      <span class="arrow">→</span>
+  <!-- ===== Глава I · Tokyo I ===== -->
+  <details class="chapter">
+    <summary class="chapter-head">
+      <span class="chapter-glyph">東</span>
+      <div>
+        <span class="chapter-kicker">Глава I · 22–27 сентября</span>
+        <h3 class="chapter-title">Tokyo I</h3>
+        <p class="chapter-intro">Первая посадка. Прилёт 23-го днём, и пять ночей на то, чтобы сбить джетлаг и понять, что этот город не собирается объяснять себя новичкам — придётся разбираться самим.</p>
+      </div>
+    </summary>
+    <div class="chapter-body">
+    <div class="chapter-days">
+
+      <a class="day-card" href="asakusa-day.html">
+        <span class="day-date">24 сен<span class="dow">чт</span></span>
+        <span class="day-kanji">浅</span>
+        <span class="day-body">
+          <h3>Asakusa Day</h3>
+          <span class="day-hook">Старейший храм города и первый настоящий день в Японии</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="shinjuku-day.html">
+        <span class="day-date">25 сен<span class="dow">пт</span></span>
+        <span class="day-kanji">新</span>
+        <span class="day-body">
+          <h3>Shinjuku Day</h3>
+          <span class="day-hook">Дух японский, ремесло с Запада — небоскрёбы там, где раньше был квартал грехов</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="shimokitazawa-day.html">
+        <span class="day-date">26 сен<span class="dow">сб</span></span>
+        <span class="day-kanji">猫</span>
+        <span class="day-body">
+          <h3>Shimokitazawa Day</h3>
+          <span class="day-hook">Винтажные лавки и театры в квартале, куда туристы почти не доходят</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+    </div>
+  </details>
+
+  <!-- ===== Глава II · Kyoto и окрестности — сэмпл нового вида ===== -->
+  <details class="chapter">
+    <summary class="chapter-head">
+      <span class="chapter-glyph">京</span>
+      <div>
+        <span class="chapter-kicker">Глава II · 27 сентября — 4 октября</span>
+        <h3 class="chapter-title">Kyoto & Environs</h3>
+        <p class="chapter-intro">Столица тысячу лет училась быть тихой — ровно в те века, когда Tokyo ещё не родился. Семь дней в городе, который никогда не сгорал полностью и поэтому обязан быть подлинным.</p>
+      </div>
+    </summary>
+    <div class="chapter-body">
+    <div class="chapter-days">
+
+      <a class="day-card" href="philosophers-path-day.html">
+        <span class="day-date">27 сен<span class="dow">вс</span></span>
+        <span class="day-kanji">哲</span>
+        <span class="day-body">
+          <h3>Philosopher's Path Day</h3>
+          <span class="day-hook">Тихий канал, вдоль которого философы протоптали дорогу, думая о смысле</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="arashiyama-day.html">
+        <span class="day-date">28 сен<span class="dow">пн</span></span>
+        <span class="day-kanji">嵐</span>
+        <span class="day-body">
+          <h3>Arashiyama Day</h3>
+          <span class="day-hook">Бамбук, который шумит громче города, и храм, куда пускают не всех</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="fushimi-nijo-day.html">
+        <span class="day-date">29 сен<span class="dow">вт</span></span>
+        <span class="day-kanji">狐</span>
+        <span class="day-body">
+          <h3>Fushimi & Nijō Day</h3>
+          <span class="day-hook">Тысяча тории в гору и замок сёгуна, который сам себя перехитрил</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="omihachiman-day.html">
+        <span class="day-date">30 сен<span class="dow">ср</span></span>
+        <span class="day-kanji">近</span>
+        <span class="day-body">
+          <h3>Omihachiman Day</h3>
+          <span class="day-hook">Город торговцев, придумавших этику капитализма за 400 лет до Adam Smith</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="higashiyama-day.html">
+        <span class="day-date">1 окт<span class="dow">чт</span></span>
+        <span class="day-kanji">東</span>
+        <span class="day-body">
+          <h3>Higashiyama Day</h3>
+          <span class="day-hook">Гейши, храмы и встреча, которую стоит проживать как единственную</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="kinkaku-day.html">
+        <span class="day-date">2 окт<span class="dow">пт</span></span>
+        <span class="day-kanji">金</span>
+        <span class="day-body">
+          <h3>Kinkaku-ji Day</h3>
+          <span class="day-hook">Золотой павильон, которым дед ответил на скромность внука</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="osaka-day.html">
+        <span class="day-date">3 окт<span class="dow">сб</span></span>
+        <span class="day-kanji">大阪</span>
+        <span class="day-body">
+          <h3>Osaka Day</h3>
+          <span class="day-hook">День, когда Kyoto одевается, а Osaka — ест</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+    </div>
+  </details>
+
+  <!-- ===== Глава III · Kanazawa — старый вид, для сравнения ===== -->
+  <details class="chapter">
+    <summary class="chapter-head">
+      <span class="chapter-glyph">箔</span>
+      <div>
+        <span class="chapter-kicker">Глава III · 4–5 октября</span>
+        <h3 class="chapter-title">Kanazawa</h3>
+        <p class="chapter-intro">Город, которому повезло — бомбардировщики его не тронули, и золото на каждой стене выжило вместе с кварталами эпохи Эдо.</p>
+      </div>
+    </summary>
+    <div class="chapter-body">
+    <div class="chapter-days">
+
+      <a class="day-card" href="kanazawa-day.html">
+        <span class="day-date">4 окт<span class="dow">вс</span></span>
+        <span class="day-kanji">箔</span>
+        <span class="day-body">
+          <h3>Kanazawa Day</h3>
+          <span class="day-hook">Золото на каждом углу и город, который забыли сжечь бомбардировщики</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="kenrokuen-day.html">
+        <span class="day-date">5 окт<span class="dow">пн</span></span>
+        <span class="day-kanji">六</span>
+        <span class="day-body">
+          <h3>Kenrokuen Day</h3>
+          <span class="day-hook">Сад, который триста лет собирал шесть совершенств — а после обеда уже Tokyo</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+    </div>
+  </details>
+
+  <!-- ===== Глава IV · Tokyo II ===== -->
+  <details class="chapter">
+    <summary class="chapter-head">
+      <span class="chapter-glyph">新</span>
+      <div>
+        <span class="chapter-kicker">Глава IV · 5–11 октября</span>
+        <h3 class="chapter-title">Tokyo II</h3>
+        <p class="chapter-intro">Тот же город, но уже не чужой. Пять дней, Крис уже на месте с 4-го, и Tokyo, который наконец можно не изучать, а просто в нём жить.</p>
+      </div>
+    </summary>
+    <div class="chapter-body">
+    <div class="chapter-days">
+
+      <a class="day-card" href="teamlab-odaiba-day.html">
+        <span class="day-date">6 окт<span class="dow">вт</span></span>
+        <span class="day-kanji">波</span>
+        <span class="day-body">
+          <h3>teamLab & Odaiba Day</h3>
+          <span class="day-hook">Луна, которая идёт на убыль, как только достигает полноты — и остров цифрового света</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="kamakura-day.html">
+        <span class="day-date">7 окт<span class="dow">ср</span></span>
+        <span class="day-kanji">鎌倉</span>
+        <span class="day-body">
+          <h3>Kamakura Day</h3>
+          <span class="day-hook">Столица самураев, которая расцвела и рассыпалась за полтора века</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="akihabara-day.html">
+        <span class="day-date">8 окт<span class="dow">чт</span></span>
+        <span class="day-kanji">神</span>
+        <span class="day-body">
+          <h3>Kanda & Akihabara Day</h3>
+          <span class="day-hook">Квартал, где до электроники были книги, а до книг — оружейники сёгуна</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="harajuku-shibuya-day.html">
+        <span class="day-date">9 окт<span class="dow">пт</span></span>
+        <span class="day-kanji">森</span>
+        <span class="day-body">
+          <h3>Harajuku & Shibuya Day</h3>
+          <span class="day-hook">Самый громкий перекрёсток мира и переулок, придумавший моду с нуля</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="day-card" href="ginza-day.html">
+        <span class="day-date">10 окт<span class="dow">сб</span></span>
+        <span class="day-kanji">銀</span>
+        <span class="day-body">
+          <h3>Ginza Day</h3>
+          <span class="day-hook">Последний полный день — и он проходит там же, где вы жили всё это время</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+    </div>
+  </details>
+
+  <h2 class="section-label" id="section-common" style="margin-top: 3.6rem;">Общее и справочники</h2>
+  <div class="tool-grid">
+
+    <a class="tool-card -blue" href="trip-logistics.html">
+      <span class="tool-kanji">旅</span>
+      <h3>Logistics</h3>
+      <span class="tool-desc">Рейсы, отели, брони и когда что открывается</span>
+      <span class="tool-arrow">→</span>
     </a>
 
-    <a class="day-stop" href="shimokitazawa-day.html">
-      <span class="day-kanji">猫</span>
-      <span class="day-text">
-        <h3>Shimokitazawa Day</h3>
-        <span class="day-area">Setagaya</span>
-      </span>
-      <span class="arrow">→</span>
+    <a class="tool-card -gold" href="trip-info.html">
+      <span class="tool-kanji">心</span>
+      <h3>Info</h3>
+      <span class="tool-desc">SIM, деньги, розетки, экстренные номера</span>
+      <span class="tool-arrow">→</span>
     </a>
 
-    <a class="day-stop" href="philosophers-path-day.html">
-      <span class="day-kanji">哲</span>
-      <span class="day-text">
-        <h3>Philosopher's Path Day</h3>
-        <span class="day-area">North Higashiyama</span>
-      </span>
-      <span class="arrow">→</span>
+    <a class="tool-card -red" href="shopping.html">
+      <span class="tool-kanji">買</span>
+      <h3>Shopping</h3>
+      <span class="tool-desc">Что и где покупать, tax-free, размеры</span>
+      <span class="tool-arrow">→</span>
     </a>
 
-    <a class="day-stop" href="fushimi-nijo-day.html">
-      <span class="day-kanji">狐</span>
-      <span class="day-text">
-        <h3>Fushimi & Nijō Day</h3>
-        <span class="day-area">Fushimi/Gion</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="arashiyama-day.html">
-      <span class="day-kanji">嵐</span>
-      <span class="day-text">
-        <h3>Arashiyama Day</h3>
-        <span class="day-area">Ukyō-ku</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="omihachiman-day.html">
-      <span class="day-kanji">近</span>
-      <span class="day-text">
-        <h3>Omihachiman Day</h3>
-        <span class="day-area">Shiga</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="higashiyama-day.html">
-      <span class="day-kanji">東</span>
-      <span class="day-text">
-        <h3>Higashiyama Day</h3>
-        <span class="day-area">Higashiyama-ku</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="kinkaku-day.html">
-      <span class="day-kanji">金</span>
-      <span class="day-text">
-        <h3>Kinkaku-ji Day</h3>
-        <span class="day-area">Kita-ku</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="osaka-day.html">
-      <span class="day-kanji">大阪</span>
-      <span class="day-text">
-        <h3>Osaka Day</h3>
-        <span class="day-area">Osaka</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="kanazawa-day.html">
-      <span class="day-kanji">箔</span>
-      <span class="day-text">
-        <h3>Kanazawa Day</h3>
-        <span class="day-area">Kanazawa</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="kenrokuen-day.html">
-      <span class="day-kanji">六</span>
-      <span class="day-text">
-        <h3>Kenrokuen Day</h3>
-        <span class="day-area">Kanazawa → Tokyo</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="teamlab-odaiba-day.html">
-      <span class="day-kanji">波</span>
-      <span class="day-text">
-        <h3>teamLab & Odaiba Day</h3>
-        <span class="day-area">Kōtō · Minato</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="kamakura-day.html">
-      <span class="day-kanji">鎌倉</span>
-      <span class="day-text">
-        <h3>Kamakura Day</h3>
-        <span class="day-area">Kamakura</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="akihabara-day.html">
-      <span class="day-kanji">神</span>
-      <span class="day-text">
-        <h3>Kanda & Akihabara Day</h3>
-        <span class="day-area">Chiyoda</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="harajuku-shibuya-day.html">
-      <span class="day-kanji">森</span>
-      <span class="day-text">
-        <h3>Harajuku & Shibuya Day</h3>
-        <span class="day-area">Shibuya-ku</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="ginza-day.html">
-      <span class="day-kanji">銀</span>
-      <span class="day-text">
-        <h3>Ginza Day</h3>
-        <span class="day-area">Chiyoda · Chūō</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="shinjuku-day.html">
-      <span class="day-kanji">新</span>
-      <span class="day-text">
-        <h3>Shinjuku Day</h3>
-        <span class="day-area">Shinjuku-ku</span>
-      </span>
-      <span class="arrow">→</span>
-    </a>
-
-  </div>
-
-  <h2 class="section-label" id="section-common">Общее и справочники</h2>
-  <div class="day-route">
-
-    <a class="day-stop" href="trip-logistics.html">
-      <span class="day-kanji">旅</span>
-      <span class="day-text"><h3>Logistics</h3></span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="trip-info.html">
-      <span class="day-kanji">心</span>
-      <span class="day-text"><h3>Info</h3></span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="shopping.html">
-      <span class="day-kanji">買</span>
-      <span class="day-text"><h3>Shopping</h3></span>
-      <span class="arrow">→</span>
-    </a>
-
-    <a class="day-stop" href="glossary.html">
-      <span class="day-kanji">語</span>
-      <span class="day-text"><h3>Glossary</h3></span>
-      <span class="arrow">→</span>
+    <a class="tool-card -ink" href="glossary.html">
+      <span class="tool-kanji">語</span>
+      <h3>Glossary</h3>
+      <span class="tool-desc">Все термины и понятия</span>
+      <span class="tool-arrow">→</span>
     </a>
 
   </div>
@@ -799,18 +1012,46 @@ window.SITE_DATA = {
   }
   updateCountdown();
 
-  // ---- Готовность дней: считаем прямо из SITE_DATA, вручную текст не трогаем ----
-  function pluralDays(n) {
-    const mod10 = n % 10, mod100 = n % 100;
-    if (mod10 === 1 && mod100 !== 11) return 'день';
-    if ([2,3,4].includes(mod10) && ![12,13,14].includes(mod100)) return 'дня';
-    return 'дней';
+  // ---- Погода в Токио на день прилёта: если прогноз уже доступен (обычно
+  // за ~2 недели), подставляем реальные цифры; иначе остаётся сезонная фраза. ----
+  // ---- Погода: до вылета — сезонное среднее (текст в HTML остаётся как есть).
+  // Во время поездки (22 сен — 11 окт) — прогноз на завтра по городу той главы,
+  // в которой сейчас идёт маршрут, по местному токийскому времени. ----
+  async function updateWeather() {
+    const el = document.getElementById('weatherLine');
+    const now = new Date();
+    const jstNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+
+    const legs = [
+      { from: '2026-09-22', to: '2026-09-27', city: 'Tokyo',    lat: 35.68,  lon: 139.69 },
+      { from: '2026-09-27', to: '2026-10-04', city: 'Kyoto',    lat: 35.01,  lon: 135.77 },
+      { from: '2026-10-04', to: '2026-10-05', city: 'Kanazawa', lat: 36.56,  lon: 136.66 },
+      { from: '2026-10-05', to: '2026-10-11', city: 'Tokyo',    lat: 35.68,  lon: 139.69 },
+    ];
+    const todayISO = jstNow.toISOString().slice(0, 10);
+    const leg = legs.find(l => todayISO >= l.from && todayISO <= l.to);
+    if (!leg) return; // до вылета или после возвращения — сезонная фраза остаётся
+
+    const tomorrow = new Date(jstNow); tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowISO = tomorrow.toISOString().slice(0, 10);
+
+    try {
+      const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${leg.lat}&longitude=${leg.lon}` +
+        '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
+        `&timezone=Asia%2FTokyo&start_date=${tomorrowISO}&end_date=${tomorrowISO}`
+      );
+      const data = await res.json();
+      const max = data && data.daily && data.daily.temperature_2m_max && data.daily.temperature_2m_max[0];
+      const min = data && data.daily && data.daily.temperature_2m_min && data.daily.temperature_2m_min[0];
+      const rain = data && data.daily && data.daily.precipitation_probability_max && data.daily.precipitation_probability_max[0];
+      if (typeof max === 'number' && typeof min === 'number') {
+        const rainNote = typeof rain === 'number' ? ` · дождь ${rain}%` : '';
+        el.textContent = `${leg.city}, завтра: +${Math.round(min)}…${Math.round(max)}°${rainNote}`;
+      }
+    } catch (e) { /* offline / file:// — оставляем сезонную фразу */ }
   }
-  if (window.SITE_DATA) {
-    const n = window.SITE_DATA.days.length;
-    document.getElementById('daysReadyNote').textContent =
-      `Готово ${n} ${pluralDays(n)} из маршрута — остальные появятся по мере подготовки.`;
-  }
+  updateWeather();
 </script>
 
 <script>
@@ -823,7 +1064,7 @@ window.SITE_DATA = {
   // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-  const TEASER_PLACE_COUNT = 6;
+  const TEASER_PLACE_COUNT = 2;
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -860,7 +1101,16 @@ window.SITE_DATA = {
     drawer.className = 'site-nav-drawer';
     drawer.id = 'siteNavDrawer';
 
-    const daysHtml = DATA.days.map(dayLinkHtml).join('');
+    const CHAPTERS = [
+      { label: "Tokyo I",          files: ["asakusa-day.html", "shinjuku-day.html", "shimokitazawa-day.html"] },
+      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "kinkaku-day.html", "osaka-day.html"] },
+      { label: "Kanazawa",         files: ["kanazawa-day.html", "kenrokuen-day.html"] },
+      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "akihabara-day.html", "harajuku-shibuya-day.html", "ginza-day.html"] },
+    ];
+    const daysHtml = CHAPTERS.map(ch => {
+      const items = ch.files.map(f => DATA.days.find(d => d.file === f)).filter(Boolean).map(dayLinkHtml).join('');
+      return `<details class="site-nav-chapter"><summary>${escapeHtml(ch.label)}</summary><ul>${items}</ul></details>`;
+    }).join('');
     const toolsHtml = DATA.tools.map(toolLinkHtml).join('');
     const placesTeaser = DATA.places.slice(0, TEASER_PLACE_COUNT).map(placeLinkHtml).join('');
     const placesAll = DATA.places.map(placeLinkHtml).join('');
@@ -878,7 +1128,7 @@ window.SITE_DATA = {
 
         <div class="site-nav-group" data-group="days">
           <div class="site-nav-label">Дни поездки</div>
-          <ul>${daysHtml}</ul>
+          ${daysHtml}
         </div>
 
         <div class="site-nav-group" data-group="tools">
@@ -910,6 +1160,7 @@ window.SITE_DATA = {
     const placesTeaserList = document.getElementById('siteNavPlacesTeaser');
     const placesAllList = document.getElementById('siteNavPlacesAll');
     const groups = drawer.querySelectorAll('.site-nav-group');
+    const chapterDetails = drawer.querySelectorAll('.site-nav-chapter');
 
     function open() {
       drawer.classList.add('open');
@@ -940,6 +1191,7 @@ window.SITE_DATA = {
           g.classList.remove('site-nav-hidden');
           g.querySelectorAll('li').forEach(li => li.classList.remove('site-nav-hidden'));
         });
+        chapterDetails.forEach(d => { d.open = false; });
         empty.classList.remove('visible');
         return;
       }
@@ -960,6 +1212,10 @@ window.SITE_DATA = {
         });
         g.classList.toggle('site-nav-hidden', !groupVisible);
         if (groupVisible) anyVisible = true;
+      });
+      chapterDetails.forEach(d => {
+        const hasVisible = !!d.querySelector('li:not(.site-nav-hidden)');
+        d.open = hasVisible;
       });
       empty.classList.toggle('visible', !anyVisible);
     });
