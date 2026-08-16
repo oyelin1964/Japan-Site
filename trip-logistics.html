@@ -260,6 +260,24 @@
     vertical-align: middle;
   }
   .status-tag.pending { color: var(--gold); background: rgba(168,124,79,0.13); }
+  .pretrip-tag {
+    display: inline-block;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold);
+    background: rgba(140,98,57,0.15);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .logi-card.pretrip {
+    border-style: dashed;
+    border-color: var(--gold);
+    background: var(--paper-deep);
+  }
 
   .logi-meta {
     display: grid;
@@ -451,6 +469,7 @@
     font-size: 0.82rem; color: var(--red); text-decoration: none;
     display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
   }
+  .top-bar a.title-link { text-decoration: none; }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
@@ -561,6 +580,21 @@ body.site-nav-locked { overflow: hidden; }
 }
 .site-nav-viewall:hover { color: var(--red-soft); }
 
+.site-nav-chapter { margin-bottom: 0.2rem; }
+.site-nav-chapter > summary {
+  display: flex; align-items: center; justify-content: space-between;
+  list-style: none; cursor: pointer;
+  padding: 0.42rem 0.4rem; border-radius: 5px;
+  font-family: 'Shippori Mincho', serif; font-size: 0.86rem; color: var(--ink);
+}
+.site-nav-chapter > summary::-webkit-details-marker { display: none; }
+.site-nav-chapter > summary::after {
+  content: "＋"; color: var(--gold); font-size: 0.82rem; flex-shrink: 0; margin-left: 0.6rem;
+}
+.site-nav-chapter[open] > summary::after { content: "－"; }
+.site-nav-chapter > summary:hover { color: var(--red); background: rgba(178,58,46,0.05); }
+.site-nav-chapter ul { list-style: none; padding-left: 0.3rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .site-nav-drawer { transition: none; }
 }
@@ -572,7 +606,7 @@ body.site-nav-locked { overflow: hidden; }
 <div class="torii-line" aria-hidden="true"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
@@ -618,7 +652,7 @@ body.site-nav-locked { overflow: hidden; }
     </div>
   </div>
   </div>
-  <p class="route-caption">Крис присоединяется в Токио 4 октября и живёт отдельно в Ginza с 4-го; остальные — с 5-го. Сэнди прилетает из Кореи отдельно, обратно летит вместе со всеми.</p>
+  <p class="route-caption">Крис присоединяется в Токио 4 октября и живёт отдельно в Ginza с 4-го; остальные — с 5-го. Сэнди прилетает из Кореи отдельно — с ночёвкой в Инчхоне 21→22 Sep и утренним рейсом из Сеула, — обратно летит вместе со всеми.</p>
 
   <nav class="tabs-nav">
     <button class="tab-btn active" data-tab="t1">Flights</button>
@@ -628,6 +662,25 @@ body.site-nav-locked { overflow: hidden; }
 
   <!-- TAB 1: Flights -->
   <section class="tab-panel active" id="t1">
+
+    <h4>Долёт Сэнди — до старта общей поездки</h4>
+
+    <div class="logi-card pretrip">
+      <div class="logi-card-header">
+        <span class="logi-card-title">ICN → NRT <span class="traveler-tag">Sandy</span><span class="pretrip-tag">До старта поездки</span></span>
+        <span class="logi-card-dates">22 Sep 2026</span>
+      </div>
+      <div class="logi-meta">
+        <div><span class="logi-label">Рейс</span>Air Seoul RS705</div>
+        <div><span class="logi-label">Вылет</span>22 Sep 08:10 · Seoul (ICN)</div>
+        <div><span class="logi-label">Прилёт</span>22 Sep 10:40 · Narita (NRT)</div>
+        <div><span class="logi-label">Тип</span>Прямой · 2ч 30м · Economy</div>
+        <div><span class="logi-label">PNR</span>40-1072975039 · PIN 0338</div>
+      </div>
+      <div class="logi-note">Отдельный перелёт Сэнди из Кореи, не из Тель-Авива — и раньше остальных: Olga вылетает тем же днём вечером, 22 Sep 19:45. Билет гибкий: смена даты/времени бесплатна за 24 часа до вылета, доплата — только за разницу в цене.</div>
+    </div>
+
+    <h4>Перелёты группы</h4>
 
     <div class="logi-card">
       <div class="logi-card-header">
@@ -675,6 +728,28 @@ body.site-nav-locked { overflow: hidden; }
 
   <!-- TAB 2: Hotels -->
   <section class="tab-panel" id="t2">
+
+    <h4>Ночь Сэнди в Инчхоне — до старта общей поездки</h4>
+
+    <div class="logi-card pretrip">
+      <div class="logi-card-header">
+        <span class="logi-card-title">Incheon (Eulwang-ri) Brown Dot <span class="traveler-tag">Sandy</span><span class="pretrip-tag">До старта поездки</span></span>
+        <span class="logi-card-dates">21–22 Sep · 1 ночь</span>
+      </div>
+      <div class="logi-meta">
+        <div><span class="logi-label">Booking No.</span>690196627</div>
+        <div><span class="logi-label">Заезд / выезд</span>21 Sep с 15:00 — 22 Sep до 12:00</div>
+        <div><span class="logi-label">Телефон отеля</span>+82 32 746 6860</div>
+        <div><span class="logi-label">Номер</span>X Standard Room 1 · 20 м², для некурящих, одна двуспальная кровать</div>
+        <div><span class="logi-label">Цена</span>₪125.34 (включая налог ₪11.39)</div>
+      </div>
+      <div class="logi-lines">
+        <div class="logi-line"><span class="logi-label">Адрес</span>6 Yongyuseo-ro 480beon-gil, Jung-gu, Incheon, Республика Корея 22383</div>
+      </div>
+      <div class="logi-note">2-звёздный отель у аэропорта Incheon — ночёвка перед утренним рейсом Air Seoul RS705 в Токио (см. Flights). Бронь только на Сэнди: в эту ночь остальные ещё в Тель-Авиве.</div>
+    </div>
+
+    <h4>Основные брони</h4>
 
     <div class="logi-card">
       <div class="logi-card-header">
@@ -1012,7 +1087,7 @@ window.SITE_DATA = {
   // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-  const TEASER_PLACE_COUNT = 6;
+  const TEASER_PLACE_COUNT = 2;
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1049,7 +1124,16 @@ window.SITE_DATA = {
     drawer.className = 'site-nav-drawer';
     drawer.id = 'siteNavDrawer';
 
-    const daysHtml = DATA.days.map(dayLinkHtml).join('');
+    const CHAPTERS = [
+      { label: "Tokyo I",          files: ["asakusa-day.html", "shinjuku-day.html", "shimokitazawa-day.html"] },
+      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "kinkaku-day.html", "osaka-day.html"] },
+      { label: "Kanazawa",         files: ["kanazawa-day.html", "kenrokuen-day.html"] },
+      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "akihabara-day.html", "harajuku-shibuya-day.html", "ginza-day.html"] },
+    ];
+    const daysHtml = CHAPTERS.map(ch => {
+      const items = ch.files.map(f => DATA.days.find(d => d.file === f)).filter(Boolean).map(dayLinkHtml).join('');
+      return `<details class="site-nav-chapter"><summary>${escapeHtml(ch.label)}</summary><ul>${items}</ul></details>`;
+    }).join('');
     const toolsHtml = DATA.tools.map(toolLinkHtml).join('');
     const placesTeaser = DATA.places.slice(0, TEASER_PLACE_COUNT).map(placeLinkHtml).join('');
     const placesAll = DATA.places.map(placeLinkHtml).join('');
@@ -1067,7 +1151,7 @@ window.SITE_DATA = {
 
         <div class="site-nav-group" data-group="days">
           <div class="site-nav-label">Дни поездки</div>
-          <ul>${daysHtml}</ul>
+          ${daysHtml}
         </div>
 
         <div class="site-nav-group" data-group="tools">
@@ -1099,6 +1183,7 @@ window.SITE_DATA = {
     const placesTeaserList = document.getElementById('siteNavPlacesTeaser');
     const placesAllList = document.getElementById('siteNavPlacesAll');
     const groups = drawer.querySelectorAll('.site-nav-group');
+    const chapterDetails = drawer.querySelectorAll('.site-nav-chapter');
 
     function open() {
       drawer.classList.add('open');
@@ -1119,7 +1204,7 @@ window.SITE_DATA = {
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
     search.addEventListener('input', () => {
-      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[-\s]+/g, '').toLowerCase();
+      const normalize = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[-\s]+/g, '').toLowerCase();
       const q = normalize(search.value.trim());
 
       if (q === '') {
@@ -1129,6 +1214,7 @@ window.SITE_DATA = {
           g.classList.remove('site-nav-hidden');
           g.querySelectorAll('li').forEach(li => li.classList.remove('site-nav-hidden'));
         });
+        chapterDetails.forEach(d => { d.open = false; });
         empty.classList.remove('visible');
         return;
       }
@@ -1149,6 +1235,10 @@ window.SITE_DATA = {
         });
         g.classList.toggle('site-nav-hidden', !groupVisible);
         if (groupVisible) anyVisible = true;
+      });
+      chapterDetails.forEach(d => {
+        const hasVisible = !!d.querySelector('li:not(.site-nav-hidden)');
+        d.open = hasVisible;
       });
       empty.classList.toggle('visible', !anyVisible);
     });

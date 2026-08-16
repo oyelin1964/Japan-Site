@@ -677,6 +677,21 @@ body.site-nav-locked { overflow: hidden; }
 }
 .site-nav-viewall:hover { color: var(--red-soft); }
 
+.site-nav-chapter { margin-bottom: 0.2rem; }
+.site-nav-chapter > summary {
+  display: flex; align-items: center; justify-content: space-between;
+  list-style: none; cursor: pointer;
+  padding: 0.42rem 0.4rem; border-radius: 5px;
+  font-family: 'Shippori Mincho', serif; font-size: 0.86rem; color: var(--ink);
+}
+.site-nav-chapter > summary::-webkit-details-marker { display: none; }
+.site-nav-chapter > summary::after {
+  content: "＋"; color: var(--gold); font-size: 0.82rem; flex-shrink: 0; margin-left: 0.6rem;
+}
+.site-nav-chapter[open] > summary::after { content: "－"; }
+.site-nav-chapter > summary:hover { color: var(--red); background: rgba(178,58,46,0.05); }
+.site-nav-chapter ul { list-style: none; padding-left: 0.3rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .site-nav-drawer { transition: none; }
 }
@@ -689,7 +704,7 @@ body.site-nav-locked { overflow: hidden; }
 <div class="toc-scrim" id="tocScrim"></div>
 
 <div class="top-bar">
-  <span class="title">Japan 2026</span>
+  <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
 </div>
 
@@ -2769,7 +2784,7 @@ window.SITE_DATA = {
   // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-  const TEASER_PLACE_COUNT = 6;
+  const TEASER_PLACE_COUNT = 2;
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2806,7 +2821,16 @@ window.SITE_DATA = {
     drawer.className = 'site-nav-drawer';
     drawer.id = 'siteNavDrawer';
 
-    const daysHtml = DATA.days.map(dayLinkHtml).join('');
+    const CHAPTERS = [
+      { label: "Tokyo I",          files: ["asakusa-day.html", "shinjuku-day.html", "shimokitazawa-day.html"] },
+      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "kinkaku-day.html", "osaka-day.html"] },
+      { label: "Kanazawa",         files: ["kanazawa-day.html", "kenrokuen-day.html"] },
+      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "akihabara-day.html", "harajuku-shibuya-day.html", "ginza-day.html"] },
+    ];
+    const daysHtml = CHAPTERS.map(ch => {
+      const items = ch.files.map(f => DATA.days.find(d => d.file === f)).filter(Boolean).map(dayLinkHtml).join('');
+      return `<details class="site-nav-chapter"><summary>${escapeHtml(ch.label)}</summary><ul>${items}</ul></details>`;
+    }).join('');
     const toolsHtml = DATA.tools.map(toolLinkHtml).join('');
     const placesTeaser = DATA.places.slice(0, TEASER_PLACE_COUNT).map(placeLinkHtml).join('');
     const placesAll = DATA.places.map(placeLinkHtml).join('');
@@ -2824,7 +2848,7 @@ window.SITE_DATA = {
 
         <div class="site-nav-group" data-group="days">
           <div class="site-nav-label">Дни поездки</div>
-          <ul>${daysHtml}</ul>
+          ${daysHtml}
         </div>
 
         <div class="site-nav-group" data-group="tools">
@@ -2856,6 +2880,7 @@ window.SITE_DATA = {
     const placesTeaserList = document.getElementById('siteNavPlacesTeaser');
     const placesAllList = document.getElementById('siteNavPlacesAll');
     const groups = drawer.querySelectorAll('.site-nav-group');
+    const chapterDetails = drawer.querySelectorAll('.site-nav-chapter');
 
     function open() {
       drawer.classList.add('open');
@@ -2876,7 +2901,7 @@ window.SITE_DATA = {
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
     search.addEventListener('input', () => {
-      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[-\s]+/g, '').toLowerCase();
+      const normalize = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[-\\s]+/g, '').toLowerCase();
       const q = normalize(search.value.trim());
 
       if (q === '') {
@@ -2886,6 +2911,7 @@ window.SITE_DATA = {
           g.classList.remove('site-nav-hidden');
           g.querySelectorAll('li').forEach(li => li.classList.remove('site-nav-hidden'));
         });
+        chapterDetails.forEach(d => { d.open = false; });
         empty.classList.remove('visible');
         return;
       }
@@ -2906,6 +2932,10 @@ window.SITE_DATA = {
         });
         g.classList.toggle('site-nav-hidden', !groupVisible);
         if (groupVisible) anyVisible = true;
+      });
+      chapterDetails.forEach(d => {
+        const hasVisible = !!d.querySelector('li:not(.site-nav-hidden)');
+        d.open = hasVisible;
       });
       empty.classList.toggle('visible', !anyVisible);
     });

@@ -957,6 +957,21 @@ body.site-nav-locked { overflow: hidden; }
 }
 .site-nav-viewall:hover { color: var(--red-soft); }
 
+.site-nav-chapter { margin-bottom: 0.2rem; }
+.site-nav-chapter > summary {
+  display: flex; align-items: center; justify-content: space-between;
+  list-style: none; cursor: pointer;
+  padding: 0.42rem 0.4rem; border-radius: 5px;
+  font-family: 'Shippori Mincho', serif; font-size: 0.86rem; color: var(--ink);
+}
+.site-nav-chapter > summary::-webkit-details-marker { display: none; }
+.site-nav-chapter > summary::after {
+  content: "＋"; color: var(--gold); font-size: 0.82rem; flex-shrink: 0; margin-left: 0.6rem;
+}
+.site-nav-chapter[open] > summary::after { content: "－"; }
+.site-nav-chapter > summary:hover { color: var(--red); background: rgba(178,58,46,0.05); }
+.site-nav-chapter ul { list-style: none; padding-left: 0.3rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .site-nav-drawer { transition: none; }
 }
@@ -1402,19 +1417,19 @@ window.SITE_DATA = {
 
     { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
     { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-ameyoko",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-yanaka",          day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
+    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
 
     { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
     { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
 
-    { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
     { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
 
     { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
     { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
@@ -1430,13 +1445,13 @@ window.SITE_DATA = {
     { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
   ]
 };
 
@@ -1451,7 +1466,7 @@ window.SITE_DATA = {
   // Figure out the current file so the drawer can skip a self-link.
   const currentFile = window.location.pathname.split('/').pop() || 'index.html';
 
-  const TEASER_PLACE_COUNT = 6;
+  const TEASER_PLACE_COUNT = 2;
 
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1488,7 +1503,16 @@ window.SITE_DATA = {
     drawer.className = 'site-nav-drawer';
     drawer.id = 'siteNavDrawer';
 
-    const daysHtml = DATA.days.map(dayLinkHtml).join('');
+    const CHAPTERS = [
+      { label: "Tokyo I",          files: ["asakusa-day.html", "shinjuku-day.html", "shimokitazawa-day.html"] },
+      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "kinkaku-day.html", "osaka-day.html"] },
+      { label: "Kanazawa",         files: ["kanazawa-day.html", "kenrokuen-day.html"] },
+      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "akihabara-day.html", "harajuku-shibuya-day.html", "ginza-day.html"] },
+    ];
+    const daysHtml = CHAPTERS.map(ch => {
+      const items = ch.files.map(f => DATA.days.find(d => d.file === f)).filter(Boolean).map(dayLinkHtml).join('');
+      return `<details class="site-nav-chapter"><summary>${escapeHtml(ch.label)}</summary><ul>${items}</ul></details>`;
+    }).join('');
     const toolsHtml = DATA.tools.map(toolLinkHtml).join('');
     const placesTeaser = DATA.places.slice(0, TEASER_PLACE_COUNT).map(placeLinkHtml).join('');
     const placesAll = DATA.places.map(placeLinkHtml).join('');
@@ -1506,7 +1530,7 @@ window.SITE_DATA = {
 
         <div class="site-nav-group" data-group="days">
           <div class="site-nav-label">Дни поездки</div>
-          <ul>${daysHtml}</ul>
+          ${daysHtml}
         </div>
 
         <div class="site-nav-group" data-group="tools">
@@ -1538,6 +1562,7 @@ window.SITE_DATA = {
     const placesTeaserList = document.getElementById('siteNavPlacesTeaser');
     const placesAllList = document.getElementById('siteNavPlacesAll');
     const groups = drawer.querySelectorAll('.site-nav-group');
+    const chapterDetails = drawer.querySelectorAll('.site-nav-chapter');
 
     function open() {
       drawer.classList.add('open');
@@ -1558,7 +1583,7 @@ window.SITE_DATA = {
     drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
     search.addEventListener('input', () => {
-      const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[-\s]+/g, '').toLowerCase();
+      const normalize = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[-\\s]+/g, '').toLowerCase();
       const q = normalize(search.value.trim());
 
       if (q === '') {
@@ -1568,6 +1593,7 @@ window.SITE_DATA = {
           g.classList.remove('site-nav-hidden');
           g.querySelectorAll('li').forEach(li => li.classList.remove('site-nav-hidden'));
         });
+        chapterDetails.forEach(d => { d.open = false; });
         empty.classList.remove('visible');
         return;
       }
@@ -1588,6 +1614,10 @@ window.SITE_DATA = {
         });
         g.classList.toggle('site-nav-hidden', !groupVisible);
         if (groupVisible) anyVisible = true;
+      });
+      chapterDetails.forEach(d => {
+        const hasVisible = !!d.querySelector('li:not(.site-nav-hidden)');
+        d.open = hasVisible;
       });
       empty.classList.toggle('visible', !anyVisible);
     });
