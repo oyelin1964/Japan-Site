@@ -319,6 +319,24 @@
   .logi-note p { margin: 0 0 0.5rem; font-size: inherit; color: inherit; }
   .logi-note p:last-child { margin-bottom: 0; }
 
+  .logi-doc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--red);
+    text-decoration: none;
+    border: 1px solid var(--red);
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+  }
+  .logi-doc-link:hover { background: var(--red); color: #fff; }
+  .logi-doc-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
   .cancel-mini { margin: 0.7rem 0 0.1rem; }
   .cancel-mini-label {
     display: block;
@@ -1026,7 +1044,12 @@ body.site-nav-locked { overflow: hidden; }
         <div class="logi-line"><span class="logi-label">Оплата</span>оплачено полностью заранее</div>
         <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до ~1 Oct (точный час не в подтверждении) · далее 50% → 80% → 100%</div>
       </div>
-      <div class="logi-note">Со стиральной машиной, без питания. Отдельная бронь от Olga — Крис прилетает на день раньше и живёт один до 11-го.</div>
+      <div class="logi-note">Со стиральной машиной, без питания. Отдельная бронь от Olga — Крис прилетает на день раньше и живёт один до 11-го.
+        <br><a class="logi-doc-link" href="Confirmation%20Kris%20Stay%20Ginza.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF
+        </a>
+      </div>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
       <div class="logi-card-header">
@@ -1045,7 +1068,12 @@ body.site-nav-locked { overflow: hidden; }
         <div class="logi-line"><span class="logi-label">Payment</span>paid in full in advance</div>
         <div class="logi-line"><span class="logi-label">Cancellation</span>free until ~1 Oct (exact time not in confirmation) · then 50% → 80% → 100%</div>
       </div>
-      <div class="logi-note">Has a washing machine, no meals. A separate booking from Olga's — Kris arrives a day earlier and stays alone until the 11th.</div>
+      <div class="logi-note">Has a washing machine, no meals. A separate booking from Olga's — Kris arrives a day earlier and stays alone until the 11th.
+        <br><a class="logi-doc-link" href="Confirmation%20Kris%20Stay%20Ginza.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF
+        </a>
+      </div>
     </div>
 
     <div class="logi-card" data-lang="ru">
