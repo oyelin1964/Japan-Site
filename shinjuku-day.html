@@ -711,6 +711,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -845,7 +874,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -859,29 +894,42 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">和魂洋才</span>
-    <blockquote>Дух — японский, ремесло — с Запада</blockquote>
-    <span class="quote-author">Лозунг эпохи Meiji</span>
+    <span class="quote-jp" data-lang="ru">和魂洋才</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">和魂洋才</span>
+    <blockquote data-lang="ru">Дух — японский, ремесло — с Запада</blockquote>
+    <blockquote data-lang="en" style="display:none;">Japanese spirit, Western skill</blockquote>
+    <span class="quote-author" data-lang="ru">Лозунг эпохи Meiji</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Slogan of the Meiji era</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Старт не с утра</strong> — сад и часть точек днём и так недоступны раньше 9:00, а вечерние места (Omoide Yokocho, Golden-Gai) откроются только к вечеру; спешить некуда, можно выйти к 10:30–11:00</li>
       <li><strong>Shinjuku Gyoen</strong> — вход платный, последний вход в 16:00; закрыт по понедельникам (сегодня пятница — не актуально)</li>
       <li><strong>Udon Shin</strong> — только наличные, вход по номеркам, готовься к очереди</li>
       <li><strong>Omoide Yokocho</strong> — большинство точек открывается не раньше 16:00–17:00, днём там почти пусто</li>
       <li><strong>Golden-Gai</strong> — почти в каждом баре отдельная плата за место (table charge, 500–1000 иен), указана у входа</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>No need for an early start</strong> — the garden and several stops aren't open before 9:00 anyway, and the evening spots (Omoide Yokocho, Golden-Gai) won't wake up until dark; leaving around 10:30–11:00 is fine</li>
+      <li><strong>Shinjuku Gyoen</strong> — paid entry, last admission 16:00; closed Mondays (today's Friday, so it's not an issue)</li>
+      <li><strong>Udon Shin</strong> — cash only, numbered-ticket entry, expect a line</li>
+      <li><strong>Omoide Yokocho</strong> — most stalls don't open before 16:00–17:00, nearly dead during the day</li>
+      <li><strong>Golden-Gai</strong> — almost every bar charges a separate table fee (500–1000 yen), posted at the door</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-gyoen">Shinjuku Gyoen</button>
     <button class="nav-place-btn" data-target="loc-talongrise">LE TALON GRISE</button>
     <button class="nav-place-btn" data-target="loc-udonshin">Udon Shin</button>
@@ -908,19 +956,29 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Shinjuku распадается на понятные кластеры вокруг одной станции, и весь день укладывается в радиус 10–15 минут ходьбы — переходы между выходами подземные, а не отдельные поездки. Логика простая: сад и шопинг — пока светло, западная сторона (Keio, смотровая площадка мэрии) — на закат, а Omoide Yokocho, Kabukicho и Golden-Gai — только с темнотой, потому что раньше там физически нечего делать.</p>
-      <p>Получается один сплошной заход по кругу: юг и восток днём, запад к закату, снова восток — уже вечером и ночью. Единственное настоящее пересечение станции за день — переход от Omoide Yokocho (запад) к Kabukicho (восток), и оно логично совпадает со сменой аперитива на ужин.</p>
+      <p data-lang="ru">Shinjuku распадается на понятные кластеры вокруг одной станции, и весь день укладывается в радиус 10–15 минут ходьбы — переходы между выходами подземные, а не отдельные поездки. Логика простая: сад и шопинг — пока светло, западная сторона (Keio, смотровая площадка мэрии) — на закат, а Omoide Yokocho, Kabukicho и Golden-Gai — только с темнотой, потому что раньше там физически нечего делать.</p>
+      <p data-lang="ru">Получается один сплошной заход по кругу: юг и восток днём, запад к закату, снова восток — уже вечером и ночью. Единственное настоящее пересечение станции за день — переход от Omoide Yokocho (запад) к Kabukicho (восток), и оно логично совпадает со сменой аперитива на ужин.</p>
+      <p data-lang="en" style="display:none;">Shinjuku breaks into clean clusters around a single station, all within a 10–15 minute walk — exits connect underground, not by separate trips. Garden and shopping while it's light, the west side (Keio, the city hall observation deck) for sunset, and Omoide Yokocho, Kabukicho, Golden-Gai only after dark, since there's nothing to do there earlier. It's one loop: south and east by day, west at sunset, east again by night — with the walk from Omoide Yokocho to Kabukicho as the day's only real crossing, timed to match aperitif turning into dinner.</p>
       <div class="inset-card day-flags">
-        <div class="inset-card-label">Между кластерами</div>
-        <ul>
+        <div class="inset-card-label" data-lang="ru">Между кластерами</div>
+        <div class="inset-card-label" data-lang="en" style="display:none;">Between clusters</div>
+        <ul data-lang="ru">
           <li><strong>Shinjuku Gyoen → Lumine/южный выход</strong> — около 10 минут пешком</li>
           <li><strong>Lumine → восточный выход (Beams, кот, San-chome)</strong> — одна связанная прогулка через станцию</li>
           <li><strong>San-chome → западный выход (Keio, смотровая)</strong> — через станцию, 10–15 минут</li>
           <li><strong>Западный выход → Kabukicho</strong> — 10 минут, единственный настоящий переход через станцию вечером</li>
+        </ul>
+        <ul data-lang="en" style="display:none;">
+          <li><strong>Shinjuku Gyoen → Lumine / south exit</strong> — about 10 minutes on foot</li>
+          <li><strong>Lumine → east exit (Beams, the cat, San-chome)</strong> — one connected walk through the station</li>
+          <li><strong>San-chome → west exit (Keio, observation deck)</strong> — through the station, 10–15 minutes</li>
+          <li><strong>West exit → Kabukicho</strong> — 10 minutes, the only real station crossing of the evening</li>
         </ul>
       </div>
     </div>
@@ -930,352 +988,457 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Сад</span>
+    <span class="place-kicker" data-lang="ru">Сад</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Garden</span>
     <h2 class="section-title -major" id="loc-gyoen">Shinjuku Gyoen</h2>
-    <span class="place-caption">Сад, который не может определиться со страной</span>
+    <span class="place-caption" data-lang="ru">Сад, который не может определиться со страной</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A garden that can't pick a country</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Земля принадлежала клану Naitō с 1590 года — подарок самого Tokugawa Ieyasu своему вассалу; сад в современном виде появился только в 1906-м</li>
         <li>Единственный крупный сад Tokyo, где буквально в одном парке сосуществуют три разные традиции: японский пейзажный сад, французский регулярный парк и английский ландшафтный газон</li>
         <li>Проект вёл французский ландшафтный архитектор Henri Martinet вместе с японцем Hayato Fukuba — тем самым специалистом, что прославил японские хризантемы на Всемирной выставке в Париже</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The land belonged to the Naitō clan from 1590 — a gift from Tokugawa Ieyasu himself to his vassal; the garden in its current form only dates to 1906</li>
+        <li>Tokyo's only major garden where three different traditions genuinely coexist in one park: Japanese landscape garden, French formal garden, English lawn</li>
+        <li>Designed by French landscape architect Henri Martinet together with Hayato Fukuba, the same specialist who made Japanese chrysanthemums famous at the Paris World's Fair</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Shinjuku Gyoen</span></div></figure>
       <div>
-        <p>В 1872 году, в разгар модернизации Meiji, здесь открыли не сад, а сельскохозяйственную опытную станцию — изучали западные методы разведения фруктов, шелкопряда и скота. Только в 1906-м, после почти десятилетия перепланировки, станция стала императорским садом — и стала им сразу в трёх стилях одновременно, а не в одном.</p>
-        <p>Это тот же жест эпохи Meiji, что и барочные бочки у Meiji Jingu: не выбирать между Japan и Западом, а демонстративно вместить оба. Сад сильно пострадал во Вторую мировую войну и открылся заново уже как национальный, а не императорский, в 1949 году.</p>
+        <p data-lang="ru">В 1872 году, в разгар модернизации Meiji, здесь открыли не сад, а сельскохозяйственную опытную станцию — изучали западные методы разведения фруктов, шелкопряда и скота. Только в 1906-м, после почти десятилетия перепланировки, станция стала императорским садом — и стала им сразу в трёх стилях одновременно, а не в одном.</p>
+        <p data-lang="ru">Это тот же жест эпохи Meiji, что и барочные бочки у Meiji Jingu: не выбирать между Japan и Западом, а демонстративно вместить оба. Сад сильно пострадал во Вторую мировую войну и открылся заново уже как национальный, а не императорский, в 1949 году.</p>
+        <p data-lang="en" style="display:none;">This started in 1872 as an agricultural experiment station, not a garden — testing Western methods for fruit, silkworms, livestock. It only became an imperial garden in 1906, and it became one in three styles at once, the same Meiji-era gesture as the sake barrels at Meiji Jingu: not choosing between Japan and the West, but pointedly holding both. Badly damaged in WWII, it reopened in 1949 — this time as a national, not imperial, garden.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–16:30</strong> (последний вход в 16:00). Закрыт по понедельникам. Вход платный, около 500 иен. Территория огромная — 58,3 га, периметр 3,5 км, закладывай минимум час-полтора.</p>
+        <p data-lang="ru">Открыт <strong>9:00–16:30</strong> (последний вход в 16:00). Закрыт по понедельникам. Вход платный, около 500 иен. Территория огромная — 58,3 га, периметр 3,5 км, закладывай минимум час-полтора.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–16:30</strong> (last entry 16:00). Closed Mondays. Paid entry, around 500 yen. Huge grounds — 58.3 ha, 3.5 km perimeter — budget at least an hour and a half.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Henri Martinet и французская школа ландшафтного дизайна в Japan · Hayato Fukuba и японские хризантемы на выставке в Париже</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Henri Martinet и французская школа ландшафтного дизайна в Japan · Hayato Fukuba и японские хризантемы на выставке в Париже</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Henri Martinet and the French school of landscape design in Japan · Hayato Fukuba and Japanese chrysanthemums at the Paris exposition</p>
 
     <hr>
 
-    <span class="place-kicker">Обувь</span>
+    <span class="place-kicker" data-lang="ru">Обувь</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shoes</span>
     <h2 class="section-title" id="loc-talongrise">LE TALON GRISE</h2>
-    <span class="place-caption">«Серый каблук» на 2 этаже Lumine 2</span>
+    <span class="place-caption" data-lang="ru">«Серый каблук» на 2 этаже Lumine 2</span>
+    <span class="place-caption" data-lang="en" style="display:none;">"Grey heel," 2nd floor of Lumine 2</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>LE TALON GRISE</span></div></figure>
       <div>
-        <p>Обувной бренд группы BAYCREW'S, название на французском означает просто «серый каблук» — концепт-стор, выросший из более крупной линии Le Talon в отдельный монобрендовый магазин на 2 этаже Lumine 2, в минуте ходьбы от южного выхода станции.</p>
+        <p data-lang="ru">Обувной бренд группы BAYCREW'S, название на французском означает просто «серый каблук» — концепт-стор, выросший из более крупной линии Le Talon в отдельный монобрендовый магазин на 2 этаже Lumine 2, в минуте ходьбы от южного выхода станции.</p>
+        <p data-lang="en" style="display:none;">A BAYCREW'S shoe label — the French name just means "grey heel" — grown from the larger Le Talon line into its own concept store on the 2nd floor of Lumine 2, a minute from the station's south exit.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>11:00–21:00</strong>, часы подстраиваются под режим Lumine.</p>
+        <p data-lang="ru">Открыт <strong>11:00–21:00</strong>, часы подстраиваются под режим Lumine.</p>
+        <p data-lang="en" style="display:none;">Open <strong>11:00–21:00</strong>, hours follow Lumine's schedule.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Обед</span>
+    <span class="place-kicker" data-lang="ru">Обед</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Lunch</span>
     <h2 class="section-title -minor" id="loc-udonshin">Udon Shin</h2>
-    <span class="place-caption">Michelin-удон в переулке на 12 мест</span>
+    <span class="place-caption" data-lang="ru">Michelin-удон в переулке на 12 мест</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Michelin udon in a 12-seat alley shop</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Udon Shin</span></div></figure>
       <div>
-        <p>Открылся в 2011 году в узком переулке Minami-Shinjuku и с тех пор фигурирует в Michelin Guide — редкость для обычной удонной. Тесто замешивают и раскатывают каждый день заново, никаких заготовок впрок: лапшу режут и варят порциями по ходу дня. Фирменные позиции — холодный bukkake udon и ten-zaru с темпурой, лапша подаётся тугой аккуратной спиралью, почти как канат.</p>
+        <p data-lang="ru">Открылся в 2011 году в узком переулке Minami-Shinjuku и с тех пор фигурирует в Michelin Guide — редкость для обычной удонной. Тесто замешивают и раскатывают каждый день заново, никаких заготовок впрок: лапшу режут и варят порциями по ходу дня. Фирменные позиции — холодный bukkake udon и ten-zaru с темпурой, лапша подаётся тугой аккуратной спиралью, почти как канат.</p>
+        <p data-lang="en" style="display:none;">Opened in 2011 in a narrow Minami-Shinjuku alley and has held a spot in the Michelin Guide ever since — rare for a plain udon shop. Dough is mixed and rolled fresh daily, noodles cut and boiled in small batches through the day. Signature orders are cold bukkake udon and tempura ten-zaru, the noodles coiled tight like rope.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Всего 12 мест, вход по номеркам через автомат у входа — заведение маленькое и популярное, будь готова подождать. Оплата только наличными.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Всего 12 мест, вход по номеркам через автомат у входа — заведение маленькое и популярное, будь готова подождать. Оплата только наличными.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Only 12 seats, numbered-ticket entry from a machine at the door — small and popular, expect a wait. Cash only.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>6–8 минут пешком от южного выхода станции. Только <strong>наличные</strong>.</p>
+        <p data-lang="ru">6–8 минут пешком от южного выхода станции. Только <strong>наличные</strong>.</p>
+        <p data-lang="en" style="display:none;">6–8 minutes on foot from the station's south exit. <strong>Cash only</strong>.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Магазин</span>
+    <span class="place-kicker" data-lang="ru">Магазин</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Store</span>
     <h2 class="section-title -minor" id="loc-beams">Beams Japan</h2>
-    <span class="place-caption">Магазин, который развернул собственную историю наоборот</span>
+    <span class="place-caption" data-lang="ru">Магазин, который развернул собственную историю наоборот</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A store that reversed its own origin story</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Первый магазин Beams открылся в 1976 году в Harajuku — крошечные 21,5 м², оформленные как комната студенческого общежития UCLA, вся идея была в том, чтобы привезти в Japan американский образ жизни</li>
         <li>Флагман BEAMS JAPAN в Shinjuku, открытый в 2016-м к 40-летию бренда, разворачивает эту логику ровно наоборот: шесть этажей курируют не американское, а японское — ремёсла и сувениры всех 47 префектур под одной крышей</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The first Beams store opened in 1976 in Harajuku — a tiny 21.5 sqm, styled after a UCLA dorm room, built entirely to import American lifestyle into Japan</li>
+        <li>The BEAMS JAPAN flagship in Shinjuku, opened in 2016 for the brand's 40th anniversary, reverses that logic exactly: six floors curating not American but Japanese goods, crafts and souvenirs from all 47 prefectures under one roof</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Beams Japan</span></div></figure>
       <div>
-        <p>Основатель Etsuzo Shitara начинал вообще не с моды — с производства картонных коробок в 1953 году. Нефтяной кризис 1970-х подтолкнул диверсификацию, и в 1976-м появился «American Life Shop Beams»: магазинчик размером с комнату, продававший американскую повседневность японской молодёжи, которой тогда было почти неоткуда её взять.</p>
-        <p>Сорок лет спустя тот же бренд, разросшийся в крупного ритейлера, открыл в Shinjuku прямо противоположный проект — не завозить чужую культуру, а экспортировать внутрь страны и наружу собственную, от народных ремёсел до поп-культуры, под лозунгом «Appare, Nippon!!».</p>
+        <p data-lang="ru">Основатель Etsuzo Shitara начинал вообще не с моды — с производства картонных коробок в 1953 году. Нефтяной кризис 1970-х подтолкнул диверсификацию, и в 1976-м появился «American Life Shop Beams»: магазинчик размером с комнату, продававший американскую повседневность японской молодёжи, которой тогда было почти неоткуда её взять.</p>
+        <p data-lang="ru">Сорок лет спустя тот же бренд, разросшийся в крупного ритейлера, открыл в Shinjuku прямо противоположный проект — не завозить чужую культуру, а экспортировать внутрь страны и наружу собственную, от народных ремёсел до поп-культуры, под лозунгом «Appare, Nippon!!».</p>
+        <p data-lang="en" style="display:none;">Founder Etsuzo Shitara started in cardboard boxes in 1953, not fashion. The 1970s oil crisis pushed him to diversify, and "American Life Shop Beams" opened in 1976 — a room-sized shop selling American everyday life to Japanese kids who had almost no other access to it. Forty years later, now a major retailer, the same brand opened the exact mirror project in Shinjuku: not importing someone else's culture, but exporting its own, from folk crafts to pop culture, under the banner "Appare, Nippon!!"</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Вход свободный, tax-free. У входа — кофейня Sarutahiko Coffee, в подвале ресторан. Рядом с восточным выходом станции.</p>
+        <p data-lang="ru">Вход свободный, tax-free. У входа — кофейня Sarutahiko Coffee, в подвале ресторан. Рядом с восточным выходом станции.</p>
+        <p data-lang="en" style="display:none;">Free entry, tax-free shopping. Sarutahiko Coffee by the entrance, a restaurant in the basement. Near the station's east exit.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Экран</span>
+    <span class="place-kicker" data-lang="ru">Экран</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Screen</span>
     <h2 class="section-title" id="loc-cat3d">The Giant 3D Cat</h2>
-    <span class="place-caption">Кошка, которая живёт по расписанию</span>
+    <span class="place-caption" data-lang="ru">Кошка, которая живёт по расписанию</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A cat that keeps office hours</span>
     <div class="photo-break"><span class="mark">猫</span><span class="cap">Cross Shinjuku Vision · восточный выход</span></div>
-    <p>Официально — «Кошка восточного выхода Shinjuku», экран Cross Shinjuku Vision на крыше здания напротив станции. Дебютировала в июле 2021 года и мгновенно стала вирусной: изогнутый LED-экран площадью свыше 150 м² создаёт эффект, что кошка физически сидит внутри коробки на углу здания, а не просто показана на плоском экране — тот же принцип анаморфной иллюзии, что у первых 3D-биллбордов на Таймс-сквер, но доведённый до бытовой обыденности японской рекламы.</p>
-    <p>У кошки есть собственный распорядок: экран включается около 7 утра, кошка «просыпается» и появляется короткими эпизодами весь день — потягивается, зевает, мурлычет, — а к часу ночи «засыпает» и гаснет.</p>
+    <p data-lang="ru">Официально — «Кошка восточного выхода Shinjuku», экран Cross Shinjuku Vision на крыше здания напротив станции. Дебютировала в июле 2021 года и мгновенно стала вирусной: изогнутый LED-экран площадью свыше 150 м² создаёт эффект, что кошка физически сидит внутри коробки на углу здания, а не просто показана на плоском экране — тот же принцип анаморфной иллюзии, что у первых 3D-биллбордов на Таймс-сквер, но доведённый до бытовой обыденности японской рекламы.</p>
+    <p data-lang="ru">У кошки есть собственный распорядок: экран включается около 7 утра, кошка «просыпается» и появляется короткими эпизодами весь день — потягивается, зевает, мурлычет, — а к часу ночи «засыпает» и гаснет.</p>
+    <p data-lang="en" style="display:none;">Officially the "Shinjuku East Exit Cat," on the Cross Shinjuku Vision screen atop a building facing the station. It debuted in July 2021 and went viral instantly: a curved LED screen over 150 sqm makes the cat look like it's physically sitting inside a box on the building's corner, the same anamorphic trick as early Times Square 3D billboards, just folded into everyday Japanese advertising. The cat keeps a schedule — the screen wakes around 7am, and the cat appears in short bursts all day, stretching and yawning, before "falling asleep" around 1am.</p>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Лучшая точка обзора — площадь у восточного выхода, у большого дерева или у пешеходного перехода. Самые чёткие кадры — в сумерках или ночью, когда экран выделяется на тёмном небе.</p>
+        <p data-lang="ru">Лучшая точка обзора — площадь у восточного выхода, у большого дерева или у пешеходного перехода. Самые чёткие кадры — в сумерках или ночью, когда экран выделяется на тёмном небе.</p>
+        <p data-lang="en" style="display:none;">Best viewing spot is the east-exit square, by the big tree or the crosswalk. Sharpest shots at dusk or at night, when the screen stands out against a dark sky.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Винтаж</span>
+    <span class="place-kicker" data-lang="ru">Винтаж</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Vintage</span>
     <h2 class="section-title" id="loc-2ndstreet">2nd Street Shinjuku 2</h2>
-    <span class="place-caption">Секонд-хенд, где хорошее не залёживается</span>
+    <span class="place-caption" data-lang="ru">Секонд-хенд, где хорошее не залёживается</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Secondhand where the good stuff doesn't sit long</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>2nd Street</span></div></figure>
       <div>
-        <p>Филиал крупной сети секонд-хенда — четыре плотно забитых этажа, мужская одежда на первом. Люксовые и дизайнерские бренды здесь встречаются чаще, чем в других отделениях сети, хотя за японскими марками лучше идти в другие точки.</p>
+        <p data-lang="ru">Филиал крупной сети секонд-хенда — четыре плотно забитых этажа, мужская одежда на первом. Люксовые и дизайнерские бренды здесь встречаются чаще, чем в других отделениях сети, хотя за японскими марками лучше идти в другие точки.</p>
+        <p data-lang="en" style="display:none;">A branch of the big secondhand chain — four densely stocked floors, menswear on the first. Luxury and designer labels turn up here more often than at other branches, though for Japanese brands specifically other locations do better.</p>
       </div>
     </div>
-    <p><span class="inline-label">Совет</span>Хорошие вещи разбирают быстро — если понравилось, не откладывай.</p>
+    <p data-lang="ru"><span class="inline-label">Совет</span>Хорошие вещи разбирают быстро — если понравилось, не откладывай.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span>Good pieces move fast — if you like it, don't wait.</p>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт до <strong>21:00</strong>. В районе Shinjuku 3-chome, рядом с San-chome.</p>
+        <p data-lang="ru">Открыт до <strong>21:00</strong>. В районе Shinjuku 3-chome, рядом с San-chome.</p>
+        <p data-lang="en" style="display:none;">Open until <strong>21:00</strong>. In Shinjuku 3-chome, near San-chome.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title" id="loc-suehiro">Suehiro-dori Street</h2>
-    <span class="place-caption">Квартал красных фонарей, ставший улицей ракуго</span>
+    <span class="place-caption" data-lang="ru">Квартал красных фонарей, ставший улицей ракуго</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A red-light block that became a rakugo street</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Suehiro-dori</span></div></figure>
       <div>
-        <p>Узкий переулок между Shinjuku-dori и Yasukuni-dori, названный в честь театра rakugo <strong>Suehiro-tei</strong> — тот переехал сюда в 1921 году и работает до сих пор, один из немногих постоянных залов этого разговорного жанра в Tokyo. Около 1951 года это была лицензированная зона красных фонарей; после закрытия квартал не заглох, а просто сменил профиль на рестораны и бары.</p>
-        <p>По атмосфере это осознанная альтернатива соседнему Kabukicho — те же полсотни метров нейтральной территории, только тише, без зазывал и с почти локальной публикой.</p>
+        <p data-lang="ru">Узкий переулок между Shinjuku-dori и Yasukuni-dori, названный в честь театра rakugo <strong>Suehiro-tei</strong> — тот переехал сюда в 1921 году и работает до сих пор, один из немногих постоянных залов этого разговорного жанра в Tokyo. Около 1951 года это была лицензированная зона красных фонарей; после закрытия квартал не заглох, а просто сменил профиль на рестораны и бары.</p>
+        <p data-lang="ru">По атмосфере это осознанная альтернатива соседнему Kabukicho — те же полсотни метров нейтральной территории, только тише, без зазывал и с почти локальной публикой.</p>
+        <p data-lang="en" style="display:none;">A narrow lane between Shinjuku-dori and Yasukuni-dori, named for the <strong>Suehiro-tei</strong> rakugo theatre — moved here in 1921 and still running, one of Tokyo's few permanent venues for this storytelling art. Around 1951 it was a licensed red-light zone; after that closed, the block didn't die, just switched to restaurants and bars. It reads as a deliberate, quieter alternative to neighboring Kabukicho — no touts, a near-local crowd.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Suehiro-tei даёт дневные и вечерние сеансы rakugo, manzai и фокусов; расписание меняется по дням. Около 48 заведений на самой улице работают до поздней ночи.</p>
+        <p data-lang="ru">Suehiro-tei даёт дневные и вечерние сеансы rakugo, manzai и фокусов; расписание меняется по дням. Около 48 заведений на самой улице работают до поздней ночи.</p>
+        <p data-lang="en" style="display:none;">Suehiro-tei runs day and evening sessions of rakugo, manzai and magic; schedule varies by day. About 48 places on the street itself stay open late.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title" id="loc-hanazono">Hanazono Shrine</h2>
-    <span class="place-caption">Зелёный остров посреди Kabukicho</span>
+    <span class="place-caption" data-lang="ru">Зелёный остров посреди Kabukicho</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A green island inside Kabukicho</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Hanazono Shrine</span></div></figure>
       <div>
-        <p>Крупнейшее святилище Shinjuku, основанное ещё в период Edo и известное как «страж района» — и это буквально его текущая работа: Hanazono Shrine стоит прямо на границе Kabukicho, зелёным островом посреди самого шумного квартала города. По воскресеньям на территории проходит блошиный антикварный рынок (не сегодня — сегодня пятница), но и в будни здесь просто тихо, что после San-chome ощущается почти физически.</p>
+        <p data-lang="ru">Крупнейшее святилище Shinjuku, основанное ещё в период Edo и известное как «страж района» — и это буквально его текущая работа: Hanazono Shrine стоит прямо на границе Kabukicho, зелёным островом посреди самого шумного квартала города. По воскресеньям на территории проходит блошиный антикварный рынок (не сегодня — сегодня пятница), но и в будни здесь просто тихо, что после San-chome ощущается почти физически.</p>
+        <p data-lang="en" style="display:none;">Shinjuku's largest shrine, dating to the Edo period and known as the area's "guardian" — which is literally its current job: Hanazono Shrine sits right on Kabukicho's edge, a green island inside the city's loudest block. Sundays bring a flea-antique market on the grounds (not today, it's Friday), but even on a weekday it's just quiet here, a relief you can feel physically after San-chome.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта постоянно, вход свободный. 3 минуты от станции Shinjuku-sanchome, 7 минут от восточного выхода JR Shinjuku.</p>
+        <p data-lang="ru">Территория открыта постоянно, вход свободный. 3 минуты от станции Shinjuku-sanchome, 7 минут от восточного выхода JR Shinjuku.</p>
+        <p data-lang="en" style="display:none;">Grounds always open, free entry. 3 minutes from Shinjuku-sanchome station, 7 minutes from JR Shinjuku's east exit.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Универмаг</span>
+    <span class="place-kicker" data-lang="ru">Универмаг</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Department store</span>
     <h2 class="section-title" id="loc-keio">Keio Department Store</h2>
-    <span class="place-caption">Последний универмаг у западного выхода</span>
+    <span class="place-caption" data-lang="ru">Последний универмаг у западного выхода</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The last department store at the west exit</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Keio Department Store</span></div></figure>
       <div>
-        <p>Открылся в 1964 году и с тех пор держится на западном выходе как более демократичная альтернатива Isetan и Takashimaya — упор на японские бренды и сегмент чуть проще, чем у соседей. После того как в 2022 году снесли соседний Odakyu, Keio остался единственным универмагом, напрямую связанным с западным выходом станции.</p>
-        <p>Здание рано или поздно перестроят — в планах района на 2040-е числится новая 110-метровая башня на этом месте, — но точной даты закрытия пока никто не называет, и на сентябрь 2026 года магазин продолжает работать в обычном режиме.</p>
+        <p data-lang="ru">Открылся в 1964 году и с тех пор держится на западном выходе как более демократичная альтернатива Isetan и Takashimaya — упор на японские бренды и сегмент чуть проще, чем у соседей. После того как в 2022 году снесли соседний Odakyu, Keio остался единственным универмагом, напрямую связанным с западным выходом станции.</p>
+        <p data-lang="ru">Здание рано или поздно перестроят — в планах района на 2040-е числится новая 110-метровая башня на этом месте, — но точной даты закрытия пока никто не называет, и на сентябрь 2026 года магазин продолжает работать в обычном режиме.</p>
+        <p data-lang="en" style="display:none;">Opened in 1964 and has held the west exit ever since as the more down-to-earth alternative to Isetan and Takashimaya — Japanese brands, a notch more casual than its neighbors. After Odakyu next door was demolished in 2022, Keio became the only department store still directly attached to the west exit. The building will eventually be rebuilt — a 110-meter tower is planned for the 2040s — but no closing date is set, and as of September 2026 it's running as normal.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>10:00–20:00</strong>, рестораны на 8 этаже — до 22:00. Летом на крыше работает пивной сад.</p>
+        <p data-lang="ru">Открыт <strong>10:00–20:00</strong>, рестораны на 8 этаже — до 22:00. Летом на крыше работает пивной сад.</p>
+        <p data-lang="en" style="display:none;">Open <strong>10:00–20:00</strong>, 8th-floor restaurants until 22:00. Rooftop beer garden in summer.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Смотровая</span>
+    <span class="place-kicker" data-lang="ru">Смотровая</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Observation deck</span>
     <h2 class="section-title -minor" id="loc-tocho">Tokyo Metropolitan Government Building</h2>
-    <span class="place-caption">Печатная плата и готический собор в одном фасаде</span>
+    <span class="place-caption" data-lang="ru">Печатная плата и готический собор в одном фасаде</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A circuit board and a Gothic cathedral in one facade</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Спроектировано Kenzō Tange — тем же архитектором, что построил гимнастический комплекс Yoyogi для Олимпиады-1964, только на этот раз, в 1990-м, для мэрии, а не для спорта</li>
         <li>202 метра, две смотровые площадки на 45 этаже каждой из башен — вход свободный, несмотря на статус официального правительственного здания</li>
         <li>На момент открытия было самым высоким зданием Japan</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Designed by Kenzō Tange — the same architect behind the Yoyogi gymnasium for the 1964 Olympics, this time for city hall in 1990, not for sport</li>
+        <li>202 meters, two observation decks on the 45th floor of each tower — free entry, despite being an official government building</li>
+        <li>Japan's tallest building when it opened</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Tokyo Metropolitan Government Building</span></div></figure>
       <div>
-        <p>Здание задумано похожим одновременно на печатную плату и на готический собор — Tange явно не выбирал между технологией и торжественностью, а совместил оба образа в одном фасаде. Внутри работает досмотр сумок, как в любом госучреждении, но после него — бесплатный панорамный вид на весь город с высоты птичьего полёта, включая Shinjuku Gyoen, Meiji Jingu и, в ясный день, гору Fuji.</p>
+        <p data-lang="ru">Здание задумано похожим одновременно на печатную плату и на готический собор — Tange явно не выбирал между технологией и торжественностью, а совместил оба образа в одном фасаде. Внутри работает досмотр сумок, как в любом госучреждении, но после него — бесплатный панорамный вид на весь город с высоты птичьего полёта, включая Shinjuku Gyoen, Meiji Jingu и, в ясный день, гору Fuji.</p>
+        <p data-lang="en" style="display:none;">The building was meant to look like a circuit board and a Gothic cathedral at once — Tange wasn't choosing between technology and grandeur, he fused both into one facade. There's a bag check inside, like any government office, but past it: a free, bird's-eye panorama over the whole city, including Shinjuku Gyoen, Meiji Jingu, and, on a clear day, Mount Fuji.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>10 минут пешком от западного выхода JR Shinjuku, или напрямую от станции метро Tochōmae. Южная башня закрыта по 1-му и 3-му вторникам месяца, северная — по 2-му и 4-му понедельникам; на конец сентября эти закрытия не выпадают. Требуется досмотр сумок на входе.</p>
+        <p data-lang="ru">10 минут пешком от западного выхода JR Shinjuku, или напрямую от станции метро Tochōmae. Южная башня закрыта по 1-му и 3-му вторникам месяца, северная — по 2-му и 4-му понедельникам; на конец сентября эти закрытия не выпадают. Требуется досмотр сумок на входе.</p>
+        <p data-lang="en" style="display:none;">10 minutes on foot from JR Shinjuku's west exit, or straight from Tochōmae metro station. South tower closed the 1st and 3rd Tuesdays of the month, north tower the 2nd and 4th Mondays; none of that falls in late September. Bag check at entry.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Переулок</span>
+    <span class="place-kicker" data-lang="ru">Переулок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Alley</span>
     <h2 class="section-title -minor" id="loc-omoide">Omoide Yokocho</h2>
-    <span class="place-caption">Переулок, оживающий только ночью</span>
+    <span class="place-caption" data-lang="ru">Переулок, оживающий только ночью</span>
+    <span class="place-caption" data-lang="en" style="display:none;">An alley that only wakes at night</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Около 80 крошечных якитори-стойл в двух параллельных переулках сразу за железнодорожными путями у западного выхода — родом из послевоенного чёрного рынка конца 1940-х</li>
         <li>Неформальное английское прозвище «Piss Alley» — наследие тех лет, когда в квартале не было общественных туалетов; сегодня они есть, но название прижилось</li>
         <li>Квартал почти полностью выгорел при пожаре 1999 года и был отстроен заново — атмосфера подлинная, но конкретные деревянные стены моложе, чем кажутся</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>About 80 tiny yakitori stalls packed into two parallel lanes right behind the west-exit rail tracks — descended from the late-1940s postwar black market</li>
+        <li>The informal English nickname "Piss Alley" is a holdover from the years before public toilets existed here; they exist now, but the name stuck</li>
+        <li>The block burned down almost entirely in a 1999 fire and was rebuilt — the atmosphere is genuine, but the actual timber is younger than it looks</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Omoide Yokocho</span></div></figure>
       <div>
-        <p>Место оживает только с приходом вечера — днём здесь буквально нечего делать, большинство стоек ещё закрыты. Меню в основном якитори и субпродукты (motsuyaki), но встречаются суши, унаги, фугу и совсем экзотические позиции вроде лягушки или сырой печени — спросить омакасэ у продавца обычно самый простой способ не мучиться выбором.</p>
+        <p data-lang="ru">Место оживает только с приходом вечера — днём здесь буквально нечего делать, большинство стоек ещё закрыты. Меню в основном якитори и субпродукты (motsuyaki), но встречаются суши, унаги, фугу и совсем экзотические позиции вроде лягушки или сырой печени — спросить омакасэ у продавца обычно самый простой способ не мучиться выбором.</p>
+        <p data-lang="en" style="display:none;">The place only comes alive in the evening — during the day there's literally nothing here, most stalls still shuttered. Menus lean yakitori and offal (motsuyaki), but sushi, unagi, fugu and stranger orders like frog or raw liver turn up too — asking for omakase is usually the easiest way not to agonize over the menu.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>У многих стоек — своя плата за место (seating fee) и лимит по времени (около 90 минут); не курить нельзя, но зона выделена. Идти лучше в ранний вечер (17:00–19:00), если хочется без толкотни.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>У многих стоек — своя плата за место (seating fee) и лимит по времени (около 90 минут); не курить нельзя, но зона выделена. Идти лучше в ранний вечер (17:00–19:00), если хочется без толкотни.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Many stalls charge their own seating fee and cap your time (around 90 minutes); smoking is allowed but confined to a zone. Go early evening (17:00–19:00) if you want to skip the crowds.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Основная масса точек работает с <strong>~16:00–17:00</strong> и до полуночи-часу ночи. Пара мест открывается на обед около 11:30–12:00, но это исключение, не правило.</p>
+        <p data-lang="ru">Основная масса точек работает с <strong>~16:00–17:00</strong> и до полуночи-часу ночи. Пара мест открывается на обед около 11:30–12:00, но это исключение, не правило.</p>
+        <p data-lang="en" style="display:none;">Most stalls run <strong>roughly 16:00–17:00</strong> through midnight to 1am. A couple open for lunch around 11:30–12:00, but that's the exception, not the rule.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -major" id="loc-kabukicho">Kabukicho</h2>
-    <span class="place-caption">Квартал, названный театром, которого никогда не было</span>
+    <span class="place-caption" data-lang="ru">Квартал, названный театром, которого никогда не было</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A district named for a theatre that never existed</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Название буквально значит «квартал kabuki» — послевоенный застройщик Kihei Suzuki планировал построить здесь театр на 1850 мест по имени Kikuza; денег не хватило, театр так и не построили, а название осталось</li>
         <li>До войны на месте, где сегодня стоит статуя Godzilla, была школа для девочек — совсем другой квартал, каким его сегодня уже невозможно представить</li>
         <li>Первый послевоенный чёрный рынок Tokyo родился именно здесь; часть его торговцев позже перебралась в ряды домиков в полукилометре от станции — так появился Golden-Gai</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The name literally means "kabuki district" — postwar developer Kihei Suzuki planned an 1,850-seat theatre here called Kikuza; the money ran out, the theatre was never built, and the name stayed</li>
+        <li>Before the war, a girls' school stood where the Godzilla statue is now — a completely different neighborhood, impossible to picture today</li>
+        <li>Tokyo's first postwar black market was born right here; some of its traders later moved to a row of shacks half a kilometer from the station, which became Golden-Gai</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Kabukicho</span></div></figure>
       <div>
-        <p>После американских бомбардировок квартал Tsunohazu лежал в руинах, и урбанист Ishikawa Hideaki вместе с местным предпринимателем Suzuki задумали превратить обломки в респектабельный театральный район наподобие Бродвея. К 1956 году построили кинотеатры и дворец Koma Theater, но большой kabuki-театр так и остался идеей на бумаге — Suzuki обанкротился раньше, чем успел его достроить.</p>
-        <p>Дальше квартал развивался уже без исходного плана: черный рынок 1940-х постепенно превратился в развлекательный район, часть которого контролировали якудза, использовавшие вакуум послевоенной полиции для своей версии порядка. Сегодняшний Kabukicho официально называют «городом, который не спит» — и это буквально его рабочий график, а не метафора.</p>
+        <p data-lang="ru">После американских бомбардировок квартал Tsunohazu лежал в руинах, и урбанист Ishikawa Hideaki вместе с местным предпринимателем Suzuki задумали превратить обломки в респектабельный театральный район наподобие Бродвея. К 1956 году построили кинотеатры и дворец Koma Theater, но большой kabuki-театр так и остался идеей на бумаге — Suzuki обанкротился раньше, чем успел его достроить.</p>
+        <p data-lang="ru">Дальше квартал развивался уже без исходного плана: черный рынок 1940-х постепенно превратился в развлекательный район, часть которого контролировали якудза, использовавшие вакуум послевоенной полиции для своей версии порядка. Сегодняшний Kabukicho официально называют «городом, который не спит» — и это буквально его рабочий график, а не метафора.</p>
+        <p data-lang="en" style="display:none;">After the US bombing raids left the Tsunohazu neighborhood in ruins, urban planner Ishikawa Hideaki and local developer Suzuki set out to turn the rubble into a respectable theatre district, a kind of Broadway. Cinemas and the Koma Theater went up by 1956, but the big kabuki theatre stayed a paper plan — Suzuki went bankrupt before it was ever built. What grew from there had no master plan: the 1940s black market slowly turned into an entertainment district, part of it run by yakuza filling the postwar police vacuum with their own version of order. Kabukicho is officially called "the town that never sleeps" — and that's literally its business hours, not a figure of speech.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Kabukicho и Omoide Yokocho — не просто соседи, а версии одной истории с разным финалом: оба выросли из одного и того же послевоенного чёрного рынка конца 1940-х. Один стал кварталом еды под открытым небом, другой — при участии <strong>якудза</strong> — развлекательным районом, часть которого позже отпочковалась в Golden-Gai.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Kabukicho и Omoide Yokocho — не просто соседи, а версии одной истории с разным финалом: оба выросли из одного и того же послевоенного чёрного рынка конца 1940-х. Один стал кварталом еды под открытым небом, другой — при участии <strong>якудза</strong> — развлекательным районом, часть которого позже отпочковалась в Golden-Gai.</p>
+      <p data-lang="en" style="display:none;">Kabukicho and Omoide Yokocho aren't just neighbors — they're two endings to the same story, both grown from the same late-1940s black market. One became a district of open-air food stalls; the other, with <strong>yakuza</strong> involvement, became an entertainment district that later spun off Golden-Gai.</p>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Оживает к вечеру и работает до утра. Обычная осторожность в отношении зазывал (touts) — не заходить в заведения, куда приглашают прямо на улице, и уточнять цену до заказа.</p>
+        <p data-lang="ru">Оживает к вечеру и работает до утра. Обычная осторожность в отношении зазывал (touts) — не заходить в заведения, куда приглашают прямо на улице, и уточнять цену до заказа.</p>
+        <p data-lang="en" style="display:none;">Comes alive in the evening and runs till morning. Usual caution with touts — don't follow anyone inviting you into a place off the street, and confirm the price before ordering.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Аттракцион</span>
+    <span class="place-kicker" data-lang="ru">Аттракцион</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Landmark</span>
     <h2 class="section-title" id="loc-godzilla">Godzilla Head</h2>
-    <span class="place-caption">Голова, которая рычит по расписанию</span>
+    <span class="place-caption" data-lang="ru">Голова, которая рычит по расписанию</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A head that roars on schedule</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Godzilla Head</span></div></figure>
       <div>
-        <p>12-метровая голова Godzilla установлена в 2015 году на террасе 8 этажа Shinjuku Toho Building — того самого здания на месте бывшей школы для девочек, о которой уже никто не вспоминает, проходя мимо ревущего монстра. С полудня до восьми вечера голова каждый час «оживает»: глаза загораются, раздаётся рёв, из пасти идёт дым.</p>
+        <p data-lang="ru">12-метровая голова Godzilla установлена в 2015 году на террасе 8 этажа Shinjuku Toho Building — того самого здания на месте бывшей школы для девочек, о которой уже никто не вспоминает, проходя мимо ревущего монстра. С полудня до восьми вечера голова каждый час «оживает»: глаза загораются, раздаётся рёв, из пасти идёт дым.</p>
+        <p data-lang="en" style="display:none;">A 12-meter Godzilla head, installed in 2015 on the 8th-floor terrace of Shinjuku Toho Building — the same site as that girls' school no one thinks about anymore while walking past the roaring monster. From noon to 8pm the head "wakes up" hourly: eyes light up, it roars, smoke pours from its mouth.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Голову хорошо видно прямо с улицы; для съёмки в упор нужна терраса кафе Gracery Lounge на 8 этаже отеля, доступ туда периодически ограничивают.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Голову хорошо видно прямо с улицы; для съёмки в упор нужна терраса кафе Gracery Lounge на 8 этаже отеля, доступ туда периодически ограничивают.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The head is clearly visible from the street; for a close-up shot you need the Gracery Lounge terrace on the hotel's 8th floor, and access there is sometimes restricted.</div>
 
     <hr>
 
-    <span class="place-kicker">Идзакая</span>
+    <span class="place-kicker" data-lang="ru">Идзакая</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Izakaya</span>
     <h2 class="section-title" id="loc-gyopao">Gyopao Gyoza</h2>
-    <span class="place-caption">Суп в тесте на третьем этаже без вывески</span>
+    <span class="place-caption" data-lang="ru">Суп в тесте на третьем этаже без вывески</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Soup wrapped in dough, third floor, no sign</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Gyopao Gyoza</span></div></figure>
       <div>
-        <p>Тайваньско-японская идзакая на третьем этаже неприметного здания в Shinjuku 3-chome — фирменное блюдо, gyopao, крупные пельмени на пару с насыщенным бульоном внутри, буквально суп в тесте. Атмосфера скорее вечеринка, чем тихий ужин: персонал шумно приветствует гостей, часто есть безлимит по напиткам.</p>
+        <p data-lang="ru">Тайваньско-японская идзакая на третьем этаже неприметного здания в Shinjuku 3-chome — фирменное блюдо, gyopao, крупные пельмени на пару с насыщенным бульоном внутри, буквально суп в тесте. Атмосфера скорее вечеринка, чем тихий ужин: персонал шумно приветствует гостей, часто есть безлимит по напиткам.</p>
+        <p data-lang="en" style="display:none;">A Taiwanese-Japanese izakaya on the third floor of an unmarked building in Shinjuku 3-chome — the signature dish, gyopao, is a large steamed dumpling filled with rich broth, literally soup in dough. More party than quiet dinner: staff greet guests loudly, and unlimited drink packages are common.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Вход через лифт на 3 этаж. По выходным лучше бронировать заранее. Принимают карты.</p>
+        <p data-lang="ru">Вход через лифт на 3 этаж. По выходным лучше бронировать заранее. Принимают карты.</p>
+        <p data-lang="en" style="display:none;">Entry by elevator to the 3rd floor. Book ahead on weekends. Cards accepted.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Бары</span>
+    <span class="place-kicker" data-lang="ru">Бары</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Bars</span>
     <h2 class="section-title -major" id="loc-goldengai">Shinjuku Golden-Gai</h2>
-    <span class="place-caption">Двести баров размером с два теннисных корта</span>
+    <span class="place-caption" data-lang="ru">Двести баров размером с два теннисных корта</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Two hundred bars in the space of two tennis courts</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Шесть узких переулков, около 200 баров на пространстве размером с два теннисных корта — большинство рассчитаны на 4–8 человек одновременно</li>
         <li>Здания — прямые архитектурные потомки послевоенных рядов чёрного рынка: торговцев со стороны восточного выхода в 1949–50-х переселили именно сюда</li>
         <li>Изначально многие из этих домиков были борделями; запрет проституции 1956 года заставил их владельцев сменить профиль на бары — так квартал и получил нынешний вид</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Six narrow lanes, around 200 bars packed into a space the size of two tennis courts — most seat only 4–8 people at once</li>
+        <li>The buildings are direct architectural descendants of the postwar black-market rows: east-exit traders were resettled here in 1949–50</li>
+        <li>Many of these shacks started as brothels; the 1956 ban on prostitution forced owners to switch to bars, giving the district its current look</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Golden-Gai</span></div></figure>
       <div>
-        <p>В отличие от неонового, цифрового Kabukicho вокруг, Golden-Gai — аналоговое и тесное пространство: деревянные лачуги, в которых сидишь коленка к коленке с незнакомцами. Девелоперы годами пытались снести квартал под очередную башню, но сложная структура собственности (у каждого крошечного бара — свой отдельный владелец) раз за разом останавливала редевелопмент.</p>
-        <p>У каждого бара — своя тема и своя постоянная публика: кино, музыка, спорт, десятилетия одного и того же хозяина за стойкой. Плата за место (table charge, обычно 500–1000 иен) — стандартная практика, всегда указана у входа.</p>
+        <p data-lang="ru">В отличие от неонового, цифрового Kabukicho вокруг, Golden-Gai — аналоговое и тесное пространство: деревянные лачуги, в которых сидишь коленка к коленке с незнакомцами. Девелоперы годами пытались снести квартал под очередную башню, но сложная структура собственности (у каждого крошечного бара — свой отдельный владелец) раз за разом останавливала редевелопмент.</p>
+        <p data-lang="ru">У каждого бара — своя тема и своя постоянная публика: кино, музыка, спорт, десятилетия одного и того же хозяина за стойкой. Плата за место (table charge, обычно 500–1000 иен) — стандартная практика, всегда указана у входа.</p>
+        <p data-lang="en" style="display:none;">Unlike the neon, digital Kabukicho around it, Golden-Gai is analog and cramped — wooden shacks where you sit knee to knee with strangers. Developers have tried for years to clear it for another tower, but the fractured ownership — every tiny bar has its own separate owner — has kept stopping redevelopment. Each bar has its own theme and its own regulars: film, music, sport, the same owner behind the counter for decades. A table charge, usually 500–1000 yen, is standard and always posted at the door.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство баров открываются к вечеру и работают допоздна. Некоторые explicitly «только для своих» — вывеска на японском без английского меню обычно об этом и говорит; не проблема, просто иди дальше.</p>
+        <p data-lang="ru">Большинство баров открываются к вечеру и работают допоздна. Некоторые explicitly «только для своих» — вывеска на японском без английского меню обычно об этом и говорит; не проблема, просто иди дальше.</p>
+        <p data-lang="en" style="display:none;">Most bars open in the evening and run late. Some are explicitly regulars-only — a Japanese-only sign with no English menu is usually the tell; not a problem, just move on to the next one.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Рамен</span>
+    <span class="place-kicker" data-lang="ru">Рамен</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Ramen</span>
     <h2 class="section-title -minor" id="loc-nagi">Ramen Nagi</h2>
-    <span class="place-caption">Рамен, который начинался с восьми мест в неделю</span>
+    <span class="place-caption" data-lang="ru">Рамен, который начинался с восьми мест в неделю</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Ramen that started with eight seats a week</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Основатель Satoshi Ikuta начал в 2004 году, в 27 лет, с того что раз в неделю арендовал место в одном из баров Golden-Gai и готовил рамен на 8 гостей — сегодня у бренда больше 35 точек по всему миру, а флагман по-прежнему здесь</li>
         <li>Фирменный вкус — niboshi (сушёная мелкая рыба): идею Ikuta привёз из поездки в префектуру Aomori, где рамен на этом бульоне — местная классика</li>
         <li>На одну порцию уходит больше 70 г niboshi из более чем 20 сортов со всей Japan</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founder Satoshi Ikuta started in 2004, at 27, renting space in a Golden-Gai bar once a week to cook ramen for 8 guests — the brand now has 35+ locations worldwide, and the flagship is still right here</li>
+        <li>The signature flavor is niboshi (dried small fish) — Ikuta brought the idea back from a trip to Aomori prefecture, where niboshi-broth ramen is a local classic</li>
+        <li>Each bowl uses over 70g of niboshi drawn from more than 20 varieties sourced across Japan</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Ramen Nagi</span></div></figure>
       <div>
-        <p>История начиналась почти как эксперимент: 4 tsubo (около 13 м²) арендованного пространства, один день в неделю, друзья в качестве первых дегустаторов. Постепенно очередь выросла до сотни человек, а рамен получил Гран-при TRY Grand Prize в 2012 году. Здание всё то же — крутая лестница, десяток мест за стойкой, — но сегодня это уже не эксперимент, а признанный текст в истории токийского рамена.</p>
+        <p data-lang="ru">История начиналась почти как эксперимент: 4 tsubo (около 13 м²) арендованного пространства, один день в неделю, друзья в качестве первых дегустаторов. Постепенно очередь выросла до сотни человек, а рамен получил Гран-при TRY Grand Prize в 2012 году. Здание всё то же — крутая лестница, десяток мест за стойкой, — но сегодня это уже не эксперимент, а признанный текст в истории токийского рамена.</p>
+        <p data-lang="en" style="display:none;">It started almost as an experiment: 4 tsubo (about 13 sqm) of rented space, one day a week, friends as the first tasters. The line grew to a hundred people, and the ramen took the TRY Grand Prize in 2012. Same building, same steep stairs, a dozen counter seats — but it's no longer an experiment, it's a settled chapter in Tokyo ramen history.</p>
       </div>
     </div>
-    <p><span class="inline-label">Попробуй</span>Фирменную «Unbelievable NIBOSHI Ramen» или её версию tsukemen (лапша отдельно от бульона для макания) — обе с уникальным топпингом из «полосок теста» (ittan-men).</p>
+    <p data-lang="ru"><span class="inline-label">Попробуй</span>Фирменную «Unbelievable NIBOSHI Ramen» или её версию tsukemen (лапша отдельно от бульона для макания) — обе с уникальным топпингом из «полосок теста» (ittan-men).</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Try</span>The signature "Unbelievable NIBOSHI Ramen" or its tsukemen version (noodles served apart from the dipping broth) — both come with a distinctive "dough strip" topping (ittan-men).</p>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>24 часа</strong>. Оплата по предоплаченным талонам у входа. Хороший финал вечера после баров — заведение и рассчитано на то, чтобы прийти сюда после полуночи.</p>
+        <p data-lang="ru">Открыт <strong>24 часа</strong>. Оплата по предоплаченным талонам у входа. Хороший финал вечера после баров — заведение и рассчитано на то, чтобы прийти сюда после полуночи.</p>
+        <p data-lang="en" style="display:none;">Open <strong>24 hours</strong>. Pay by ticket machine at the entrance. A good way to close out the night after the bars — the place is built for a post-midnight crowd.</p>
       </div>
     </details>
 
@@ -1284,10 +1447,13 @@ body.site-nav-locked { overflow: hidden; }
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Tokyo Metropolitan Government Building и Yoyogi National Gymnasium с Harajuku & Shibuya Day — работа одного и того же архитектора, Kenzō Tange, с разницей в 26 лет: сперва спортивный символ Олимпиады-1964, потом административная башня новой, богатой Japan 1990 года. Это два разных момента одной и той же национальной уверенности в себе, выраженной через архитектуру.</p>
-  <p>А про Kabukicho и Omoide Yokocho — общий чёрный рынок, два разных финала — уже было сказано выше: разные ответы на одну и ту же нищету и один и тот же правовой вакуум первых послевоенных лет.</p>
+  <p data-lang="ru">Tokyo Metropolitan Government Building и Yoyogi National Gymnasium с Harajuku & Shibuya Day — работа одного и того же архитектора, Kenzō Tange, с разницей в 26 лет: сперва спортивный символ Олимпиады-1964, потом административная башня новой, богатой Japan 1990 года. Это два разных момента одной и той же национальной уверенности в себе, выраженной через архитектуру.</p>
+  <p data-lang="ru">А про Kabukicho и Omoide Yokocho — общий чёрный рынок, два разных финала — уже было сказано выше: разные ответы на одну и ту же нищету и один и тот же правовой вакуум первых послевоенных лет.</p>
+  <p data-lang="en" style="display:none;">The Tokyo Metropolitan Government Building and the Yoyogi National Gymnasium from Harajuku & Shibuya Day are the same architect's work, 26 years apart — Kenzō Tange, first an Olympic symbol in 1964, then an administrative tower for the rich, confident Japan of 1990. Two moments of the same national self-assurance, expressed in concrete.</p>
+  <p data-lang="en" style="display:none;">And Kabukicho and Omoide Yokocho — one black market, two different endings — was already covered above: two answers to the same postwar poverty and the same legal vacuum.</p>
 
-  <p class="footnote">Shinjuku Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Shinjuku Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Shinjuku Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1659,6 +1825,35 @@ window.SITE_DATA = {
   }
 })();
 
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ----------
+   Elements marked data-lang="ru" / data-lang="en" are shown or hidden by
+   toggling inline style.display. Clearing the inline style (vs setting a
+   value) lets each element fall back to its own CSS-defined display type,
+   so this works for spans, blocks, list items, grids alike. */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 </body>
 </html>

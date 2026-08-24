@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,30 +883,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">天は人の上に人を造らず、人の下に人を造らずと云えり</span>
-    <blockquote>Небо не создаёт человека выше человека и не создаёт человека ниже человека</blockquote>
-    <span class="quote-author">Фукудзава Юкити, «Призыв к учению», 1872 год</span>
-    <span class="quote-source">Самая знаменитая фраза японского Просвещения — и прямая причина, по которой в Kanda выросли университеты, а вокруг них — сотни книжных лавок</span>
+    <span class="quote-jp" data-lang="ru">天は人の上に人を造らず、人の下に人を造らずと云えり</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">天は人の上に人を造らず、人の下に人を造らずと云えり</span>
+    <blockquote data-lang="ru">Небо не создаёт человека выше человека и не создаёт человека ниже человека</blockquote>
+    <blockquote data-lang="en" style="display:none;">Heaven creates no one above another and no one below another</blockquote>
+    <span class="quote-author" data-lang="ru">Фукудзава Юкити, «Призыв к учению», 1872 год</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Fukuzawa Yukichi, "An Encouragement of Learning," 1872</span>
+    <span class="quote-source" data-lang="ru">Самая знаменитая фраза японского Просвещения — и прямая причина, по которой в Kanda выросли университеты, а вокруг них — сотни книжных лавок</span>
+    <span class="quote-source" data-lang="en" style="display:none;">The most famous line of the Japanese Enlightenment — and the direct reason universities grew up in Kanda, with hundreds of bookshops sprouting around them</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>День с развилкой</strong> — утро вместе в Kanda/Jimbocho, дальше Kris идёт по всем магазинам Akihabara сам, вы с Sandy — в своём темпе</li>
       <li><strong>Kanda Myojin — убрана из маршрута</strong>: святилище стоит на холме, к нему ведут ступени и неровные дорожки, по отзывам посетителей — не самый удобный подъём</li>
       <li><strong>Jimbocho</strong> — крупнейший в мире квартал букинистических лавок, около 130–150 магазинов на паре улиц; можно бродить без плана</li>
       <li><strong>Akihabara — не общая часть дня</strong>, а скорее пункт Kris; для вас с Sandy ниже — более лёгкий вариант той же территории</li>
       <li><strong>Вечер — два варианта на выбор</strong>, оба ниже: Ameyoko (просто и рядом) или Yanaka (отдельная небольшая прогулка); решаете на месте, по самочувствию</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>A day with a fork in it</strong> — morning together in Kanda/Jimbocho, then Kris goes through every Akihabara shop on his own, you and Sandy set your own pace</li>
+      <li><strong>Kanda Myojin has been dropped from the route</strong>: the shrine sits on a hill reached by stairs and uneven paths, and visitor reviews say the climb isn't the easiest</li>
+      <li><strong>Jimbocho</strong> — the world's largest cluster of secondhand bookshops, about 130–150 stores over a couple of streets; fine to wander without a plan</li>
+      <li><strong>Akihabara isn't the shared part of the day</strong>, it's really Kris's stop; for you and Sandy, below is a lighter version of the same area</li>
+      <li><strong>Evening has two options to choose from</strong>, both below: Ameyoko (simple and close) or Yanaka (a small separate walk); decide on the spot, by how you feel</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-jimbocho">Jimbocho</button>
     <button class="nav-place-btn" data-target="loc-akihabara">Akihabara</button>
     <button class="nav-place-btn" data-target="loc-ameyoko">Ameyoko</button>
@@ -886,13 +935,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Единственная общая часть дня — Jimbocho, и это скорее плюс, чем ограничение: квартал создан для медленного блуждания без цели, а не для галочек в списке. После него маршрут естественно расходится — Kris уходит в Akihabara на несколько часов вглубь, а вам с Sandy нет смысла повторять его темп; лучше выбрать свой кусок того же района или уйти в сторону раньше.</p>
-      <div class="blockquote">И сам квартал Akihabara дважды полностью сменил профессию — от радиодеталей до аниме и манги, — не изменившись как место ни разу.</div>
-      <p>Вечером логично встретиться уже не в Akihabara, а рядом — оба варианта ниже в одной-двух остановках. Выбор зависит от того, сколько осталось сил: Ameyoko — это просто ужин с уличной атмосферой, без обязательной программы; Yanaka — уже небольшая самостоятельная прогулка со своим сюжетом.</p>
+      <p data-lang="ru">Единственная общая часть дня — Jimbocho, и это скорее плюс, чем ограничение: квартал создан для медленного блуждания без цели, а не для галочек в списке. После него маршрут естественно расходится — Kris уходит в Akihabara на несколько часов вглубь, а вам с Sandy нет смысла повторять его темп; лучше выбрать свой кусок того же района или уйти в сторону раньше.</p>
+      <div class="blockquote" data-lang="ru">И сам квартал Akihabara дважды полностью сменил профессию — от радиодеталей до аниме и манги, — не изменившись как место ни разу.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the Akihabara district itself has completely changed profession twice — from radio parts to anime and manga — without ever changing as a place.</div>
+      <p data-lang="ru">Вечером логично встретиться уже не в Akihabara, а рядом — оба варианта ниже в одной-двух остановках. Выбор зависит от того, сколько осталось сил: Ameyoko — это просто ужин с уличной атмосферой, без обязательной программы; Yanaka — уже небольшая самостоятельная прогулка со своим сюжетом.</p>
+      <p data-lang="en" style="display:none;">The only shared part of the day is Jimbocho, and that's more of a plus than a limit: the district is built for slow, aimless wandering, not for checking things off a list. After that the route naturally splits — Kris heads deep into Akihabara for several hours, and there's no point trying to match his pace; you and Sandy are better off picking your own slice of the same area or stepping away earlier. In the evening it makes sense to meet back up somewhere near Akihabara, not in it — both options below are one or two stops away. The choice depends on how much energy is left: Ameyoko is simply dinner with a street atmosphere, no program required; Yanaka is a small independent walk with its own storyline.</p>
     </div>
   </details>
 
@@ -900,92 +953,126 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -major" id="loc-jimbocho">Jimbocho</h2>
-    <span class="place-caption">Квартал, который построило Просвещение</span>
+    <span class="place-caption" data-lang="ru">Квартал, который построило Просвещение</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The district the Enlightenment built</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Крупнейшее в мире скопление букинистических магазинов — около 130–150 лавок, треть всех подержанных книготорговцев Japan на паре улиц вокруг перекрёстка Yasukuni-dori и Hakusan-dori</li>
         <li>Квартал вырос не стихийно, а вслед за университетами: после Meiji Restoration здесь одна за другой открывались юридические и гуманитарные школы, включая будущий Tokyo University — спрос студентов на книги создал предложение</li>
         <li>Здесь же в 1913 году, после квартального пожара, Shigeo Iwanami открыл маленькую лавку, которая стала издательством Iwanami Shoten — одним из главных издателей современной японской мысли</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The world's largest concentration of secondhand bookstores — about 130–150 shops, a third of all used-book dealers in Japan, packed into a couple of streets around the Yasukuni-dori and Hakusan-dori intersection</li>
+        <li>The district didn't grow spontaneously, it followed the universities: after the Meiji Restoration, law and humanities schools opened here one after another, including what became Tokyo University — student demand for books created the supply</li>
+        <li>In 1913, after a district-wide fire, Shigeo Iwanami opened a small shop here that became Iwanami Shoten, one of the leading publishers of modern Japanese thought</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Jimbocho</span></div></figure>
       <div>
-        <p>Название района восходит к самураю Nagaharu Jimbo, чья резиденция стояла здесь в конце XVII века — но настоящую судьбу кварталу задал не он, а взрыв образования эпохи Meiji, тот самый, о котором писал Fukuzawa Yukichi в цитате наверху страницы. Идея, что учиться может и должен каждый, а не только самурайское сословие, требовала книг в невиданных прежде масштабах — и Jimbocho стал их естественным складом.</p>
-        <p>Сегодня лавки специализируются до предела: есть магазин только про кошек, только про альпинизм, только старые географические карты. К северу, в сторону Ochanomizu, та же логика привела к музыкальному кварталу — сначала книги для студентов, потом ноты, потом сами инструменты; сейчас там сосредоточены магазины гитар и струнных, от винтажных до совсем новых.</p>
+        <p data-lang="ru">Название района восходит к самураю Nagaharu Jimbo, чья резиденция стояла здесь в конце XVII века — но настоящую судьбу кварталу задал не он, а взрыв образования эпохи Meiji, тот самый, о котором писал Fukuzawa Yukichi в цитате наверху страницы. Идея, что учиться может и должен каждый, а не только самурайское сословие, требовала книг в невиданных прежде масштабах — и Jimbocho стал их естественным складом.</p>
+        <p data-lang="ru">Сегодня лавки специализируются до предела: есть магазин только про кошек, только про альпинизм, только старые географические карты. К северу, в сторону Ochanomizu, та же логика привела к музыкальному кварталу — сначала книги для студентов, потом ноты, потом сами инструменты; сейчас там сосредоточены магазины гитар и струнных, от винтажных до совсем новых.</p>
+        <p data-lang="en" style="display:none;">The district's name goes back to samurai Nagaharu Jimbo, whose residence stood here in the late 17th century — but its real destiny came not from him, from the explosion of Meiji-era education, the very thing Fukuzawa Yukichi wrote about in the quote at the top of this page. The idea that everyone could and should learn, not just the samurai class, demanded books on a scale never seen before — and Jimbocho became their natural warehouse. Today the shops specialize to an extreme degree: there's a shop just for cats, one just for mountaineering, one just for old geographic maps. To the north, toward Ochanomizu, the same logic produced a music district — books for students first, then sheet music, then the instruments themselves; today it's a cluster of guitar and string shops, from vintage to brand new.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Не обязательно искать что-то конкретное — сама структура квартала (проспект букинистов, переулок кофеен, отдельная улица инструментов) работает как готовый маршрут для медленной прогулки.</div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Fukuzawa Yukichi и японское Просвещение · сравнение с книжным кварталом любого европейского университетского города</p>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Не обязательно искать что-то конкретное — сама структура квартала (проспект букинистов, переулок кофеен, отдельная улица инструментов) работает как готовый маршрут для медленной прогулки.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>No need to look for anything specific — the district's own structure (a bookshop avenue, a coffee-shop lane, a separate instrument street) works as a ready-made route for a slow walk.</div>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Fukuzawa Yukichi и японское Просвещение · сравнение с книжным кварталом любого европейского университетского города</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Fukuzawa Yukichi and the Japanese Enlightenment · a comparison with the book district of any European university town</p>
 
     <hr>
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -major" id="loc-akihabara">Akihabara</h2>
-    <span class="place-caption">Квартал, который сегодня не совсем ваш</span>
+    <span class="place-caption" data-lang="ru">Квартал, который сегодня не совсем ваш</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The district that isn't quite yours today</span>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Akihabara</span></div></figure>
       <div>
-        <p>После войны здесь был чёрный рынок радиодеталей — солдаты и инженеры распродавали списанную технику прямо с земли у станции. К 1980-м это превратилось в крупнейший в Japan квартал бытовой электроники, а к 2000-м, когда электронику подвинул смартфон, торговцы переориентировались на то, что осталось растущим рынком, — аниме, мангу, видеоигры и всё, что вокруг них выросло: от специализированных магазинов до maid-кафе.</p>
-        <p>Это тот редкий пункт поездки, где Kris — не сопровождающий, а тот, кто ведёт: пройти все профильные магазины Akihabara вдумчиво — само по себе полноценный день, и втискивать это в общий темп смысла нет.</p>
+        <p data-lang="ru">После войны здесь был чёрный рынок радиодеталей — солдаты и инженеры распродавали списанную технику прямо с земли у станции. К 1980-м это превратилось в крупнейший в Japan квартал бытовой электроники, а к 2000-м, когда электронику подвинул смартфон, торговцы переориентировались на то, что осталось растущим рынком, — аниме, мангу, видеоигры и всё, что вокруг них выросло: от специализированных магазинов до maid-кафе.</p>
+        <p data-lang="ru">Это тот редкий пункт поездки, где Kris — не сопровождающий, а тот, кто ведёт: пройти все профильные магазины Akihabara вдумчиво — само по себе полноценный день, и втискивать это в общий темп смысла нет.</p>
+        <p data-lang="en" style="display:none;">This was a black market for radio parts after the war — soldiers and engineers sold decommissioned equipment right off the ground by the station. By the 1980s it had grown into Japan's largest consumer electronics district, and by the 2000s, once smartphones displaced electronics, the traders pivoted to what remained a growing market — anime, manga, video games, and everything that grew up around them, from specialty shops to maid cafés. This is the rare stop on the trip where Kris isn't tagging along, he's the one leading: working through Akihabara's specialty shops properly is a full day in itself, and there's no point squeezing it into the group's pace.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Квартал не выжил, а дважды полностью сменил профессию — от списанных радиодеталей до бытовой электроники, а затем до аниме и манги, — оставаясь при этом на одном и том же пятачке земли у одной и той же станции. Не место держится за товар, а товар меняется вокруг места.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Квартал не выжил, а дважды полностью сменил профессию — от списанных радиодеталей до бытовой электроники, а затем до аниме и манги, — оставаясь при этом на одном и том же пятачке земли у одной и той же станции. Не место держится за товар, а товар меняется вокруг места.</p>
+      <p data-lang="en" style="display:none;">The district didn't just survive — it completely changed profession twice, from decommissioned radio parts to consumer electronics, then to anime and manga, all while staying on the exact same patch of ground by the exact same station. The place doesn't cling to a product; the product changes around the place.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Если хочется увидеть район, не тратя на него полдня, — 15–20 минут неспешным шагом по главной Chuo-dori, с её вертикальными неоновыми вывесками, дают почти всё ощущение места без глубокого захода в отдельные магазины.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Если хочется увидеть район, не тратя на него полдня, — 15–20 минут неспешным шагом по главной Chuo-dori, с её вертикальными неоновыми вывесками, дают почти всё ощущение места без глубокого захода в отдельные магазины.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>To see the district without spending half a day on it, a 15–20-minute stroll down the main Chuo-dori, with its vertical neon signs, gives almost the whole sense of the place without going deep into individual shops.</div>
 
     <hr>
 
-    <span class="place-kicker">Вечер</span>
+    <span class="place-kicker" data-lang="ru">Вечер</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Evening</span>
     <h2 class="section-title -minor" id="loc-ameyoko">Ameyoko</h2>
-    <span class="place-caption">Просто ужин с уличной атмосферой, без программы</span>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Оба вечерних варианта — одна станция от Akihabara, оба не требуют брони или расписания. Разница только в том, сколько сил осталось к вечеру: этот — если программы уже не хочется.</div>
+    <span class="place-caption" data-lang="ru">Просто ужин с уличной атмосферой, без программы</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Just dinner with a street atmosphere, no program</span>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Оба вечерних варианта — одна станция от Akihabara, оба не требуют брони или расписания. Разница только в том, сколько сил осталось к вечеру: этот — если программы уже не хочется.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Both evening options are one stop from Akihabara, neither needs a reservation or a schedule. The difference is just how much energy is left by evening: this one is for when you don't want a program at all.</div>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Ameyoko</span></div></figure>
       <div>
-        <p>Шумный рыночный квартал под и вдоль железнодорожных путей, вырос после войны как чёрный рынок (само название — сокращение от «Ameya Yokochō», «переулок торговцев сладостями», хотя торговали там куда более широким ассортиментом). Сегодня — уличная еда, бары-стойки, недорогая рыба и одежда. Сюда идут не смотреть, а просто быть — поесть, выпить, послушать зазывал, уйти когда надоест. Никакого сюжета, никакой программы.</p>
+        <p data-lang="ru">Шумный рыночный квартал под и вдоль железнодорожных путей, вырос после войны как чёрный рынок (само название — сокращение от «Ameya Yokochō», «переулок торговцев сладостями», хотя торговали там куда более широким ассортиментом). Сегодня — уличная еда, бары-стойки, недорогая рыба и одежда. Сюда идут не смотреть, а просто быть — поесть, выпить, послушать зазывал, уйти когда надоест. Никакого сюжета, никакой программы.</p>
+        <p data-lang="en" style="display:none;">A loud market district running under and along the rail tracks, grown up after the war as a black market (the name itself shortens "Ameya Yokochō," "candy sellers' alley," though the range of goods sold was much wider). Today it's street food, counter bars, cheap fish and clothing. People come here not to look but simply to be — eat, drink, listen to the touts, leave when they're done. No storyline, no program.</p>
       </div>
     </div>
 
     <hr>
 
-    <span class="place-kicker">Вечер</span>
+    <span class="place-kicker" data-lang="ru">Вечер</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Evening</span>
     <h2 class="section-title -major" id="loc-yanaka">Yanaka</h2>
-    <span class="place-caption">Район, которого не коснулись ни землетрясение, ни бомбёжки</span>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Второй вечерний вариант — если ещё есть запал на небольшую самостоятельную прогулку со своим сюжетом, не просто на ужин.</div>
+    <span class="place-caption" data-lang="ru">Район, которого не коснулись ни землетрясение, ни бомбёжки</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The district untouched by earthquake or bombing</span>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Второй вечерний вариант — если ещё есть запал на небольшую самостоятельную прогулку со своим сюжетом, не просто на ужин.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>The second evening option, for when there's still energy for a small independent walk with its own storyline, not just dinner.</div>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Один из немногих районов Tokyo, не тронутых ни землетрясением 1923 года, ни бомбардировками 1945-го — деревянная застройка довоенного Tokyo здесь не реконструкция, а оригинал</li>
         <li>Yanaka Ginza — шотэнгай длиной 170 метров, лавки местами торгуют больше века подряд; на входе со стороны станции Nippori — лестница Yuyake Dandan, «лестница заката», названная так за вид, который с неё открывается ближе к вечеру</li>
         <li>На кладбище Yanaka Reien похоронен Tokugawa Yoshinobu — последний сёгун, тот самый, что в 1867 году в Nijō Castle в Kyoto объявил Taisei Hōkan и добровольно передал власть императору</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>One of the few Tokyo districts untouched by both the 1923 earthquake and the 1945 bombing raids — the prewar wooden buildings here aren't reconstructions, they're originals</li>
+        <li>Yanaka Ginza is a 170-meter shotengai, some shops trading for over a century; at the entrance from Nippori station is the Yuyake Dandan staircase, the "sunset stairs," named for the view it offers toward evening</li>
+        <li>Tokugawa Yoshinobu, the last shogun, is buried at Yanaka Reien cemetery — the same man who announced Taisei Hōkan at Nijō Castle in Kyoto in 1867, voluntarily handing power back to the emperor</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Yanaka</span></div></figure>
       <div>
-        <p>Логичный маршрут — от станции Nippori через кладбище (это не мрачное место, а скорее тихий сад с соснами и — по вечерам — множеством уличных кошек, живущих здесь свободно) к лестнице Yuyake Dandan, и вниз по ней прямо в Yanaka Ginza за уличной едой: менчи-кацу, якитори, мороженое с дыней.</p>
+        <p data-lang="ru">Логичный маршрут — от станции Nippori через кладбище (это не мрачное место, а скорее тихий сад с соснами и — по вечерам — множеством уличных кошек, живущих здесь свободно) к лестнице Yuyake Dandan, и вниз по ней прямо в Yanaka Ginza за уличной едой: менчи-кацу, якитори, мороженое с дыней.</p>
+        <p data-lang="en" style="display:none;">A logical route: from Nippori station through the cemetery (not a gloomy place, more a quiet garden of pines and, come evening, plenty of free-roaming street cats), to the Yuyake Dandan stairs, and down them straight into Yanaka Ginza for street food — menchi-katsu, yakitori, melon ice cream.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Заходить лучше со стороны Nippori, через кладбище — тогда лестница Yuyake Dandan и спуск в шотэнгай становятся естественным финалом прогулки, а не началом.</div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · <a href="fushimi-nijo-day.html#loc-nijocastle">Fushimi & Nijō Day → Nijō Castle</a>, где тот же Yoshinobu объявил Taisei Hōkan</p>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Заходить лучше со стороны Nippori, через кладбище — тогда лестница Yuyake Dandan и спуск в шотэнгай становятся естественным финалом прогулки, а не началом.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Better to enter from Nippori, through the cemetery — that way the Yuyake Dandan stairs and the descent into the shotengai become a natural ending to the walk, not the start.</div>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · <a href="fushimi-nijo-day.html#loc-nijocastle">Fushimi & Nijō Day → Nijō Castle</a>, где тот же Yoshinobu объявил Taisei Hōkan</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a> · <a href="fushimi-nijo-day.html#loc-nijocastle">Fushimi & Nijō Day → Nijō Castle</a>, where the same Yoshinobu announced Taisei Hōkan</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Fukuzawa Yukichi, чья фраза открывает сегодняшний день, писал в эпоху, когда Japan срочно училась у Запада после насильственного открытия страны «чёрными кораблями» коммодора Perry — тот же исторический разлом, который вчера привёл к переделке форта Odaiba в развлекательный квартал. Разница в том, что Perry открыл Japan силой, а университеты вокруг Jimbocho — это то, что страна сделала с этой открытостью по собственной инициативе, превратив внешнее давление в внутренний проект самообразования.</p>
-  <p>А смена специализации Akihabara — с радиодеталей на аниме — структурно похожа на то, что ты видела в Kanazawa с золотой фольгой: ремесло выживает не потому, что не меняется, а потому что успевает поменять предмет, сохранив квартал и навык адаптации.</p>
+  <p data-lang="ru">Fukuzawa Yukichi, чья фраза открывает сегодняшний день, писал в эпоху, когда Japan срочно училась у Запада после насильственного открытия страны «чёрными кораблями» коммодора Perry — тот же исторический разлом, который вчера привёл к переделке форта Odaiba в развлекательный квартал. Разница в том, что Perry открыл Japan силой, а университеты вокруг Jimbocho — это то, что страна сделала с этой открытостью по собственной инициативе, превратив внешнее давление в внутренний проект самообразования.</p>
+  <p data-lang="en" style="display:none;">Fukuzawa Yukichi, whose line opens today, wrote in an era when Japan urgently studied the West after being forced open by Commodore Perry's Black Ships — the same historical rupture that yesterday led to Odaiba's fort becoming an entertainment district. The difference is that Perry opened Japan by force, while the universities around Jimbocho are what the country did with that openness on its own initiative, turning outside pressure into an internal project of self-education.</p>
+  <p data-lang="ru">А смена специализации Akihabara — с радиодеталей на аниме — структурно похожа на то, что ты видела в Kanazawa с золотой фольгой: ремесло выживает не потому, что не меняется, а потому что успевает поменять предмет, сохранив квартал и навык адаптации.</p>
+  <p data-lang="en" style="display:none;">And Akihabara's change of specialty, from radio parts to anime, is structurally similar to what you saw in Kanazawa with gold leaf: a craft survives not because it stays the same, but because it manages to change its subject while keeping the district and the skill of adapting.</p>
 
-  <p class="footnote">Kanda & Akihabara Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Kanda & Akihabara Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Kanda & Akihabara Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1025,6 +1112,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

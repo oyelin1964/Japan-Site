@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,30 +883,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">人は人 吾はわれ也 とにかくに 吾行く道を 吾は行くなり</span>
-    <blockquote>Люди — это люди, я — это я. Что бы ни случилось, я иду своей дорогой</blockquote>
-    <span class="quote-author">Нисида Китаро, философ, в честь которого названа тропа</span>
-    <span class="quote-source">Танка высечена на камне у тропы, рядом с Hōnen-in — написана в новогодний день 1934 года, когда автору было 64</span>
+    <span class="quote-jp" data-lang="ru">人は人 吾はわれ也 とにかくに 吾行く道を 吾は行くなり</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">人は人 吾はわれ也 とにかくに 吾行く道を 吾は行くなり</span>
+    <blockquote data-lang="ru">Люди — это люди, я — это я. Что бы ни случилось, я иду своей дорогой</blockquote>
+    <blockquote data-lang="en" style="display:none;">People are people, I am I. Whatever happens, I walk my own path</blockquote>
+    <span class="quote-author" data-lang="ru">Нисида Китаро, философ, в честь которого названа тропа</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Nishida Kitarō, the philosopher the path is named for</span>
+    <span class="quote-source" data-lang="ru">Танка высечена на камне у тропы, рядом с Hōnen-in — написана в новогодний день 1934 года, когда автору было 64</span>
+    <span class="quote-source" data-lang="en" style="display:none;">A tanka carved on a stone by the path, near Hōnen-in — written on New Year's Day 1934, when the author was 64</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>День переезда</strong> — выезд из Centurion Hotel Akasaka до 11:00 (это дедлайн, не требование: чем раньше выйдете, тем спокойнее день в Kyoto)</li>
       <li><strong>Shinkansen Nozomi Tokyo → Kyoto</strong> — бронь мест, детали и точное время открытия окна — в <a href="trip-logistics.html">Logistics</a></li>
       <li><strong>Kyoto Century Hotel</strong> — номер с 15:00, но багаж принимают раньше; 5 минут пешком от Kyoto Station</li>
       <li><strong>Eikan-dō</strong> — последний вход в 16:00, самый строгий дедлайн дня — если время поджимает, идите сюда первым делом</li>
       <li><strong>Ginkaku-ji</strong> — последний вход в 16:45, самый мягкий дедлайн — логично оставить напоследок</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Travel day</strong> — checkout from Centurion Hotel Akasaka by 11:00 (a deadline, not a requirement — the earlier you leave, the calmer the day in Kyoto)</li>
+      <li><strong>Shinkansen Nozomi Tokyo → Kyoto</strong> — seat reservations, details, and the exact booking window are in <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Kyoto Century Hotel</strong> — check-in at 15:00, but luggage drop-off starts earlier; 5 minutes on foot from Kyoto Station</li>
+      <li><strong>Eikan-dō</strong> — last entry 16:00, the day's tightest deadline — go here first if time is short</li>
+      <li><strong>Ginkaku-ji</strong> — last entry 16:45, the softest deadline — logical to save for last</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-nanzenji">Nanzen-ji</button>
     <button class="nav-place-btn" data-target="loc-eikando">Eikan-dō</button>
     <button class="nav-place-btn" data-target="loc-honenin">Hōnen-in</button>
@@ -887,14 +936,18 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Из Kyoto Station сюда ведут два разных маршрута — медленный автобус прямо до Ginkaku-ji (северный конец тропы) и метро до станции Keage (южный конец, рядом с Nanzen-ji) с пересадкой Karasuma → Tozai, около 20 минут. Разница в скорости и определяет порядок: стартовать логично с южного конца через метро, а не тащиться автобусом на север.</p>
-      <p>Дальше маршрут идёт от самого строгого дедлайна к самому мягкому: Nanzen-ji (бесплатная территория, без спешки) → Eikan-dō (вход до 16:00 — закрываем этот вопрос первым) → Hōnen-in и Ōtoyo Shrine (без ограничений по времени, можно задержаться) → Ginkaku-ji в конце (вход до 16:45).</p>
-      <div class="blockquote">А «серебряный» павильон в конце тропы, которым всё завершится, — на самом деле никогда не видел ни грамма серебра, ни разу за 500 с лишним лет.</div>
-      <p>Если выехать из Tokyo пораньше, всё это можно пройти в куда более спокойном темпе — порядок работает и как страховка на случай опозданий, и просто как логичный маршрут в целом.</p>
+      <p data-lang="ru">Из Kyoto Station сюда ведут два разных маршрута — медленный автобус прямо до Ginkaku-ji (северный конец тропы) и метро до станции Keage (южный конец, рядом с Nanzen-ji) с пересадкой Karasuma → Tozai, около 20 минут. Разница в скорости и определяет порядок: стартовать логично с южного конца через метро, а не тащиться автобусом на север.</p>
+      <p data-lang="ru">Дальше маршрут идёт от самого строгого дедлайна к самому мягкому: Nanzen-ji (бесплатная территория, без спешки) → Eikan-dō (вход до 16:00 — закрываем этот вопрос первым) → Hōnen-in и Ōtoyo Shrine (без ограничений по времени, можно задержаться) → Ginkaku-ji в конце (вход до 16:45).</p>
+      <div class="blockquote" data-lang="ru">А «серебряный» павильон в конце тропы, которым всё завершится, — на самом деле никогда не видел ни грамма серебра, ни разу за 500 с лишним лет.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the "silver" pavilion that closes out the path has, in fact, never seen a gram of silver — not once in over 500 years.</div>
+      <p data-lang="ru">Если выехать из Tokyo пораньше, всё это можно пройти в куда более спокойном темпе — порядок работает и как страховка на случай опозданий, и просто как логичный маршрут в целом.</p>
+      <p data-lang="en" style="display:none;">Two different routes get you here from Kyoto Station — a slow bus straight to Ginkaku-ji (the path's north end), or the metro to Keage station (south end, by Nanzen-ji) with a Karasuma-to-Tozai transfer, about 20 minutes. That speed gap sets the order: start at the south end via metro rather than crawl north by bus. From there the route runs from the tightest deadline to the softest: Nanzen-ji (free grounds, no rush) → Eikan-dō (entry closes at 16:00 — handle that first) → Hōnen-in and Ōtoyo Shrine (no time limits, linger if you like) → Ginkaku-ji last (entry until 16:45). Leave Tokyo early and you can take all of this at a much calmer pace — the order works both as insurance against running late and simply as the logical route.</p>
     </div>
   </details>
 
@@ -902,138 +955,182 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-nanzenji">Nanzen-ji</h2>
-    <span class="place-caption">Римский акведук внутри дзен-монастыря XIII века</span>
+    <span class="place-caption" data-lang="ru">Римский акведук внутри дзен-монастыря XIII века</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A Roman-style aqueduct inside a 13th-century Zen monastery</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Основан в 1291 году на месте виллы императора Kameyama, который сам передал резиденцию под дзен-храм — редкий случай, когда монастырь начинается с отречения императора, а не с указа сёгуна</li>
         <li>Огромные ворота Sanmon (1628) — сцена знаменитой пьесы кабуки, где разбойник Ishikawa Goemon произносит «какой великолепный вид!», не подозревая, что его вот-вот схватят и сварят заживо</li>
         <li>Через территорию храма в 1890 году провели кирпичный акведук Suirokaku — часть канала Lake Biwa, инженерного проекта эпохи Meiji, который спроектировал 20-с-небольшим-летний инженер Tanabe Sakurō</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founded in 1291 on the site of Emperor Kameyama's villa, which he himself handed over to become a Zen temple — a rare case of a monastery starting with an emperor's renunciation rather than a shogun's decree</li>
+        <li>The massive Sanmon gate (1628) is the setting of a famous kabuki scene where the outlaw Ishikawa Goemon declares "what a magnificent view!" — unaware he's about to be captured and boiled alive</li>
+        <li>In 1890 a brick aqueduct, the Suirokaku, was routed straight through the temple grounds — part of the Lake Biwa Canal, a Meiji-era engineering project designed by Tanabe Sakurō, then in his early twenties</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Nanzen-ji</span></div></figure>
       <div>
-        <p>Акведук строили, чтобы провести воду из озера Biwa в Kyoto — и заодно запустить первую в Japan гидроэлектростанцию, давшую городу электричество с 1895 года. Прокладывать западного вида кирпичный мост через территорию храма XIV века было спорным решением, и городские власти долго обсуждали, как вписать его в пейзаж, не разрушив атмосферу места. Получившийся компромисс — то немногое в Kyoto, что выглядит откровенно чужеродным и при этом стало одной из самых фотографируемых деталей города.</p>
-        <p>Sanmon, в свою очередь, построен не как парадный вход, а как памятник павшим: заказчик Tōdō Takatora поставил его в 1628 году в память о своих вассалах, погибших при осаде Osaka Castle в 1615-м. Легенда о разбойнике Goemon, поднявшемся на ворота полюбоваться видом прямо перед арестом, — позднейшая кабуки-выдумка: настоящие ворота его эпохи сгорели ещё до того, как построили нынешние.</p>
+        <p data-lang="ru">Акведук строили, чтобы провести воду из озера Biwa в Kyoto — и заодно запустить первую в Japan гидроэлектростанцию, давшую городу электричество с 1895 года. Прокладывать западного вида кирпичный мост через территорию храма XIV века было спорным решением, и городские власти долго обсуждали, как вписать его в пейзаж, не разрушив атмосферу места. Получившийся компромисс — то немногое в Kyoto, что выглядит откровенно чужеродным и при этом стало одной из самых фотографируемых деталей города.</p>
+        <p data-lang="ru">Sanmon, в свою очередь, построен не как парадный вход, а как памятник павшим: заказчик Tōdō Takatora поставил его в 1628 году в память о своих вассалах, погибших при осаде Osaka Castle в 1615-м. Легенда о разбойнике Goemon, поднявшемся на ворота полюбоваться видом прямо перед арестом, — позднейшая кабуки-выдумка: настоящие ворота его эпохи сгорели ещё до того, как построили нынешние.</p>
+        <p data-lang="en" style="display:none;">The aqueduct was built to bring water from Lake Biwa to Kyoto, and to power Japan's first hydroelectric plant, which supplied the city with electricity from 1895. Running a Western-looking brick bridge through a 14th-century temple was controversial, and city authorities argued for years over how to fit it into the landscape without wrecking the mood of the place. The compromise is one of the few things in Kyoto that looks openly foreign — and it became one of the city's most photographed details anyway. The Sanmon gate, meanwhile, wasn't built as a grand entrance but as a war memorial: patron Tōdō Takatora erected it in 1628 to honor vassals who died in the 1615 siege of Osaka Castle. The legend of the outlaw Goemon admiring the view from the gate right before his arrest is a later kabuki invention — the actual gate from his era burned down before this one was built.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Подняться на верхний этаж Sanmon можно за отдельную плату — вид оттуда действительно тот самый, ради которого Goemon (по легенде) забыл об осторожности.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Подняться на верхний этаж Sanmon можно за отдельную плату — вид оттуда действительно тот самый, ради которого Goemon (по легенде) забыл об осторожности.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>You can climb to the Sanmon's upper floor for a separate fee — the view really is the one Goemon (legend says) forgot all caution for.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта <strong>8:40–17:00</strong>, платные постройки (Sanmon, Hōjō, Nanzen-in) — до 16:30–16:40. Несколько отдельных билетов на разные части комплекса, покупаются по месту.</p>
+        <p data-lang="ru">Территория открыта <strong>8:40–17:00</strong>, платные постройки (Sanmon, Hōjō, Nanzen-in) — до 16:30–16:40. Несколько отдельных билетов на разные части комплекса, покупаются по месту.</p>
+        <p data-lang="en" style="display:none;">Grounds open <strong>8:40–17:00</strong>, paid buildings (Sanmon, Hōjō, Nanzen-in) until 16:30–16:40. Separate tickets for different parts of the complex, bought on site.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo</a> — осада Osaka Castle 1615 года · <a href="glossary.html#meiji-restoration">Реставрация Meiji</a> — канал Lake Biwa и первая ГЭС Japan</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo</a> — осада Osaka Castle 1615 года · <a href="glossary.html#meiji-restoration">Реставрация Meiji</a> — канал Lake Biwa и первая ГЭС Japan</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate</a> — the 1615 siege of Osaka Castle · <a href="glossary.html#meiji-restoration">The Meiji Restoration</a> — the Lake Biwa Canal and Japan's first hydroelectric plant</p>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -minor" id="loc-eikando">Eikan-dō</h2>
-    <span class="place-caption">Будда, который обернулся и поторопил монаха</span>
+    <span class="place-caption" data-lang="ru">Будда, который обернулся и поторопил монаха</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The Buddha who turned around to hurry a monk along</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Eikan-dō</span></div></figure>
       <div>
-        <p>Основан в 853 году как школа эзотерического буддизма Shingon, но известен по имени монаха XI века Eikan, который однажды во время ритуального обхода зала увидел, как статуя Amida Buddha сошла с пьедестала и пошла впереди него — а обернувшись через плечо, произнесла: «Eikan, ты слишком медлишь». С тех пор главный объект поклонения храма — <strong>Mikaeri Amida</strong>, «обернувшийся Amida»: редчайшая иконография, где голова статуи повёрнута вбок, а не смотрит прямо на молящегося.</p>
+        <p data-lang="ru">Основан в 853 году как школа эзотерического буддизма Shingon, но известен по имени монаха XI века Eikan, который однажды во время ритуального обхода зала увидел, как статуя Amida Buddha сошла с пьедестала и пошла впереди него — а обернувшись через плечо, произнесла: «Eikan, ты слишком медлишь». С тех пор главный объект поклонения храма — <strong>Mikaeri Amida</strong>, «обернувшийся Amida»: редчайшая иконография, где голова статуи повёрнута вбок, а не смотрит прямо на молящегося.</p>
+        <p data-lang="en" style="display:none;">Founded in 853 as a school of esoteric Shingon Buddhism, but known today for an 11th-century monk named Eikan, who during a ritual circling of the hall watched the Amida Buddha statue step down from its pedestal and walk ahead of him — glancing back over its shoulder to say, "Eikan, you're too slow." Ever since, the temple's central object of worship has been <strong>Mikaeri Amida</strong>, the "looking-back Amida" — an exceptionally rare iconography where the statue's head turns to the side instead of facing the worshipper directly.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Официальное имя храма — Zenrin-ji, «храм в тихой роще»; «Eikan-dō» («зал Eikan») — прозвище по имени монаха из легенды, но именно оно и прижилось.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Официальное имя храма — Zenrin-ji, «храм в тихой роще»; «Eikan-dō» («зал Eikan») — прозвище по имени монаха из легенды, но именно оно и прижилось.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The temple's official name is Zenrin-ji, "temple in a quiet grove"; "Eikan-dō" ("Eikan's hall") is a nickname from the legend's monk — but it's the one that stuck.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–17:00</strong>, последний вход в <strong>16:00</strong> — самый строгий дедлайн дня, идти сюда первым, если время ограничено. Около 600 иен.</p>
+        <p data-lang="ru">Открыт <strong>9:00–17:00</strong>, последний вход в <strong>16:00</strong> — самый строгий дедлайн дня, идти сюда первым, если время ограничено. Около 600 иен.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–17:00</strong>, last entry <strong>16:00</strong> — the day's tightest deadline, come here first if time is tight. Around 600 yen.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -minor" id="loc-honenin">Hōnen-in</h2>
-    <span class="place-caption">Соломенные ворота, заросшие мхом до неузнаваемости</span>
+    <span class="place-caption" data-lang="ru">Соломенные ворота, заросшие мхом до неузнаваемости</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A thatched gate gone unrecognizable under moss</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Hōnen-in</span></div></figure>
       <div>
-        <p>Построен в 1680 году монахом Ninchō в честь Hōnen (1133–1212) — основателя школы Jōdo, буддизма «чистой земли», который в 75 лет был отправлен в изгнание за ересь: конкурирующие школы посчитали его учение о спасении через простое повторение имени Amida слишком лёгким путём к просветлению. Соломенная крыша ворот Sanmon, вся заросшая мхом, — самый узнаваемый образ храма и одна из самых фотографируемых деталей всей тропы.</p>
-        <p>Сразу за воротами — два невысоких кургана белого песка, <strong>byakusadan</strong>, символизирующих воду: пройти между ними считается ритуальным очищением перед входом на территорию. Узор на песке монахи перерисовывают каждые 4–5 дней, подстраивая под сезон — в конце сентября это обычно клён или иной осенний мотив.</p>
+        <p data-lang="ru">Построен в 1680 году монахом Ninchō в честь Hōnen (1133–1212) — основателя школы Jōdo, буддизма «чистой земли», который в 75 лет был отправлен в изгнание за ересь: конкурирующие школы посчитали его учение о спасении через простое повторение имени Amida слишком лёгким путём к просветлению. Соломенная крыша ворот Sanmon, вся заросшая мхом, — самый узнаваемый образ храма и одна из самых фотографируемых деталей всей тропы.</p>
+        <p data-lang="ru">Сразу за воротами — два невысоких кургана белого песка, <strong>byakusadan</strong>, символизирующих воду: пройти между ними считается ритуальным очищением перед входом на территорию. Узор на песке монахи перерисовывают каждые 4–5 дней, подстраивая под сезон — в конце сентября это обычно клён или иной осенний мотив.</p>
+        <p data-lang="en" style="display:none;">Built in 1680 by the monk Ninchō in honor of Hōnen (1133–1212), founder of the Jōdo Pure Land school — who was exiled at age 75 for heresy, after rival schools decided his teaching that salvation came from simply repeating Amida's name was too easy a shortcut to enlightenment. The moss-swallowed thatched roof of the Sanmon gate is the temple's most recognizable image and one of the most photographed sights on the whole path. Just past the gate sit two low mounds of white sand, <strong>byakusadan</strong>, symbolizing water — walking between them is considered ritual purification before entering the grounds. Monks redraw the pattern in the sand every 4–5 days to match the season; in late September it's usually maple leaves or another autumn motif.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Главный зал открыт для посещения только две недели в апреле и неделю в ноябре — в конце сентября внутрь не попасть, но сам сад, ворота и byakusadan доступны всегда и бесплатно.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Главный зал открыт для посещения только две недели в апреле и неделю в ноябре — в конце сентября внутрь не попасть, но сам сад, ворота и byakusadan доступны всегда и бесплатно.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>The main hall only opens to visitors for two weeks in April and one week in November — you can't get inside in late September, but the garden, gate, and byakusadan are always open and free.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта <strong>6:00–16:00</strong>, вход свободный. Небольшой крюк в сторону от основной тропы, но короткий.</p>
+        <p data-lang="ru">Территория открыта <strong>6:00–16:00</strong>, вход свободный. Небольшой крюк в сторону от основной тропы, но короткий.</p>
+        <p data-lang="en" style="display:none;">Grounds open <strong>6:00–16:00</strong>, free entry. A small detour off the main path, but a short one.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Hōnen и школа Jōdo · byakusadan и логика песчаных садов в буддийских храмах</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Hōnen и школа Jōdo · byakusadan и логика песчаных садов в буддийских храмах</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Hōnen and the Jōdo school · byakusadan and the logic of sand gardens in Buddhist temples</p>
 
     <hr>
 
-    <span class="place-kicker">Святилище</span>
+    <span class="place-kicker" data-lang="ru">Святилище</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title -minor" id="loc-otoyoshrine">Ōtoyo Shrine</h2>
-    <span class="place-caption">Святилище, которое стерегут не львы, а мыши</span>
+    <span class="place-caption" data-lang="ru">Святилище, которое стерегут не львы, а мыши</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A shrine guarded by mice instead of lions</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Ōtoyo Shrine</span></div></figure>
       <div>
-        <p>Основано в 887 году как молитва об исцелении императора Uda. Почти в любом синтоистском святилище Japan вход стерегут komainu — каменные львы-собаки. Здесь у малого святилища Daikoku-sha эту роль неожиданно взяли на себя мыши: по легенде из «Кодзики», бог Ōkuninushi укрылся от лесного пожара в норе, которую прямо у него на глазах вырыла мышь, — и с тех пор мыши считаются его защитниками.</p>
-        <p>На территории есть ещё пара стражей-обезьян у соседнего святилища и птицы-коршуна у святилища бога огня — но именно мыши, единственные в своём роде во всей Japan, сделали Ōtoyo местом, которое туристы находят почти случайно, свернув с тропы.</p>
+        <p data-lang="ru">Основано в 887 году как молитва об исцелении императора Uda. Почти в любом синтоистском святилище Japan вход стерегут komainu — каменные львы-собаки. Здесь у малого святилища Daikoku-sha эту роль неожиданно взяли на себя мыши: по легенде из «Кодзики», бог Ōkuninushi укрылся от лесного пожара в норе, которую прямо у него на глазах вырыла мышь, — и с тех пор мыши считаются его защитниками.</p>
+        <p data-lang="ru">На территории есть ещё пара стражей-обезьян у соседнего святилища и птицы-коршуна у святилища бога огня — но именно мыши, единственные в своём роде во всей Japan, сделали Ōtoyo местом, которое туристы находят почти случайно, свернув с тропы.</p>
+        <p data-lang="en" style="display:none;">Founded in 887 as a prayer for Emperor Uda's recovery from illness. Almost every Shinto shrine in Japan has its entrance guarded by komainu, lion-dog statues. Here, at the small Daikoku-sha shrine, mice unexpectedly take that role: according to a Kojiki legend, the god Ōkuninushi hid from a forest fire in a burrow a mouse dug right in front of him — and mice have been considered his protectors ever since. There are also monkey guardians at a neighboring shrine and a kite bird at the fire god's shrine on the grounds, but it's the mice — unique in all of Japan — that make Ōtoyo the kind of place tourists find almost by accident, ducking off the main path.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>У левой мыши в лапах чаша — считается, что она приносит здоровье и лёгкие роды; у правой — свиток, покровительствующий учёбе.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>У левой мыши в лапах чаша — считается, что она приносит здоровье и лёгкие роды; у правой — свиток, покровительствующий учёбе.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The mouse on the left holds a bowl, said to bring health and easy childbirth; the one on the right holds a scroll, said to favor scholarship.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Маленькое святилище, обход занимает 15–20 минут. Вход свободный, открыто постоянно. Вход прямо с тропы, легко пропустить, если не искать целенаправленно.</p>
+        <p data-lang="ru">Маленькое святилище, обход занимает 15–20 минут. Вход свободный, открыто постоянно. Вход прямо с тропы, легко пропустить, если не искать целенаправленно.</p>
+        <p data-lang="en" style="display:none;">A small shrine, 15–20 minutes to walk through. Free entry, always open. The entrance is right off the path — easy to miss if you're not looking for it.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#inari-kitsune">Животные-посланники ками в синто</a> — здесь та же логика, что у kitsune при Fushimi Inari, только другое животное и другой бог</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#inari-kitsune">Животные-посланники ками в синто</a> — здесь та же логика, что у kitsune при Fushimi Inari, только другое животное и другой бог</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#inari-kitsune">Animal messengers of the kami in Shinto</a> — the same logic as the kitsune at Fushimi Inari, just a different animal and a different god</p>
 
     <hr>
 
-    <span class="place-kicker">Павильон</span>
+    <span class="place-kicker" data-lang="ru">Павильон</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Pavilion</span>
     <h2 class="section-title -major" id="loc-ginkakuji">Ginkaku-ji</h2>
-    <span class="place-caption">Серебряный павильон, который никогда не видел серебра</span>
+    <span class="place-caption" data-lang="ru">Серебряный павильон, который никогда не видел серебра</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The silver pavilion that never saw any silver</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Построен в 1482 году сёгуном Ashikaga Yoshimasa как загородная вилла для отставки — и, несмотря на название «Серебряный павильон», серебром никогда не покрывался, ни изначально, ни впоследствии</li>
         <li>Задуман как более скромный ответ Kinkaku-ji («Золотому павильону»), построенному его дедом Yoshimitsu — и эта скромность считается манифестом эстетики wabi-sabi задолго до того, как термин закрепился</li>
         <li>После смерти Yoshimasa вилла, согласно его завещанию, стала храмом — тем же путём, что и Kōdai-ji и другие резиденции, которые ты уже встречала в этой поездке</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Built in 1482 by shogun Ashikaga Yoshimasa as a countryside retirement villa — and despite the "Silver Pavilion" name, it was never covered in silver, not at construction, not since</li>
+        <li>Conceived as a more restrained answer to Kinkaku-ji, the "Golden Pavilion," built by his grandfather Yoshimitsu — that restraint is considered a manifesto for wabi-sabi aesthetics long before the term itself took hold</li>
+        <li>After Yoshimasa's death, the villa became a temple per his will — the same path taken by Kōdai-ji and other residences you've already seen on this trip</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Ginkaku-ji</span></div></figure>
       <div>
-        <p>По одной версии, Yoshimasa планировал покрыть павильон серебряной фольгой, но не успел — гражданская война Ōnin (1467–1477) и последующая бедность казны сорвали план. По другой, более убедительной, — название появилось только в период Edo, спустя века после постройки, просто как поэтическая пара к «золотому» соседу, без всякого реального намерения покрывать здание металлом.</p>
-        <p>Лунный свет, отражающийся в песчаном саду Ginshadan перед павильоном, назвали «достаточно серебряным» заменителем — эстетика недосказанности вместо буквальной роскоши, тот самый принцип wabi-sabi.</p>
+        <p data-lang="ru">По одной версии, Yoshimasa планировал покрыть павильон серебряной фольгой, но не успел — гражданская война Ōnin (1467–1477) и последующая бедность казны сорвали план. По другой, более убедительной, — название появилось только в период Edo, спустя века после постройки, просто как поэтическая пара к «золотому» соседу, без всякого реального намерения покрывать здание металлом.</p>
+        <p data-lang="ru">Лунный свет, отражающийся в песчаном саду Ginshadan перед павильоном, назвали «достаточно серебряным» заменителем — эстетика недосказанности вместо буквальной роскоши, тот самый принцип wabi-sabi.</p>
+        <p data-lang="en" style="display:none;">One theory says Yoshimasa planned to cover the pavilion in silver foil but never got the chance — the Ōnin civil war (1467–1477) and the resulting empty treasury killed the plan. A more convincing one says the name only appeared in the Edo period, centuries after construction, purely as a poetic pairing with its "golden" neighbor, with no real intent to ever silver the building. Moonlight reflecting off the Ginshadan sand garden in front of the pavilion was called "silver enough" — an aesthetic of restraint standing in for literal luxury, the wabi-sabi principle itself.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>За пятьсот с лишним лет истории «Серебряный павильон» ни разу не видел ни грамма серебра — ни при постройке, ни позже. Само название появилось спустя века, в эпоху Edo, просто как красивая пара к золотому Kinkaku-ji, без всякого намерения когда-либо посеребрить здание.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">За пятьсот с лишним лет истории «Серебряный павильон» ни разу не видел ни грамма серебра — ни при постройке, ни позже. Само название появилось спустя века, в эпоху Edo, просто как красивая пара к золотому Kinkaku-ji, без всякого намерения когда-либо посеребрить здание.</p>
+      <p data-lang="en" style="display:none;">Across more than five hundred years of history, the "Silver Pavilion" has never seen a gram of silver — not at construction, not since. The name itself only appeared centuries later, in the Edo period, purely as a pretty match for the golden Kinkaku-ji, with no intent to ever actually silver the building.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>За главным садом есть тропа наверх, к смотровой площадке над всем комплексом и видом на город — большинство туристов до неё не доходят, ограничиваясь нижним кругом у пруда.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>За главным садом есть тропа наверх, к смотровой площадке над всем комплексом и видом на город — большинство туристов до неё не доходят, ограничиваясь нижним кругом у пруда.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>Past the main garden, a trail climbs to a viewpoint over the whole complex and the city — most visitors never reach it, stopping at the lower loop by the pond.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>8:30–17:00</strong> (сентябрь входит в летний график), последний вход за 15 минут до закрытия — то есть <strong>16:45</strong>, самый мягкий дедлайн среди всех точек дня. Около 500 иен.</p>
+        <p data-lang="ru">Открыт <strong>8:30–17:00</strong> (сентябрь входит в летний график), последний вход за 15 минут до закрытия — то есть <strong>16:45</strong>, самый мягкий дедлайн среди всех точек дня. Около 500 иен.</p>
+        <p data-lang="en" style="display:none;">Open <strong>8:30–17:00</strong> (September falls under the summer schedule), last entry 15 minutes before closing — <strong>16:45</strong>, the day's softest deadline. Around 500 yen.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> · <a href="glossary.html#muromachi-shogunate">Сёгунат Muromachi и рождение японской эстетики</a> · Ashikaga Yoshimasa и культура Higashiyama · сравнение с Kinkaku-ji (день 2 октября)</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> · <a href="glossary.html#muromachi-shogunate">Сёгунат Muromachi и рождение японской эстетики</a> · Ashikaga Yoshimasa и культура Higashiyama · сравнение с Kinkaku-ji (день 2 октября)</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> · <a href="glossary.html#muromachi-shogunate">The Muromachi shogunate and the birth of Japanese aesthetics</a> · Ashikaga Yoshimasa and Higashiyama culture · a comparison with Kinkaku-ji (October 2nd)</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Акведук Suirokaku у Nanzen-ji — та же логика демонстративной модернизации эпохи Meiji, что уже встречалась в лесу Meiji Jingu и в трёх стилях сада Shinjuku Gyoen: снова момент, когда Japan не выбирает между собой и Западом, а нарочито совмещает оба языка в одном месте. Разница в том, что здесь это не жест примирения, а чистая инженерия — и её автору, Tanabe Sakurō, было чуть за двадцать, когда ему доверили один из крупнейших проектов эпохи.</p>
-  <p>А Ginkaku-ji и его скромность без серебра — хороший повод вернуться к wabi-sabi перед тем, как 2 октября увидишь Kinkaku-ji, его золочёного прямого оппонента: два павильона, построенных дедом и внуком, отвечают на один и тот же вопрос о роскоши совершенно по-разному.</p>
+  <p data-lang="ru">Акведук Suirokaku у Nanzen-ji — та же логика демонстративной модернизации эпохи Meiji, что уже встречалась в лесу Meiji Jingu и в трёх стилях сада Shinjuku Gyoen: снова момент, когда Japan не выбирает между собой и Западом, а нарочито совмещает оба языка в одном месте. Разница в том, что здесь это не жест примирения, а чистая инженерия — и её автору, Tanabe Sakurō, было чуть за двадцать, когда ему доверили один из крупнейших проектов эпохи.</p>
+  <p data-lang="ru">А Ginkaku-ji и его скромность без серебра — хороший повод вернуться к wabi-sabi перед тем, как 2 октября увидишь Kinkaku-ji, его золочёного прямого оппонента: два павильона, построенных дедом и внуком, отвечают на один и тот же вопрос о роскоши совершенно по-разному.</p>
+  <p data-lang="en" style="display:none;">The Suirokaku aqueduct at Nanzen-ji is the same logic of pointed Meiji-era modernization already seen in the Meiji Jingu forest and the three styles of Shinjuku Gyoen — another moment where Japan doesn't choose between itself and the West but deliberately fuses both languages in one place. The difference is that here it's pure engineering, not a gesture of reconciliation — and its designer, Tanabe Sakurō, was barely in his twenties when he was entrusted with one of the era's biggest projects.</p>
+  <p data-lang="en" style="display:none;">And Ginkaku-ji's silverless restraint is a good excuse to circle back to wabi-sabi before seeing Kinkaku-ji, its gilded direct counterpart, on October 2nd — two pavilions, built by a grandfather and grandson, answering the same question about luxury in completely opposite ways.</p>
 
-  <p class="footnote">Philosopher's Path Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Philosopher's Path Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Philosopher's Path Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1073,6 +1170,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

@@ -346,6 +346,34 @@
     position: sticky; top: 0; z-index: 80; background: var(--paper);
   }
   .top-bar .title { font-family: 'Shippori Mincho', serif; font-size: 1.1rem; color: var(--ink); }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -481,7 +509,13 @@ body.site-nav-locked { overflow: hidden; }
 <div class="entry-screen">
 <div class="top-bar">
   <span class="title">Japan 2026</span>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center; gap:0.7rem;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -489,8 +523,10 @@ body.site-nav-locked { overflow: hidden; }
 
   <div class="hero-inner">
     <div class="hero-quote">
-      <span class="quote-jp">道に迷うことこそ、道を知ることだ</span>
-      <blockquote>Заблудиться — это и есть способ найти дорогу</blockquote>
+      <span class="quote-jp" data-lang="ru">道に迷うことこそ、道を知ることだ</span>
+      <span class="quote-jp" data-lang="en" style="display:none;">道に迷うことこそ、道を知ることだ</span>
+      <blockquote data-lang="ru">Заблудиться — это и есть способ найти дорогу</blockquote>
+      <blockquote data-lang="en" style="display:none;">Getting lost is exactly how you find the way</blockquote>
     </div>
   </div>
 </header>
@@ -499,15 +535,18 @@ body.site-nav-locked { overflow: hidden; }
   <div class="dash-grid">
     <div class="dash-stat">
       <span class="dash-num" id="daysLeft">—</span>
-      <span class="dash-label">дней до вылета</span>
+      <span class="dash-label" data-lang="ru">дней до вылета</span>
+      <span class="dash-label" data-lang="en" style="display:none;">days to departure</span>
     </div>
     <div class="dash-stat">
       <span class="dash-num ink">17</span>
-      <span class="dash-label">полных дней в Японии</span>
+      <span class="dash-label" data-lang="ru">полных дней в Японии</span>
+      <span class="dash-label" data-lang="en" style="display:none;">full days in Japan</span>
     </div>
     <div class="dash-stat">
       <span class="dash-num ink small" id="fxRate">≈54 ¥</span>
-      <span class="dash-label">за 1 ₪</span>
+      <span class="dash-label" data-lang="ru">за 1 ₪</span>
+      <span class="dash-label" data-lang="en" style="display:none;">per 1 ₪</span>
     </div>
     <div class="dash-stat">
       <span class="dash-num ink small"><span id="ilTime">—:—</span> · <span id="jpTime">—:—</span></span>
@@ -515,11 +554,13 @@ body.site-nav-locked { overflow: hidden; }
     </div>
   </div>
   <div class="dash-route">
-    <span class="dash-label">Погода</span>
+    <span class="dash-label" data-lang="ru">Погода</span>
+    <span class="dash-label" data-lang="en" style="display:none;">Weather</span>
     <div class="route-line" id="weatherLine">+24…27° днём · +18…20° ночью · тайфуны позади</div>
   </div>
   <div class="dash-route">
-    <span class="dash-label">Маршрут</span>
+    <span class="dash-label" data-lang="ru">Маршрут</span>
+    <span class="dash-label" data-lang="en" style="display:none;">Route</span>
     <div class="route-line">
       <span>Tokyo</span><span class="route-arrow">→</span><span>Kyoto</span><span class="route-arrow">→</span><span>Kanazawa</span><span class="route-arrow">→</span><span>Tokyo</span>
     </div>
@@ -529,47 +570,56 @@ body.site-nav-locked { overflow: hidden; }
 
 <main class="wrap">
 
-  <h2 class="section-label" id="section-days">Дни поездки</h2>
+  <h2 class="section-label" id="section-days" data-lang="ru">Дни поездки</h2>
+  <h2 class="section-label" id="section-days-en" data-lang="en" style="display:none;">Trip Days</h2>
 
   <!-- ===== Глава I · Tokyo I ===== -->
   <details class="chapter">
     <summary class="chapter-head">
       <span class="chapter-glyph">東</span>
       <div>
-        <span class="chapter-kicker">Глава I · 22–27 сентября</span>
+        <span class="chapter-kicker" data-lang="ru">Глава I · 22–27 сентября</span>
+        <span class="chapter-kicker" data-lang="en" style="display:none;">Chapter I · September 22–27</span>
         <h3 class="chapter-title">Tokyo I</h3>
-        <p class="chapter-intro">Первая посадка. Прилёт 23-го днём, и пять ночей на то, чтобы сбить джетлаг и понять, что этот город не собирается объяснять себя новичкам — придётся разбираться самим.</p>
+        <p class="chapter-intro" data-lang="ru">Первая посадка. Прилёт 23-го днём, и пять ночей на то, чтобы сбить джетлаг и понять, что этот город не собирается объяснять себя новичкам — придётся разбираться самим.</p>
+        <p class="chapter-intro" data-lang="en" style="display:none;">The first landing. Arriving on the 23rd in the afternoon, with five nights to shake off jet lag and realize this city isn't going to explain itself to newcomers — you'll have to figure it out yourself.</p>
       </div>
     </summary>
     <div class="chapter-body">
     <div class="chapter-days">
 
       <a class="day-card" href="asakusa-day.html">
-        <span class="day-date">24 сен<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="ru">24 сен<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">24 Sep<span class="dow">Thu</span></span>
         <span class="day-kanji">浅</span>
         <span class="day-body">
           <h3>Asakusa Day</h3>
-          <span class="day-hook">Старейший храм города и первый настоящий день в Японии</span>
+          <span class="day-hook" data-lang="ru">Старейший храм города и первый настоящий день в Японии</span>
+          <span class="day-hook" data-lang="en" style="display:none;">The city's oldest temple, and the first real day in Japan</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="shinjuku-day.html">
-        <span class="day-date">25 сен<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="ru">25 сен<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">25 Sep<span class="dow">Fri</span></span>
         <span class="day-kanji">新</span>
         <span class="day-body">
           <h3>Shinjuku Day</h3>
-          <span class="day-hook">Дух японский, ремесло с Запада — небоскрёбы там, где раньше был квартал грехов</span>
+          <span class="day-hook" data-lang="ru">Дух японский, ремесло с Запада — небоскрёбы там, где раньше был квартал грехов</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Japanese spirit, Western skill — skyscrapers where a red-light district used to stand</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="shimokitazawa-day.html">
-        <span class="day-date">26 сен<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="ru">26 сен<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">26 Sep<span class="dow">Sat</span></span>
         <span class="day-kanji">猫</span>
         <span class="day-body">
           <h3>Shimokitazawa Day</h3>
-          <span class="day-hook">Винтажные лавки и театры в квартале, куда туристы почти не доходят</span>
+          <span class="day-hook" data-lang="ru">Винтажные лавки и театры в квартале, куда туристы почти не доходят</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Vintage shops and theaters in a district tourists rarely reach</span>
         </span>
         <span class="arrow">→</span>
       </a>
@@ -583,80 +633,96 @@ body.site-nav-locked { overflow: hidden; }
     <summary class="chapter-head">
       <span class="chapter-glyph">京</span>
       <div>
-        <span class="chapter-kicker">Глава II · 27 сентября — 4 октября</span>
+        <span class="chapter-kicker" data-lang="ru">Глава II · 27 сентября — 4 октября</span>
+        <span class="chapter-kicker" data-lang="en" style="display:none;">Chapter II · September 27 – October 4</span>
         <h3 class="chapter-title">Kyoto & Environs</h3>
-        <p class="chapter-intro">Столица тысячу лет училась быть тихой — ровно в те века, когда Tokyo ещё не родился. Семь дней в городе, который никогда не сгорал полностью и поэтому обязан быть подлинным.</p>
+        <p class="chapter-intro" data-lang="ru">Столица тысячу лет училась быть тихой — ровно в те века, когда Tokyo ещё не родился. Семь дней в городе, который никогда не сгорал полностью и поэтому обязан быть подлинным.</p>
+        <p class="chapter-intro" data-lang="en" style="display:none;">The capital spent a thousand years learning to be quiet — during the very centuries Tokyo hadn't yet been born. Seven days in a city that never burned down completely, and so is obligated to be genuine.</p>
       </div>
     </summary>
     <div class="chapter-body">
     <div class="chapter-days">
 
       <a class="day-card" href="philosophers-path-day.html">
-        <span class="day-date">27 сен<span class="dow">вс</span></span>
+        <span class="day-date" data-lang="ru">27 сен<span class="dow">вс</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">27 Sep<span class="dow">Sun</span></span>
         <span class="day-kanji">哲</span>
         <span class="day-body">
           <h3>Philosopher's Path Day</h3>
-          <span class="day-hook">Тихий канал, вдоль которого философы протоптали дорогу, думая о смысле</span>
+          <span class="day-hook" data-lang="ru">Тихий канал, вдоль которого философы протоптали дорогу, думая о смысле</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A quiet canal, worn into a path by philosophers thinking about meaning</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="arashiyama-day.html">
-        <span class="day-date">28 сен<span class="dow">пн</span></span>
+        <span class="day-date" data-lang="ru">28 сен<span class="dow">пн</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">28 Sep<span class="dow">Mon</span></span>
         <span class="day-kanji">嵐</span>
         <span class="day-body">
           <h3>Arashiyama Day</h3>
-          <span class="day-hook">Бамбук, который шумит громче города, и храм, куда пускают не всех</span>
+          <span class="day-hook" data-lang="ru">Бамбук, который шумит громче города, и храм, куда пускают не всех</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Bamboo that roars louder than the city, and a temple that doesn't let everyone in</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="fushimi-nijo-day.html">
-        <span class="day-date">29 сен<span class="dow">вт</span></span>
+        <span class="day-date" data-lang="ru">29 сен<span class="dow">вт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">29 Sep<span class="dow">Tue</span></span>
         <span class="day-kanji">狐</span>
         <span class="day-body">
           <h3>Fushimi & Nijō Day</h3>
-          <span class="day-hook">Тысяча тории в гору и замок сёгуна, который сам себя перехитрил</span>
+          <span class="day-hook" data-lang="ru">Тысяча тории в гору и замок сёгуна, который сам себя перехитрил</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A thousand torii up a mountain, and a shogun's castle that outsmarted itself</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="omihachiman-day.html">
-        <span class="day-date">30 сен<span class="dow">ср</span></span>
+        <span class="day-date" data-lang="ru">30 сен<span class="dow">ср</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">30 Sep<span class="dow">Wed</span></span>
         <span class="day-kanji">近</span>
         <span class="day-body">
           <h3>Omihachiman Day</h3>
-          <span class="day-hook">Город торговцев, придумавших этику капитализма за 400 лет до Adam Smith</span>
+          <span class="day-hook" data-lang="ru">Город торговцев, придумавших этику капитализма за 400 лет до Adam Smith</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A merchant town that invented the ethics of capitalism 400 years before Adam Smith</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="higashiyama-day.html">
-        <span class="day-date">1 окт<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="ru">1 окт<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 1<span class="dow">Thu</span></span>
         <span class="day-kanji">東</span>
         <span class="day-body">
           <h3>Higashiyama Day</h3>
-          <span class="day-hook">Гейши, храмы и встреча, которую стоит проживать как единственную</span>
+          <span class="day-hook" data-lang="ru">Гейши, храмы и встреча, которую стоит проживать как единственную</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Geisha, temples, and a meeting worth living as though it's the only one</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="kinkaku-day.html">
-        <span class="day-date">2 окт<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="ru">2 окт<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 2<span class="dow">Fri</span></span>
         <span class="day-kanji">金</span>
         <span class="day-body">
           <h3>Kinkaku-ji Day</h3>
-          <span class="day-hook">Золотой павильон, которым дед ответил на скромность внука</span>
+          <span class="day-hook" data-lang="ru">Золотой павильон, которым дед ответил на скромность внука</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A golden pavilion — a grandfather's answer to his grandson's restraint</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="osaka-day.html">
-        <span class="day-date">3 окт<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="ru">3 окт<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 3<span class="dow">Sat</span></span>
         <span class="day-kanji">大阪</span>
         <span class="day-body">
           <h3>Osaka Day</h3>
-          <span class="day-hook">День, когда Kyoto одевается, а Osaka — ест</span>
+          <span class="day-hook" data-lang="ru">День, когда Kyoto одевается, а Osaka — ест</span>
+          <span class="day-hook" data-lang="en" style="display:none;">The day Kyoto dresses up and Osaka eats</span>
         </span>
         <span class="arrow">→</span>
       </a>
@@ -670,30 +736,36 @@ body.site-nav-locked { overflow: hidden; }
     <summary class="chapter-head">
       <span class="chapter-glyph">箔</span>
       <div>
-        <span class="chapter-kicker">Глава III · 4–5 октября</span>
+        <span class="chapter-kicker" data-lang="ru">Глава III · 4–5 октября</span>
+        <span class="chapter-kicker" data-lang="en" style="display:none;">Chapter III · October 4–5</span>
         <h3 class="chapter-title">Kanazawa</h3>
-        <p class="chapter-intro">Город, которому повезло — бомбардировщики его не тронули, и золото на каждой стене выжило вместе с кварталами эпохи Эдо.</p>
+        <p class="chapter-intro" data-lang="ru">Город, которому повезло — бомбардировщики его не тронули, и золото на каждой стене выжило вместе с кварталами эпохи Эдо.</p>
+        <p class="chapter-intro" data-lang="en" style="display:none;">A lucky city — the bombers never touched it, and gold on every wall survived alongside its Edo-era districts.</p>
       </div>
     </summary>
     <div class="chapter-body">
     <div class="chapter-days">
 
       <a class="day-card" href="kanazawa-day.html">
-        <span class="day-date">4 окт<span class="dow">вс</span></span>
+        <span class="day-date" data-lang="ru">4 окт<span class="dow">вс</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 4<span class="dow">Sun</span></span>
         <span class="day-kanji">箔</span>
         <span class="day-body">
           <h3>Kanazawa Day</h3>
-          <span class="day-hook">Золото на каждом углу и город, который забыли сжечь бомбардировщики</span>
+          <span class="day-hook" data-lang="ru">Золото на каждом углу и город, который забыли сжечь бомбардировщики</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Gold on every corner, and a city the bombers forgot to burn</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="kenrokuen-day.html">
-        <span class="day-date">5 окт<span class="dow">пн</span></span>
+        <span class="day-date" data-lang="ru">5 окт<span class="dow">пн</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 5<span class="dow">Mon</span></span>
         <span class="day-kanji">六</span>
         <span class="day-body">
           <h3>Kenrokuen Day</h3>
-          <span class="day-hook">Сад, который триста лет собирал шесть совершенств — а после обеда уже Tokyo</span>
+          <span class="day-hook" data-lang="ru">Сад, который триста лет собирал шесть совершенств — а после обеда уже Tokyo</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A garden spent three centuries gathering six perfections — and by afternoon, it's Tokyo again</span>
         </span>
         <span class="arrow">→</span>
       </a>
@@ -707,60 +779,72 @@ body.site-nav-locked { overflow: hidden; }
     <summary class="chapter-head">
       <span class="chapter-glyph">新</span>
       <div>
-        <span class="chapter-kicker">Глава IV · 5–11 октября</span>
+        <span class="chapter-kicker" data-lang="ru">Глава IV · 5–11 октября</span>
+        <span class="chapter-kicker" data-lang="en" style="display:none;">Chapter IV · October 5–11</span>
         <h3 class="chapter-title">Tokyo II</h3>
-        <p class="chapter-intro">Тот же город, но уже не чужой. Пять дней, Крис уже на месте с 4-го, и Tokyo, который наконец можно не изучать, а просто в нём жить.</p>
+        <p class="chapter-intro" data-lang="ru">Тот же город, но уже не чужой. Пять дней, Крис уже на месте с 4-го, и Tokyo, который наконец можно не изучать, а просто в нём жить.</p>
+        <p class="chapter-intro" data-lang="en" style="display:none;">The same city, but no longer a stranger. Five days, Kris already there from the 4th, and a Tokyo you can finally live in instead of studying.</p>
       </div>
     </summary>
     <div class="chapter-body">
     <div class="chapter-days">
 
       <a class="day-card" href="teamlab-odaiba-day.html">
-        <span class="day-date">6 окт<span class="dow">вт</span></span>
+        <span class="day-date" data-lang="ru">6 окт<span class="dow">вт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 6<span class="dow">Tue</span></span>
         <span class="day-kanji">波</span>
         <span class="day-body">
           <h3>teamLab & Odaiba Day</h3>
-          <span class="day-hook">Луна, которая идёт на убыль, как только достигает полноты — и остров цифрового света</span>
+          <span class="day-hook" data-lang="ru">Луна, которая идёт на убыль, как только достигает полноты — и остров цифрового света</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A moon that starts waning the moment it's full — and an island of digital light</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="kamakura-day.html">
-        <span class="day-date">7 окт<span class="dow">ср</span></span>
+        <span class="day-date" data-lang="ru">7 окт<span class="dow">ср</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 7<span class="dow">Wed</span></span>
         <span class="day-kanji">鎌倉</span>
         <span class="day-body">
           <h3>Kamakura Day</h3>
-          <span class="day-hook">Столица самураев, которая расцвела и рассыпалась за полтора века</span>
+          <span class="day-hook" data-lang="ru">Столица самураев, которая расцвела и рассыпалась за полтора века</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A samurai capital that bloomed and crumbled in a century and a half</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="akihabara-day.html">
-        <span class="day-date">8 окт<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="ru">8 окт<span class="dow">чт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 8<span class="dow">Thu</span></span>
         <span class="day-kanji">神</span>
         <span class="day-body">
           <h3>Kanda & Akihabara Day</h3>
-          <span class="day-hook">Квартал, где до электроники были книги, а до книг — оружейники сёгуна</span>
+          <span class="day-hook" data-lang="ru">Квартал, где до электроники были книги, а до книг — оружейники сёгуна</span>
+          <span class="day-hook" data-lang="en" style="display:none;">A district that had books before electronics, and the shogun's gunsmiths before books</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="harajuku-shibuya-day.html">
-        <span class="day-date">9 окт<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="ru">9 окт<span class="dow">пт</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 9<span class="dow">Fri</span></span>
         <span class="day-kanji">森</span>
         <span class="day-body">
           <h3>Harajuku & Shibuya Day</h3>
-          <span class="day-hook">Самый громкий перекрёсток мира и переулок, придумавший моду с нуля</span>
+          <span class="day-hook" data-lang="ru">Самый громкий перекрёсток мира и переулок, придумавший моду с нуля</span>
+          <span class="day-hook" data-lang="en" style="display:none;">The world's loudest crossing, and an alley that invented fashion from scratch</span>
         </span>
         <span class="arrow">→</span>
       </a>
 
       <a class="day-card" href="ginza-day.html">
-        <span class="day-date">10 окт<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="ru">10 окт<span class="dow">сб</span></span>
+        <span class="day-date" data-lang="en" style="display:none;">Oct 10<span class="dow">Sat</span></span>
         <span class="day-kanji">銀</span>
         <span class="day-body">
           <h3>Ginza Day</h3>
-          <span class="day-hook">Последний полный день — и он проходит там же, где вы жили всё это время</span>
+          <span class="day-hook" data-lang="ru">Последний полный день — и он проходит там же, где вы жили всё это время</span>
+          <span class="day-hook" data-lang="en" style="display:none;">The last full day, spent right where you've been living all along</span>
         </span>
         <span class="arrow">→</span>
       </a>
@@ -769,41 +853,73 @@ body.site-nav-locked { overflow: hidden; }
     </div>
   </details>
 
-  <h2 class="section-label" id="section-common" style="margin-top: 3.6rem;">Общее и справочники</h2>
+  <h2 class="section-label" id="section-common" style="margin-top: 3.6rem;" data-lang="ru">Общее и справочники</h2>
+  <h2 class="section-label" id="section-common-en" style="margin-top: 3.6rem; display:none;" data-lang="en">General & Reference</h2>
   <div class="tool-grid">
 
     <a class="tool-card -blue" href="trip-logistics.html">
       <span class="tool-kanji">旅</span>
       <h3>Logistics</h3>
-      <span class="tool-desc">Рейсы, отели, брони и когда что открывается</span>
+      <span class="tool-desc" data-lang="ru">Рейсы, отели, брони и когда что открывается</span>
+      <span class="tool-desc" data-lang="en" style="display:none;">Flights, hotels, bookings, and when things open</span>
       <span class="tool-arrow">→</span>
     </a>
 
     <a class="tool-card -gold" href="trip-info.html">
       <span class="tool-kanji">心</span>
       <h3>Info</h3>
-      <span class="tool-desc">SIM, деньги, розетки, экстренные номера</span>
+      <span class="tool-desc" data-lang="ru">SIM, деньги, розетки, экстренные номера</span>
+      <span class="tool-desc" data-lang="en" style="display:none;">SIM, money, outlets, emergency numbers</span>
       <span class="tool-arrow">→</span>
     </a>
 
     <a class="tool-card -red" href="shopping.html">
       <span class="tool-kanji">買</span>
       <h3>Shopping</h3>
-      <span class="tool-desc">Что и где покупать, tax-free, размеры</span>
+      <span class="tool-desc" data-lang="ru">Что и где покупать, tax-free, размеры</span>
+      <span class="tool-desc" data-lang="en" style="display:none;">What and where to buy, tax-free, sizing</span>
       <span class="tool-arrow">→</span>
     </a>
 
     <a class="tool-card -ink" href="glossary.html">
       <span class="tool-kanji">語</span>
       <h3>Glossary</h3>
-      <span class="tool-desc">Все термины и понятия</span>
+      <span class="tool-desc" data-lang="ru">Все термины и понятия</span>
+      <span class="tool-desc" data-lang="en" style="display:none;">All terms and concepts</span>
       <span class="tool-arrow">→</span>
     </a>
 
   </div>
 
-  <p class="footnote">Japan 2026 · указатель · обновляется по ходу подготовки</p>
+  <p class="footnote" data-lang="ru">Japan 2026 · указатель · обновляется по ходу подготовки</p>
+  <p class="footnote" data-lang="en" style="display:none;">Japan 2026 · index · updated as preparation continues</p>
 </main>
+
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
+</script>
 
 <script>
 /* Single source of truth for site-wide navigation: days, reference tools, and
@@ -973,6 +1089,10 @@ window.SITE_DATA = {
     return (asUTC - date.getTime()) / 3600000;
   }
 
+  function currentLang() {
+    return localStorage.getItem('japan2026-lang') || 'ru';
+  }
+
   function updateClocks() {
     const now = new Date();
     const ilFmt = new Intl.DateTimeFormat('ru-RU', { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit' });
@@ -981,7 +1101,8 @@ window.SITE_DATA = {
     document.getElementById('jpTime').textContent = jpFmt.format(now);
 
     const diff = Math.round(getOffsetHours('Asia/Tokyo', now) - getOffsetHours('Asia/Jerusalem', now));
-    document.getElementById('tzDiff').textContent = `Israel · Japan (+${diff}ч)`;
+    const hUnit = currentLang() === 'en' ? 'h' : 'ч';
+    document.getElementById('tzDiff').textContent = `Israel · Japan (+${diff}${hUnit})`;
   }
 
   updateClocks();
@@ -1008,7 +1129,7 @@ window.SITE_DATA = {
     const el = document.getElementById('daysLeft');
     if (diffDays > 0) el.textContent = diffDays;
     else if (diffDays === 0) el.textContent = '0';
-    else el.textContent = 'в пути';
+    else el.textContent = currentLang() === 'en' ? 'en route' : 'в пути';
   }
   updateCountdown();
 
@@ -1030,7 +1151,13 @@ window.SITE_DATA = {
     ];
     const todayISO = jstNow.toISOString().slice(0, 10);
     const leg = legs.find(l => todayISO >= l.from && todayISO <= l.to);
-    if (!leg) return; // до вылета или после возвращения — сезонная фраза остаётся
+    if (!leg) {
+      // до вылета или после возвращения — сезонная фраза, языкозависимая
+      el.textContent = currentLang() === 'en'
+        ? '+24…27° day · +18…20° night · typhoon season over'
+        : '+24…27° днём · +18…20° ночью · тайфуны позади';
+      return;
+    }
 
     const tomorrow = new Date(jstNow); tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowISO = tomorrow.toISOString().slice(0, 10);
@@ -1046,12 +1173,23 @@ window.SITE_DATA = {
       const min = data && data.daily && data.daily.temperature_2m_min && data.daily.temperature_2m_min[0];
       const rain = data && data.daily && data.daily.precipitation_probability_max && data.daily.precipitation_probability_max[0];
       if (typeof max === 'number' && typeof min === 'number') {
-        const rainNote = typeof rain === 'number' ? ` · дождь ${rain}%` : '';
-        el.textContent = `${leg.city}, завтра: +${Math.round(min)}…${Math.round(max)}°${rainNote}`;
+        if (currentLang() === 'en') {
+          const rainNote = typeof rain === 'number' ? ` · rain ${rain}%` : '';
+          el.textContent = `${leg.city}, tomorrow: +${Math.round(min)}…${Math.round(max)}°${rainNote}`;
+        } else {
+          const rainNote = typeof rain === 'number' ? ` · дождь ${rain}%` : '';
+          el.textContent = `${leg.city}, завтра: +${Math.round(min)}…${Math.round(max)}°${rainNote}`;
+        }
       }
     } catch (e) { /* offline / file:// — оставляем сезонную фразу */ }
   }
   updateWeather();
+
+  // ---- Перерисовать языкозависимые динамические строки при смене RU/EN ----
+  window.addEventListener('storage', e => { if (e.key === 'japan2026-lang') { updateClocks(); updateCountdown(); updateWeather(); } });
+  document.getElementById('langToggle')?.addEventListener('click', () => {
+    setTimeout(() => { updateClocks(); updateCountdown(); updateWeather(); }, 0);
+  });
 </script>
 
 <script>

@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,28 +883,40 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">祇園精舎の鐘の声、諸行無常の響きあり</span>
-    <blockquote>В звоне колокола Гион Сёдзя слышен отзвук непостоянства всех вещей</blockquote>
-    <span class="quote-author">«Повесть о доме Тайра» (Хэйкэ моногатари), открывающая строка, XIII век</span>
-    <span class="quote-source">Клан Taira, чей глава сегодня появится дважды — как разрушитель одной жизни и как повод для тысяч безымянных могил</span>
+    <span class="quote-jp" data-lang="ru">祇園精舎の鐘の声、諸行無常の響きあり</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">祇園精舎の鐘の声、諸行無常の響きあり</span>
+    <blockquote data-lang="ru">В звоне колокола Гион Сёдзя слышен отзвук непостоянства всех вещей</blockquote>
+    <blockquote data-lang="en" style="display:none;">The bell of Gion Shōja tolls the impermanence of all things</blockquote>
+    <span class="quote-author" data-lang="ru">«Повесть о доме Тайра» (Хэйкэ моногатари), открывающая строка, XIII век</span>
+    <span class="quote-author" data-lang="en" style="display:none;">The Tale of the Heike, opening line, 13th century</span>
+    <span class="quote-source" data-lang="ru">Клан Taira, чей глава сегодня появится дважды — как разрушитель одной жизни и как повод для тысяч безымянных могил</span>
+    <span class="quote-source" data-lang="en" style="display:none;">The Taira clan, whose leader appears twice today — as the man who wrecked one woman's life, and as the reason behind thousands of unnamed graves</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">3 момента</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">3 момента</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">3 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Маршрут идёт от Otagi, а не к нему</strong> — такси или автобус сразу к открытию (9:00), дальше весь день пешком в сторону вокзала, а не наоборот</li>
       <li><strong>Yusai-Tei Gallery — по брони</strong>, вход по таймслоту, около ¥2000 (без осенней надбавки — сентябрь ещё не сезон клёнов); она теперь последняя точка дня, слот стоит бронировать на вторую половину дня; ссылка на форму брони — в <a href="trip-logistics.html">Logistics</a></li>
       <li><strong>Tenryu-ji сознательно не в маршруте</strong> — самый раскрученный и людный храм района; весь день выстроен вокруг тихой западной части Sagano вместо него</li>
+    </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>The route runs from Otagi, not toward it</strong> — taxi or bus straight to opening (9:00), then the whole day on foot heading back toward the station, not the other way around</li>
+      <li><strong>Yusai-Tei Gallery needs a reservation</strong>, timed entry, around ¥2000 (no autumn surcharge — September isn't maple season yet); it's now the day's last stop, so book the slot for the afternoon; the booking form link is in <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Tenryu-ji is deliberately left off the route</strong> — the area's most famous and crowded temple; the whole day is built around quiet western Sagano instead</li>
     </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-otagi">Otagi Nenbutsuji</button>
     <button class="nav-place-btn" data-target="loc-adashino">Adashino Nenbutsuji</button>
     <button class="nav-place-btn" data-target="loc-toriimoto">Saga-Toriimoto</button>
@@ -886,13 +933,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Маршрут идёт не от вокзала, а к нему: такси или автобус сразу забрасывает в самую глубину Sagano, к Otagi Nenbutsuji, а весь день дальше — это спуск обратно к реке, с каждым шагом ближе к людям. Логика обратная тому, что делает большинство: они идут от бамбука вглубь и упираются в тихие места уже уставшими и в разгар дня; мы начинаем с самого дальнего и самого тихого, а бамбуковую рощу проходим уже во второй половине дня, когда она в любом случае многолюдна — но это всего десять минут ходьбы, так что не страшно.</p>
-      <div class="blockquote">И самая тихая точка дня — не самая старая: 1200-летний на вид Otagi Nenbutsuji на деле вырезан заново сорок лет назад, руками обычных прихожан.</div>
-      <p>От Otagi до соседних точек — Adashino, Toriimoto, Gio-ji — расстояния небольшие. А вот дорога от отеля до самого Otagi на такси или автобусе может занять прилично времени; закладывай его заранее, а не пытайся успеть точно к открытию впритык.</p>
+      <p data-lang="ru">Маршрут идёт не от вокзала, а к нему: такси или автобус сразу забрасывает в самую глубину Sagano, к Otagi Nenbutsuji, а весь день дальше — это спуск обратно к реке, с каждым шагом ближе к людям. Логика обратная тому, что делает большинство: они идут от бамбука вглубь и упираются в тихие места уже уставшими и в разгар дня; мы начинаем с самого дальнего и самого тихого, а бамбуковую рощу проходим уже во второй половине дня, когда она в любом случае многолюдна — но это всего десять минут ходьбы, так что не страшно.</p>
+      <div class="blockquote" data-lang="ru">И самая тихая точка дня — не самая старая: 1200-летний на вид Otagi Nenbutsuji на деле вырезан заново сорок лет назад, руками обычных прихожан.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the day's quietest stop isn't its oldest: Otagi Nenbutsuji, which looks 1,200 years old, was actually carved anew forty years ago, by ordinary parishioners' hands.</div>
+      <p data-lang="ru">От Otagi до соседних точек — Adashino, Toriimoto, Gio-ji — расстояния небольшие. А вот дорога от отеля до самого Otagi на такси или автобусе может занять прилично времени; закладывай его заранее, а не пытайся успеть точно к открытию впритык.</p>
+      <p data-lang="en" style="display:none;">The route doesn't start at the station, it ends there: a taxi or bus drops you straight into the depths of Sagano, at Otagi Nenbutsuji, and the whole day after that is a walk back down toward the river, getting closer to the crowds with every step. It's the reverse of what most people do — they start at the bamboo and work inward, hitting the quiet spots already tired, mid-day; we start at the farthest, quietest point and hit the bamboo grove in the afternoon, when it's crowded anyway — but it's only a ten-minute walk through, so no harm done. Distances between Otagi and the nearby stops — Adashino, Toriimoto, Gio-ji — are short. The ride from the hotel to Otagi itself can take a while, though; budget for it in advance rather than trying to time it right at opening.</p>
     </div>
   </details>
 
@@ -900,141 +951,190 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-otagi">Otagi Nenbutsuji</h2>
-    <span class="place-caption">1200 изваяний, которым всего сорок лет</span>
+    <span class="place-caption" data-lang="ru">1200 изваяний, которым всего сорок лет</span>
+    <span class="place-caption" data-lang="en" style="display:none;">1,200 statues that are only forty years old</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Храм основан ещё в VIII веке, но то, ради чего сюда идут, — вовсе не древность</li>
         <li>К 1980-м годам постройка обветшала почти полностью, пока скульптор Kōchō Nishimura не предложил обучить резьбе по камню обычных посетителей и прихожан вместо найма мастеров</li>
         <li>За десять лет около 1200 учеников вырезали 1200 статуй rakan (учеников Будды) — каждую свою, без единого повторяющегося лица: кто-то смеётся, кто-то держит кота, кто-то играет на инструменте</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The temple was founded back in the 8th century, but that's not what people actually come for</li>
+        <li>By the 1980s the buildings had fallen into near-ruin, until sculptor Kōchō Nishimura proposed teaching stone-carving to ordinary visitors and parishioners instead of hiring craftsmen</li>
+        <li>Over ten years, about 1,200 amateurs carved 1,200 rakan statues (disciples of the Buddha) — each one unique, no two faces alike: some laughing, some holding a cat, some playing an instrument</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Otagi Nenbutsuji</span></div></figure>
       <div>
-        <p>Первая точка дня — и сразу слом ожиданий. Каждая статуя сделана рукой не мастера, а случайного человека, который однажды пришёл в полуразрушенный храм и остался на несколько выходных с зубилом. Мшистый, «древний» на вид ансамбль оказывается новоделом одного поколения — задел на весь день, который дальше будет то и дело возвращаться к вопросу, что делает вещь подлинной.</p>
+        <p data-lang="ru">Первая точка дня — и сразу слом ожиданий. Каждая статуя сделана рукой не мастера, а случайного человека, который однажды пришёл в полуразрушенный храм и остался на несколько выходных с зубилом. Мшистый, «древний» на вид ансамбль оказывается новоделом одного поколения — задел на весь день, который дальше будет то и дело возвращаться к вопросу, что делает вещь подлинной.</p>
+        <p data-lang="en" style="display:none;">The day's first stop, and it immediately breaks expectations. Every statue was made not by a craftsman but by an ordinary person who once wandered into this crumbling temple and stayed a few weekends with a chisel. The moss-covered, "ancient"-looking ensemble turns out to be one generation's work — a setup for a day that keeps circling back to the question of what makes a thing authentic.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Весь этот мшистый, «древний» на вид ансамбль — на самом деле новодел одного поколения: тысяча двести статуй, вырезанных не монахами и не резчиками по камню, а руками случайных прихожан за одно десятилетие в 1980-х.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Весь этот мшистый, «древний» на вид ансамбль — на самом деле новодел одного поколения: тысяча двести статуй, вырезанных не монахами и не резчиками по камню, а руками случайных прихожан за одно десятилетие в 1980-х.</p>
+      <p data-lang="en" style="display:none;">This entire moss-covered, "ancient"-looking ensemble is actually one generation's work: twelve hundred statues carved not by monks or professional stonemasons, but by the hands of ordinary parishioners over a single decade in the 1980s.</p>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–16:30</strong>. Добираться удобнее на такси или автобусе — от станции Saga-Arashiyama около 10–15 минут; пешком в одну сторону — минут 25–30. Первый час после открытия — самое тихое время во всём районе.</p>
+        <p data-lang="ru">Открыт <strong>9:00–16:30</strong>. Добираться удобнее на такси или автобусе — от станции Saga-Arashiyama около 10–15 минут; пешком в одну сторону — минут 25–30. Первый час после открытия — самое тихое время во всём районе.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–16:30</strong>. Easiest by taxi or bus — about 10–15 minutes from Saga-Arashiyama station; 25–30 minutes on foot one way. The first hour after opening is the quietest time in the whole area.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a> (и чем rakan отличается от bodhisattva) · сравнение с Kinkaku-ji и Ryōan-ji (день 2 октября) — снова вопрос о том, что делает вещь подлинной</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a> (и чем rakan отличается от bodhisattva) · сравнение с Kinkaku-ji и Ryōan-ji (день 2 октября) — снова вопрос о том, что делает вещь подлинной</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#bodhisattva">Bodhisattva — one who could leave, but stays</a> (and how a rakan differs from a bodhisattva) · a comparison with Kinkaku-ji and Ryōan-ji (October 2nd) — the same question of authenticity again</p>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -minor" id="loc-adashino">Adashino Nenbutsuji</h2>
-    <span class="place-caption">Восемь тысяч имён, которых никто не запомнил</span>
+    <span class="place-caption" data-lang="ru">Восемь тысяч имён, которых никто не запомнил</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Eight thousand names no one remembered</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Название «Adashino» означает «пустота», «бренность» — местность веками служила местом, куда сносили тела тех, кого некому было хоронить: бедняков, странников, умерших без семьи</li>
         <li>Около 8000 каменных изваяний и малых пагод — не изначально единый ансамбль, а собранные за столетия со всей округи разрозненные надгробия безымянных могил, сведённые в одно поле</li>
         <li>Раз в год, в августе, здесь проводят церемонию Sentō Kuyō — зажигают тысячи свечей в память об этих людях; вне церемонии место тихое и почти безлюдное</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The name "Adashino" means "emptiness," "impermanence" — for centuries this ground was where the bodies of those with no one to bury them were brought: the poor, travelers, the family-less dead</li>
+        <li>The roughly 8,000 stone statues and small pagodas were never one unified set — they're scattered unnamed gravestones gathered from the surrounding area over centuries and consolidated into one field</li>
+        <li>Once a year, in August, the Sentō Kuyō ceremony lights thousands of candles in memory of these people; outside the ceremony the place is quiet and nearly empty</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Adashino Nenbutsuji</span></div></figure>
       <div>
-        <p>После Otagi, где новодел выдаёт себя за древность, здесь ровно наоборот: настоящие века, но без единого имени. Это не кладбище в привычном смысле, а скорее собранная по крупицам память о тех, кого некому было запомнить лично, — практика буддийской заботы о душах без потомков, для которых само поминовение возможно только коллективно. За полем — короткая тропа через бамбук, гораздо меньше знаменитой рощи, но почти всегда пустая.</p>
+        <p data-lang="ru">После Otagi, где новодел выдаёт себя за древность, здесь ровно наоборот: настоящие века, но без единого имени. Это не кладбище в привычном смысле, а скорее собранная по крупицам память о тех, кого некому было запомнить лично, — практика буддийской заботы о душах без потомков, для которых само поминовение возможно только коллективно. За полем — короткая тропа через бамбук, гораздо меньше знаменитой рощи, но почти всегда пустая.</p>
+        <p data-lang="en" style="display:none;">After Otagi, where the new pretends to be ancient, this is the exact reverse: real centuries, without a single name attached. It isn't a cemetery in the usual sense — more a memory pieced together for people no one was left to remember individually, a Buddhist practice of caring for souls with no descendants, whose remembrance is only possible collectively. Past the field, a short bamboo path — much smaller than the famous grove, but almost always empty.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–16:30</strong>. Небольшой входной билет. Фотографировать статуи из уважения к месту — сдержанно, не как объект для позирования.</p>
+        <p data-lang="ru">Открыт <strong>9:00–16:30</strong>. Небольшой входной билет. Фотографировать статуи из уважения к месту — сдержанно, не как объект для позирования.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–16:30</strong>. Small entry fee. Photograph the statues respectfully — not as a backdrop for posing.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title -minor" id="loc-toriimoto">Saga-Toriimoto</h2>
-    <span class="place-caption">Улица, которую эпоха черепицы обошла стороной</span>
+    <span class="place-caption" data-lang="ru">Улица, которую эпоха черепицы обошла стороной</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A street the tile-roof era skipped</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Saga-Toriimoto</span></div></figure>
       <div>
-        <p>Короткая улица традиционной застройки, местами с настоящими соломенными крышами — редкость даже для Kyoto, где большинство «исторических» кварталов давно перекрыты черепицей. После двух храмов подряд, каждый со своим уроком о подлинности и памяти, здесь можно просто идти и ничего не считывать — пауза без сообщения.</p>
+        <p data-lang="ru">Короткая улица традиционной застройки, местами с настоящими соломенными крышами — редкость даже для Kyoto, где большинство «исторических» кварталов давно перекрыты черепицей. После двух храмов подряд, каждый со своим уроком о подлинности и памяти, здесь можно просто идти и ничего не считывать — пауза без сообщения.</p>
+        <p data-lang="en" style="display:none;">A short stretch of traditional buildings, some with genuine thatched roofs — rare even for Kyoto, where most "historic" quarters switched to tile long ago. After two temples in a row, each with its own lesson about authenticity and memory, this is a place to just walk and not read anything into it — a pause with no message attached.</p>
       </div>
     </div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#torii-vs-mon">Torii vs. Mon — два разных способа войти в священное</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#torii-vs-mon">Torii vs. Mon — два разных способа войти в священное</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#torii-vs-mon">Torii vs. Mon — two different ways to enter the sacred</a></p>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-gioji">Gio-ji</h2>
-    <span class="place-caption">Четыре женщины одного мужчины под одной крышей</span>
+    <span class="place-caption" data-lang="ru">Четыре женщины одного мужчины под одной крышей</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Four women of one man, under one roof</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Основан в конце периода Heian как женский монастырь; известен по «Повести о доме Тайра» — истории Gio, придворной танцовщицы shirabyōshi</li>
         <li>Taira no Kiyomori — военачальник, чей род на пике власти фактически управлял императорским двором, а падение вскоре после этой истории запустило войну Genpei и приход к власти рода Minamoto</li>
         <li>Внутри единственного зала храма — деревянные статуи Gio, её матери, сестры, соперницы Hotoke Gozen и самого Kiyomori, поставленного отдельно, вне общего ряда</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founded at the end of the Heian period as a convent; known through the Tale of the Heike as the story of Gio, a court shirabyōshi dancer</li>
+        <li>Taira no Kiyomori was a warlord whose clan effectively ran the imperial court at its peak, and whose fall soon after this story triggered the Genpei War and the rise of the Minamoto clan</li>
+        <li>Inside the temple's single hall stand wooden statues of Gio, her mother, her sister, her rival Hotoke Gozen, and Kiyomori himself, placed apart from the rest</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Gio-ji</span></div></figure>
       <div>
-        <p>Gio была фавориткой Kiyomori, пока его внимание не переключилось на молодую танцовщицу Hotoke Gozen. Униженная, Gio удалилась в этот монастырь вместе с матерью и сестрой — а позже к ним присоединилась и сама Hotoke Gozen, которую тот же Kiyomori со временем тоже разлюбил. Четыре женщины, разделившие одного мужчину, доживали свой век под одной крышей — сюжет, который «Повесть о доме Тайра» использует как миниатюру всей философии текста: величие Taira было временным, и цитата в начале сегодняшнего дня — про это же.</p>
-        <p>Сад мхов, разросшийся вокруг храма за века, — не эффектная декорация, а побочный эффект тишины: место настолько маленькое и отдалённое, что мох просто никто не тревожил.</p>
+        <p data-lang="ru">Gio была фавориткой Kiyomori, пока его внимание не переключилось на молодую танцовщицу Hotoke Gozen. Униженная, Gio удалилась в этот монастырь вместе с матерью и сестрой — а позже к ним присоединилась и сама Hotoke Gozen, которую тот же Kiyomori со временем тоже разлюбил. Четыре женщины, разделившие одного мужчину, доживали свой век под одной крышей — сюжет, который «Повесть о доме Тайра» использует как миниатюру всей философии текста: величие Taira было временным, и цитата в начале сегодняшнего дня — про это же.</p>
+        <p data-lang="ru">Сад мхов, разросшийся вокруг храма за века, — не эффектная декорация, а побочный эффект тишины: место настолько маленькое и отдалённое, что мох просто никто не тревожил.</p>
+        <p data-lang="en" style="display:none;">Gio was Kiyomori's favorite until his attention shifted to a younger dancer, Hotoke Gozen. Humiliated, Gio retreated to this convent with her mother and sister — and later Hotoke Gozen herself joined them, after the same Kiyomori grew tired of her too. Four women who shared one man lived out their lives under a single roof — a plot the Tale of the Heike uses as a miniature of its entire philosophy: the Taira's greatness was temporary, the same point made by today's opening quote. The moss garden that grew up around the temple over the centuries isn't a designed flourish, it's a side effect of quiet: the place is small and remote enough that no one ever disturbed the moss.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Осмотр занимает 20–30 минут. Небольшой вход; совместный билет с соседним Adashino Nenbutsuji предлагается не всегда — уточнять на месте.</p>
+        <p data-lang="ru">Осмотр занимает 20–30 минут. Небольшой вход; совместный билет с соседним Adashino Nenbutsuji предлагается не всегда — уточнять на месте.</p>
+        <p data-lang="en" style="display:none;">A visit takes 20–30 minutes. Small entry fee; a combined ticket with nearby Adashino Nenbutsuji isn't always offered — check on site.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a> · «Повесть о доме Тайра» как источник японской эстетики бренности</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a> · «Повесть о доме Тайра» как источник японской эстетики бренности</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#genpei-war">The Genpei War and the fall of the Taira clan</a> · The Tale of the Heike as a source of Japanese aesthetics of impermanence</p>
 
     <hr>
 
-    <span class="place-kicker">Роща</span>
+    <span class="place-kicker" data-lang="ru">Роща</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Grove</span>
     <h2 class="section-title -minor" id="loc-bamboo">Bamboo Forest</h2>
-    <span class="place-caption">Достопримечательность короче, чем очередь на вход</span>
+    <span class="place-caption" data-lang="ru">Достопримечательность короче, чем очередь на вход</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A landmark shorter than the line to see it</span>
     <div class="photo-break"><span class="mark">竹</span><span class="cap">Arashiyama Bamboo Forest</span></div>
-    <p>Проход насквозь занимает 10–15 минут в любом темпе. К этому моменту дня роща уже многолюдна — она в двух шагах от станции и от Tenryu-ji, и толпа собирается тут с самого утра, независимо от того, в какую сторону идёшь. Это нормально: сюда идём не за тишиной — вся тишина уже досталась раньше, у Otagi и Adashino.</p>
-    <p><span class="inline-label">Совет</span>Не пытайся ловить пустые кадры — просто пройди насквозь и иди дальше, к реке.</p>
+    <p data-lang="ru">Проход насквозь занимает 10–15 минут в любом темпе. К этому моменту дня роща уже многолюдна — она в двух шагах от станции и от Tenryu-ji, и толпа собирается тут с самого утра, независимо от того, в какую сторону идёшь. Это нормально: сюда идём не за тишиной — вся тишина уже досталась раньше, у Otagi и Adashino.</p>
+    <p data-lang="en" style="display:none;">Walking through takes 10–15 minutes at any pace. By this point in the day it's crowded — it's a stone's throw from the station and Tenryu-ji, and the crowd gathers here from the morning regardless of which direction you're heading. That's fine: this isn't the stop for quiet — all the quiet already happened earlier, at Otagi and Adashino.</p>
+    <p data-lang="ru"><span class="inline-label">Совет</span>Не пытайся ловить пустые кадры — просто пройди насквозь и иди дальше, к реке.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span>Don't chase an empty shot — just walk through and keep going toward the river.</p>
 
     <hr>
 
-    <span class="place-kicker">Галерея</span>
+    <span class="place-kicker" data-lang="ru">Галерея</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Gallery</span>
     <h2 class="section-title" id="loc-yusaitei">Yusai-Tei Gallery</h2>
-    <span class="place-caption">Зеркало из чёрного лака и настоящая река за окном</span>
+    <span class="place-caption" data-lang="ru">Зеркало из чёрного лака и настоящая река за окном</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A black-lacquer mirror and a real river through the window</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Зданию около 150 лет — построено в эпоху Meiji на месте виллы императора Kameyama; сначала — рёкан Chidori, где, по легенде, Кавабата Ясунари писал роман «Стон горы»</li>
         <li>Двадцать лет назад дом выкупил красильщик тканей Okuda Yusai и превратил в галерею собственных работ</li>
         <li>Круглые окна отражают сад и реку Hozugawa на чёрном лакированном столе — эффект «водного зеркала»: одно и то же изображение сразу и за окном, и в отражении</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The building is about 150 years old — built in the Meiji era on the site of Emperor Kameyama's villa; it began as the Chidori ryokan, where legend says Yasunari Kawabata wrote "The Sound of the Mountain"</li>
+        <li>Twenty years ago, textile dyer Okuda Yusai bought the house and turned it into a gallery for his own work</li>
+        <li>Round windows reflect the garden and the Hozugawa river on a black lacquered table — a "water mirror" effect, the same image appearing both through the window and in its reflection</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Yusai-Tei Gallery</span></div></figure>
       <div>
-        <p>Дом несколько раз менял профессию, прежде чем стать тем, что он есть сейчас: сначала императорская вилла, потом рёкан с литературной легендой, потом — мастерская и витрина одного художника. Каждый следующий владелец не сносил прежнее, а достраивал поверх — и круглые окна с видом на Hozugawa стали финальным слоем этой истории.</p>
-        <p>Вход по таймслоту — здесь удобно бронировать на вторую половину дня: после четырёх храмов и рощи это первая точка, где можно просто сесть и ничего не смотреть по расписанию.</p>
+        <p data-lang="ru">Дом несколько раз менял профессию, прежде чем стать тем, что он есть сейчас: сначала императорская вилла, потом рёкан с литературной легендой, потом — мастерская и витрина одного художника. Каждый следующий владелец не сносил прежнее, а достраивал поверх — и круглые окна с видом на Hozugawa стали финальным слоем этой истории.</p>
+        <p data-lang="ru">Вход по таймслоту — здесь удобно бронировать на вторую половину дня: после четырёх храмов и рощи это первая точка, где можно просто сесть и ничего не смотреть по расписанию.</p>
+        <p data-lang="en" style="display:none;">The house changed careers a few times before becoming what it is now: first an imperial villa, then a ryokan with a literary legend attached, then a workshop and showcase for a single artist. Each new owner built on top of what was there rather than tearing it down, and the round windows overlooking the Hozugawa became the final layer of that history. Entry is by timed slot — worth booking for the afternoon here, since after four temples and a bamboo grove this is the first stop where you can just sit and not look at anything on schedule.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>В стоимость входа включена чашка matcha на террасе — не спеши после осмотра галереи: именно эта пауза с видом на реку часто запоминается больше самих окон, и это хороший способ закрыть день.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>В стоимость входа включена чашка matcha на террасе — не спеши после осмотра галереи: именно эта пауза с видом на реку часто запоминается больше самих окон, и это хороший способ закрыть день.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Entry includes a cup of matcha on the terrace — don't rush off after seeing the gallery. That pause with the river view often sticks in the memory more than the windows themselves, and it's a good way to close out the day.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Вход только по предварительной брони на таймслот. Около <strong>¥2000</strong> (в сезон осенних клёнов — ¥3000). Фотографировать интерьер обычно нельзя — съёмка разрешена только во внутреннем дворе.</p>
+        <p data-lang="ru">Вход только по предварительной брони на таймслот. Около <strong>¥2000</strong> (в сезон осенних клёнов — ¥3000). Фотографировать интерьер обычно нельзя — съёмка разрешена только во внутреннем дворе.</p>
+        <p data-lang="en" style="display:none;">Entry by advance timed reservation only. Around <strong>¥2000</strong> (¥3000 during autumn maple season). Photography of the interior usually isn't allowed — only in the courtyard.</p>
       </div>
     </details>
 
@@ -1043,10 +1143,13 @@ body.site-nav-locked { overflow: hidden; }
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Taira no Kiyomori, который сегодня появляется в истории Gio, — фигура, вокруг которой строится вся «Повесть о доме Тайра»: пик могущества клана, а затем стремительное падение в войне Genpei, которая привела к власти род Minamoto и открыла путь к системе сёгуната, определившей Japan на следующие 700 лет — вплоть до того самого Tokugawa, о котором ты слышал в Nijō Castle и Kanazawa. Личная трагедия одной танцовщицы здесь — миниатюра исторического слома, который перекроил всю страну.</p>
-  <p>А контраст между Otagi Nenbutsuji (новодел сорокалетней давности, выглядящий как древность) и Adashino Nenbutsuji (подлинные века, но без единого имени) — ещё одна вариация темы подлинности, которая шла через Kinkaku-ji, Ryōan-ji и Garden of Fine Arts: иногда важнее не то, сколько вещи лет, а то, кто и зачем её сделал.</p>
+  <p data-lang="ru">Taira no Kiyomori, который сегодня появляется в истории Gio, — фигура, вокруг которой строится вся «Повесть о доме Тайра»: пик могущества клана, а затем стремительное падение в войне Genpei, которая привела к власти род Minamoto и открыла путь к системе сёгуната, определившей Japan на следующие 700 лет — вплоть до того самого Tokugawa, о котором ты слышал в Nijō Castle и Kanazawa. Личная трагедия одной танцовщицы здесь — миниатюра исторического слома, который перекроил всю страну.</p>
+  <p data-lang="ru">А контраст между Otagi Nenbutsuji (новодел сорокалетней давности, выглядящий как древность) и Adashino Nenbutsuji (подлинные века, но без единого имени) — ещё одна вариация темы подлинности, которая шла через Kinkaku-ji, Ryōan-ji и Garden of Fine Arts: иногда важнее не то, сколько вещи лет, а то, кто и зачем её сделал.</p>
+  <p data-lang="en" style="display:none;">Taira no Kiyomori, who appears today in Gio's story, is the figure the entire Tale of the Heike is built around: the clan's peak power, followed by a rapid collapse in the Genpei War that brought the Minamoto clan to power and opened the path to the shogunate system that shaped Japan for the next 700 years — right down to the Tokugawa you've already encountered at Nijō Castle and in Kanazawa. One dancer's personal tragedy here is a miniature of the historical rupture that reshaped the whole country.</p>
+  <p data-lang="en" style="display:none;">And the contrast between Otagi Nenbutsuji (forty-year-old work that reads as ancient) and Adashino Nenbutsuji (genuine centuries, without a single name) is another variation on the authenticity theme that's run through Kinkaku-ji, Ryōan-ji, and the Garden of Fine Arts: sometimes what matters isn't how old a thing is, but who made it and why.</p>
 
-  <p class="footnote">Arashiyama Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Arashiyama Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Arashiyama Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1086,6 +1189,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

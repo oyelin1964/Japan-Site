@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,19 +883,25 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">栄枯盛衰</span>
-    <blockquote>Расцвет и упадок сменяют друг друга — таков порядок вещей</blockquote>
-    <span class="quote-author">Классический японский идиом (yojijukugo)</span>
-    <span class="quote-source">Сегодняшний день — его иллюстрация в одном городе: от первого сёгуната до последнего вздоха рода Hōjō, 150 лет между двумя концами одной кривой</span>
+    <span class="quote-jp" data-lang="ru">栄枯盛衰</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">栄枯盛衰</span>
+    <blockquote data-lang="ru">Расцвет и упадок сменяют друг друга — таков порядок вещей</blockquote>
+    <blockquote data-lang="en" style="display:none;">Prosperity and decline follow one another — such is the order of things</blockquote>
+    <span class="quote-author" data-lang="ru">Классический японский идиом (yojijukugo)</span>
+    <span class="quote-author" data-lang="en" style="display:none;">A classical Japanese idiom (yojijukugo)</span>
+    <span class="quote-source" data-lang="ru">Сегодняшний день — его иллюстрация в одном городе: от первого сёгуната до последнего вздоха рода Hōjō, 150 лет между двумя концами одной кривой</span>
+    <span class="quote-source" data-lang="en" style="display:none;">Today is its illustration in a single city: from the first shogunate to the Hōjō clan's last breath, 150 years between the two ends of one curve</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">7 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">7 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">7 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Komachi St и Hachiman-gu — с утра</strong>, а не вечером: сувенирные лавки закрываются к 18:00, а вечер занят закатом на переезде — если оставить улицу на потом, магазины уже не застать</li>
       <li><strong>JR Tokyo → Kamakura</strong> — Yokosuka Line, около часа, без пересадок, брони не нужно</li>
       <li><strong>Kōtoku-in</strong> — октябрь: 8:00–17:00, внутрь статуи можно зайти отдельно за небольшую плату</li>
@@ -869,11 +910,21 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Kamakurakōkō-mae</strong> — это действующий ж/д переезд, а не аттракцион: снимать аккуратно, не задерживаться на путях; закат 7 октября — около 17:17</li>
       <li><strong>Ужин — без привязки к часам</strong>: рестораны и стрит-фуд на Komachi St и у Yuigahama работают допоздна, шопинг уже будет закрыт позади</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Komachi St and Hachiman-gu in the morning</strong>, not the evening: souvenir shops close by 18:00, and the evening is spent on the sunset at the crossing — leave the street for later and the shops are gone</li>
+      <li><strong>JR Tokyo → Kamakura</strong> — Yokosuka Line, about an hour, no transfers, no reservation needed</li>
+      <li><strong>Kōtoku-in</strong> — October: 8:00–17:00, entering the statue itself is a separate small fee</li>
+      <li><strong>Hase-dera</strong> — open until 17:00, but October through February last entry is 16:30 — plan around that, not the general closing time</li>
+      <li><strong>Zeniarai Benten is optional</strong>: the Daibutsu Hiking Trail from Kōtoku-in, a steep climb at the start and rough dirt track after, about an hour — decide on the spot, by how you feel, not by the plan</li>
+      <li><strong>Kamakurakōkō-mae</strong> is a working rail crossing, not an attraction: shoot carefully, don't linger on the tracks; sunset on October 7th is around 17:17</li>
+      <li><strong>Dinner has no fixed timing</strong>: restaurants and street food on Komachi St and near Yuigahama run late, shopping will already be behind you</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-komachi">Komachi St</button>
     <button class="nav-place-btn" data-target="loc-hachimangu">Tsurugaoka Hachiman-gu (опц.)</button>
     <button class="nav-place-btn" data-target="loc-kotokuin">Kōtoku-in</button>
@@ -891,13 +942,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>День держится на двух слоях: вера и власть, но начинается не с них, а с логистики — Komachi St и Hachiman-gu идут первыми не потому, что так драматичнее, а потому что это единственный способ застать сувенирные лавки открытыми. Дальше Enoden уносит на запад, в Hase, к Kōtoku-in и Hase-dera — два храма в пяти минутах друг от друга, статуя под открытым небом и статуя, приплывшая по морю. Рядом — Yuigahama Beach, пляж, откуда всё в буквальном смысле началось.</p>
-      <div class="blockquote">Опционально: от Kōtoku-in начинается Daibutsu Hiking Trail — лесная тропа через холмы к Zeniarai Benten, пещерному святилищу, где моют деньги. Около часа, с крутым подъёмом в начале и неровной грунтовкой дальше — решать по самочувствию, не по плану.</div>
-      <p>Финал дня — снова Enoden, уже дальше на запад, к Kamakurakōkō-mae: закат 7 октября около 17:17, и это единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно. Возвращение к вокзалу — ужин где придётся, в Komachi St или у Yuigahama; шопинг к этому часу уже позади, и это не потеря, а часть плана.</p>
+      <p data-lang="ru">День держится на двух слоях: вера и власть, но начинается не с них, а с логистики — Komachi St и Hachiman-gu идут первыми не потому, что так драматичнее, а потому что это единственный способ застать сувенирные лавки открытыми. Дальше Enoden уносит на запад, в Hase, к Kōtoku-in и Hase-dera — два храма в пяти минутах друг от друга, статуя под открытым небом и статуя, приплывшая по морю. Рядом — Yuigahama Beach, пляж, откуда всё в буквальном смысле началось.</p>
+      <div class="blockquote" data-lang="ru">Опционально: от Kōtoku-in начинается Daibutsu Hiking Trail — лесная тропа через холмы к Zeniarai Benten, пещерному святилищу, где моют деньги. Около часа, с крутым подъёмом в начале и неровной грунтовкой дальше — решать по самочувствию, не по плану.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">Optional: the Daibutsu Hiking Trail starts at Kōtoku-in — a forest path over the hills to Zeniarai Benten, a cave shrine where you wash money. About an hour, a steep climb at the start and rough dirt track after — decide by how you feel, not by the plan.</div>
+      <p data-lang="ru">Финал дня — снова Enoden, уже дальше на запад, к Kamakurakōkō-mae: закат 7 октября около 17:17, и это единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно. Возвращение к вокзалу — ужин где придётся, в Komachi St или у Yuigahama; шопинг к этому часу уже позади, и это не потеря, а часть плана.</p>
+      <p data-lang="en" style="display:none;">The day rests on two layers, faith and power, but doesn't start with either — it starts with logistics: Komachi St and Hachiman-gu go first not for drama, but because it's the only way to catch the souvenir shops open. From there the Enoden carries you west, to Hase, to Kōtoku-in and Hase-dera — two temples five minutes apart, an open-air statue and one that drifted in by sea. Nearby is Yuigahama Beach, the shore where it all literally began. The day's finale is the Enoden again, further west, to Kamakurakōkō-mae: sunset on October 7th around 17:17, the day's one stop with no fixed hours, so timing it to the light is easy. Back toward the station, dinner wherever it lands, on Komachi St or by Yuigahama — shopping is already behind you by then, and that's part of the plan, not a loss.</p>
     </div>
   </details>
 
@@ -905,194 +960,257 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title" id="loc-komachi">Komachi St</h2>
-    <span class="place-caption">Улица, с которой начинается и заканчивается день</span>
+    <span class="place-caption" data-lang="ru">Улица, с которой начинается и заканчивается день</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The street the day opens and closes on</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Komachi St</span></div></figure>
       <div>
-        <p>350-метровая пешеходная улица прямо от восточного выхода станции Kamakura, идёт параллельно парадному подходу к Tsurugaoka Hachiman-gu. Начиналась как скромный рынок много веков назад, а сегодня — плотная концентрация из примерно 250 лавок: стрит-фуд, сувениры, кафе, десерты на любой вкус.</p>
-        <p>Место шумное и туристическое — 18 миллионов посетителей в год, по официальным подсчётам, так что рассчитывать на тишину здесь не стоит ни утром, ни вечером. Логика захода дважды за день простая: утром — за покупками, пока лавки открыты; вечером сюда же (или к Yuigahama) — уже просто поесть, без ожидания от места чего-то большего.</p>
+        <p data-lang="ru">350-метровая пешеходная улица прямо от восточного выхода станции Kamakura, идёт параллельно парадному подходу к Tsurugaoka Hachiman-gu. Начиналась как скромный рынок много веков назад, а сегодня — плотная концентрация из примерно 250 лавок: стрит-фуд, сувениры, кафе, десерты на любой вкус.</p>
+        <p data-lang="ru">Место шумное и туристическое — 18 миллионов посетителей в год, по официальным подсчётам, так что рассчитывать на тишину здесь не стоит ни утром, ни вечером. Логика захода дважды за день простая: утром — за покупками, пока лавки открыты; вечером сюда же (или к Yuigahama) — уже просто поесть, без ожидания от места чего-то большего.</p>
+        <p data-lang="en" style="display:none;">A 350-meter pedestrian street right off the east exit of Kamakura station, running parallel to the main approach to Tsurugaoka Hachiman-gu. It started as a modest market centuries ago; today it's a dense cluster of roughly 250 shops — street food, souvenirs, cafés, desserts for every taste. It's loud and touristy — 18 million visitors a year, by official counts, so don't expect quiet here morning or evening. The logic of visiting twice in one day is simple: shop in the morning while the stalls are open, come back here (or to Yuigahama) in the evening just to eat, no expectation of anything more from the place.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Shirasu don</strong> — миска риса с мелкой свежей рыбкой, локальный деликатес побережья Shonan; в сезон подают и сырой, и варёный вариант вместе.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-try">Что попробовать</span><br><strong>Shirasu don</strong> — миска риса с мелкой свежей рыбкой, локальный деликатес побережья Shonan; в сезон подают и сырой, и варёный вариант вместе.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-try">Try</span><br><strong>Shirasu don</strong> — a bowl of rice topped with tiny fresh fish, a local delicacy of the Shonan coast; in season it's served with both raw and boiled versions together.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Сувенирные лавки закрываются к <strong>18:00</strong>, рестораны и стрит-фуд работают позже. Улица начинается сразу у восточного выхода станции Kamakura, отмечена красными воротами torii.</p>
+        <p data-lang="ru">Сувенирные лавки закрываются к <strong>18:00</strong>, рестораны и стрит-фуд работают позже. Улица начинается сразу у восточного выхода станции Kamakura, отмечена красными воротами torii.</p>
+        <p data-lang="en" style="display:none;">Souvenir shops close by <strong>18:00</strong>, restaurants and street food stay open later. The street starts right at Kamakura station's east exit, marked by a red torii gate.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
-    <h2 class="section-title -minor" id="loc-hachimangu">Tsurugaoka Hachiman-gu <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;">опционально</span></h2>
-    <span class="place-caption">Храм, с которого начался сёгунат</span>
-    <div class="note"><span class="note-tag tag-skip">Опционально</span><br>В конце Komachi St, буквально по пути — заходить или нет, зависит только от того, сколько времени и сил хочется потратить на храмы именно сегодня. Пропустишь — ничего не потеряешь логистически, просто дальше по Enoden сразу в Hase.</div>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
+    <h2 class="section-title -minor" id="loc-hachimangu">Tsurugaoka Hachiman-gu <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;" data-lang="ru">опционально</span><span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600; display:none;" data-lang="en">optional</span></h2>
+    <span class="place-caption" data-lang="ru">Храм, с которого начался сёгунат</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The shrine the shogunate began with</span>
+    <div class="note" data-lang="ru"><span class="note-tag tag-skip">Опционально</span><br>В конце Komachi St, буквально по пути — заходить или нет, зависит только от того, сколько времени и сил хочется потратить на храмы именно сегодня. Пропустишь — ничего не потеряешь логистически, просто дальше по Enoden сразу в Hase.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-skip">Optional</span><br>At the end of Komachi St, right on the way — whether to stop in depends only on how much time and energy you want to spend on temples today. Skip it and you lose nothing logistically, just continue by Enoden straight to Hase.</div>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Основан в 1063 году, но по-настоящему важным стал в 1180-м, когда Minamoto no Yoritomo перенёс его сюда и сделал духовным центром своей новой военной столицы</li>
         <li>В 1219 году на каменной лестнице храма зарезали сёгуна Minamoto no Sanetomo — собственный племянник, метивший на его место; убийцу обезглавили в тот же день</li>
         <li>Тысячелетнюю гинкго у лестницы, за которой якобы прятался убийца, повалило штормом в 2010 году — дерево проросло заново из пня</li>
         <li>В 1591 году Toyotomi Hideyoshi похлопал по плечу статую Yoritomo в святилище Shirahata и заявил, что превзошёл его — поднявшись к власти вообще без знатных предков</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founded in 1063, but became truly important in 1180, when Minamoto no Yoritomo moved it here and made it the spiritual center of his new warrior capital</li>
+        <li>In 1219 shogun Minamoto no Sanetomo was cut down on the shrine's stone stairs — by his own nephew, who wanted his position; the killer was beheaded the same day</li>
+        <li>The thousand-year-old ginkgo by the stairs, behind which the killer supposedly hid, was toppled by a storm in 2010 — the tree regrew from the stump</li>
+        <li>In 1591 Toyotomi Hideyoshi patted the shoulder of Yoritomo's statue in the Shirahata shrine and claimed to have surpassed him — having risen to power with no noble ancestry at all</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Tsurugaoka Hachiman-gu</span></div></figure>
       <div>
-        <p>До 1180 года это был скромный родовой храм клана Minamoto у побережья, в деревне Yui — том самом месте, что сегодня называется Yuigahama Beach. Yoritomo перенёс его вглубь суши и сделал не просто святилищем, а политическим манифестом: центром новой столицы воинов, отдельной от изнеженного императорского Kyoto. Отсюда начинается сама идея сёгуната — двоевластия, при котором император остаётся сакральным символом, а реальная власть находится у военных в Kamakura.</p>
-        <p>Убийство Sanetomo в 1219 году — не просто дворцовая драма. Sanetomo был последним сёгуном по прямой линии Minamoto: после его смерти клан Hōjō, формально регенты, стал управлять страной от имени марионеточных сёгунов. Один удар клинком на храмовой лестнице оборвал линию основателя и передал власть в чужие руки — сюжет, который аукнётся ещё не раз в японской истории.</p>
+        <p data-lang="ru">До 1180 года это был скромный родовой храм клана Minamoto у побережья, в деревне Yui — том самом месте, что сегодня называется Yuigahama Beach. Yoritomo перенёс его вглубь суши и сделал не просто святилищем, а политическим манифестом: центром новой столицы воинов, отдельной от изнеженного императорского Kyoto. Отсюда начинается сама идея сёгуната — двоевластия, при котором император остаётся сакральным символом, а реальная власть находится у военных в Kamakura.</p>
+        <p data-lang="ru">Убийство Sanetomo в 1219 году — не просто дворцовая драма. Sanetomo был последним сёгуном по прямой линии Minamoto: после его смерти клан Hōjō, формально регенты, стал управлять страной от имени марионеточных сёгунов. Один удар клинком на храмовой лестнице оборвал линию основателя и передал власть в чужие руки — сюжет, который аукнётся ещё не раз в японской истории.</p>
+        <p data-lang="en" style="display:none;">Before 1180, this was a modest family shrine of the Minamoto clan by the coast, in the village of Yui — the very spot that's now Yuigahama Beach. Yoritomo moved it inland and turned it into more than a shrine, a political manifesto: the center of a new warrior capital, distinct from a soft, refined imperial Kyoto. This is where the idea of the shogunate itself begins — a dual power structure, where the emperor remains a sacred symbol while real power sits with the military in Kamakura. Sanetomo's assassination in 1219 wasn't just palace drama. He was the last shogun in the direct Minamoto line — after his death the Hōjō clan, formally just regents, began ruling the country in the name of puppet shoguns. One sword strike on a temple staircase cut off the founder's line and handed power to someone else — a pattern that would echo through Japanese history again.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Историки сомневаются, что легендарная гинкго вообще имеет отношение к убийству — первое упоминание дерева в этом сюжете появляется только в хронике XVII века. Деталь, скорее всего, придумана постфактум, но прижилась крепче фактов.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Историки сомневаются, что легендарная гинкго вообще имеет отношение к убийству — первое упоминание дерева в этом сюжете появляется только в хронике XVII века. Деталь, скорее всего, придумана постфактум, но прижилась крепче фактов.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>Historians doubt the legendary ginkgo has anything to do with the assassination at all — the tree's first mention in this story only appears in a 17th-century chronicle. The detail was probably invented after the fact, but it stuck harder than the facts did.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта с рассвета до заката, вход свободный. Доступ в Главный зал (Honden) — ¥200. В конце Komachi St, 10 минут пешком от станции Kamakura.</p>
+        <p data-lang="ru">Территория открыта с рассвета до заката, вход свободный. Доступ в Главный зал (Honden) — ¥200. В конце Komachi St, 10 минут пешком от станции Kamakura.</p>
+        <p data-lang="en" style="display:none;">Grounds open sunrise to sunset, free entry. Access to the Main Hall (Honden) is ¥200. At the end of Komachi St, 10 minutes on foot from Kamakura station.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura — власть переходит к воинам</a> · <a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura — власть переходит к воинам</a> · <a href="glossary.html#genpei-war">Война Genpei и конец клана Taira</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#kamakura-shogunate">The Kamakura shogunate — power shifts to the warriors</a> · <a href="glossary.html#genpei-war">The Genpei War and the fall of the Taira clan</a></p>
 
     <hr>
 
-    <span class="place-kicker">Будда</span>
+    <span class="place-kicker" data-lang="ru">Будда</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Buddha</span>
     <h2 class="section-title -major" id="loc-kotokuin">Kōtoku-in</h2>
-    <span class="place-caption">Будда, которому пятьсот лет не нужна крыша</span>
+    <span class="place-caption" data-lang="ru">Будда, которому пятьсот лет не нужна крыша</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A Buddha with no need for a roof, five hundred years running</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Бронзовая статуя Amida Buddha отлита около 1252 года, высота 13,35 метра, вес около 121 тонны — второй по величине бронзовый Будда Japan после Nara</li>
         <li>Первоначальный деревянный вариант статуи повредило штормом; нынешний бронзовый заменил его</li>
         <li>Зал, в котором стояла статуя, разрушало штормами дважды, а в 1495 или 1498 году (источники расходятся) — цунами. С тех пор зал просто не стали отстраивать</li>
         <li>Внутрь статуи можно зайти — она полая</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The bronze Amida Buddha was cast around 1252, standing 13.35 meters tall, weighing about 121 tons — Japan's second-largest bronze Buddha after Nara's</li>
+        <li>An earlier wooden version of the statue was damaged by a storm; the current bronze one replaced it</li>
+        <li>The hall housing the statue was destroyed by storms twice, then by a tsunami in either 1495 or 1498 (sources disagree). After that, the hall was simply never rebuilt</li>
+        <li>You can go inside the statue — it's hollow</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Kōtoku-in Great Buddha</span></div></figure>
       <div>
-        <p>Прямая параллель Higashiyama Day: точно так же, как сцена Kiyomizu-dera держится веками, не будучи оригинальными досками, этот Будда — памятник тому, что уцелело, а не тому, что было задумано изначально. Статую Amida, будды западного рая Sukhavati, строили под крышей — и именно отсутствие крыши стало её самой узнаваемой чертой на пятьсот лет вперёд.</p>
+        <p data-lang="ru">Прямая параллель Higashiyama Day: точно так же, как сцена Kiyomizu-dera держится веками, не будучи оригинальными досками, этот Будда — памятник тому, что уцелело, а не тому, что было задумано изначально. Статую Amida, будды западного рая Sukhavati, строили под крышей — и именно отсутствие крыши стало её самой узнаваемой чертой на пятьсот лет вперёд.</p>
+        <p data-lang="en" style="display:none;">A direct parallel to Higashiyama Day: just as Kiyomizu-dera's stage has stood for centuries without being the original boards, this Buddha is a monument to what survived, not to what was originally intended. The Amida statue, buddha of the western paradise Sukhavata, was built to stand under a roof — and the absence of that roof became its single most recognizable feature for the next five hundred years.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Решение не восстанавливать зал после цунами — то ли прагматизм (дорого отстраивать в сейсмоопасной зоне), то ли жест: статуя, пережившая огонь, штормы и Great Kanto Earthquake 1923 года, не нуждается в защите. Самая узнаваемая черта Будды под открытым небом — не архитектурный замысел, а то, что осталось после того, как замысел трижды разрушили.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Решение не восстанавливать зал после цунами — то ли прагматизм (дорого отстраивать в сейсмоопасной зоне), то ли жест: статуя, пережившая огонь, штормы и Great Kanto Earthquake 1923 года, не нуждается в защите. Самая узнаваемая черта Будды под открытым небом — не архитектурный замысел, а то, что осталось после того, как замысел трижды разрушили.</p>
+      <p data-lang="en" style="display:none;">The decision not to rebuild the hall after the tsunami was either pragmatism (expensive to rebuild in an earthquake zone) or a statement: a statue that survived fire, storms, and the 1923 Great Kanto Earthquake needs no protection. The Buddha's most recognizable feature under the open sky isn't an architectural intention, it's what was left after that intention got wrecked three times over.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>53 каменных основания, разбросанных по территории — единственное, что осталось от разрушенного зала: буквальный отпечаток здания, которого больше нет.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>53 каменных основания, разбросанных по территории — единственное, что осталось от разрушенного зала: буквальный отпечаток здания, которого больше нет.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>53 stone foundation stones scattered across the grounds are all that's left of the destroyed hall — a literal footprint of a building that no longer exists.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Октябрь: <strong>8:00–17:00</strong>. Вход на территорию отдельно от входа внутрь статуи (небольшая доплата). 7 минут пешком от станции Hase.</p>
+        <p data-lang="ru">Октябрь: <strong>8:00–17:00</strong>. Вход на территорию отдельно от входа внутрь статуи (небольшая доплата). 7 минут пешком от станции Hase.</p>
+        <p data-lang="en" style="display:none;">October: <strong>8:00–17:00</strong>. Grounds entry is separate from entering the statue itself (small extra fee). 7 minutes on foot from Hase station.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#kamakura-shogunate">The Kamakura shogunate</a></p>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-hasedera">Hase-dera</h2>
-    <span class="place-caption">Статуя, которую бросили в море ради удачи</span>
+    <span class="place-caption" data-lang="ru">Статуя, которую бросили в море ради удачи</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The statue thrown into the sea for luck</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>По легенде, в 721 году монах Tokudō вырезал две статуи Kannon из ствола одного камфорного дерева — одну оставил в Nara, вторую бросил в море с молитвой, чтобы она сама нашла своё место</li>
         <li>Через 15 лет статую прибило к берегу неподалёку от Kamakura — так, в 736 году, был основан этот храм</li>
         <li>9,18-метровая деревянная статуя с одиннадцатью головами — одна из крупнейших деревянных статуй Japan</li>
         <li>С обзорной площадки храма открывается вид на Yuigahama Beach — ту самую бухту, куда должна была приплыть статуя</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Legend says that in 721 the monk Tokudō carved two Kannon statues from a single camphor tree trunk — leaving one in Nara and casting the other into the sea with a prayer that it would find its own resting place</li>
+        <li>Fifteen years later the statue washed ashore near Kamakura — this temple was founded in 736 as a result</li>
+        <li>The 9.18-meter wooden statue with eleven heads is one of Japan's largest wooden statues</li>
+        <li>The temple's viewing deck looks out over Yuigahama Beach, the very bay the statue was said to have drifted into</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Hase-dera Kannon</span></div></figure>
       <div>
-        <p>Одиннадцать голов статуи — не украшение, а функция: Kannon, бодхисаттва сострадания, буквально «слышит крики мира» со всех сторон одновременно. Легенда о двух статуях из одного дерева работает как красивая метафора самой Japan этого периода: страна, до последнего смотрящая на Nara и Kyoto как на культурный центр, но всё активнее отправляющая собственные смыслы «в свободное плавание» — в данном случае в буквальном смысле, вплавь.</p>
-        <p>Историчность легенды под вопросом: документальных подтверждений почти нет, а самое раннее твёрдое свидетельство существования храма — надпись на колоколе 1264 года. Но, как и в случае с гинкго у Hachiman-gu, точность истории здесь вторична по отношению к тому, что она объясняет городу о самом себе.</p>
+        <p data-lang="ru">Одиннадцать голов статуи — не украшение, а функция: Kannon, бодхисаттва сострадания, буквально «слышит крики мира» со всех сторон одновременно. Легенда о двух статуях из одного дерева работает как красивая метафора самой Japan этого периода: страна, до последнего смотрящая на Nara и Kyoto как на культурный центр, но всё активнее отправляющая собственные смыслы «в свободное плавание» — в данном случае в буквальном смысле, вплавь.</p>
+        <p data-lang="ru">Историчность легенды под вопросом: документальных подтверждений почти нет, а самое раннее твёрдое свидетельство существования храма — надпись на колоколе 1264 года. Но, как и в случае с гинкго у Hachiman-gu, точность истории здесь вторична по отношению к тому, что она объясняет городу о самом себе.</p>
+        <p data-lang="en" style="display:none;">The statue's eleven heads aren't decoration, they're a function: Kannon, bodhisattva of compassion, literally "hears the cries of the world" from every direction at once. The legend of two statues from one tree works as a fitting metaphor for Japan of this period: a country still looking to Nara and Kyoto as its cultural center, but increasingly setting its own meanings adrift — here, quite literally, afloat. The legend's historicity is doubtful — almost no documentary evidence exists, and the earliest solid record of the temple is a bell inscription from 1264. But as with the ginkgo at Hachiman-gu, the story's accuracy matters less here than what it tells the city about itself.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>8:00–17:00</strong>, но с октября по февраль <strong>последний вход в 16:30</strong> — на дату этой поездки это уже действующее правило, закладывай его, а не общее время закрытия. 5 минут пешком от Kōtoku-in. На территории также пещеры Benten-kutsu, посвящённые богине Benzaiten — той же, что встретится позже сегодня в Zeniarai Benten.</p>
+        <p data-lang="ru">Открыт <strong>8:00–17:00</strong>, но с октября по февраль <strong>последний вход в 16:30</strong> — на дату этой поездки это уже действующее правило, закладывай его, а не общее время закрытия. 5 минут пешком от Kōtoku-in. На территории также пещеры Benten-kutsu, посвящённые богине Benzaiten — той же, что встретится позже сегодня в Zeniarai Benten.</p>
+        <p data-lang="en" style="display:none;">Open <strong>8:00–17:00</strong>, but October through February <strong>last entry is 16:30</strong> — that's already in effect for this trip's dates, plan around it, not the general closing time. 5 minutes on foot from Kōtoku-in. The grounds also hold the Benten-kutsu caves, dedicated to the goddess Benzaiten — the same one you'll meet again later today at Zeniarai Benten.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kannon">Kannon — та, кто слышит крики мира</a> · <a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#kannon">Kannon — та, кто слышит крики мира</a> · <a href="glossary.html#bodhisattva">Bodhisattva — тот, кто мог бы уйти, но остаётся</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#kannon">Kannon — she who hears the cries of the world</a> · <a href="glossary.html#bodhisattva">Bodhisattva — one who could leave, but stays</a></p>
 
     <hr>
 
-    <span class="place-kicker">Пляж</span>
+    <span class="place-kicker" data-lang="ru">Пляж</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Beach</span>
     <h2 class="section-title -minor" id="loc-yuigahama">Yuigahama Beach</h2>
-    <span class="place-caption">Пляж, с которого всё началось</span>
+    <span class="place-caption" data-lang="ru">Пляж, с которого всё началось</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The beach it all started from</span>
     <div class="cols">
       <figure><div class="img-placeholder" style=""><span>Yuigahama Beach</span></div></figure>
       <div>
-        <p>Короткая пауза у воды между двумя храмовыми кластерами — но не просто пляж. Именно здесь, в деревне Yui, стоял самый первый вариант Tsurugaoka Hachiman-gu, до того как Yoritomo в 1180 году перенёс его вглубь города. Стоя на песке, ты в буквальном смысле стоишь на месте, откуда стартовала вся сегодняшняя история про сёгунат.</p>
+        <p data-lang="ru">Короткая пауза у воды между двумя храмовыми кластерами — но не просто пляж. Именно здесь, в деревне Yui, стоял самый первый вариант Tsurugaoka Hachiman-gu, до того как Yoritomo в 1180 году перенёс его вглубь города. Стоя на песке, ты в буквальном смысле стоишь на месте, откуда стартовала вся сегодняшняя история про сёгунат.</p>
+        <p data-lang="en" style="display:none;">A short pause by the water between two temple clusters — but not just a beach. This is where, in the village of Yui, the very first version of Tsurugaoka Hachiman-gu once stood, before Yoritomo moved it inland in 1180. Standing on the sand, you're literally standing on the spot the entire shogunate story of the day started from.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открытый пляж, доступен всегда. 5–7 минут пешком от станции Yuigahama или от Hase-dera в сторону моря.</p>
+        <p data-lang="ru">Открытый пляж, доступен всегда. 5–7 минут пешком от станции Yuigahama или от Hase-dera в сторону моря.</p>
+        <p data-lang="en" style="display:none;">Open beach, always accessible. 5–7 minutes on foot from Yuigahama station, or from Hase-dera toward the sea.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Святилище</span>
-    <h2 class="section-title -minor" id="loc-zeniarai">Zeniarai Benten <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;">опционально</span></h2>
-    <span class="place-caption">Пещера, где моют деньги</span>
-    <div class="note"><span class="note-tag tag-skip">Опционально</span><br>Это не часть основного маршрута дня — крюк примерно на 1–1,5 часа сверх плана, и физически не самый лёгкий: тропа Daibutsu Hiking Trail от Kōtoku-in начинается крутым 10–15-минутным подъёмом, дальше — неровная лесная грунтовка, без асфальта и перил. Решай на месте, по коленям и настроению, а не заранее по плану — и учти, что тропа ведёт вниз к вокзалу, а не в сторону Kamakurakōkō-mae, так что вместе с закатом на переезде в один день эти два пункта не складываются без петли назад.</div>
+    <span class="place-kicker" data-lang="ru">Святилище</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
+    <h2 class="section-title -minor" id="loc-zeniarai">Zeniarai Benten <span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600;" data-lang="ru">опционально</span><span style="font-family:'Inter',sans-serif; font-size:0.6em; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); font-weight:600; display:none;" data-lang="en">optional</span></h2>
+    <span class="place-caption" data-lang="ru">Пещера, где моют деньги</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The cave where money gets washed</span>
+    <div class="note" data-lang="ru"><span class="note-tag tag-skip">Опционально</span><br>Это не часть основного маршрута дня — крюк примерно на 1–1,5 часа сверх плана, и физически не самый лёгкий: тропа Daibutsu Hiking Trail от Kōtoku-in начинается крутым 10–15-минутным подъёмом, дальше — неровная лесная грунтовка, без асфальта и перил. Решай на месте, по коленям и настроению, а не заранее по плану — и учти, что тропа ведёт вниз к вокзалу, а не в сторону Kamakurakōkō-mae, так что вместе с закатом на переезде в один день эти два пункта не складываются без петли назад.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-skip">Optional</span><br>Not part of the day's core route — an extra 1–1.5 hours on top of the plan, and not the easiest physically: the Daibutsu Hiking Trail from Kōtoku-in starts with a steep 10–15-minute climb, then rough forest dirt track, no pavement or railings. Decide on the spot, by how your knees and mood feel, not by a plan made in advance — and note the trail heads down toward the station, not toward Kamakurakōkō-mae, so combined with the crossing sunset in one day, these two don't fit together without doubling back.</div>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>По легенде, в 1185 году Yoritomo получил во сне указание построить храм у священного источника — сделал это, и дела в стране пошли на лад</li>
         <li>Официальное имя — Zeniarai Benzaiten Ugafuku Jinja: святилище смешанного синто-буддийского божества Ugafukujin (тело дракона, голова человека) в сочетании с богиней Benzaiten</li>
         <li>Вход — через узкий тоннель, прорубленный в скале; внутри пещера с источником, где по легенде деньги удваиваются, если их там вымыть</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Legend says that in 1185 Yoritomo received instructions in a dream to build a shrine at a sacred spring — he did, and the country's fortunes improved</li>
+        <li>The official name is Zeniarai Benzaiten Ugafuku Jinja: a shrine to the mixed Shinto-Buddhist deity Ugafukujin (a dragon's body, a human head) combined with the goddess Benzaiten</li>
+        <li>The entrance is through a narrow tunnel cut into the rock; inside is a cave with a spring where, legend says, money doubles if you wash it there</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Zeniarai Benten</span></div></figure>
       <div>
-        <p>Тот же Yoritomo, что построил Tsurugaoka Hachiman-gu как политический манифест новой столицы, здесь строит нечто совсем другое — приватное, суеверное, спрятанное в скале. Редкий случай, когда сохранилось прямое смешение синто и буддизма, не разделённое указом Meiji 1868 года, как это произошло почти со всеми остальными храмами страны.</p>
-        <p>Ритуал простой: берёшь плетёную корзину, зачерпываешь воду источника, моешь монеты или банкноты, вытираешь и убираешь в кошелёк — по легенде, вымытые здесь деньги вернутся с прибавкой.</p>
+        <p data-lang="ru">Тот же Yoritomo, что построил Tsurugaoka Hachiman-gu как политический манифест новой столицы, здесь строит нечто совсем другое — приватное, суеверное, спрятанное в скале. Редкий случай, когда сохранилось прямое смешение синто и буддизма, не разделённое указом Meiji 1868 года, как это произошло почти со всеми остальными храмами страны.</p>
+        <p data-lang="ru">Ритуал простой: берёшь плетёную корзину, зачерпываешь воду источника, моешь монеты или банкноты, вытираешь и убираешь в кошелёк — по легенде, вымытые здесь деньги вернутся с прибавкой.</p>
+        <p data-lang="en" style="display:none;">The same Yoritomo who built Tsurugaoka Hachiman-gu as a political manifesto for his new capital built something entirely different here — private, superstitious, hidden in rock. A rare surviving case of direct Shinto-Buddhist syncretism, not split apart by the 1868 Meiji decree the way it was at nearly every other shrine in the country. The ritual is simple: take a woven basket, scoop water from the spring, wash coins or bills, dry them, and put them back in your wallet — legend says money washed here comes back with more.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>8:00–16:30</strong>. Корзинка, благовония и свеча — ¥100 с человека. От храма вниз до станции Kamakura — около 20 минут пешком по обычной дороге, без тропы.</p>
+        <p data-lang="ru">Открыт <strong>8:00–16:30</strong>. Корзинка, благовония и свеча — ¥100 с человека. От храма вниз до станции Kamakura — около 20 минут пешком по обычной дороге, без тропы.</p>
+        <p data-lang="en" style="display:none;">Open <strong>8:00–16:30</strong>. Basket, incense, and candle are ¥100 per person. Down from the shrine to Kamakura station is about 20 minutes on foot along a regular road, no trail.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura и Minamoto no Yoritomo</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#kamakura-shogunate">Сёгунат Kamakura и Minamoto no Yoritomo</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#kamakura-shogunate">The Kamakura shogunate and Minamoto no Yoritomo</a></p>
 
     <hr>
 
-    <span class="place-kicker">Переезд</span>
+    <span class="place-kicker" data-lang="ru">Переезд</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Crossing</span>
     <h2 class="section-title -minor" id="loc-kokomae">Kamakurakōkō-mae</h2>
-    <span class="place-caption">Переезд из открывающей заставки Slam Dunk</span>
+    <span class="place-caption" data-lang="ru">Переезд из открывающей заставки Slam Dunk</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The crossing from Slam Dunk's opening sequence</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Kamakurakōkō-mae crossing</span></div></figure>
       <div>
-        <p>Обычный железнодорожный переезд прямо у выхода со станции — море за спиной, одноколейный трамвайчик Enoden проезжает раз в 10–12 минут. Ничего особенного, если бы не аниме: именно этот переезд появляется в заставке культовой баскетбольной манги и аниме Slam Dunk, и с тех пор сюда едут специально ради одного кадра — уходящий вдаль поезд на фоне океана.</p>
-        <p>Это не музей и не аттракцион, а действующая инфраструктура: местные здесь просто едут на работу, а туристы стоят с телефонами наготове в ожидании следующего состава.</p>
+        <p data-lang="ru">Обычный железнодорожный переезд прямо у выхода со станции — море за спиной, одноколейный трамвайчик Enoden проезжает раз в 10–12 минут. Ничего особенного, если бы не аниме: именно этот переезд появляется в заставке культовой баскетбольной манги и аниме Slam Dunk, и с тех пор сюда едут специально ради одного кадра — уходящий вдаль поезд на фоне океана.</p>
+        <p data-lang="ru">Это не музей и не аттракцион, а действующая инфраструктура: местные здесь просто едут на работу, а туристы стоят с телефонами наготове в ожидании следующего состава.</p>
+        <p data-lang="en" style="display:none;">An ordinary rail crossing right by the station exit — the sea at your back, the single-track Enoden tram passing every 10–12 minutes. Nothing special, except for anime: this exact crossing appears in the opening sequence of the cult basketball manga and anime Slam Dunk, and people have been coming specifically for that one shot ever since — the train receding into the distance against the ocean. It's not a museum or an attraction, it's working infrastructure: locals just commute here, while tourists stand with phones ready waiting for the next train.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Переезд настоящий, с настоящим движением. Снимать — только с тротуара, не заходя на пути, и не задерживать реальных пассажиров и водителей ради кадра.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Переезд настоящий, с настоящим движением. Снимать — только с тротуара, не заходя на пути, и не задерживать реальных пассажиров и водителей ради кадра.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>This is a real crossing with real traffic. Shoot only from the sidewalk, never step onto the tracks, and don't hold up actual passengers or drivers for a photo.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Прямо у выхода со станции Kamakurakōkō-mae. Закат 7 октября — около <strong>17:17</strong>, единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно.</p>
+        <p data-lang="ru">Прямо у выхода со станции Kamakurakōkō-mae. Закат 7 октября — около <strong>17:17</strong>, единственная точка дня без фиксированных часов работы, так что подстроиться под свет несложно.</p>
+        <p data-lang="en" style="display:none;">Right at the exit of Kamakurakōkō-mae station. Sunset on October 7th is around <strong>17:17</strong>, the day's only stop with no fixed hours, so timing it to the light is easy.</p>
       </div>
     </details>
 
@@ -1101,15 +1219,19 @@ body.site-nav-locked { overflow: hidden; }
   <hr>
 
   <h2 class="section-title" id="t4">Food & Coffee</h2>
-  <p><strong>Shirasu don</strong> у Yuigahama Beach или на Komachi St — местная рыбка, свежая только здесь и только в сезон. Ужин без жёсткой привязки к месту: Komachi St и окрестности Yuigahama работают допоздна, шопинг к этому часу уже позади.</p>
+  <p data-lang="ru"><strong>Shirasu don</strong> у Yuigahama Beach или на Komachi St — местная рыбка, свежая только здесь и только в сезон. Ужин без жёсткой привязки к месту: Komachi St и окрестности Yuigahama работают допоздна, шопинг к этому часу уже позади.</p>
+  <p data-lang="en" style="display:none;"><strong>Shirasu don</strong> near Yuigahama Beach or on Komachi St — local fish, fresh only here and only in season. Dinner isn't tied to any one spot: Komachi St and the area around Yuigahama run late, shopping is already behind you by then.</p>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Сегодняшний день закрывает сюжет, который начался задолго до него: клан Taira уничтожен в войне Genpei, победитель Minamoto no Yoritomo строит здесь, в Kamakura, первый в истории Japan военный сёгунат — систему двоевластия, при которой император остаётся символом в Kyoto, а реальная власть сосредоточена у воинов. Тот же Yoritomo, что превратил скромный храм Yui в политический манифест новой столицы (Tsurugaoka Hachiman-gu), по легенде, стоит и за пещерным святилищем Zeniarai Benten — если дойдёшь туда сегодня, увидишь совсем другой регистр той же фигуры: не демонстрация власти, а личная удача.</p>
-  <p>Сёгунат, начатый здесь в 1180-х, закончится тоже в Kamakura: в 1333 году последний регент клана Hōjō вместе с 800 самураями совершит массовое сэппуку в пещерах Tōshō-ji, не пережив падения города. Ритуальное самоубийство ради чести, впервые задокументированное ещё во время войны Genpei у храма Byōdō-in, здесь проходит полный круг — от единичного жеста одного полководца до финала целой эпохи.</p>
+  <p data-lang="ru">Сегодняшний день закрывает сюжет, который начался задолго до него: клан Taira уничтожен в войне Genpei, победитель Minamoto no Yoritomo строит здесь, в Kamakura, первый в истории Japan военный сёгунат — систему двоевластия, при которой император остаётся символом в Kyoto, а реальная власть сосредоточена у воинов. Тот же Yoritomo, что превратил скромный храм Yui в политический манифест новой столицы (Tsurugaoka Hachiman-gu), по легенде, стоит и за пещерным святилищем Zeniarai Benten — если дойдёшь туда сегодня, увидишь совсем другой регистр той же фигуры: не демонстрация власти, а личная удача.</p>
+  <p data-lang="en" style="display:none;">Today closes a story that began long before it: the Taira clan was wiped out in the Genpei War, and the victor, Minamoto no Yoritomo, built Japan's first-ever military shogunate right here in Kamakura — a dual power structure, the emperor remaining a symbol in Kyoto while real power concentrated with the warriors. The same Yoritomo who turned a modest Yui temple into a political manifesto for a new capital (Tsurugaoka Hachiman-gu) is also credited, by legend, with the cave shrine at Zeniarai Benten — reach it today and you'll see an entirely different register of the same man: not a display of power, but personal luck.</p>
+  <p data-lang="ru">Сёгунат, начатый здесь в 1180-х, закончится тоже в Kamakura: в 1333 году последний регент клана Hōjō вместе с 800 самураями совершит массовое сэппуку в пещерах Tōshō-ji, не пережив падения города. Ритуальное самоубийство ради чести, впервые задокументированное ещё во время войны Genpei у храма Byōdō-in, здесь проходит полный круг — от единичного жеста одного полководца до финала целой эпохи.</p>
+  <p data-lang="en" style="display:none;">The shogunate started here in the 1180s ended here too: in 1333, the last Hōjō regent and 800 samurai committed mass seppuku in the caves of Tōshō-ji rather than survive the city's fall. Ritual suicide for honor, first documented back during the Genpei War at Byōdō-in temple, comes full circle here — from a single warlord's isolated gesture to the ending of an entire era.</p>
 
-  <p class="footnote">Kamakura Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Kamakura Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Kamakura Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1149,6 +1271,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

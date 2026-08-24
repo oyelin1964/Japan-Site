@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,29 +883,42 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">京の着倒れ、大阪の食い倒れ</span>
-    <blockquote>Kyoto разоряется на одежде, Osaka — на еде</blockquote>
-    <span class="quote-author">Старая поговорка Kansai</span>
+    <span class="quote-jp" data-lang="ru">京の着倒れ、大阪の食い倒れ</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">京の着倒れ、大阪の食い倒れ</span>
+    <blockquote data-lang="ru">Kyoto разоряется на одежде, Osaka — на еде</blockquote>
+    <blockquote data-lang="en" style="display:none;">Kyoto ruins itself on clothes, Osaka ruins itself on food</blockquote>
+    <span class="quote-author" data-lang="ru">Старая поговорка Kansai</span>
+    <span class="quote-author" data-lang="en" style="display:none;">An old Kansai saying</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Kyo-train Garaku</strong> — ходит только по субботам, воскресеньям и праздникам, брони не нужно, обычный тариф ¥410. Из Kawaramachi в Osaka-Umeda: 10:41 (наш поезд), 12:41, 14:41, 16:41 — назад можно любым обычным Hankyu-поездом, без привязки к расписанию</li>
       <li><strong>От отеля до Kawaramachi</strong> — subway Karasuma line до Shijo (2 остановки) + 5 минут пешком; заложи ~20–25 минут, выйти из отеля не позже 9:50</li>
       <li><strong>Osaka Castle</strong> — сегодня только снаружи, без очереди в музей</li>
       <li><strong>tokito</strong> в Karahori — обед только walk-in, 11:00–15:00, без брони</li>
       <li><strong>Kitan Hibiki</strong> — ужин по брони, желательно закрыть за 2–3 недели через Tabelog или по телефону; детали — в <a href="trip-logistics.html">Logistics</a></li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Kyo-train Garaku</strong> — runs only Saturdays, Sundays, and holidays, no reservation needed, standard fare ¥410. From Kawaramachi to Osaka-Umeda: 10:41 (our train), 12:41, 14:41, 16:41 — return on any regular Hankyu train, no fixed schedule needed</li>
+      <li><strong>Hotel to Kawaramachi</strong> — subway Karasuma line to Shijo (2 stops) + 5 minutes on foot; budget ~20–25 minutes, leave the hotel by 9:50 at the latest</li>
+      <li><strong>Osaka Castle</strong> — exterior only today, no museum line</li>
+      <li><strong>tokito</strong> in Karahori — lunch is walk-in only, 11:00–15:00, no reservation</li>
+      <li><strong>Kitan Hibiki</strong> — dinner needs a reservation, best booked 2–3 weeks out via Tabelog or by phone; details in <a href="trip-logistics.html">Logistics</a></li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-garaku">Kyo-train Garaku</button>
     <button class="nav-place-btn" data-target="loc-karahori">Karahori · tokito</button>
     <button class="nav-place-btn" data-target="loc-osakacastle">Osaka Castle</button>
@@ -890,13 +938,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>День держится на двух непохожих кластерах и одном красивом поезде между ними. Утро — тихое: субботним поездом Garaku едем в Osaka, оттуда сразу в Karahori и Tanimachi — старый купеческий район без туристов, обед в tokito, короткий взгляд на Osaka Castle снаружи. После полудня город меняет тональность: спускаемся в Namba, и дальше — рынок, храм, неон Dotonbori и винтажные лавки Amerikamura, всё в 5–10 минутах ходьбы друг от друга.</p>
-      <div class="blockquote">Именно в Osaka Castle замыкается сюжет, начатый в день Higashiyama: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu — того самого человека, что в 1615 году возьмёт этот замок штурмом.</div>
-      <p>Вечер — ужин в Kitan Hibiki рядом со станцией Namba, затем короткий коктейль в Bar Nayuta в паре минут ходьбы, и обратно в Umeda на любом Hankyu-поезде — без гонки за расписанием.</p>
+      <p data-lang="ru">День держится на двух непохожих кластерах и одном красивом поезде между ними. Утро — тихое: субботним поездом Garaku едем в Osaka, оттуда сразу в Karahori и Tanimachi — старый купеческий район без туристов, обед в tokito, короткий взгляд на Osaka Castle снаружи. После полудня город меняет тональность: спускаемся в Namba, и дальше — рынок, храм, неон Dotonbori и винтажные лавки Amerikamura, всё в 5–10 минутах ходьбы друг от друга.</p>
+      <div class="blockquote" data-lang="ru">Именно в Osaka Castle замыкается сюжет, начатый в день Higashiyama: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu — того самого человека, что в 1615 году возьмёт этот замок штурмом.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">It's at Osaka Castle that the thread from the Higashiyama day closes: Kōdai-ji in Kyoto was built with money from Tokugawa Ieyasu — the same man who stormed this castle in 1615.</div>
+      <p data-lang="ru">Вечер — ужин в Kitan Hibiki рядом со станцией Namba, затем короткий коктейль в Bar Nayuta в паре минут ходьбы, и обратно в Umeda на любом Hankyu-поезде — без гонки за расписанием.</p>
+      <p data-lang="en" style="display:none;">The day rests on two very different clusters and one lovely train ride between them. The morning is quiet: the Saturday Garaku train takes us to Osaka, straight into Karahori and Tanimachi — an old merchant district with no tourists — lunch at tokito, a quick look at Osaka Castle from the outside. In the afternoon the city changes tone: down into Namba, then the market, a shrine, Dotonbori's neon, and Amerikamura's vintage shops, all 5–10 minutes' walk from each other. The evening is dinner at Kitan Hibiki near Namba station, a short cocktail at Bar Nayuta a couple minutes away, and back to Umeda on any Hankyu train — no schedule to chase.</p>
     </div>
   </details>
 
@@ -904,224 +956,294 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Поезд</span>
+    <span class="place-kicker" data-lang="ru">Поезд</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Train</span>
     <h2 class="section-title -major" id="loc-garaku">Kyo-train Garaku</h2>
-    <span class="place-caption">Kyoto, упакованный в шесть вагонов</span>
+    <span class="place-caption" data-lang="ru">Kyoto, упакованный в шесть вагонов</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Kyoto packed into six train cars</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Запущен Hankyu Railway в марте 2019 года — к юбилею 1200-летия Kyoto как столицы</li>
         <li>Каждый из шести вагонов оформлен под своё время года: клён и красные листья, зимний бамбук, весенняя сакура — татами-сиденья, круглые окна, миниатюрные сухие сады прямо в вагоне</li>
         <li>Бронь не нужна, тариф — обычный, ¥410 в одну сторону; ходит только по субботам, воскресеньям и праздникам</li>
         <li>45 минут между Kawaramachi и Osaka-Umeda — ровно тот путь, что несколько веков занимал у купцов, но с чайным садом за окном вместо тракта</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Launched by Hankyu Railway in March 2019, for Kyoto's 1,200th anniversary as capital</li>
+        <li>Each of the six cars is themed to a season — maple and red leaves, winter bamboo, spring cherry blossom — with tatami seating, round windows, and miniature dry gardens built right into the car</li>
+        <li>No reservation needed, standard fare, ¥410 one way; runs only Saturdays, Sundays, and holidays</li>
+        <li>45 minutes between Kawaramachi and Osaka-Umeda — the exact route merchants covered for centuries, just with a tea garden outside the window instead of a dirt road</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Kyo-train Garaku</span></div></figure>
       <div>
-        <p>Garaku — это обычная коммерческая линия Hankyu Kyoto Line, просто в этот состав включили шесть вагонов, каждый из которых декорирован как маленький Kyoto: деревянные оконные рамы, татами вместо части сидений, noren-занавески между вагонами. Дополнительных денег за это не берут — платишь ровно столько же, сколько за обычную электричку.</p>
-        <p>Есть лёгкая ирония в самом жесте: город, зарабатывающий на «подлинности» старого Kyoto, экспортирует эту атмосферу в соседний город на рельсах, за 45 минут и по цене автобусного билета.</p>
+        <p data-lang="ru">Garaku — это обычная коммерческая линия Hankyu Kyoto Line, просто в этот состав включили шесть вагонов, каждый из которых декорирован как маленький Kyoto: деревянные оконные рамы, татами вместо части сидений, noren-занавески между вагонами. Дополнительных денег за это не берут — платишь ровно столько же, сколько за обычную электричку.</p>
+        <p data-lang="ru">Есть лёгкая ирония в самом жесте: город, зарабатывающий на «подлинности» старого Kyoto, экспортирует эту атмосферу в соседний город на рельсах, за 45 минут и по цене автобусного билета.</p>
+        <p data-lang="en" style="display:none;">Garaku is just an ordinary commercial Hankyu Kyoto Line service — this particular train just happens to include six cars decorated like a miniature Kyoto: wooden window frames, tatami in place of some seating, noren curtains between cars. No extra charge for any of it — you pay exactly what you'd pay for a regular train. There's a small irony in the whole gesture: a city that makes its living off the "authenticity" of old Kyoto exports that same atmosphere to a neighboring city, by rail, in 45 minutes, at the price of a bus ticket.</p>
       </div>
     </div>
-    <p><span class="inline-label">Совет</span>Мест без брони достаточно, но по субботам вагон с сакурой (весенняя тема) и зимний бамбуковый — самые популярные; если очень хочется конкретный вагон, можно просто пройтись по составу на первой станции и выбрать место.</p>
+    <p data-lang="ru"><span class="inline-label">Совет</span>Мест без брони достаточно, но по субботам вагон с сакурой (весенняя тема) и зимний бамбуковый — самые популярные; если очень хочется конкретный вагон, можно просто пройтись по составу на первой станции и выбрать место.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span>There's usually plenty of unreserved seating, but on Saturdays the cherry blossom car (spring theme) and the winter bamboo car are the most popular; if you want a specific car, just walk through the train at the first station and pick a seat.</p>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Расписание и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Расписание и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Schedule & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Из <strong>Kyoto-Kawaramachi в Osaka-Umeda</strong>: 10:41, 12:41, 14:41, 16:41. Обратно — любым обычным Hankyu-поездом, расписание частое, привязки к конкретному времени нет.</p>
-        <p>Платформа в Kawaramachi — №2 (крайняя), в Osaka-Umeda — платформа №3. Не перепутать с соседней JR-линией на той же станции.</p>
+        <p data-lang="ru">Из <strong>Kyoto-Kawaramachi в Osaka-Umeda</strong>: 10:41, 12:41, 14:41, 16:41. Обратно — любым обычным Hankyu-поездом, расписание частое, привязки к конкретному времени нет.</p>
+        <p data-lang="ru">Платформа в Kawaramachi — №2 (крайняя), в Osaka-Umeda — платформа №3. Не перепутать с соседней JR-линией на той же станции.</p>
+        <p data-lang="en" style="display:none;">From <strong>Kyoto-Kawaramachi to Osaka-Umeda</strong>: 10:41, 12:41, 14:41, 16:41. Return on any regular Hankyu train — frequent schedule, no need to time it.</p>
+        <p data-lang="en" style="display:none;">Platform 2 (end platform) in Kawaramachi, platform 3 in Osaka-Umeda. Don't confuse it with the neighboring JR line at the same station.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -minor" id="loc-karahori">Karahori · tokito</h2>
-    <span class="place-caption">Обед в квартале, которого нет в путеводителях</span>
+    <span class="place-caption" data-lang="ru">Обед в квартале, которого нет в путеводителях</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Lunch in a district that isn't in guidebooks</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Karahori (空堀) — «пустой ров»: название от несохранившегося внешнего рва замка Osaka, который проходил здесь до эпохи Edo</li>
         <li>Район почти не пострадал от бомбёжек 1945 года — сохранил довоенную застройку и узкие переулки, редкость для центра Osaka</li>
         <li>tokito работает на обед только с улицы, без брони, 11:00–15:00</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Karahori (空堀) means "empty moat" — named for the vanished outer moat of Osaka Castle, which ran through here before the Edo period</li>
+        <li>The district was barely touched by the 1945 bombing raids, keeping its prewar buildings and narrow lanes — a rarity for central Osaka</li>
+        <li>tokito only serves lunch to walk-ins, no reservation, 11:00–15:00</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Karahori shotengai</span></div></figure>
       <div>
-        <p>Пока весь турпоток Osaka стягивается в Namba и Dotonbori, Karahori и соседний Tanimachi остаются кварталом для местных: старый shotengai (крытая торговая улица) с керамическими лавками, кофейнями в переоборудованных machiya и ни одного автобуса с туристами. Название района — прямое напоминание о военном прошлом места: здесь проходил внешний оборонительный ров Osaka Castle, той самой крепости, которую сегодня увидишь во второй половине дня.</p>
-        <p>tokito — небольшое заведение в одном из переулков квартала, идзакая по вечерам и простая обеденная кухня днём. Ничего постановочного: обед подают только тем, кто пришёл и сел, брони нет физически.</p>
+        <p data-lang="ru">Пока весь турпоток Osaka стягивается в Namba и Dotonbori, Karahori и соседний Tanimachi остаются кварталом для местных: старый shotengai (крытая торговая улица) с керамическими лавками, кофейнями в переоборудованных machiya и ни одного автобуса с туристами. Название района — прямое напоминание о военном прошлом места: здесь проходил внешний оборонительный ров Osaka Castle, той самой крепости, которую сегодня увидишь во второй половине дня.</p>
+        <p data-lang="ru">tokito — небольшое заведение в одном из переулков квартала, идзакая по вечерам и простая обеденная кухня днём. Ничего постановочного: обед подают только тем, кто пришёл и сел, брони нет физически.</p>
+        <p data-lang="en" style="display:none;">While all of Osaka's tourist flow funnels into Namba and Dotonbori, Karahori and neighboring Tanimachi stay a local district: an old shotengai (covered shopping street) with pottery shops, cafés in converted machiya, and not a single tour bus. The district's name is a direct reminder of its military past — Osaka Castle's outer defensive moat ran through here, the same castle you'll see this afternoon. tokito is a small place tucked in one of the district's alleys, an izakaya by evening and simple lunch fare by day. Nothing staged about it: lunch goes to whoever walks in and sits down, there's no reservation system at all.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p><strong>tokito</strong>: обед 11:00–15:00, только walk-in. Ужин 18:00–24:00 (сегодня не понадобится).</p>
-        <p>От Osaka-Umeda до Karahori — метро (Tanimachi line до Tanimachi 6-chome или Matsuyamachi), около 20 минут.</p>
+        <p data-lang="ru"><strong>tokito</strong>: обед 11:00–15:00, только walk-in. Ужин 18:00–24:00 (сегодня не понадобится).</p>
+        <p data-lang="ru">От Osaka-Umeda до Karahori — метро (Tanimachi line до Tanimachi 6-chome или Matsuyamachi), около 20 минут.</p>
+        <p data-lang="en" style="display:none;"><strong>tokito</strong>: lunch 11:00–15:00, walk-in only. Dinner 18:00–24:00 (not needed today).</p>
+        <p data-lang="en" style="display:none;">From Osaka-Umeda to Karahori by metro (Tanimachi line to Tanimachi 6-chome or Matsuyamachi), about 20 minutes.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Крепость</span>
+    <span class="place-kicker" data-lang="ru">Крепость</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Castle</span>
     <h2 class="section-title -major" id="loc-osakacastle">Osaka Castle</h2>
-    <span class="place-caption">Крепость, которую строили заново дважды</span>
+    <span class="place-caption" data-lang="ru">Крепость, которую строили заново дважды</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The fortress rebuilt twice from scratch</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Заложен в 1583 году Toyotomi Hideyoshi на месте храма-крепости Ishiyama Hongan-ji, который до этого 11 лет осаждал и в итоге сжёг Oda Nobunaga</li>
         <li>В 1615 году замок взят штурмом войсками Tokugawa — клан Toyotomi уничтожен полностью, включая сына Hideyoshi</li>
         <li>Нынешняя башня — железобетонная реконструкция 1931 года, с реставрацией после войны; не оригинал ни по одной доске</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founded in 1583 by Toyotomi Hideyoshi on the site of the fortress-temple Ishiyama Hongan-ji, which Oda Nobunaga had besieged for 11 years before finally burning it down</li>
+        <li>In 1615 the castle was taken by storm by Tokugawa forces — the Toyotomi clan was wiped out entirely, including Hideyoshi's son</li>
+        <li>The current tower is a 1931 reinforced-concrete reconstruction, restored again after the war — not a single original board remains</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Osaka Castle</span></div></figure>
       <div>
-        <p>Сегодня — только снаружи, без очереди в музей: и по времени разумнее, и по сюжету честнее. Внутри давно не крепость, а бетонный музей с лифтом. Настоящая история — в том, что случилось на этом месте, а не в интерьере.</p>
-        <p>Hideyoshi построил замок как демонстрацию новой власти — крестьянин, поднявшийся до фактического правителя Japan, возводит крепость на месте, которое до него защищали 11 лет. Через три десятилетия здесь же будет уничтожен род его наследников — теми самыми людьми, что годом раньше в Kyoto профинансировали храм для его вдовы.</p>
+        <p data-lang="ru">Сегодня — только снаружи, без очереди в музей: и по времени разумнее, и по сюжету честнее. Внутри давно не крепость, а бетонный музей с лифтом. Настоящая история — в том, что случилось на этом месте, а не в интерьере.</p>
+        <p data-lang="ru">Hideyoshi построил замок как демонстрацию новой власти — крестьянин, поднявшийся до фактического правителя Japan, возводит крепость на месте, которое до него защищали 11 лет. Через три десятилетия здесь же будет уничтожен род его наследников — теми самыми людьми, что годом раньше в Kyoto профинансировали храм для его вдовы.</p>
+        <p data-lang="en" style="display:none;">Exterior only today, no museum line — smarter timing, and more honest to the story anyway. Inside it's been a concrete museum with an elevator for a long time, not a fortress. The real history is in what happened on this ground, not in the interior. Hideyoshi built the castle as a show of new power — a peasant risen to become Japan's de facto ruler, raising a fortress on ground that had been defended for 11 years before him. Three decades later, his heirs' entire line would be wiped out here — by the very people who, a year earlier in Kyoto, had funded a temple for his widow.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Это прямое продолжение сюжета Higashiyama Day: Kōdai-ji в Kyoto построен на деньги <strong>Tokugawa Ieyasu</strong> — того самого человека, чьи войска в 1615 году штурмовали именно эту крепость и положили конец роду Hideyoshi.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Это прямое продолжение сюжета Higashiyama Day: Kōdai-ji в Kyoto построен на деньги <strong>Tokugawa Ieyasu</strong> — того самого человека, чьи войска в 1615 году штурмовали именно эту крепость и положили конец роду Hideyoshi.</p>
+      <p data-lang="en" style="display:none;">This is a direct continuation of the Higashiyama Day story: Kōdai-ji in Kyoto was built with money from <strong>Tokugawa Ieyasu</strong> — the very man whose forces stormed this exact fortress in 1615 and ended Hideyoshi's line.</p>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Парк вокруг замка открыт круглосуточно, вход свободный. Внутрь Tenshukaku (главной башни) сегодня не идём.</p>
+        <p data-lang="ru">Парк вокруг замка открыт круглосуточно, вход свободный. Внутрь Tenshukaku (главной башни) сегодня не идём.</p>
+        <p data-lang="en" style="display:none;">The park around the castle is open 24 hours, free entry. Not going inside the Tenshukaku (main tower) today.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi и объединение Japan</a> · <a href="glossary.html#tokugawa-edo">Осада Osaka 1615 года и падение клана Toyotomi</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi и объединение Japan</a> · <a href="glossary.html#tokugawa-edo">Осада Osaka 1615 года и падение клана Toyotomi</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi and the unification of Japan</a> · <a href="glossary.html#tokugawa-edo">The 1615 siege of Osaka and the fall of the Toyotomi clan</a></p>
 
     <hr>
 
-    <span class="place-kicker">Рынок</span>
+    <span class="place-kicker" data-lang="ru">Рынок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Market</span>
     <h2 class="section-title" id="loc-kuromon">Kuromon Ichiba Market</h2>
-    <span class="place-caption">«Кухня Osaka», которая давно готовит для туристов</span>
+    <span class="place-caption" data-lang="ru">«Кухня Osaka», которая давно готовит для туристов</span>
+    <span class="place-caption" data-lang="en" style="display:none;">"Osaka's kitchen," now cooking mostly for tourists</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Kuromon Ichiba</span></div></figure>
       <div>
-        <p>Рынок вырос стихийно около 1822 года как неформальная рыбная торговля у чёрных ворот (kuromon) соседнего храма — отсюда и имя. Официальным рынком стал только в 1912-м. Долгое время Kuromon снабжал рыбой и продуктами рестораны и домашние кухни района — «кухня Osaka» в буквальном смысле.</p>
-        <p>Сегодня баланс сместился: большинство ларьков вдоль 580-метровой крытой галереи готовят порционные шпажки — крабовые ноги, морской ёж, wagyu на гриле — на вынос, специально под туристический поток. Это не подделка, просто другой рынок: смотреть стоит и на прилавки для местных вглубь галереи, не только на витрины у входа.</p>
+        <p data-lang="ru">Рынок вырос стихийно около 1822 года как неформальная рыбная торговля у чёрных ворот (kuromon) соседнего храма — отсюда и имя. Официальным рынком стал только в 1912-м. Долгое время Kuromon снабжал рыбой и продуктами рестораны и домашние кухни района — «кухня Osaka» в буквальном смысле.</p>
+        <p data-lang="ru">Сегодня баланс сместился: большинство ларьков вдоль 580-метровой крытой галереи готовят порционные шпажки — крабовые ноги, морской ёж, wagyu на гриле — на вынос, специально под туристический поток. Это не подделка, просто другой рынок: смотреть стоит и на прилавки для местных вглубь галереи, не только на витрины у входа.</p>
+        <p data-lang="en" style="display:none;">The market grew up spontaneously around 1822 as informal fish trading by the black gate (kuromon) of a neighboring temple, which gave it its name. It only became an official market in 1912. For a long time Kuromon supplied fish and groceries to the district's restaurants and home kitchens — "Osaka's kitchen" in the literal sense. Today the balance has shifted: most stalls along the 580-meter covered gallery sell single-portion skewers — crab legs, sea urchin, grilled wagyu — to go, built for the tourist flow. It's not fake, just a different market now: worth looking at the stalls further into the gallery, serving locals, not just the storefronts near the entrance.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство лавок работает <strong>с раннего утра до 17:00–18:00</strong>, отдельные — дольше. Наличные пригодятся, не все прилавки принимают карты.</p>
+        <p data-lang="ru">Большинство лавок работает <strong>с раннего утра до 17:00–18:00</strong>, отдельные — дольше. Наличные пригодятся, не все прилавки принимают карты.</p>
+        <p data-lang="en" style="display:none;">Most stalls run <strong>from early morning until 17:00–18:00</strong>, some later. Cash comes in handy, not every stall takes cards.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title" id="loc-yasaka">Namba Yasaka Jinja</h2>
-    <span class="place-caption">Храм с головой льва размером со здание</span>
+    <span class="place-caption" data-lang="ru">Храм с головой льва размером со здание</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A shrine with a lion's head the size of a building</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Namba Yasaka Jinja</span></div></figure>
       <div>
-        <p>Сам синтоистский храм существует с легендарных времён, но известен сегодня не древностью, а одной постройкой 1975 года — гигантской сценой в форме львиной морды (shishi), почти 12 метров высотой. Пасть льва традиционно связывают со способностью поглощать неудачу и выдыхать удачу обратно; сама конструкция служит сценой для представлений в дни фестивалей.</p>
-        <p>Контраст работает на contrastе: тысячелетняя синтоистская традиция и showa-эпохи китч соседствуют без всякого противоречия — обычная японская логика непрерывности места поверх смены форм.</p>
+        <p data-lang="ru">Сам синтоистский храм существует с легендарных времён, но известен сегодня не древностью, а одной постройкой 1975 года — гигантской сценой в форме львиной морды (shishi), почти 12 метров высотой. Пасть льва традиционно связывают со способностью поглощать неудачу и выдыхать удачу обратно; сама конструкция служит сценой для представлений в дни фестивалей.</p>
+        <p data-lang="ru">Контраст работает на contrastе: тысячелетняя синтоистская традиция и showa-эпохи китч соседствуют без всякого противоречия — обычная японская логика непрерывности места поверх смены форм.</p>
+        <p data-lang="en" style="display:none;">The Shinto shrine itself dates to legendary times, but it's known today not for its age but for a single 1975 structure — a giant stage shaped like a lion's head (shishi), nearly 12 meters tall. The lion's mouth is traditionally said to swallow bad luck and breathe good luck back out; the structure itself doubles as a stage for festival performances. The contrast runs on contrast: a thousand-year-old Shinto tradition and Shōwa-era kitsch sit side by side without any friction — the usual Japanese logic of continuity of place over changes in form.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта постоянно, вход свободный. Пять минут пешком от станции Namba.</p>
+        <p data-lang="ru">Территория открыта постоянно, вход свободный. Пять минут пешком от станции Namba.</p>
+        <p data-lang="en" style="display:none;">Grounds always open, free entry. Five minutes on foot from Namba station.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja) — устройство синтоистского святилища</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja) — устройство синтоистского святилища</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#shrine">Shrine (jinja) — how a Shinto shrine is structured</a></p>
 
     <hr>
 
-    <span class="place-kicker">Канал</span>
+    <span class="place-kicker" data-lang="ru">Канал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Canal</span>
     <h2 class="section-title -minor" id="loc-dotonbori">Dotonbori</h2>
-    <span class="place-caption">Канал, который стал витриной города</span>
+    <span class="place-caption" data-lang="ru">Канал, который стал витриной города</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The canal that became the city's shopwindow</span>
     <div class="photo-break"><span class="mark">道</span><span class="cap">Dotonbori · вечерний неон</span></div>
-    <p>Канал прорыт в 1612 году купцом Yasui Doton — отсюда имя. С периода Edo вдоль берега стояли театры kabuki, и квартал изначально строился как развлекательный, а не жилой. Знаменитая вывеска «бегущего человека» Glico висит здесь с 1935 года — нынешняя версия уже далеко не первая по счёту, но силуэт сохраняют неизменным.</p>
-    <p>Сегодня проходим здесь просто пешком, ради вечерних огней и самого канала — ужинать будем в другом месте.</p>
+    <p data-lang="ru">Канал прорыт в 1612 году купцом Yasui Doton — отсюда имя. С периода Edo вдоль берега стояли театры kabuki, и квартал изначально строился как развлекательный, а не жилой. Знаменитая вывеска «бегущего человека» Glico висит здесь с 1935 года — нынешняя версия уже далеко не первая по счёту, но силуэт сохраняют неизменным.</p>
+    <p data-lang="ru">Сегодня проходим здесь просто пешком, ради вечерних огней и самого канала — ужинать будем в другом месте.</p>
+    <p data-lang="en" style="display:none;">The canal was dug in 1612 by merchant Yasui Doton, hence the name. Kabuki theaters lined the bank from the Edo period on, and the district was built as an entertainment quarter from the start, not a residential one. The famous Glico "running man" sign has hung here since 1935 — the current version is far from the first, but the silhouette has stayed the same. Today it's just a walk-through, for the evening lights and the canal itself — dinner is elsewhere.</p>
 
-    <p><span class="inline-label">Совет</span>Лучшее время — уже после захода солнца, когда включается неон; днём канал выглядит гораздо обычнее.</p>
+    <p data-lang="ru"><span class="inline-label">Совет</span>Лучшее время — уже после захода солнца, когда включается неон; днём канал выглядит гораздо обычнее.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span>Best after sunset, once the neon comes on — the canal looks a lot more ordinary during the day.</p>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title -minor" id="loc-amemura">Amerikamura</h2>
-    <span class="place-caption">Квартал американской мечты образца 1970-х</span>
+    <span class="place-caption" data-lang="ru">Квартал американской мечты образца 1970-х</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A slice of the 1970s American dream</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Название и дух квартала родились в 1970-х, когда молодые торговцы начали привозить сюда американский секонд-хенд и армейский surplus</li>
         <li>日宝三ッ寺会館 — рядовое офисное здание Nishi-Shinsaibashi, на деле — улей из нескольких независимых винтажных лавок под одной крышей</li>
         <li>BB Amemura — одна из старожилов района, барахолка/thrift в самом сердце Amerikamura, у Triangle Park</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The district's name and spirit date to the 1970s, when young traders started bringing in American secondhand clothing and army surplus</li>
+        <li>日宝三ッ寺会館 looks like an ordinary Nishi-Shinsaibashi office building, but it's actually a hive of several independent vintage shops under one roof</li>
+        <li>BB Amemura is one of the district's old-timers, a thrift shop at the heart of Amerikamura, by Triangle Park</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Amerikamura</span></div></figure>
       <div>
-        <p>Послевоенное увлечение Japan американской культурой нашло здесь материальную форму: в 1970-х пара торговцев начала возить сюда джинсы и куртки из Штатов, и вокруг этого стихийно вырос целый квартал. Сейчас Amerikamura — самая плотная концентрация винтажных и секонд-хенд лавок в Kansai, но без глянца Shinsaibashi по соседству: тут по-прежнему улица для тех, кто копается в вешалках, а не разглядывает витрины.</p>
-        <p>日宝三ッ寺会館 — типичный для района приём: снаружи ничем не примечательное офисное здание, внутри — несколько этажей маленьких независимых магазинов, каждый со своей специализацией. Заходить стоит с расчётом на охоту, а не на быстрый обзор.</p>
+        <p data-lang="ru">Послевоенное увлечение Japan американской культурой нашло здесь материальную форму: в 1970-х пара торговцев начала возить сюда джинсы и куртки из Штатов, и вокруг этого стихийно вырос целый квартал. Сейчас Amerikamura — самая плотная концентрация винтажных и секонд-хенд лавок в Kansai, но без глянца Shinsaibashi по соседству: тут по-прежнему улица для тех, кто копается в вешалках, а не разглядывает витрины.</p>
+        <p data-lang="ru">日宝三ッ寺会館 — типичный для района приём: снаружи ничем не примечательное офисное здание, внутри — несколько этажей маленьких независимых магазинов, каждый со своей специализацией. Заходить стоит с расчётом на охоту, а не на быстрый обзор.</p>
+        <p data-lang="en" style="display:none;">Postwar Japan's fascination with American culture took physical shape here: a couple of traders started bringing jeans and jackets from the States in the 1970s, and a whole district grew up around it spontaneously. Amerikamura is now Kansai's densest concentration of vintage and secondhand shops, but without the polish of neighboring Shinsaibashi — it's still a street for people digging through racks, not window-shopping. 日宝三ッ寺会館 is a typical move for the district: an unremarkable office building outside, several floors of small independent shops inside, each with its own specialty. Best gone into expecting to hunt, not to browse quickly.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство лавок открывается к <strong>11:00–12:00</strong> и работает до вечера. Наличные надёжнее — не все мелкие магазины принимают карты.</p>
+        <p data-lang="ru">Большинство лавок открывается к <strong>11:00–12:00</strong> и работает до вечера. Наличные надёжнее — не все мелкие магазины принимают карты.</p>
+        <p data-lang="en" style="display:none;">Most shops open by <strong>11:00–12:00</strong> and run into the evening. Cash is safer — not every small shop takes cards.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Ужин</span>
+    <span class="place-kicker" data-lang="ru">Ужин</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Dinner</span>
     <h2 class="section-title -major" id="loc-kitanhibiki">Kitan Hibiki</h2>
-    <span class="place-caption">Ужин с wagyu, которое не боится температуры</span>
+    <span class="place-caption" data-lang="ru">Ужин с wagyu, которое не боится температуры</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Wagyu dinner that isn't afraid of temperature</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Открыт в июне 2024 года Kitan Group — той же командой, что с 2019-го держит сеть якинику Kitan</li>
         <li>Фирменная техника — сухая выдержка wagyu без холодильника, мясо готовят прямо перед гостями на углях</li>
         <li>На втором этаже — стойка вокруг традиционного очага irori и живой джаз по вечерам</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Opened June 2024 by Kitan Group, the same team behind the Kitan yakiniku chain since 2019</li>
+        <li>Signature technique is dry-aging wagyu without refrigeration, cooked over charcoal right in front of guests</li>
+        <li>The second floor has a counter around a traditional irori hearth, with live jazz in the evenings</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Kitan Hibiki</span></div></figure>
       <div>
-        <p>Это не якинику в привычном смысле — здесь не жаришь сам, шеф готовит на углях прямо у стойки, объясняя, откуда конкретный кусок и сколько он выдерживался. Формат рассчитан на то, чтобы ужин был событием, а не просто едой — подходящая точка для вечера, где хочется закрыть день чем-то запоминающимся, а не просто перекусить.</p>
+        <p data-lang="ru">Это не якинику в привычном смысле — здесь не жаришь сам, шеф готовит на углях прямо у стойки, объясняя, откуда конкретный кусок и сколько он выдерживался. Формат рассчитан на то, чтобы ужин был событием, а не просто едой — подходящая точка для вечера, где хочется закрыть день чем-то запоминающимся, а не просто перекусить.</p>
+        <p data-lang="en" style="display:none;">Not yakiniku in the usual sense — you don't grill it yourself, the chef cooks over charcoal right at the counter, explaining where each cut is from and how long it's been aged. The format is built to make dinner an event, not just a meal — a fitting stop for an evening you want to close out with something memorable, not just a bite to eat.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Бронь желательна — заведение популярное, и хотя жёсткого окна открытия продаж нет, разумно закрыть стол за 2–3 недели через Tabelog или по телефону.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Бронь желательна — заведение популярное, и хотя жёсткого окна открытия продаж нет, разумно закрыть стол за 2–3 недели через Tabelog или по телефону.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>Reservations recommended — this place is popular, and while there's no strict booking window, closing the table 2–3 weeks out via Tabelog or by phone is a reasonable move.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Ужин <strong>17:00–23:00</strong>. Пять минут пешком от станции Namba. Бронь — через Tabelog или по телефону; детали и статус брони — в <a href="trip-logistics.html">Logistics</a>.</p>
+        <p data-lang="ru">Ужин <strong>17:00–23:00</strong>. Пять минут пешком от станции Namba. Бронь — через Tabelog или по телефону; детали и статус брони — в <a href="trip-logistics.html">Logistics</a>.</p>
+        <p data-lang="en" style="display:none;">Dinner <strong>17:00–23:00</strong>. Five minutes on foot from Namba station. Book via Tabelog or by phone; reservation details and status in <a href="trip-logistics.html">Logistics</a>.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Бар</span>
+    <span class="place-kicker" data-lang="ru">Бар</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Bar</span>
     <h2 class="section-title" id="loc-nayuta">Bar Nayuta</h2>
-    <span class="place-caption">Коктейль без меню за незаметной дверью</span>
+    <span class="place-caption" data-lang="ru">Коктейль без меню за незаметной дверью</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A menu-less cocktail behind an unmarked door</span>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Bar Nayuta</span></div></figure>
       <div>
-        <p>Вход не помечен ничем, кроме геометрического символа на вывеске здания Mario — дальше лифт на пятый этаж и очень низкая дверь. Меню в баре нет: рассказываешь бартендеру, что любишь, и получаешь коктейль, придуманный специально под этот разговор, часто на основе собственных настоек и биттеров бара. Nayuta входит в список Asia's 50 Best Bars — заслуженно, но без пафоса витрины: место маленькое и совсем не старается выглядеть эксклюзивным.</p>
+        <p data-lang="ru">Вход не помечен ничем, кроме геометрического символа на вывеске здания Mario — дальше лифт на пятый этаж и очень низкая дверь. Меню в баре нет: рассказываешь бартендеру, что любишь, и получаешь коктейль, придуманный специально под этот разговор, часто на основе собственных настоек и биттеров бара. Nayuta входит в список Asia's 50 Best Bars — заслуженно, но без пафоса витрины: место маленькое и совсем не старается выглядеть эксклюзивным.</p>
+        <p data-lang="en" style="display:none;">The entrance has nothing marking it beyond a geometric symbol on the Mario building's sign — then an elevator to the fifth floor and a very low door. No menu: you tell the bartender what you like, and get a cocktail invented on the spot for that conversation, often built on the bar's own infusions and bitters. Nayuta made Asia's 50 Best Bars, deservedly, but without any showroom pretense — it's small and makes no effort to look exclusive.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>17:00–03:00</strong> ежедневно. Брони нет и не бывает — просто заходишь; место маленькое, к позднему вечеру может не быть мест.</p>
+        <p data-lang="ru">Открыт <strong>17:00–03:00</strong> ежедневно. Брони нет и не бывает — просто заходишь; место маленькое, к позднему вечеру может не быть мест.</p>
+        <p data-lang="en" style="display:none;">Open <strong>17:00–03:00</strong> daily. No reservations, ever — you just walk in; it's small, and by late evening there may be no seats left.</p>
       </div>
     </details>
 
@@ -1131,16 +1253,20 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t4">
     <h2 class="section-title">Food & Coffee</h2>
-    <p><strong>tokito</strong> в Karahori — обед дня, walk-in без брони, подробности выше. <strong>Kitan Hibiki</strong> — основной ужин, wagyu на углях и джаз на втором этаже. <strong>Bar Nayuta</strong> — короткий коктейль на закрытие вечера перед возвращением в Kyoto.</p>
+    <p data-lang="ru"><strong>tokito</strong> в Karahori — обед дня, walk-in без брони, подробности выше. <strong>Kitan Hibiki</strong> — основной ужин, wagyu на углях и джаз на втором этаже. <strong>Bar Nayuta</strong> — короткий коктейль на закрытие вечера перед возвращением в Kyoto.</p>
+    <p data-lang="en" style="display:none;"><strong>tokito</strong> in Karahori is today's lunch, walk-in, no reservation, details above. <strong>Kitan Hibiki</strong> is the main dinner, charcoal-cooked wagyu and jazz on the second floor. <strong>Bar Nayuta</strong> is a short cocktail to close out the evening before heading back to Kyoto.</p>
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Сегодняшний Osaka Castle — прямое продолжение истории, начатой в Higashiyama Day: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu, профинансировавшего храм для Nene, вдовы Toyotomi Hideyoshi. Тот же Ieyasu в 1615 году штурмом взял именно эту крепость и уничтожил род Hideyoshi целиком, включая его сына Hideyori. Один и тот же человек оплатил храм для вдовы поверженного соперника — и стёр с лица земли то, что этот соперник построил как символ собственной власти. Стоя сегодня перед стенами замка, ты завершаешь сюжет, начатый несколько дней назад у бамбуковой рощи Kōdai-ji.</p>
-  <p>А поговорка про «Kyoto着倒れ、Osaka食い倒れ» из вступительной цитаты — не просто красивая фраза. Она объясняет саму структуру сегодняшнего дня: утро в тихом, почти кёотском по духу квартале Karahori, и вечер в Namba, где город прямо оправдывает свою репутацию — ужином, ради которого стоило приехать.</p>
+  <p data-lang="ru">Сегодняшний Osaka Castle — прямое продолжение истории, начатой в Higashiyama Day: Kōdai-ji в Kyoto построен на деньги Tokugawa Ieyasu, профинансировавшего храм для Nene, вдовы Toyotomi Hideyoshi. Тот же Ieyasu в 1615 году штурмом взял именно эту крепость и уничтожил род Hideyoshi целиком, включая его сына Hideyori. Один и тот же человек оплатил храм для вдовы поверженного соперника — и стёр с лица земли то, что этот соперник построил как символ собственной власти. Стоя сегодня перед стенами замка, ты завершаешь сюжет, начатый несколько дней назад у бамбуковой рощи Kōdai-ji.</p>
+  <p data-lang="ru">А поговорка про «Kyoto着倒れ、Osaka食い倒れ» из вступительной цитаты — не просто красивая фраза. Она объясняет саму структуру сегодняшнего дня: утро в тихом, почти кёотском по духу квартале Karahori, и вечер в Namba, где город прямо оправдывает свою репутацию — ужином, ради которого стоило приехать.</p>
+  <p data-lang="en" style="display:none;">Today's Osaka Castle is a direct continuation of the story from Higashiyama Day: Kōdai-ji in Kyoto was built with money from Tokugawa Ieyasu, who funded a temple for Nene, Toyotomi Hideyoshi's widow. That same Ieyasu stormed this exact fortress in 1615 and wiped out Hideyoshi's line entirely, including his son Hideyori. One man paid for a temple honoring his fallen rival's widow — and erased what that rival had built as a symbol of his own power. Standing at the castle walls today closes a thread that started a few days ago by Kōdai-ji's bamboo grove.</p>
+  <p data-lang="en" style="display:none;">And the saying about "Kyoto ruins itself on clothes, Osaka on food" from the opening quote isn't just a nice line. It explains the structure of the day itself: a quiet, almost Kyoto-like morning in Karahori, and an evening in Namba where the city lives up to its reputation — with a dinner worth the trip.</p>
 
-  <p class="footnote">Osaka Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Osaka Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Osaka Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1180,6 +1306,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

@@ -850,6 +850,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -984,7 +1013,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -998,30 +1033,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">一期一会</span>
-    <blockquote>Одна жизнь, одна встреча</blockquote>
-    <span class="quote-author">Ии Наосукэ</span>
-    <span class="quote-source">«Тяною итиэсю», 1858</span>
+    <span class="quote-jp" data-lang="ru">一期一会</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">一期一会</span>
+    <blockquote data-lang="ru">Одна жизнь, одна встреча</blockquote>
+    <blockquote data-lang="en" style="display:none;">One time, one meeting</blockquote>
+    <span class="quote-author" data-lang="ru">Ии Наосукэ</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Ii Naosuke</span>
+    <span class="quote-source" data-lang="ru">«Тяною итиэсю», 1858</span>
+    <span class="quote-source" data-lang="en" style="display:none;">"Chanoyu Ichie-shū," 1858</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>IC-карта</strong> — нужна весь день: метро, Odakyu Line, трамвай Setagaya</li>
       <li><strong>Little Soul Cafe</strong> — только наличные, открыто с 19:00 (днём закрыто)</li>
       <li><strong>Кошачий трамвай</strong> — без расписания, не закладывай точное время</li>
       <li><strong>Магазины Shimokitazawa</strong> — открываются не раньше 11:00; Desk Labo закрыт по понедельникам</li>
       <li><strong>Gōtoku-ji</strong> — офис с котиками и goshuin только до 15:00, лучше приезжать утром</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>IC card</strong> — needed all day: metro, Odakyu Line, the Setagaya tram</li>
+      <li><strong>Little Soul Cafe</strong> — cash only, opens 19:00 (closed during the day)</li>
+      <li><strong>The cat tram</strong> — no fixed schedule, don't plan around an exact time</li>
+      <li><strong>Shimokitazawa shops</strong> — don't open before 11:00; Desk Labo closed Mondays</li>
+      <li><strong>Gōtoku-ji</strong> — the cat-figurine office and goshuin close at 15:00, come in the morning</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-gotokuji">Gōtoku-ji Temple</button>
     <button class="nav-place-btn" data-target="loc-nerdydogs">Nerdy Dogs</button>
     <button class="nav-place-btn" data-target="loc-desklabo">Desk Labo</button>
@@ -1038,19 +1087,30 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">маршрут по часам</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">маршрут по часам</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Gōtoku-ji — с утра. Магазины Reload и Nerdy Dogs открываются позже, ближе к полудню, так что после храма спешить некуда. А вот Little Soul Cafe работает только вечером, и если туда хочется, разумнее после магазинов вернуться в отель и выйти заново, а не тянуть один долгий заход.</p>
-      <p>Бонус: со станции Yamashita иногда можно поймать «кошачий» трамвай — ходит без расписания, 1–2 раза в час, тариф около 160–170 иен, оплата IC-картой при входе через переднюю дверь.</p>
+      <p data-lang="ru">Gōtoku-ji — с утра. Магазины Reload и Nerdy Dogs открываются позже, ближе к полудню, так что после храма спешить некуда. А вот Little Soul Cafe работает только вечером, и если туда хочется, разумнее после магазинов вернуться в отель и выйти заново, а не тянуть один долгий заход.</p>
+      <p data-lang="ru">Бонус: со станции Yamashita иногда можно поймать «кошачий» трамвай — ходит без расписания, 1–2 раза в час, тариф около 160–170 иен, оплата IC-картой при входе через переднюю дверь.</p>
+      <p data-lang="en" style="display:none;">Gōtoku-ji in the morning. Reload and Nerdy Dogs open later, closer to noon, so there's no rush after the temple. Little Soul Cafe only runs in the evening — if it's on the list, better to go back to the hotel after shopping and head out fresh, not stretch one long day into the night.</p>
+      <p data-lang="en" style="display:none;">Bonus: from Yamashita station you can sometimes catch the "cat" tram — no fixed schedule, runs 1–2 times an hour, fare around 160–170 yen, tap your IC card at the front door.</p>
       <div class="inset-card day-flags">
-        <div class="inset-card-label">Пешком между точками</div>
-        <ul>
+        <div class="inset-card-label" data-lang="ru">Пешком между точками</div>
+        <div class="inset-card-label" data-lang="en" style="display:none;">On foot between stops</div>
+        <ul data-lang="ru">
           <li><strong>Gōtoku-ji → Nerdy Dogs</strong>12 минут пешком</li>
           <li><strong>Nerdy Dogs → Reload (Desk Labo / APFR)</strong>10 минут на Odakyu Line — оба магазина в одном здании, отдельно искать не нужно</li>
           <li><strong>Reload → Ōzeki</strong>пара минут пешком</li>
           <li><strong>Обратно до отеля</strong>около 30 минут</li>
+        </ul>
+        <ul data-lang="en" style="display:none;">
+          <li><strong>Gōtoku-ji → Nerdy Dogs</strong>12 minutes on foot</li>
+          <li><strong>Nerdy Dogs → Reload (Desk Labo / APFR)</strong>10 minutes on the Odakyu Line — both shops share one building, no separate search needed</li>
+          <li><strong>Reload → Ōzeki</strong>a couple minutes on foot</li>
+          <li><strong>Back to the hotel</strong>about 30 minutes</li>
         </ul>
       </div>
     </div>
@@ -1060,182 +1120,247 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title -major" id="loc-gotokuji">Gōtoku-ji Temple</h2>
-    <span class="place-caption">Храм, который начался с удара молнии</span>
+    <span class="place-caption" data-lang="ru">Храм, который начался с удара молнии</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A temple that started with a lightning strike</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Не просто «храм с котиками»: за фасадом — драма эпохи Эдо, идея goryō (умиротворение неупокоенных духов) и могила человека, открывшего Японию миру</li>
         <li>Потомок Наотаки, Ii Naosuke, подписал в 1858 году договор Харриса, открывший японские порты для торговли с США — в 1860 году его убили у ворот Сакурада замка Эдо, что многие историки считают началом конца сёгуната Tokugawa</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Not just "the cat temple": behind the facade is an Edo-era drama, the idea of goryō (pacifying restless spirits), and the grave of the man who opened Japan to the world</li>
+        <li>Naotaka's descendant, Ii Naosuke, signed the 1858 Harris Treaty opening Japanese ports to US trade — in 1860 he was assassinated at Edo Castle's Sakurada Gate, an event many historians mark as the beginning of the end for the Tokugawa shogunate</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Gōtoku-ji</span></div></figure>
       <div>
-        <p>Храм принадлежит школе <strong>Sōtō Zen</strong>. По легенде, около 1620 года местный кот поманил лапой даймё <strong>Ii Naotaka</strong>, приглашая зайти на территорию храма. Наотака последовал за ним — и в тот же миг молния ударила в дерево, под которым он только что стоял. Поэтому поднятая лапа manekineko означает не приветствие, а <strong>приглашение подойти ближе</strong>. В благодарность Наотака сделал храм родовым храмом клана Ii, а после его смерти в 1659 году храм переименовали в его честь — так началась история манэки-нэко.</p>
+        <p data-lang="ru">Храм принадлежит школе <strong>Sōtō Zen</strong>. По легенде, около 1620 года местный кот поманил лапой даймё <strong>Ii Naotaka</strong>, приглашая зайти на территорию храма. Наотака последовал за ним — и в тот же миг молния ударила в дерево, под которым он только что стоял. Поэтому поднятая лапа manekineko означает не приветствие, а <strong>приглашение подойти ближе</strong>. В благодарность Наотака сделал храм родовым храмом клана Ii, а после его смерти в 1659 году храм переименовали в его честь — так началась история манэки-нэко.</p>
+        <p data-lang="en" style="display:none;">The temple belongs to the <strong>Sōtō Zen</strong> school. Legend has it that around 1620, a temple cat raised its paw to beckon daimyō <strong>Ii Naotaka</strong> inside. He followed — and lightning struck the tree he'd just been standing under. That's why the manekineko's raised paw isn't a wave hello, it's <strong>an invitation to come closer</strong>. Grateful, Naotaka made the temple the Ii clan's family temple; after his death in 1659 it was renamed in his honor — and the manekineko legend was born.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>На обратной стороне многих кошек написаны имена людей, которые принесли их после исполнения желания.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Загляни на кладбище клана Ii — около 300 захоронений, включая и Наотаку, и Наосукэ.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>В отличие от сувенирных кошек по всей Японии, кошки Gōtoku-ji держат поднятой исключительно <strong>правую лапу</strong> и никогда не держат монету koban.</div>
     </div>
-
-    <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Тот самый потомок Наотаки, <strong>Ii Naosuke</strong>, чья могила лежит здесь же, в 1858 году подписал договор Харриса — открыл японские порты для торговли с США. В 1860-м его убили у ворот Сакурада замка Эдо: многие историки считают это началом конца сёгуната Tokugawa. Храм, который весь мир знает по мультяшным котикам, хранит могилу человека, чья смерть запустила отсчёт до конца эпохи.</p>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Many of the cats have names written on the back — left by people whose wish came true.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Visit the Ii clan cemetery — about 300 graves, including both Naotaka and Naosuke.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Unlike souvenir cats elsewhere in Japan, Gōtoku-ji's cats always raise the <strong>right paw only</strong> and never hold a koban coin.</div>
     </div>
 
-    <div class="blockquote">Философия храма: кошка лишь даёт тебе шанс и призывает удачу, но то, как ты им воспользуешься, зависит исключительно от твоих собственных усилий.</div>
+    <div class="panel-dark">
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Тот самый потомок Наотаки, <strong>Ii Naosuke</strong>, чья могила лежит здесь же, в 1858 году подписал договор Харриса — открыл японские порты для торговли с США. В 1860-м его убили у ворот Сакурада замка Эдо: многие историки считают это началом конца сёгуната Tokugawa. Храм, который весь мир знает по мультяшным котикам, хранит могилу человека, чья смерть запустила отсчёт до конца эпохи.</p>
+      <p data-lang="en" style="display:none;">That same descendant of Naotaka, <strong>Ii Naosuke</strong>, buried right here, signed the Harris Treaty in 1858, opening Japanese ports to US trade. In 1860 he was assassinated at Edo Castle's Sakurada Gate — an event many historians call the beginning of the end for the Tokugawa shogunate. A temple the world knows for cartoon cats holds the grave of a man whose death started the countdown to the end of an era.</p>
+    </div>
+
+    <div class="blockquote" data-lang="ru">Философия храма: кошка лишь даёт тебе шанс и призывает удачу, но то, как ты им воспользуешься, зависит исключительно от твоих собственных усилий.</div>
+    <div class="blockquote" data-lang="en" style="display:none;">The temple's philosophy: the cat only offers a chance and calls in luck — what you do with it is entirely up to your own effort.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта ежедневно <strong>6:00–17:00</strong>, но офис с сувенирными кошками и печатью goshuin работает только <strong>8:00–15:00</strong>. Приезжать лучше утром — популярные размеры котиков раскупают уже к полудню. Тени на территории почти нет — летом стоит взять воду.</p>
+        <p data-lang="ru">Территория открыта ежедневно <strong>6:00–17:00</strong>, но офис с сувенирными кошками и печатью goshuin работает только <strong>8:00–15:00</strong>. Приезжать лучше утром — популярные размеры котиков раскупают уже к полудню. Тени на территории почти нет — летом стоит взять воду.</p>
+        <p data-lang="en" style="display:none;">Grounds open daily <strong>6:00–17:00</strong>, but the office selling cat figurines and goshuin stamps only runs <strong>8:00–15:00</strong>. Come in the morning — popular figurine sizes sell out by noon. Almost no shade on the grounds, bring water in summer.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · Ii Naotaka · Ii clan и роль в защите сёгуната Tokugawa · <a href="glossary.html#zen-schools">Sōtō Zen</a> · <a href="glossary.html#meiji-restoration">Инцидент у ворот Сакурада, 1860 · Договор Харриса и «чёрные корабли» Перри</a> · <a href="glossary.html#chado-tea-ceremony">Сэн-но Рикю и традиция итиго итиэ в чайной церемонии</a> · <a href="glossary.html#zen-and-samurai">Zen и Samurai — тренировка ума перед тренировкой руки</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · Ii Naotaka · Ii clan и роль в защите сёгуната Tokugawa · <a href="glossary.html#zen-schools">Sōtō Zen</a> · <a href="glossary.html#meiji-restoration">Инцидент у ворот Сакурада, 1860 · Договор Харриса и «чёрные корабли» Перри</a> · <a href="glossary.html#chado-tea-ceremony">Сэн-но Рикю и традиция итиго итиэ в чайной церемонии</a> · <a href="glossary.html#zen-and-samurai">Zen и Samurai — тренировка ума перед тренировкой руки</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#temple">Temple (tera) — how a Buddhist temple is structured</a> · Ii Naotaka · the Ii clan and its role defending the Tokugawa shogunate · <a href="glossary.html#zen-schools">Sōtō Zen</a> · <a href="glossary.html#meiji-restoration">The Sakurada Gate incident, 1860 · the Harris Treaty and Perry's "black ships"</a> · <a href="glossary.html#chado-tea-ceremony">Sen no Rikyū and ichigo ichie in the tea ceremony</a> · <a href="glossary.html#zen-and-samurai">Zen and the Samurai — training the mind before the hand</a></p>
 
     <hr>
 
-    <span class="place-kicker">Винтаж</span>
+    <span class="place-kicker" data-lang="ru">Винтаж</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Vintage</span>
     <h2 class="section-title" id="loc-nerdydogs">Nerdy Dogs</h2>
-    <span class="place-caption">Секонд-хенд, который обманывает названием</span>
+    <span class="place-caption" data-lang="ru">Секонд-хенд, который обманывает названием</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A secondhand shop with a misleading name</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Nerdy Dogs</span></div></figure>
       <div>
-        <p>Название обманывает — «собаки-ботаники» на деле оказываются крошечным независимым секонд-хендом, который переворачивает представление о японском винтаже. Вместо привычных джинсов и оверсайз-футболок бывшие байеры крупных токийских концепт-сторов сделали ставку на редкую эстетику <strong>«resort & outdoor vintage»</strong>: архивные куртки, флис и техничная одежда 90-х от Patagonia, L.L. Bean и Lands' End.</p>
-        <p>Это яркий пример того, как японский селективный подход превращает обычную утилитарную одежду прошлых десятилетий в объект коллекционирования.</p>
+        <p data-lang="ru">Название обманывает — «собаки-ботаники» на деле оказываются крошечным независимым секонд-хендом, который переворачивает представление о японском винтаже. Вместо привычных джинсов и оверсайз-футболок бывшие байеры крупных токийских концепт-сторов сделали ставку на редкую эстетику <strong>«resort & outdoor vintage»</strong>: архивные куртки, флис и техничная одежда 90-х от Patagonia, L.L. Bean и Lands' End.</p>
+        <p data-lang="ru">Это яркий пример того, как японский селективный подход превращает обычную утилитарную одежду прошлых десятилетий в объект коллекционирования.</p>
+        <p data-lang="en" style="display:none;">The name is misleading — "nerdy dogs" turns out to be a tiny independent secondhand shop that flips the usual idea of Japanese vintage. Instead of the standard denim and oversized tees, former buyers from major Tokyo concept stores bet on a rarer niche: <strong>"resort & outdoor vintage"</strong> — archival jackets, fleece, 90s technical gear from Patagonia, L.L. Bean, Lands' End. It's a sharp example of the Japanese eye turning plain, utilitarian clothing from past decades into a collector's object.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Загляни на стенд бренда <strong>Lands' End</strong> — в Японии его часто считают недооценённым по сравнению с гигантами аутдора, но владельцы Nerdy Dogs находят редкие цвета и детали кроя, доказывающие качество текстиля прошлых лет.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Обрати внимание на концепцию <strong>Mingei</strong> (народного ремесла) — идею, что утилитарные, повседневные вещи обладают скрытой, честной красотой. Японцы часто проецируют этот принцип на старую рабочую и аутдор-одежду.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Check the <strong>Lands' End</strong> rack — in Japan it's often seen as underrated next to the big outdoor names, but Nerdy Dogs' owners find rare colors and cut details that prove the old fabric's quality.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Worth knowing the concept of <strong>Mingei</strong> (folk craft) — the idea that utilitarian, everyday objects carry an honest, hidden beauty. Japanese collectors often project this onto old workwear and outdoor gear.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Небольшие магазины Shimokitazawa открываются позже храмов — обычно ближе к <strong>11:00</strong>.</p>
+        <p data-lang="ru">Небольшие магазины Shimokitazawa открываются позже храмов — обычно ближе к <strong>11:00</strong>.</p>
+        <p data-lang="en" style="display:none;">Shimokitazawa's small shops open later than the temples — usually closer to <strong>11:00</strong>.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#mingei">Mingei</a> · независимая розница в Токио</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#mingei">Mingei</a> · независимая розница в Токио</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#mingei">Mingei</a> · independent retail in Tokyo</p>
 
     <hr>
 
-    <span class="place-kicker">Канцелярия</span>
+    <span class="place-kicker" data-lang="ru">Канцелярия</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Stationery</span>
     <h2 class="section-title" id="loc-desklabo">Desk Labo</h2>
-    <span class="place-caption">Музей функционального дизайна на бывших рельсах</span>
+    <span class="place-caption" data-lang="ru">Музей функционального дизайна на бывших рельсах</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A museum of functional design on former railway tracks</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Desk Labo</span></div></figure>
       <div>
-        <p>Магазин канцелярии переехал сюда после 14 лет работы в соседнем Sangenjaya — и оказался в комплексе <strong>Reload</strong>, построенном на месте бывших надземных путей линии Odakyu: когда рельсы в 2013 году убрали под землю, освободившуюся полосу отдали под малый бизнес. Ассортимент — смесь брендов: французские Papier Tigre, немецкие LAMY, японские Delfonics и Hightide.</p>
-        <p>Desk Labo — не просто канцелярская лавка, а музей функционального дизайна: витрина японской страсти к упорядочиванию пространства и эстетизации повседневного труда.</p>
+        <p data-lang="ru">Магазин канцелярии переехал сюда после 14 лет работы в соседнем Sangenjaya — и оказался в комплексе <strong>Reload</strong>, построенном на месте бывших надземных путей линии Odakyu: когда рельсы в 2013 году убрали под землю, освободившуюся полосу отдали под малый бизнес. Ассортимент — смесь брендов: французские Papier Tigre, немецкие LAMY, японские Delfonics и Hightide.</p>
+        <p data-lang="ru">Desk Labo — не просто канцелярская лавка, а музей функционального дизайна: витрина японской страсти к упорядочиванию пространства и эстетизации повседневного труда.</p>
+        <p data-lang="en" style="display:none;">This stationery shop moved here after 14 years in nearby Sangenjaya, landing in <strong>Reload</strong>, a complex built where the Odakyu Line's elevated tracks used to run — when the rails went underground in 2013, the freed-up strip went to small businesses. The lineup mixes brands: French Papier Tigre, German LAMY, Japanese Delfonics and Hightide. More a museum of functional design than a simple stationery shop — a showcase for the Japanese love of ordering space and aestheticizing everyday work.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Многие изделия сделаны небольшими японскими мастерскими, которые существуют десятилетиями и почти неизвестны за пределами страны.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Приглядись к минималистичным японским латунным держателям для ручек. Металл со временем темнеет, приобретая патину — живое воплощение эстетики <strong>wabi-sabi</strong>.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Many pieces come from small Japanese workshops that have run for decades and are almost unknown outside the country.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Look closely at the minimalist Japanese brass pen holders. The metal darkens over time into a patina — a living example of <strong>wabi-sabi</strong>.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открывается не раньше <strong>11:00–12:00</strong>, работает до <strong>20:00</strong>. <strong>Закрыт по понедельникам.</strong> Стоит в одном комплексе Reload с APFR TOKYO — искать по отдельным адресам не нужно.</p>
+        <p data-lang="ru">Открывается не раньше <strong>11:00–12:00</strong>, работает до <strong>20:00</strong>. <strong>Закрыт по понедельникам.</strong> Стоит в одном комплексе Reload с APFR TOKYO — искать по отдельным адресам не нужно.</p>
+        <p data-lang="en" style="display:none;">Opens no earlier than <strong>11:00–12:00</strong>, runs until <strong>20:00</strong>. <strong>Closed Mondays.</strong> Shares the Reload complex with APFR TOKYO — no separate address to track down.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#zakka">Концепция zakka</a> · Japanese stationery · Kaizen · craftsmanship в Японии</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#zakka">Концепция zakka</a> · Japanese stationery · Kaizen · craftsmanship в Японии</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#zakka">The zakka concept</a> · Japanese stationery · Kaizen · craftsmanship in Japan</p>
 
     <hr>
 
-    <span class="place-kicker">Парфюмерия</span>
+    <span class="place-kicker" data-lang="ru">Парфюмерия</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Fragrance</span>
     <h2 class="section-title" id="loc-apfr">APFR TOKYO</h2>
-    <span class="place-caption">Где запах не нюхают, а слушают</span>
+    <span class="place-caption" data-lang="ru">Где запах не нюхают, а слушают</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Where scent is listened to, not sniffed</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>APFR TOKYO</span></div></figure>
       <div>
-        <p>Флагманский магазин парфюмерного бренда, основанного Keita Sugasawa в 2011 году — раньше он назывался Apotheke Fragrance. Почти вся продукция до сих пор производится небольшими партиями вручную.</p>
-        <p>Японская культура запахов долгое время развивалась иначе, чем европейская. В традиции <strong>kōdō</strong> аромат не столько украшает пространство, сколько становится предметом созерцания — почти как чайная церемония или каллиграфия.</p>
+        <p data-lang="ru">Флагманский магазин парфюмерного бренда, основанного Keita Sugasawa в 2011 году — раньше он назывался Apotheke Fragrance. Почти вся продукция до сих пор производится небольшими партиями вручную.</p>
+        <p data-lang="ru">Японская культура запахов долгое время развивалась иначе, чем европейская. В традиции <strong>kōdō</strong> аромат не столько украшает пространство, сколько становится предметом созерцания — почти как чайная церемония или каллиграфия.</p>
+        <p data-lang="en" style="display:none;">The flagship of a fragrance brand founded by Keita Sugasawa in 2011, originally called Apotheke Fragrance. Nearly everything is still made by hand in small batches. Japanese scent culture developed on its own path, apart from the European one: in the <strong>kōdō</strong> tradition, fragrance isn't decoration so much as an object of contemplation — closer to a tea ceremony or calligraphy.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Сравнивай ароматы медленно. В японской традиции считается, что запах нужно не «нюхать», а «слушать».</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Бренд работает с традиционными мотивами — бамбук, сандал (byakudan), сезонные цитрусы вроде yuzu — в современных урбанистических композициях.</div>
     </div>
-    <p><span class="inline-label">Попробуй</span>Ароматические палочки обмакивают здесь вручную, и горят они около 100 минут — стоит понюхать несколько вариантов на месте, прежде чем выбирать.</p>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Compare scents slowly. Japanese tradition holds that fragrance is "listened to," not sniffed.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The brand builds modern, urban compositions out of traditional notes — bamboo, sandalwood (byakudan), seasonal citrus like yuzu.</div>
+    </div>
+    <p data-lang="ru"><span class="inline-label">Попробуй</span>Ароматические палочки обмакивают здесь вручную, и горят они около 100 минут — стоит понюхать несколько вариантов на месте, прежде чем выбирать.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Try</span>The incense sticks are hand-dipped here and burn for about 100 minutes — worth smelling a few in the shop before choosing.</p>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открывается вместе с остальными магазинами Reload — обычно <strong>11:00–12:00</strong>, работает до <strong>20:00</strong>.</p>
+        <p data-lang="ru">Открывается вместе с остальными магазинами Reload — обычно <strong>11:00–12:00</strong>, работает до <strong>20:00</strong>.</p>
+        <p data-lang="en" style="display:none;">Opens with the rest of Reload — usually <strong>11:00–12:00</strong>, runs until <strong>20:00</strong>.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#kodo-incense">Kōdō</a> · культура благовоний · традиции koh, связанные с буддийскими ритуалами</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#kodo-incense">Kōdō</a> · культура благовоний · традиции koh, связанные с буддийскими ритуалами</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#kodo-incense">Kōdō</a> · incense culture · koh traditions tied to Buddhist ritual</p>
 
     <hr>
 
-    <span class="place-kicker">Супермаркет</span>
+    <span class="place-kicker" data-lang="ru">Супермаркет</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Supermarket</span>
     <h2 class="section-title" id="loc-ozeki">Ōzeki Shimokitazawa</h2>
-    <span class="place-caption">Овощи как ювелирные изделия</span>
+    <span class="place-caption" data-lang="ru">Овощи как ювелирные изделия</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Vegetables treated like jewelry</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Ōzeki</span></div></figure>
       <div>
-        <p>Обычный на вид супермаркет хорошо вписывается в характер района: японская гастрономия строится не вокруг громких брендов, а вокруг качества отдельных производителей. Даже если ничего не покупать, интересно посмотреть, сколько внимания уделяется упаковке, сезонности и происхождению продуктов — это часть системы доверия между производителем и покупателем, заметной по всей Японии.</p>
-        <p>Обилие маленьких семейных ресторанчиков вокруг привело к тому, что на полках можно встретить редкие сорта овощей, грибов и фруктов, которые не продаются в стандартных сетевых магазинах.</p>
+        <p data-lang="ru">Обычный на вид супермаркет хорошо вписывается в характер района: японская гастрономия строится не вокруг громких брендов, а вокруг качества отдельных производителей. Даже если ничего не покупать, интересно посмотреть, сколько внимания уделяется упаковке, сезонности и происхождению продуктов — это часть системы доверия между производителем и покупателем, заметной по всей Японии.</p>
+        <p data-lang="ru">Обилие маленьких семейных ресторанчиков вокруг привело к тому, что на полках можно встретить редкие сорта овощей, грибов и фруктов, которые не продаются в стандартных сетевых магазинах.</p>
+        <p data-lang="en" style="display:none;">An ordinary-looking supermarket that fits the neighborhood's character: Japanese food culture is built around individual producers' quality, not big brand names. Worth a look even without buying anything — the care put into packaging, seasonality, and provenance is part of a trust system between grower and buyer visible all over Japan. Thanks to the dense cluster of small family restaurants nearby, the shelves carry rare vegetables, mushrooms, and fruit you won't find at standard chains.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Посмотри, сколько информации производитель сообщает прямо на упаковке — происхождение, сезон, способ использования.</div>
       <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Поднимись на второй этаж — там отдел навынос от суши-ресторана Sushi-no-Midori (родом со станции Umegaoka). Свежайшие суши ресторанного уровня по ценам обычного супермаркета, без многочасовых очередей у флагманского заведения.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Загляни в отдел сезонных фруктов: безупречные дыни и виноград Shine Muscat упаковывают и преподносят как ювелирные изделия — иллюстрация культуры дарения подарков (ochugen и oseibo).</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>See how much a producer discloses right on the packaging — origin, season, how to use it.</div>
+      <div class="note"><span class="note-tag tag-try">What to try</span><br>Head up to the second floor — there's a takeaway counter from Sushi-no-Midori (of Umegaoka station fame). Restaurant-grade fresh sushi at supermarket prices, without the flagship's hours-long line.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Check the seasonal fruit section: flawless melons and Shine Muscat grapes packaged and presented like jewelry — a window into the gift-giving culture of ochugen and oseibo.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Точных часов именно этого магазина не проверяли — но обычный японский супермаркет работает примерно <strong>9:00/10:00–21:00/22:00</strong>. Стоит свериться в Google Maps в день визита.</p>
+        <p data-lang="ru">Точных часов именно этого магазина не проверяли — но обычный японский супермаркет работает примерно <strong>9:00/10:00–21:00/22:00</strong>. Стоит свериться в Google Maps в день визита.</p>
+        <p data-lang="en" style="display:none;">Haven't confirmed this exact store's hours — but a typical Japanese supermarket runs roughly <strong>9:00/10:00–21:00/22:00</strong>. Worth checking Google Maps on the day.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika culture</a> · японская упаковка продуктов · оптовые рынки Toyosu и бывший Tsukiji, логистика утреннего улова</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika culture</a> · японская упаковка продуктов · оптовые рынки Toyosu и бывший Tsukiji, логистика утреннего улова</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#depachika">Depachika culture</a> · Japanese food packaging · the Toyosu and former Tsukiji wholesale markets, morning-catch logistics</p>
 
     <hr>
 
-    <span class="place-kicker">Бар</span>
+    <span class="place-kicker" data-lang="ru">Бар</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Bar</span>
     <h2 class="section-title -minor" id="loc-littlesoul">Little Soul Cafe</h2>
-    <span class="place-caption">Для тех, кто пришёл послушать, а не выпить</span>
+    <span class="place-caption" data-lang="ru">Для тех, кто пришёл послушать, а не выпить</span>
+    <span class="place-caption" data-lang="en" style="display:none;">For people who came to listen, not just drink</span>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Little Soul Cafe</span></div></figure>
       <div>
-        <p>Несмотря на название, кофе здесь не главное. С 1999 года это узкий бар с более чем 15 000 виниловых пластинок — коллекцией, которую владелец Nobuo Miyamae начал собирать ещё студентом, — и списком примерно из 450 коктейлей и спиртных напитков, включая большую ромовую коллекцию.</p>
-        <p>Это классический пример японского <strong>listening bar</strong> (ongaku kissa) — традиции, уходящей корнями в 1920-е годы, когда пластинки стоили слишком дорого, и люди приходили в специальные кафе просто послушать музыку. Хозяин сам стоит за пультом, создавая аналоговую атмосферу.</p>
+        <p data-lang="ru">Несмотря на название, кофе здесь не главное. С 1999 года это узкий бар с более чем 15 000 виниловых пластинок — коллекцией, которую владелец Nobuo Miyamae начал собирать ещё студентом, — и списком примерно из 450 коктейлей и спиртных напитков, включая большую ромовую коллекцию.</p>
+        <p data-lang="ru">Это классический пример японского <strong>listening bar</strong> (ongaku kissa) — традиции, уходящей корнями в 1920-е годы, когда пластинки стоили слишком дорого, и люди приходили в специальные кафе просто послушать музыку. Хозяин сам стоит за пультом, создавая аналоговую атмосферу.</p>
+        <p data-lang="en" style="display:none;">Despite the name, coffee isn't the point. Since 1999 this narrow bar has held over 15,000 vinyl records — a collection owner Nobuo Miyamae started as a student — and a list of roughly 450 cocktails and spirits, including a serious rum collection. A textbook Japanese <strong>listening bar</strong> (ongaku kissa), a tradition dating to the 1920s, when records were too expensive to own and people went to dedicated cafés just to hear them. The owner runs the turntable himself, building the analog atmosphere by hand.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Если играет винил, прислушайся к подбору музыки — во многих небольших японских барах коллекция пластинок это часть личности владельца.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Стены от пола до потолка забиты пластинками, а посадочных мест всего около 8–10. Обрати внимание на коллекцию рома — больше 100 видов со всего мира.</div>
     </div>
-    <p><span class="inline-label">Совет</span>Кафе открывается только в 19:00 — если прийти днём, дверь будет закрыта. Планировать как вечернюю точку, а не промежуточную остановку.</p>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>If vinyl is playing, listen to the selection — at small Japanese bars, the record collection is often part of the owner's identity.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Records floor to ceiling, only about 8–10 seats. Worth noting the rum collection — over 100 varieties from around the world.</div>
+    </div>
+    <p data-lang="ru"><span class="inline-label">Совет</span>Кафе открывается только в 19:00 — если прийти днём, дверь будет закрыта. Планировать как вечернюю точку, а не промежуточную остановку.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span>The café only opens at 19:00 — show up during the day and the door will be shut. Plan it as an evening destination, not a mid-day stop.</p>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>19:00–2:00</strong>. Cover charge <strong>500 иен</strong> с человека. Только <strong>наличные</strong> (cash-only), внутри разрешено курение. Брони не требует, но мест всего 8–10 — если хочется гарантированно сесть, лучше прийти к самому открытию.</p>
+        <p data-lang="ru">Открыт <strong>19:00–2:00</strong>. Cover charge <strong>500 иен</strong> с человека. Только <strong>наличные</strong> (cash-only), внутри разрешено курение. Брони не требует, но мест всего 8–10 — если хочется гарантированно сесть, лучше прийти к самому открытию.</p>
+        <p data-lang="en" style="display:none;">Open <strong>19:00–2:00</strong>. Cover charge <strong>500 yen</strong> per person. <strong>Cash only</strong>, smoking allowed inside. No reservations, but only 8–10 seats — arrive right at opening if you want a guaranteed spot.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> · музыкальная сцена Shimokitazawa · ongaku kissa 1920-х годов</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> · музыкальная сцена Shimokitazawa · ongaku kissa 1920-х годов</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> · Shimokitazawa's music scene · ongaku kissa of the 1920s</p>
 
   </section>
 
@@ -1243,16 +1368,20 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t4">
     <h2 class="section-title">Food & Coffee</h2>
-    <p>Если появится желание перекусить, лучше искать небольшие семейные заведения на соседних улицах, а не возле станции — именно там обычно встречаются самые интересные местные кафе и маленькие рестораны.</p>
+    <p data-lang="ru">Если появится желание перекусить, лучше искать небольшие семейные заведения на соседних улицах, а не возле станции — именно там обычно встречаются самые интересные местные кафе и маленькие рестораны.</p>
+    <p data-lang="en" style="display:none;">If you want a bite, look for small family places on the side streets rather than right by the station — that's usually where the more interesting local cafés and small restaurants turn up.</p>
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Интересно сравнить Gōtoku-ji с Meiji Jingu, который ещё будет в поездке: один почти незаметен на карте истории Японии, другой связан с рождением современной нации — но оба показывают, как японцы умеют превращать место памяти в живое пространство. Если день с Kaminarimon и Sensō-ji показывал старую, ритуальную Японию, то сегодня — момент, когда эта Япония начала открываться миру, причём ценой жизни человека, который это подписал.</p>
-  <p>А сам район Shimokitazawa стоит в стороне от больших храмов и государственных сюжетов: это другая Япония — страна маленьких независимых проектов, где ценность создаётся не масштабом, а качеством исполнения.</p>
+  <p data-lang="ru">Интересно сравнить Gōtoku-ji с Meiji Jingu, который ещё будет в поездке: один почти незаметен на карте истории Японии, другой связан с рождением современной нации — но оба показывают, как японцы умеют превращать место памяти в живое пространство. Если день с Kaminarimon и Sensō-ji показывал старую, ритуальную Японию, то сегодня — момент, когда эта Япония начала открываться миру, причём ценой жизни человека, который это подписал.</p>
+  <p data-lang="ru">А сам район Shimokitazawa стоит в стороне от больших храмов и государственных сюжетов: это другая Япония — страна маленьких независимых проектов, где ценность создаётся не масштабом, а качеством исполнения.</p>
+  <p data-lang="en" style="display:none;">Worth comparing Gōtoku-ji to Meiji Jingu, still ahead in the trip: one barely registers on Japan's historical map, the other is tied to the birth of the modern nation — yet both show how the Japanese turn a memorial site into a living space. If the Kaminarimon and Sensō-ji day showed old, ritual Japan, today is the moment that Japan started opening to the world, at the cost of the life of the man who signed it.</p>
+  <p data-lang="en" style="display:none;">Shimokitazawa itself sits apart from the grand temples and national narratives — it's a different Japan, a country of small independent projects where value comes from craft, not scale.</p>
 
-  <p class="footnote">Shimokitazawa Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Shimokitazawa Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Shimokitazawa Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1298,6 +1427,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

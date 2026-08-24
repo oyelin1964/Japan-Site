@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,30 +883,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">人の一生は重荷を負うて遠き道を行くが如し、急ぐべからず</span>
-    <blockquote>Жизнь человека — как нести тяжёлый груз по длинной дороге. Спешить не стоит</blockquote>
-    <span class="quote-author">Приписывается Tokugawa Ieyasu как его предсмертное завещание</span>
-    <span class="quote-source">На деле — подделка эпохи Meiji, выданная за слова сёгуна; замок, где сёгунат Ieyasu начался и закончился, — сегодня в маршруте</span>
+    <span class="quote-jp" data-lang="ru">人の一生は重荷を負うて遠き道を行くが如し、急ぐべからず</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">人の一生は重荷を負うて遠き道を行くが如し、急ぐべからず</span>
+    <blockquote data-lang="ru">Жизнь человека — как нести тяжёлый груз по длинной дороге. Спешить не стоит</blockquote>
+    <blockquote data-lang="en" style="display:none;">A man's life is like carrying a heavy load down a long road. There's no need to hurry</blockquote>
+    <span class="quote-author" data-lang="ru">Приписывается Tokugawa Ieyasu как его предсмертное завещание</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Attributed to Tokugawa Ieyasu as his deathbed testament</span>
+    <span class="quote-source" data-lang="ru">На деле — подделка эпохи Meiji, выданная за слова сёгуна; замок, где сёгунат Ieyasu начался и закончился, — сегодня в маршруте</span>
+    <span class="quote-source" data-lang="en" style="display:none;">Actually a Meiji-era forgery passed off as the shogun's own words; the castle where Ieyasu's shogunate began and ended is on today's route</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Fushimi Inari</strong> — выходи пораньше, около 7:00–7:30: дальше на маршруте прибавляются толпы и жара, полный подъём и спуск занимают 2–3 часа</li>
       <li><strong>Vermillion Cafe</strong> — закрывается рано, около 15:00–15:30, кухня и того раньше; заходи сразу после спуска с горы, а не под вечер</li>
       <li><strong>Nishiki Market</strong> — многие лавки принимают только наличные, есть на ходу вдоль рынка не принято</li>
       <li><strong>Nijō Castle</strong> — последний вход в 16:00, дворец Ninomaru закрывается тогда же; закладывай на дневную часть, не на вечер</li>
       <li><strong>IC-карта</strong> — нужна весь день: JR Nara Line, метро, автобусы и Keihan Line; немного наличных пригодится в Nishiki Market и Gion Tsujiri</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Fushimi Inari</strong> — leave early, around 7:00–7:30: crowds and heat build up as the route goes on, and the full climb and descent takes 2–3 hours</li>
+      <li><strong>Vermillion Cafe</strong> — closes early, around 15:00–15:30, kitchen even earlier; go right after descending the mountain, not in the late afternoon</li>
+      <li><strong>Nishiki Market</strong> — many stalls take cash only, and eating while walking along the market isn't customary</li>
+      <li><strong>Nijō Castle</strong> — last entry 16:00, the Ninomaru palace closes at the same time; plan it into the daytime portion, not the evening</li>
+      <li><strong>IC card</strong> — needed all day: JR Nara Line, metro, buses, and the Keihan Line; some cash will come in handy at Nishiki Market and Gion Tsujiri</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-fushimiinari">Fushimi Inari Taisha</button>
     <button class="nav-place-btn" data-target="loc-vermillion">Vermillion Cafe</button>
     <button class="nav-place-btn" data-target="loc-nishiki">Nishiki Market</button>
@@ -887,13 +936,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Утро — самый плотный отрезок: подниматься на Fushimi Inari разумнее пораньше, а сразу после спуска — в Vermillion, а не откладывать кофе на потом: кухня кафе закрывается ещё раньше, чем основной зал. Дальше — около 20 минут на JR и метро до Nishiki Market, оттуда ещё 15–20 минут на метро до Nijō Castle.</p>
-      <div class="blockquote">А скрипучий «соловьиный пол» замка — не хитрая ловушка против ниндзя, как гласит легенда, а просто побочный эффект конструкции.</div>
-      <p>Nijō Castle стоит закладывать на дневную часть маршрута, не на вечер — последний вход туда в 16:00. Gion Tsujiri, наоборот, хорошо ложится под конец дня, минут тридцать от замка: чайный зал на втором этаже работает допоздна, и это логичная точка для десерта, а не отдельный поход. От Gion до отеля — 15–20 минут пешком вдоль Kamo River, если день не слишком жаркий.</p>
+      <p data-lang="ru">Утро — самый плотный отрезок: подниматься на Fushimi Inari разумнее пораньше, а сразу после спуска — в Vermillion, а не откладывать кофе на потом: кухня кафе закрывается ещё раньше, чем основной зал. Дальше — около 20 минут на JR и метро до Nishiki Market, оттуда ещё 15–20 минут на метро до Nijō Castle.</p>
+      <div class="blockquote" data-lang="ru">А скрипучий «соловьиный пол» замка — не хитрая ловушка против ниндзя, как гласит легенда, а просто побочный эффект конструкции.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the castle's creaky "nightingale floor" isn't a cunning trap against ninja, as the legend goes — it's just a side effect of the construction.</div>
+      <p data-lang="ru">Nijō Castle стоит закладывать на дневную часть маршрута, не на вечер — последний вход туда в 16:00. Gion Tsujiri, наоборот, хорошо ложится под конец дня, минут тридцать от замка: чайный зал на втором этаже работает допоздна, и это логичная точка для десерта, а не отдельный поход. От Gion до отеля — 15–20 минут пешком вдоль Kamo River, если день не слишком жаркий.</p>
+      <p data-lang="en" style="display:none;">The morning is the busiest stretch: it makes sense to climb Fushimi Inari early, then head straight to Vermillion right after coming down rather than saving coffee for later — the café's kitchen closes even earlier than the main room. From there, about 20 minutes on JR and the metro to Nishiki Market, and another 15–20 minutes by metro to Nijō Castle. Nijō Castle should go into the daytime part of the route, not the evening — last entry is 16:00. Gion Tsujiri, by contrast, sits well at the end of the day, about thirty minutes from the castle: the second-floor tea room stays open late, making it a logical dessert stop rather than a separate trip. From Gion to the hotel is 15–20 minutes on foot along the Kamo River, if the day isn't too hot.</p>
     </div>
   </details>
 
@@ -901,175 +954,237 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Святилище</span>
+    <span class="place-kicker" data-lang="ru">Святилище</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title -major" id="loc-fushimiinari">Fushimi Inari Taisha</h2>
-    <span class="place-caption">Гора из десяти тысяч ворот, которая никогда не бывает одного возраста</span>
+    <span class="place-caption" data-lang="ru">Гора из десяти тысяч ворот, которая никогда не бывает одного возраста</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A mountain of ten thousand gates that's never one single age</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Главное святилище всех ~30 000 храмов Inari в Японии, основанное в 711 году — но почти все ворота torii, которые ты увидишь, моложе тебя самой</li>
         <li>Это не аттракцион, а живой реестр благодарностей: около десяти тысяч ворот, и на обороте каждой — имя того, кто её подарил</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The head shrine of all ~30,000 Inari shrines in Japan, founded in 711 — but almost every torii gate you'll see is younger than you are</li>
+        <li>Not a tourist attraction so much as a living ledger of gratitude: roughly ten thousand gates, each one with the donor's name written on the back</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Fushimi Inari</span></div></figure>
       <div>
-        <p>Гора Inari — не декорация, а действующий баланс: в эпоху Edo среди торговцев родился каламбур между словом «тōру» (проходить сквозь) и надеждой, что желание «сбудется» — и дарить храму ворота стало способом материализовать благодарность богу риса и торговли <strong>Inari</strong>. С тех пор компании и частные лица заказывают новые torii взамен обветшавших; счёт идёт на сотни тысяч иен за маленькие ворота и больше миллиона — за крупные.</p>
-        <p>Из-за этого гора выглядит одинаково древней на любом отрезке пути — хотя на деле это не музей одной эпохи, а живая традиция, которая обновляется у тебя на глазах уже больше трёхсот лет.</p>
+        <p data-lang="ru">Гора Inari — не декорация, а действующий баланс: в эпоху Edo среди торговцев родился каламбур между словом «тōру» (проходить сквозь) и надеждой, что желание «сбудется» — и дарить храму ворота стало способом материализовать благодарность богу риса и торговли <strong>Inari</strong>. С тех пор компании и частные лица заказывают новые torii взамен обветшавших; счёт идёт на сотни тысяч иен за маленькие ворота и больше миллиона — за крупные.</p>
+        <p data-lang="ru">Из-за этого гора выглядит одинаково древней на любом отрезке пути — хотя на деле это не музей одной эпохи, а живая традиция, которая обновляется у тебя на глазах уже больше трёхсот лет.</p>
+        <p data-lang="en" style="display:none;">Mount Inari isn't decoration, it's a running ledger: in the Edo period, merchants built a pun between "tōru" (to pass through) and the hope that a wish would "come true" (tōru), and donating a gate became a way to materialize gratitude to <strong>Inari</strong>, the god of rice and trade. Companies and individuals have been commissioning new torii to replace worn ones ever since; costs run from a few hundred thousand yen for a small gate to over a million for a large one. That's why the mountain looks equally ancient at any point along the path — though in fact it isn't a museum frozen in one era, it's a living tradition that's been renewing itself in front of visitors' eyes for over three hundred years.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Переверни взглядом любые ворота — почти на каждых найдёшь имя дарителя и дату черной тушью. Это не подпись мастера, а автограф чьей-то благодарности.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Самый плотный и фотографируемый участок — «Senbon Torii», двойной тоннель примерно из 800 ворот у главного святилища. Дальше поток туристов резко редеет.</div>
       <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Полный подъём и спуск с горы — 2–3 часа. Если сил или времени немного, честная точка разворота — смотровая площадка Yotsutsuji примерно на середине пути, откуда открывается вид на весь город.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Look at the back of almost any gate — you'll find the donor's name and the date in black ink. Not a craftsman's signature, but someone's autograph of gratitude.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The densest and most photographed stretch is "Senbon Torii," a double tunnel of about 800 gates near the main shrine. The crowd thins out sharply past that point.</div>
+      <div class="note"><span class="note-tag tag-tip">Practical tip</span><br>The full climb and descent takes 2–3 hours. If time or energy is short, a fair turnaround point is the Yotsutsuji viewpoint about halfway up, with a view over the whole city.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта <strong>круглосуточно</strong>, вход бесплатный. Лучшее время — раннее утро (до 8:00) или закат, когда основной поток туристов схлынул. Тени на маршруте немного.</p>
+        <p data-lang="ru">Территория открыта <strong>круглосуточно</strong>, вход бесплатный. Лучшее время — раннее утро (до 8:00) или закат, когда основной поток туристов схлынул. Тени на маршруте немного.</p>
+        <p data-lang="en" style="display:none;">Grounds open <strong>24 hours</strong>, free entry. Best time is early morning (before 8:00) or sunset, once most of the crowd has cleared. Not much shade along the way.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Клан Hata и его роль в раннем Kyoto · <a href="glossary.html#shrine">Shrine (jinja) — как устроено синтоистское святилище</a> · <a href="glossary.html#inari-kitsune">культ kitsune как посланников Inari</a> · Fushimi как порт-предместье старой столицы · <a href="glossary.html#kami">что такое kami</a> · <a href="glossary.html#torii-vs-mon">torii vs. mon — в чём разница</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Клан Hata и его роль в раннем Kyoto · <a href="glossary.html#shrine">Shrine (jinja) — как устроено синтоистское святилище</a> · <a href="glossary.html#inari-kitsune">культ kitsune как посланников Inari</a> · Fushimi как порт-предместье старой столицы · <a href="glossary.html#kami">что такое kami</a> · <a href="glossary.html#torii-vs-mon">torii vs. mon — в чём разница</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>The Hata clan and its role in early Kyoto · <a href="glossary.html#shrine">Shrine (jinja) — how a Shinto shrine is structured</a> · <a href="glossary.html#inari-kitsune">the kitsune cult as Inari's messengers</a> · Fushimi as the old capital's port suburb · <a href="glossary.html#kami">what a kami is</a> · <a href="glossary.html#torii-vs-mon">torii vs. mon — the difference</a></p>
 
     <hr>
 
-    <span class="place-kicker">Кофе</span>
+    <span class="place-kicker" data-lang="ru">Кофе</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Coffee</span>
     <h2 class="section-title -minor" id="loc-vermillion">Vermillion Cafe</h2>
-    <span class="place-caption">Флэт-уайт у подножия горы тысяч богов</span>
+    <span class="place-caption" data-lang="ru">Флэт-уайт у подножия горы тысяч богов</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A flat white at the foot of a mountain of gods</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Vermillion</span></div></figure>
       <div>
-        <p>Семья, которая держит кафе, начинала не с эспрессо-бара, а со столетнего чайного домика <strong>Yakurikitei</strong> на самой вершине горы — им управляют родители нынешнего владельца, Shigeo Kimura. Сам Shigeo восемнадцать лет прожил в Мельбурне и, вернувшись, привёз с собой то, чего в те годы у подножия Fushimi Inari не было вовсе — эспрессо-машину и культуру австралийской кофейни.</p>
-        <p>Получилось редкое сочетание: место, укоренённое в семейной истории горы, но говорящее на совершенно интернациональном языке — кофе здесь варят так же серьёзно, как в лучших кофейнях Мельбурна.</p>
+        <p data-lang="ru">Семья, которая держит кафе, начинала не с эспрессо-бара, а со столетнего чайного домика <strong>Yakurikitei</strong> на самой вершине горы — им управляют родители нынешнего владельца, Shigeo Kimura. Сам Shigeo восемнадцать лет прожил в Мельбурне и, вернувшись, привёз с собой то, чего в те годы у подножия Fushimi Inari не было вовсе — эспрессо-машину и культуру австралийской кофейни.</p>
+        <p data-lang="ru">Получилось редкое сочетание: место, укоренённое в семейной истории горы, но говорящее на совершенно интернациональном языке — кофе здесь варят так же серьёзно, как в лучших кофейнях Мельбурна.</p>
+        <p data-lang="en" style="display:none;">The family running this café didn't start with an espresso bar — they started with the century-old <strong>Yakurikitei</strong> tea house near the mountain's summit, still run by the current owner's parents. Owner Shigeo Kimura himself spent eighteen years in Melbourne and, on returning, brought back something that didn't exist at the foot of Fushimi Inari at the time — an espresso machine and an Australian café sensibility. The result is a rare mix: a place rooted in the mountain's family history but speaking a completely international language — the coffee here is made as seriously as at Melbourne's best.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Flat white — редкость для Японии образца ещё десятилетней давности, и именно с него всё начиналось.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Терраса выходит на тихий пруд — контраст с толпой у главного входа буквально в паре минут ходьбы.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-try">Try</span><br>The flat white — a rarity in Japan even a decade ago, and the drink the whole place started with.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The terrace looks out on a quiet pond — a contrast to the crowds at the main entrance just a couple minutes' walk away.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыто примерно <strong>9:00–15:30</strong>, кухня закрывается раньше основного зала. Заходить лучше сразу после спуска с горы.</p>
+        <p data-lang="ru">Открыто примерно <strong>9:00–15:30</strong>, кухня закрывается раньше основного зала. Заходить лучше сразу после спуска с горы.</p>
+        <p data-lang="en" style="display:none;">Open roughly <strong>9:00–15:30</strong>, kitchen closes before the main room. Best to visit right after coming down the mountain.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Австралийская кофейная культура и её экспорт в Азию · чайные домики (chaya) у паломнических троп</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Австралийская кофейная культура и её экспорт в Азию · чайные домики (chaya) у паломнических троп</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Australian coffee culture and its export to Asia · chaya tea houses along pilgrimage routes</p>
 
     <hr>
 
-    <span class="place-kicker">Рынок</span>
+    <span class="place-kicker" data-lang="ru">Рынок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Market</span>
     <h2 class="section-title" id="loc-nishiki">Nishiki Market</h2>
-    <span class="place-caption">Рыбный рынок в городе без моря</span>
+    <span class="place-caption" data-lang="ru">Рыбный рынок в городе без моря</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A fish market in a city with no sea</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Nishiki Market</span></div></figure>
       <div>
-        <p>Kyoto не стоит на берегу моря — и тем не менее «кухня Kyoto» четыре века построена вокруг рыбы. Разгадка не в логистике, а в воде: под этим кварталом бьют холодные подземные ключи с постоянной температурой около 15–18°C, идеальные для хранения улова без всякого льда. Именно поэтому в 1615 году сёгунат официально узаконил здесь рыбный рынок — а не потому, что рядом было море.</p>
-        <p>Позже к рыбным лавкам добавились овощи, соленья, юба и посуда, и рынок разросся в узкую 400-метровую улицу почти из полутора сотен магазинов — многие из которых существуют без малого столетиями.</p>
+        <p data-lang="ru">Kyoto не стоит на берегу моря — и тем не менее «кухня Kyoto» четыре века построена вокруг рыбы. Разгадка не в логистике, а в воде: под этим кварталом бьют холодные подземные ключи с постоянной температурой около 15–18°C, идеальные для хранения улова без всякого льда. Именно поэтому в 1615 году сёгунат официально узаконил здесь рыбный рынок — а не потому, что рядом было море.</p>
+        <p data-lang="ru">Позже к рыбным лавкам добавились овощи, соленья, юба и посуда, и рынок разросся в узкую 400-метровую улицу почти из полутора сотен магазинов — многие из которых существуют без малого столетиями.</p>
+        <p data-lang="en" style="display:none;">Kyoto isn't on the coast — and yet "Kyoto cuisine" has been built around fish for four centuries. The answer isn't logistics, it's water: cold underground springs run beneath this district at a steady 15–18°C, ideal for keeping a catch fresh without any ice. That's why the shogunate formally licensed a fish market here in 1615 — not because the sea was nearby. Vegetables, pickles, yuba, and tableware were added to the fish stalls over time, and the market grew into a narrow 400-meter street of nearly a hundred and fifty shops, many of them nearly a century old.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Магазин ножей <strong>Aritsugu</strong> ведёт историю с 1560 года, от мастера-кузнеца мечей Aritsugu Fujiwara — ножи здесь до сих пор куют по логике оружейного, а не кухонного ремесла.</div>
       <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Есть на ходу здесь не принято — это считается неуважением к тесноте прохода. Купленное лучше съесть у прилавка или отойти в сторону.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>В самом конце рынка, у Shinkyōgoku-dōri — маленькое святилище Nishiki Tenmangū, посвящённое богу учёности Sugawara no Michizane. Лёгкий контраст: торговая суета и тихий храм в паре шагов друг от друга.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The <strong>Aritsugu</strong> knife shop traces back to 1560, to swordsmith Aritsugu Fujiwara — the knives here are still forged with a swordsmith's logic, not a kitchen supplier's.</div>
+      <div class="note"><span class="note-tag tag-tip">Practical tip</span><br>Eating while walking isn't customary here — it's considered disrespectful in such a narrow passage. Better to eat what you buy right at the stall or step to the side.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>At the very end of the market, by Shinkyōgoku-dōri, sits the small Nishiki Tenmangū shrine, dedicated to Sugawara no Michizane, god of scholarship. A light contrast — market bustle and a quiet shrine a few steps apart.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство лавок работают <strong>9:00–18:00</strong>, некоторые закрываются уже к 16:00. Многие принимают только наличные.</p>
+        <p data-lang="ru">Большинство лавок работают <strong>9:00–18:00</strong>, некоторые закрываются уже к 16:00. Многие принимают только наличные.</p>
+        <p data-lang="en" style="display:none;">Most stalls run <strong>9:00–18:00</strong>, some close by 16:00. Many take cash only.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika culture</a> · культура японских ножей · подземные воды Kyoto как основа местной кухни и sake · <a href="glossary.html#bushido">Bushidō — путь воина, придуманный дважды</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika culture</a> · культура японских ножей · подземные воды Kyoto как основа местной кухни и sake · <a href="glossary.html#bushido">Bushidō — путь воина, придуманный дважды</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#depachika">Depachika culture</a> · Japanese knife culture · Kyoto's underground water as the foundation of local cuisine and sake · <a href="glossary.html#bushido">Bushidō — the warrior's path, invented twice</a></p>
 
     <hr>
 
-    <span class="place-kicker">Замок</span>
+    <span class="place-kicker" data-lang="ru">Замок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Castle</span>
     <h2 class="section-title -major" id="loc-nijocastle">Nijō Castle</h2>
-    <span class="place-caption">Замок, который помнит и рождение, и конец сёгуната</span>
+    <span class="place-caption" data-lang="ru">Замок, который помнит и рождение, и конец сёгуната</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The castle that remembers both the shogunate's birth and its end</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Замок, в котором сёгунат Tokugawa родился в 1603 году и в котором же формально прекратил существование в 1867-м — редкий случай, когда одно здание помнит и начало, и конец целой эпохи</li>
         <li>Знаменитый «соловьиный пол» — не хитрая ловушка против ниндзя, как гласит расхожая легенда, а побочный эффект самой конструкции пола</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The castle where the Tokugawa shogunate was born in 1603 and formally ended in 1867 — a rare case of one building remembering both the beginning and the end of an entire era</li>
+        <li>The famous "nightingale floor" isn't a clever trap against ninja, as the popular legend goes — it's a side effect of the floor's own construction</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Nijō Castle</span></div></figure>
       <div>
-        <p>Замок построен в 1601–1603 годах по приказу <strong>Tokugawa Ieyasu</strong> — не как крепость, а как демонстрация силы: официальная резиденция сёгуна в императорском городе, куда он приезжал производить впечатление на двор, а не обороняться. Коридоры дворца Ninomaru скрипят при каждом шаге — знаменитый uguisubari, «соловьиный пол».</p>
-        <p>Спустя 264 года, в 1867-м, именно в зале для приёмов Ninomaru пятнадцатый и последний сёгун <strong>Tokugawa Yoshinobu</strong> объявил о возврате власти императору — акт, известный как Taisei Hōkan. Так замок, построенный ради демонстрации силы клана Tokugawa, стал местом, где эта сила была официально сложена.</p>
+        <p data-lang="ru">Замок построен в 1601–1603 годах по приказу <strong>Tokugawa Ieyasu</strong> — не как крепость, а как демонстрация силы: официальная резиденция сёгуна в императорском городе, куда он приезжал производить впечатление на двор, а не обороняться. Коридоры дворца Ninomaru скрипят при каждом шаге — знаменитый uguisubari, «соловьиный пол».</p>
+        <p data-lang="ru">Спустя 264 года, в 1867-м, именно в зале для приёмов Ninomaru пятнадцатый и последний сёгун <strong>Tokugawa Yoshinobu</strong> объявил о возврате власти императору — акт, известный как Taisei Hōkan. Так замок, построенный ради демонстрации силы клана Tokugawa, стал местом, где эта сила была официально сложена.</p>
+        <p data-lang="en" style="display:none;">The castle was built in 1601–1603 on orders from <strong>Tokugawa Ieyasu</strong> — not as a fortress, but as a display of power: the shogun's official residence in the imperial city, built to impress the court, not to defend against attack. The corridors of the Ninomaru palace creak with every step, the famous uguisubari, or "nightingale floor." Two hundred and sixty-four years later, in 1867, it was in the very same Ninomaru reception hall that the fifteenth and last shogun, <strong>Tokugawa Yoshinobu</strong>, announced the return of power to the emperor — the act known as Taisei Hōkan. So the castle built to display the Tokugawa clan's power became the place where that power was formally surrendered.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Скрипучий «соловьиный пол» Ninomaru обычно объясняют как систему сигнализации против шпионов и убийц — специально придуманную ловушку. На деле это просто эффект того, как деревянные скобы трутся о гвозди в половицах: заметный побочный результат конструкции, а не спроектированная защита.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Скрипучий «соловьиный пол» Ninomaru обычно объясняют как систему сигнализации против шпионов и убийц — специально придуманную ловушку. На деле это просто эффект того, как деревянные скобы трутся о гвозди в половицах: заметный побочный результат конструкции, а не спроектированная защита.</p>
+      <p data-lang="en" style="display:none;">Ninomaru's creaky "nightingale floor" is usually explained as an alarm system against spies and assassins — a trap designed on purpose. In fact it's simply the effect of wooden clamps rubbing against nails in the floorboards: a noticeable side effect of the construction, not an engineered defense.</p>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Пройди по коридору медленно и постарайся ступать бесшумно — не получится почти ни у кого, и это лучший способ прочувствовать, зачем вообще нужен этот пол, каким бы ни было исходное намерение строителей.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Роспись на fusuma (раздвижные двери) выполнена художниками школы Kanō — рода, служившего Tokugawa на протяжении двухсот лет. В каждой комнате сюжет росписи соответствует статусу тех, кого в ней принимали.</div>
       <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Оригинальные деревья на территории почти отсутствовали намеренно — опадающая листва осенью напоминала сёгуну и самураям о быстротечности жизни, а это считалось нежелательным настроением для резиденции власти. Сегодняшний сад — уже более поздняя пристройка.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Walk the corridor slowly and try to step silently — almost no one manages it, and it's the best way to feel what this floor is for, whatever the builders' original intent actually was.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The paintings on the fusuma (sliding doors) were done by artists of the Kanō school, which served the Tokugawa for two hundred years. In each room, the subject of the painting matches the status of whoever was received there.</div>
+      <div class="note"><span class="note-tag tag-tip">Practical tip</span><br>The grounds were deliberately kept almost treeless at first — falling autumn leaves reminded the shogun and his samurai of life's impermanence, an unwelcome mood for a seat of power. Today's garden is a later addition.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта <strong>8:45–17:00</strong> (последний вход в 16:00), дворец Ninomaru — до <strong>16:00</strong>. Закрыт по вторникам в январе, июле, августе и декабре — на даты этой поездки не попадает. Вход платный, около 600–1000 иен в зависимости от того, включён ли дворец.</p>
+        <p data-lang="ru">Территория открыта <strong>8:45–17:00</strong> (последний вход в 16:00), дворец Ninomaru — до <strong>16:00</strong>. Закрыт по вторникам в январе, июле, августе и декабре — на даты этой поездки не попадает. Вход платный, около 600–1000 иен в зависимости от того, включён ли дворец.</p>
+        <p data-lang="en" style="display:none;">Grounds open <strong>8:45–17:00</strong> (last entry 16:00), Ninomaru palace until <strong>16:00</strong>. Closed Tuesdays in January, July, August, and December — doesn't affect this trip's dates. Paid entry, around 600–1000 yen depending on whether the palace is included.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Битва при Sekigahara, 1600 год</a> · <a href="glossary.html#kano-school">школа живописи Kanō</a> · <a href="glossary.html#meiji-restoration">Taisei Hōkan и начало эпохи Meiji</a> · <a href="glossary.html#kobori-enshu">садовник Kobori Enshū</a> · <a href="glossary.html#samurai">кто такие samurai</a> · <a href="glossary.html#ninja-shinobi">правда о «соловьином поле» и ninja</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Битва при Sekigahara, 1600 год</a> · <a href="glossary.html#kano-school">школа живописи Kanō</a> · <a href="glossary.html#meiji-restoration">Taisei Hōkan и начало эпохи Meiji</a> · <a href="glossary.html#kobori-enshu">садовник Kobori Enshū</a> · <a href="glossary.html#samurai">кто такие samurai</a> · <a href="glossary.html#ninja-shinobi">правда о «соловьином поле» и ninja</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Battle of Sekigahara, 1600</a> · <a href="glossary.html#kano-school">the Kanō school of painting</a> · <a href="glossary.html#meiji-restoration">Taisei Hōkan and the start of the Meiji era</a> · <a href="glossary.html#kobori-enshu">garden designer Kobori Enshū</a> · <a href="glossary.html#samurai">who the samurai were</a> · <a href="glossary.html#ninja-shinobi">the truth about the "nightingale floor" and ninja</a></p>
 
     <hr>
 
-    <span class="place-kicker">Чай</span>
+    <span class="place-kicker" data-lang="ru">Чай</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Tea</span>
     <h2 class="section-title -minor" id="loc-giontsujiri">Gion Tsujiri Main Store</h2>
-    <span class="place-caption">Жернова мелют матчу тем же способом полтора века</span>
+    <span class="place-caption" data-lang="ru">Жернова мелют матчу тем же способом полтора века</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The same millstone grind, a century and a half unchanged</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Gion Tsujiri</span></div></figure>
       <div>
-        <p>История началась в 1860 году в деревне Uji, когда Tsuji Riemon открыл лавку по продаже местного чая — того самого <strong>Uji tea</strong>, который до сих пор считается эталоном японской чайной культуры. Название «Gion Tsujiri» магазин получил только в 1948 году, когда третье поколение семьи открыло флагманский магазин в квартале Gion.</p>
-        <p>Каменные жернова здесь до сих пор мелют матчу тем же неспешным способом, что и полтора века назад — на выходе получается около 40 граммов порошка в час. Это не маркетинговый жест: более быстрый помол нагревает лист и разрушает и цвет, и аромат матчи.</p>
+        <p data-lang="ru">История началась в 1860 году в деревне Uji, когда Tsuji Riemon открыл лавку по продаже местного чая — того самого <strong>Uji tea</strong>, который до сих пор считается эталоном японской чайной культуры. Название «Gion Tsujiri» магазин получил только в 1948 году, когда третье поколение семьи открыло флагманский магазин в квартале Gion.</p>
+        <p data-lang="ru">Каменные жернова здесь до сих пор мелют матчу тем же неспешным способом, что и полтора века назад — на выходе получается около 40 граммов порошка в час. Это не маркетинговый жест: более быстрый помол нагревает лист и разрушает и цвет, и аромат матчи.</p>
+        <p data-lang="en" style="display:none;">The story starts in 1860 in the village of Uji, when Tsuji Riemon opened a shop selling local tea — the very <strong>Uji tea</strong> still regarded as the standard for Japanese tea culture. The name "Gion Tsujiri" only came in 1948, when the third generation of the family opened the flagship store in the Gion district. The stone mills here still grind matcha the same slow way they did a century and a half ago — output is about 40 grams of powder an hour. That's not a marketing gesture: faster grinding heats the leaf and destroys both the color and the aroma of the matcha.</p>
       </div>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Прямо у входа — гигантский <strong>chasen</strong> (бамбуковый венчик для взбивания матчи), доходящий почти до потолка. Обычный размер венчика умещается в ладони — здесь его увеличили в десятки раз как знак того, чему посвящён магазин.</div>
       <div class="note"><span class="note-tag tag-try">Что попробовать</span><br>Мягкое мороженое на матче (matcha soft serve) — простой тест качества: у по-настоящему хорошей матчи вкус горький и сложный, а не просто сладко-зелёный.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Right at the entrance stands a giant <strong>chasen</strong> (bamboo whisk for beating matcha), reaching nearly to the ceiling. A normal whisk fits in your palm — this one's blown up dozens of times over, a sign of what the shop is built around.</div>
+      <div class="note"><span class="note-tag tag-try">Try</span><br>Matcha soft serve — a simple quality test: genuinely good matcha tastes bitter and complex, not just sweet-green.</div>
+    </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Магазин на первом этаже и чайный зал <strong>Saryō Tsujiri</strong> на втором-третьем работают до вечера, обычно до 19:00–20:00. У входа часто очередь — особенно в выходные. Если хочется не взять на вынос, а посидеть — нужно на второй этаж, не на первый: там полноценное меню на посадку (парфе, анмицу, дзензай).</p>
+        <p data-lang="ru">Магазин на первом этаже и чайный зал <strong>Saryō Tsujiri</strong> на втором-третьем работают до вечера, обычно до 19:00–20:00. У входа часто очередь — особенно в выходные. Если хочется не взять на вынос, а посидеть — нужно на второй этаж, не на первый: там полноценное меню на посадку (парфе, анмицу, дзензай).</p>
+        <p data-lang="en" style="display:none;">The ground-floor shop and the <strong>Saryō Tsujiri</strong> tea room on floors two and three run into the evening, usually until 19:00–20:00. Expect a line at the door, especially on weekends. For a sit-down rather than takeaway, head to the second floor, not the first — that's where the full seated menu is (parfait, anmitsu, zenzai).</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Регион Uji и история японского чаеводства · <a href="glossary.html#chado-tea-ceremony">Chadō, Sen no Rikyū и разница между matcha, sencha и gyokuro</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Регион Uji и история японского чаеводства · <a href="glossary.html#chado-tea-ceremony">Chadō, Sen no Rikyū и разница между matcha, sencha и gyokuro</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>The Uji region and the history of Japanese tea growing · <a href="glossary.html#chado-tea-ceremony">Chadō, Sen no Rikyū, and the difference between matcha, sencha, and gyokuro</a></p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="t4">Food & Coffee</h2>
-  <p>Vermillion — лучшая точка для завтрака или раннего перекуса: маленькое меню, но сильный кофе и веганские опции вроде гранолы и хумуса. На Nishiki Market логичнее устроить обед — пробовать понемногу у разных прилавков, не садясь за стол. В Gion Tsujiri вечером хорошо зайти именно за десертом — matcha soft serve или парфе в чайном зале Saryō Tsujiri на втором этаже.</p>
+  <p data-lang="ru">Vermillion — лучшая точка для завтрака или раннего перекуса: маленькое меню, но сильный кофе и веганские опции вроде гранолы и хумуса. На Nishiki Market логичнее устроить обед — пробовать понемногу у разных прилавков, не садясь за стол. В Gion Tsujiri вечером хорошо зайти именно за десертом — matcha soft serve или парфе в чайном зале Saryō Tsujiri на втором этаже.</p>
+  <p data-lang="en" style="display:none;">Vermillion is the best stop for breakfast or an early bite: a small menu, but strong coffee and vegan options like granola and hummus. Nishiki Market makes more sense for lunch — sampling a little at different stalls rather than sitting down. Gion Tsujiri is worth stopping at in the evening specifically for dessert — matcha soft serve or a parfait in the Saryō Tsujiri tea room on the second floor.</p>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Nijō Castle стоит хорошо сопоставить с Kinkaku-ji, если он будет в маршруте позже: один — резиденция военной власти, подчёркнуто сдержанная снаружи и роскошная внутри, другой — павильон, чья роскошь выставлена напоказ. Оба говорят о власти, но на разных языках. Есть и другая линия, которая тянется прямо из Higashiyama Day: Tokugawa Ieyasu, чьи деньги в 1606 году построили Kōdai-ji — храм для вдовы побеждённого им клана Toyotomi, — три года спустя после Sekigahara начал строить именно этот замок как резиденцию новой власти. Круг замкнулся в 1867-м, когда в его же приёмном зале Ninomaru пятнадцатый и последний сёгун Tokugawa сложил эту власть обратно.</p>
-  <p>Есть и прямая связь дальше по маршруту: договор Харриса 1858 года и приход Black Ships коммодора Перри, которые уже встречались в истории Ii Naosuke, — часть того же процесса, который в 1867-м привёл к Taisei Hōkan прямо в стенах Nijō Castle. Fushimi Inari же живёт вне этой политической линии совсем: это гора, которую ни один сёгун и ни один император не в силах был отменить, потому что её строит не государство, а тысячи частных благодарностей.</p>
+  <p data-lang="ru">Nijō Castle стоит хорошо сопоставить с Kinkaku-ji, если он будет в маршруте позже: один — резиденция военной власти, подчёркнуто сдержанная снаружи и роскошная внутри, другой — павильон, чья роскошь выставлена напоказ. Оба говорят о власти, но на разных языках. Есть и другая линия, которая тянется прямо из Higashiyama Day: Tokugawa Ieyasu, чьи деньги в 1606 году построили Kōdai-ji — храм для вдовы побеждённого им клана Toyotomi, — три года спустя после Sekigahara начал строить именно этот замок как резиденцию новой власти. Круг замкнулся в 1867-м, когда в его же приёмном зале Ninomaru пятнадцатый и последний сёгун Tokugawa сложил эту власть обратно.</p>
+  <p data-lang="ru">Есть и прямая связь дальше по маршруту: договор Харриса 1858 года и приход Black Ships коммодора Перри, которые уже встречались в истории Ii Naosuke, — часть того же процесса, который в 1867-м привёл к Taisei Hōkan прямо в стенах Nijō Castle. Fushimi Inari же живёт вне этой политической линии совсем: это гора, которую ни один сёгун и ни один император не в силах был отменить, потому что её строит не государство, а тысячи частных благодарностей.</p>
+  <p data-lang="en" style="display:none;">Worth comparing Nijō Castle to Kinkaku-ji if it's later on the route: one is a military-power residence, pointedly restrained outside and luxurious within; the other is a pavilion whose luxury is put on open display. Both speak about power, just in different languages. There's another thread running straight from Higashiyama Day: Tokugawa Ieyasu, whose money funded Kōdai-ji in 1606, a temple for the widow of the clan he'd just defeated, started building this very castle three years after Sekigahara, as the residence of the new power. The circle closed in 1867, when in that same Ninomaru reception hall, the fifteenth and last Tokugawa shogun laid that power back down.</p>
+  <p data-lang="en" style="display:none;">There's a direct link further along the route too: the 1858 Harris Treaty and the arrival of Commodore Perry's Black Ships, already seen in Ii Naosuke's story, are part of the same process that led to Taisei Hōkan in 1867, right inside the walls of Nijō Castle. Fushimi Inari, by contrast, lives entirely outside this political thread — a mountain no shogun and no emperor could ever cancel, because it isn't built by the state, it's built by thousands of private acts of gratitude.</p>
 
-  <p class="footnote">Fushimi & Nijō Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Fushimi & Nijō Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Fushimi & Nijō Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1109,6 +1224,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,19 +883,25 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">満つれば欠く</span>
-    <blockquote>Что достигло полноты — начинает убывать</blockquote>
-    <span class="quote-author">Японская пословица о луне и приливе</span>
-    <span class="quote-source">Весь сегодняшний день буквально об этом: вода, которая проецируется без единой капли, и вода, которая всё ещё поднимается и опускается по-настоящему</span>
+    <span class="quote-jp" data-lang="ru">満つれば欠く</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">満つれば欠く</span>
+    <blockquote data-lang="ru">Что достигло полноты — начинает убывать</blockquote>
+    <blockquote data-lang="en" style="display:none;">What reaches fullness begins to wane</blockquote>
+    <span class="quote-author" data-lang="ru">Японская пословица о луне и приливе</span>
+    <span class="quote-author" data-lang="en" style="display:none;">A Japanese proverb about the moon and the tide</span>
+    <span class="quote-source" data-lang="ru">Весь сегодняшний день буквально об этом: вода, которая проецируется без единой капли, и вода, которая всё ещё поднимается и опускается по-настоящему</span>
+    <span class="quote-source" data-lang="en" style="display:none;">Today is literally about this: water projected without a single real drop, and water that still genuinely rises and falls</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">6 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">6 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">6 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Hamarikyu Gardens — точно в плане</strong>, это не под вопросом; ниже — только про то, как удобнее до него добраться</li>
       <li><strong>Как доехать до Hamarikyu — два способа</strong>. Пешком/на метро от Odaiba это надёжно и не зависит ни от чего. По воде — красивее, но нужно выбрать правильного перевозчика (см. ниже)</li>
       <li><strong>Два разных оператора лодок, легко перепутать</strong>: «Tokyo Mizube Line» (городской, дешёвый) стоял на ремонте с января 2026, возобновление — «летом 2026» без точной даты, статус на октябрь не гарантирован. «Tokyo Cruise» (частный, кораблики Himiko/Hotaluna) работал всё это время без остановок и ходит по маршруту Odaiba → Hamarikyu. Если едете по воде — это тот, что нужен</li>
@@ -868,11 +909,20 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Toyosu Senkyaku Banrai</strong> — рядом с teamLab, рестораны на 1–2 этажах до 22:00, рыбный рынок закрывается раньше</li>
       <li><strong>Hamarikyu — последний вход в 16:30</strong>, закрытие в 17:00</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Hamarikyu Gardens is firmly on the plan</strong>, that's not in question; the rest below is just about how best to get there</li>
+      <li><strong>Two ways to reach Hamarikyu</strong>. On foot/by metro from Odaiba is reliable and doesn't depend on anything. By water is prettier, but you need to pick the right operator (see below)</li>
+      <li><strong>Two different boat operators, easy to mix up</strong>: "Tokyo Mizube Line" (municipal, cheap) has been under repair since January 2026, resuming "summer 2026" with no exact date, status for October not guaranteed. "Tokyo Cruise" (private, the Himiko/Hotaluna boats) has run without interruption and covers the Odaiba → Hamarikyu route. If going by water, this is the one you want</li>
+      <li><strong>teamLab Planets is in Toyosu</strong>, not Odaiba (moved in 2023); booking and details in <a href="trip-logistics.html">Logistics</a></li>
+      <li><strong>Toyosu Senkyaku Banrai</strong> — right by teamLab, 1st-2nd floor restaurants until 22:00, the fish market closes earlier</li>
+      <li><strong>Hamarikyu</strong> — last entry 16:30, closes at 17:00</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-teamlab">teamLab Planets</button>
     <button class="nav-place-btn" data-target="loc-toyosu">Toyosu Market</button>
     <button class="nav-place-btn" data-target="loc-odaiba">Odaiba waterfront</button>
@@ -887,13 +937,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Логика дня — от полностью придуманного к полностью настоящему. Утро в teamLab Planets: вода без единой капли настоящей, целиком спроецированная и просчитанная. Дальше рынок Toyosu — уже настоящая, живая рыба, но всё равно сцена, выстроенная под туриста. Odaiba — псевдо-Нью-Йорк на насыпном острове.</p>
-      <div class="blockquote">И единственная в этом дне вода, которую не пришлось изобретать, — прилив Hamarikyu, тот же самый, что был здесь ещё при сёгунах.</div>
-      <p>Практически: teamLab с утра (к открытию, если получится — но не ради толпы, а потому что зал комфортнее полупустым), обед в Toyosu, переезд на Yurikamome в Odaiba, набережная и Statue of Liberty во второй половине дня, и Hamarikyu — ближе к вечеру, но не позже 16:30 (последний вход). До Hamarikyu из Odaiba — либо на метро/пешком (надёжно и не зависит от расписания катеров), либо на кораблике Tokyo Cruise, если хочется зайти по воде и время позволяет.</p>
+      <p data-lang="ru">Логика дня — от полностью придуманного к полностью настоящему. Утро в teamLab Planets: вода без единой капли настоящей, целиком спроецированная и просчитанная. Дальше рынок Toyosu — уже настоящая, живая рыба, но всё равно сцена, выстроенная под туриста. Odaiba — псевдо-Нью-Йорк на насыпном острове.</p>
+      <div class="blockquote" data-lang="ru">И единственная в этом дне вода, которую не пришлось изобретать, — прилив Hamarikyu, тот же самый, что был здесь ещё при сёгунах.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the only water in the whole day that didn't have to be invented is the tide at Hamarikyu — the same one that was here under the shoguns.</div>
+      <p data-lang="ru">Практически: teamLab с утра (к открытию, если получится — но не ради толпы, а потому что зал комфортнее полупустым), обед в Toyosu, переезд на Yurikamome в Odaiba, набережная и Statue of Liberty во второй половине дня, и Hamarikyu — ближе к вечеру, но не позже 16:30 (последний вход). До Hamarikyu из Odaiba — либо на метро/пешком (надёжно и не зависит от расписания катеров), либо на кораблике Tokyo Cruise, если хочется зайти по воде и время позволяет.</p>
+      <p data-lang="en" style="display:none;">The day's logic runs from fully invented to fully real. Morning at teamLab Planets: water with not one real drop, entirely projected and computed. Then Toyosu Market — genuine, living fish, but still a scene staged for tourists. Odaiba — pseudo-New York on reclaimed land. Practically: teamLab in the morning (right at opening if it works out — not to beat the crowd, but because the rooms feel better half-empty), lunch at Toyosu, ride the Yurikamome to Odaiba, waterfront and the Statue of Liberty in the afternoon, and Hamarikyu toward evening, but no later than 16:30 (last entry). From Odaiba to Hamarikyu, either metro/on foot (reliable, doesn't depend on boat schedules) or the Tokyo Cruise boat, if you want to arrive by water and time allows.</p>
     </div>
   </details>
 
@@ -901,104 +955,137 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Инсталляция</span>
+    <span class="place-kicker" data-lang="ru">Инсталляция</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Installation</span>
     <h2 class="section-title -major" id="loc-teamlab">teamLab Planets</h2>
-    <span class="place-caption">Вода, которая не мокрая ровно до того момента, пока ты в неё не зайдёшь</span>
+    <span class="place-caption" data-lang="ru">Вода, которая не мокрая ровно до того момента, пока ты в неё не зайдёшь</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Water that isn't wet, right up until you step into it</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>С 2023 года находится в Toyosu, не на прежнем месте в Odaiba — если искать по старым путеводителям, легко промахнуться районом</li>
         <li>Заходишь босиком по щиколотку в воду — это не метафора, а буквальное условие входа: обувь снимается на входе, дальше залы с проекциями, зеркальные полы, подвесной цветочный сад</li>
         <li>В начале 2026 года пространство расширили больше чем вдвое — добавили Athletic Forest и Future Park; на весь маршрут закладывай 1.5–2.5 часа</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Since 2023 it's been in Toyosu, not the old Odaiba spot — following an outdated guidebook can easily send you to the wrong district</li>
+        <li>You walk in barefoot, ankle-deep in water — not a figure of speech, a literal condition of entry: shoes come off at the door, then rooms of projections, mirrored floors, a suspended flower garden</li>
+        <li>In early 2026 the space more than doubled, adding Athletic Forest and Future Park; budget 1.5–2.5 hours for the full route</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>teamLab Planets</span></div></figure>
       <div>
-        <p>Идея коллектива teamLab в том, что искусство перестаёт быть объектом, на который смотрят со стороны, и становится средой, в которую физически входишь — вода отражает твоё собственное движение, рыбы на проекции разбегаются от шагов, а сама граница между произведением и посетителем размывается настолько, что вопрос «где заканчивается инсталляция» перестаёт иметь смысл.</p>
+        <p data-lang="ru">Идея коллектива teamLab в том, что искусство перестаёт быть объектом, на который смотрят со стороны, и становится средой, в которую физически входишь — вода отражает твоё собственное движение, рыбы на проекции разбегаются от шагов, а сама граница между произведением и посетителем размывается настолько, что вопрос «где заканчивается инсталляция» перестаёт иметь смысл.</p>
+        <p data-lang="en" style="display:none;">The teamLab collective's idea is that art stops being an object viewed from outside and becomes an environment you physically enter — the water reflects your own movement, projected fish scatter from your footsteps, and the line between artwork and visitor blurs to the point that "where does the installation end" stops being a meaningful question.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–22:00</strong>, последний вход в 21:00. Билеты — с таймслотом на 15 минут, официальный сайт или Klook; на выходные и праздники раскупают заранее. Бесплатные шкафчики, повторный вход не допускается. Станция — Shin-Toyosu (линия Yurikamome).</p>
+        <p data-lang="ru">Открыт <strong>9:00–22:00</strong>, последний вход в 21:00. Билеты — с таймслотом на 15 минут, официальный сайт или Klook; на выходные и праздники раскупают заранее. Бесплатные шкафчики, повторный вход не допускается. Станция — Shin-Toyosu (линия Yurikamome).</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–22:00</strong>, last entry 21:00. Tickets come with a 15-minute timeslot, from the official site or Klook; weekends and holidays sell out ahead. Free lockers, no re-entry allowed. Station is Shin-Toyosu (Yurikamome line).</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Рынок</span>
+    <span class="place-kicker" data-lang="ru">Рынок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Market</span>
     <h2 class="section-title -minor" id="loc-toyosu">Toyosu Market и Senkyaku Banrai</h2>
-    <span class="place-caption">Рынок, который переехал, и Edo, который построили заново</span>
+    <span class="place-caption" data-lang="ru">Рынок, который переехал, и Edo, который построили заново</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A market that moved, and an Edo built fresh</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Toyosu Market</span></div></figure>
       <div>
-        <p>Toyosu принял функции знаменитого Tsukiji в 2018 году — с галереи можно увидеть знаменитый тунцовый аукцион и торговые ряды сверху, без доступа в сам зал. А рядом, в 2024 году, открыли Senkyaku Banrai — квартал, намеренно построенный «под старину»: балки из дерева региона Tama, черепица с острова Awaji, имитация улиц периода Edo. То есть вы обедаете не в историческом квартале, а в новодельной декорации Edo — ещё один слой того же вопроса о подлинности, что шёл через весь Kyoto и Kanazawa.</p>
+        <p data-lang="ru">Toyosu принял функции знаменитого Tsukiji в 2018 году — с галереи можно увидеть знаменитый тунцовый аукцион и торговые ряды сверху, без доступа в сам зал. А рядом, в 2024 году, открыли Senkyaku Banrai — квартал, намеренно построенный «под старину»: балки из дерева региона Tama, черепица с острова Awaji, имитация улиц периода Edo. То есть вы обедаете не в историческом квартале, а в новодельной декорации Edo — ещё один слой того же вопроса о подлинности, что шёл через весь Kyoto и Kanazawa.</p>
+        <p data-lang="en" style="display:none;">Toyosu took over the famous Tsukiji's role in 2018 — the gallery lets you watch the famous tuna auction and trading floor from above, no access to the floor itself. Right next door, Senkyaku Banrai opened in 2024, a district deliberately built to look old: timber from the Tama region, roof tiles from Awaji Island, streets imitating the Edo period. Which means lunch happens not in a historic district but in a brand-new Edo stage set — another layer of the same authenticity question that ran through all of Kyoto and Kanazawa.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Смотровая площадка рынка — обычно до 17:00, закрыта по воскресеньям и праздникам. Senkyaku Banrai: рестораны 1–2 этажей — до 22:00, рыбные ряды закрываются раньше, около 18:00.</p>
+        <p data-lang="ru">Смотровая площадка рынка — обычно до 17:00, закрыта по воскресеньям и праздникам. Senkyaku Banrai: рестораны 1–2 этажей — до 22:00, рыбные ряды закрываются раньше, около 18:00.</p>
+        <p data-lang="en" style="display:none;">The market viewing deck usually runs until 17:00, closed Sundays and holidays. Senkyaku Banrai: 1st-2nd floor restaurants until 22:00, fish stalls close earlier, around 18:00.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a></p>
 
     <hr>
 
-    <span class="place-kicker">Набережная</span>
+    <span class="place-kicker" data-lang="ru">Набережная</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Waterfront</span>
     <h2 class="section-title -minor" id="loc-odaiba">Odaiba waterfront</h2>
-    <span class="place-caption">Псевдо-Нью-Йорк на насыпном острове</span>
+    <span class="place-caption" data-lang="ru">Псевдо-Нью-Йорк на насыпном острове</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A pseudo-New York on reclaimed land</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Odaiba</span></div></figure>
       <div>
-        <p>Сам остров Odaiba — искусственная насыпь, построенная в 1850-х как оборонительные форты против кораблей коммодора Perry, а в 1990-х перестроенная в выставочно-развлекательный район. Уменьшенная копия нью-йоркской Статуи Свободы стоит здесь с 1998 года — изначально как временный подарок на год франко-японской дружбы, но осталась насовсем, потому что оказалась популярнее, чем ожидали организаторы.</p>
+        <p data-lang="ru">Сам остров Odaiba — искусственная насыпь, построенная в 1850-х как оборонительные форты против кораблей коммодора Perry, а в 1990-х перестроенная в выставочно-развлекательный район. Уменьшенная копия нью-йоркской Статуи Свободы стоит здесь с 1998 года — изначально как временный подарок на год франко-японской дружбы, но осталась насовсем, потому что оказалась популярнее, чем ожидали организаторы.</p>
+        <p data-lang="en" style="display:none;">Odaiba itself is reclaimed land, built in the 1850s as defensive forts against Commodore Perry's ships, then rebuilt in the 1990s into an exhibition and entertainment district. A scaled-down copy of New York's Statue of Liberty has stood here since 1998 — originally meant as a one-year gift for the Year of France in Japan, but it stayed on permanently after turning out more popular than the organizers expected.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Набережная у Statue of Liberty — одна из немногих точек Tokyo, откуда Rainbow Bridge видно целиком, с обеих башен сразу; вечером мост подсвечивается.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Набережная у Statue of Liberty — одна из немногих точек Tokyo, откуда Rainbow Bridge видно целиком, с обеих башен сразу; вечером мост подсвечивается.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>The waterfront by the Statue of Liberty is one of the few spots in Tokyo where you see all of Rainbow Bridge, both towers at once; the bridge lights up in the evening.</div>
 
     <hr>
 
-    <span class="place-kicker">Сад</span>
+    <span class="place-kicker" data-lang="ru">Сад</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Garden</span>
     <h2 class="section-title -major" id="loc-hamarikyu">Hamarikyu Gardens</h2>
-    <span class="place-caption">Единственный сад Tokyo, где вода настоящая и приливная</span>
+    <span class="place-caption" data-lang="ru">Единственный сад Tokyo, где вода настоящая и приливная</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The only Tokyo garden where the water is real and tidal</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Заложен в 1654 году как вилла ветви клана Tokugawa; с 1709-го — резиденция самого сёгуна и охотничьи угодья для соколиной охоты на уток</li>
         <li>Пруд Shioiri-no-Ike — единственный в Tokyo сохранившийся приливной пруд эпохи Edo: вода заходит прямо из Tokyo Bay через систему шлюзов, уровень меняется вместе с настоящим приливом, а не по расписанию фонтана</li>
         <li>После падения сёгуната стал императорской виллой, после войны — общественным парком с 1946 года</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Laid out in 1654 as a villa for a Tokugawa branch family; from 1709 the shogun's own residence and hunting grounds for falconry duck hunting</li>
+        <li>The Shioiri-no-Ike pond is Tokyo's only surviving Edo-era tidal pond — water flows in straight from Tokyo Bay through a sluice system, its level rising and falling with the real tide, not a fountain's schedule</li>
+        <li>Became an imperial villa after the shogunate fell, then a public park after the war, from 1946</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Hamarikyu</span></div></figure>
       <div>
-        <p>Чайный домик Nakajima-no-Ochaya стоит прямо на острове посреди пруда, соединён с берегом деревянными мостиками — сюда сёгуны и придворные дамы приходили смотреть именно на воду, которая сегодня выглядит абсолютным контрастом небоскрёбам Shiodome за спиной. В северной части сохранились подлинные угодья для охоты на уток Koshindo Kamoba — рвы и укрытия, из которых загоняли дичь сетями, редкая деталь именно феодальной, не декоративной функции сада.</p>
+        <p data-lang="ru">Чайный домик Nakajima-no-Ochaya стоит прямо на острове посреди пруда, соединён с берегом деревянными мостиками — сюда сёгуны и придворные дамы приходили смотреть именно на воду, которая сегодня выглядит абсолютным контрастом небоскрёбам Shiodome за спиной. В северной части сохранились подлинные угодья для охоты на уток Koshindo Kamoba — рвы и укрытия, из которых загоняли дичь сетями, редкая деталь именно феодальной, не декоративной функции сада.</p>
+        <p data-lang="en" style="display:none;">The Nakajima-no-Ochaya tea house sits on an island in the middle of the pond, linked to shore by wooden bridges — this is where shoguns and court ladies came specifically to look at water that today reads as a total contrast to the Shiodome skyscrapers behind it. The northern section still has genuine duck-hunting grounds, the Koshindo Kamoba — ditches and blinds used to drive game into nets, a rare surviving detail of the garden's feudal function, not just its decoration.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Весь день до этой точки был построен: teamLab — из света, Senkyaku Banrai — из нового дерева под старину, Odaiba — из насыпного грунта. Здесь строить не пришлось ничего — прилив заходил в этот пруд ещё при сёгунах и остаётся тем же самым физическим явлением сегодня, без единого насоса.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Весь день до этой точки был построен: teamLab — из света, Senkyaku Banrai — из нового дерева под старину, Odaiba — из насыпного грунта. Здесь строить не пришлось ничего — прилив заходил в этот пруд ещё при сёгунах и остаётся тем же самым физическим явлением сегодня, без единого насоса.</p>
+      <p data-lang="en" style="display:none;">Everything before this point in the day was built: teamLab out of light, Senkyaku Banrai out of new timber made to look old, Odaiba out of reclaimed ground. Here nothing had to be built at all — the tide has been coming into this pond since the shoguns, and it remains the exact same physical phenomenon today, with not a single pump.</p>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–17:00</strong>, последний вход в <strong>16:30</strong>. Взрослый билет — около 300 иен. От Odaiba — либо на метро (Yurikamome/Yurakucho до Shiodome, дальше пешком), либо на кораблике Tokyo Cruise (Himiko/Hotaluna) — именно этого оператора, не «Tokyo Mizube Line», у которого статус на осень 2026 не гарантирован.</p>
+        <p data-lang="ru">Открыт <strong>9:00–17:00</strong>, последний вход в <strong>16:30</strong>. Взрослый билет — около 300 иен. От Odaiba — либо на метро (Yurikamome/Yurakucho до Shiodome, дальше пешком), либо на кораблике Tokyo Cruise (Himiko/Hotaluna) — именно этого оператора, не «Tokyo Mizube Line», у которого статус на осень 2026 не гарантирован.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–17:00</strong>, last entry <strong>16:30</strong>. Adult ticket around 300 yen. From Odaiba, either by metro (Yurikamome/Yurakucho to Shiodome, then on foot) or the Tokyo Cruise boat (Himiko/Hotaluna) — that operator specifically, not "Tokyo Mizube Line," whose fall 2026 status isn't guaranteed.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · Shinjuku Gyoen и Meiji Jingu (уже видела) — сады, тоже пережившие смену эпох, но без приливной воды</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · Shinjuku Gyoen и Meiji Jingu (уже видела) — сады, тоже пережившие смену эпох, но без приливной воды</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a> · Shinjuku Gyoen and Meiji Jingu (already seen) — gardens that also outlived a change of eras, just without tidal water</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Hamarikyu закрывает тему, которая шла через весь день с разных сторон: teamLab строит воду из света, Toyosu строит Edo из нового дерева, а Hamarikyu — единственное место, где ничего строить не пришлось, потому что прилив был здесь ещё при сёгунах и остаётся тем же физическим явлением сегодня. Из всех садов поездки — Shinjuku Gyoen, Kenrokuen — этот единственный не иллюстрирует идею воды, а буквально её показывает.</p>
-  <p>А сам остров Odaiba — тоже часть этой темы, только с другой стороны: насыпь, построенная в 1850-х как оборонительные форты против кораблей коммодора Perry, а полтора века спустя перепрофилированная в район развлечений. То, что задумывалось как военная граница страны, закрытой от внешнего мира, стало витриной открытости и глобальной поп-культуры — ещё один разворот на 180 градусов, из тех, что эта поездка показывает регулярно.</p>
+  <p data-lang="ru">Hamarikyu закрывает тему, которая шла через весь день с разных сторон: teamLab строит воду из света, Toyosu строит Edo из нового дерева, а Hamarikyu — единственное место, где ничего строить не пришлось, потому что прилив был здесь ещё при сёгунах и остаётся тем же физическим явлением сегодня. Из всех садов поездки — Shinjuku Gyoen, Kenrokuen — этот единственный не иллюстрирует идею воды, а буквально её показывает.</p>
+  <p data-lang="en" style="display:none;">Hamarikyu closes out a theme that ran through the whole day from different angles: teamLab builds water out of light, Toyosu builds Edo out of new timber, and Hamarikyu is the one place nothing had to be built, because the tide has been here since the shoguns and remains the same physical phenomenon today. Of all the gardens on this trip — Shinjuku Gyoen, Kenrokuen — this is the only one that doesn't illustrate the idea of water, it simply shows it.</p>
+  <p data-lang="ru">А сам остров Odaiba — тоже часть этой темы, только с другой стороны: насыпь, построенная в 1850-х как оборонительные форты против кораблей коммодора Perry, а полтора века спустя перепрофилированная в район развлечений. То, что задумывалось как военная граница страны, закрытой от внешнего мира, стало витриной открытости и глобальной поп-культуры — ещё один разворот на 180 градусов, из тех, что эта поездка показывает регулярно.</p>
+  <p data-lang="en" style="display:none;">And Odaiba itself is part of the same theme, just from the other side: reclaimed land, built in the 1850s as defensive forts against Commodore Perry's ships, repurposed a century and a half later into an entertainment district. What was meant as a military border for a country closed to the outside world became a showcase for openness and global pop culture — another 180-degree flip, one of the kind this trip keeps turning up.</p>
 
-  <p class="footnote">teamLab & Odaiba Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">teamLab & Odaiba Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">teamLab & Odaiba Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1038,6 +1125,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

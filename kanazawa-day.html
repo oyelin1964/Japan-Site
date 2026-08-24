@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,19 +883,25 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">出る杭は打たれる</span>
-    <blockquote>Торчащий гвоздь забивают</blockquote>
-    <span class="quote-author">Японская пословица</span>
-    <span class="quote-source">Клан, который сегодня встретишь, построил на этом принципе всю свою стратегию выживания — и попутно захватил рынок золота</span>
+    <span class="quote-jp" data-lang="ru">出る杭は打たれる</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">出る杭は打たれる</span>
+    <blockquote data-lang="ru">Торчащий гвоздь забивают</blockquote>
+    <blockquote data-lang="en" style="display:none;">The nail that sticks out gets hammered down</blockquote>
+    <span class="quote-author" data-lang="ru">Японская пословица</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Japanese proverb</span>
+    <span class="quote-source" data-lang="ru">Клан, который сегодня встретишь, построил на этом принципе всю свою стратегию выживания — и попутно захватил рынок золота</span>
+    <span class="quote-source" data-lang="en" style="display:none;">The clan you'll meet today built its entire survival strategy on this principle — and cornered the gold market along the way</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">7 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">7 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">7 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>День переезда, но не гонка</strong> — 12:00 у Kyoto Century Hotel это дедлайн выселения, а не время выхода: план — выйти в 9:00–9:30, налегке успеть на утренний поезд</li>
       <li><strong>Поезд Kyoto → Kanazawa</strong> — Thunderbird до Tsuruga (~50 мин) + пересадка (~5–10 мин) + Hokuriku Shinkansen до Kanazawa (~40–50 мин), итого около 2 часов; оба поезда — только с местом, бронь и точное время открытия окна см. в <a href="trip-logistics.html">Logistics</a></li>
       <li><strong>Machi No Odoriba</strong> — заезд 15:00–18:00, оплачено заранее</li>
@@ -869,9 +910,19 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Kris прилетает в Narita сегодня в 17:05</strong>, но отдельно и остаётся жить в Tokyo — встретитесь позже, не в Kanazawa</li>
       <li><strong>Воскресенье</strong> — не идеальный день по толпе в Kanazawa, но иначе в маршрут не встроить</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Travel day, but not a race</strong> — 12:00 at Kyoto Century Hotel is checkout deadline, not the time to leave: the plan is to leave at 9:00–9:30, light and easy for the morning train</li>
+      <li><strong>Kyoto → Kanazawa train</strong> — Thunderbird to Tsuruga (~50 min) + transfer (~5–10 min) + Hokuriku Shinkansen to Kanazawa (~40–50 min), about 2 hours total; both trains are reserved-seat only, see <a href="trip-logistics.html">Logistics</a> for the booking window and exact times</li>
+      <li><strong>Machi No Odoriba</strong> — check-in 15:00–18:00, prepaid</li>
+      <li><strong>Omicho Market and Nagamachi close by 16:30–17:00</strong> — with an early start this is just the order of the day, not a race</li>
+      <li><strong>Kenrokuen isn't today</strong>, deliberately saved for tomorrow morning (opens ~7:00, before the crowds)</li>
+      <li><strong>Kris lands at Narita today at 17:05</strong>, but separately, and is staying in Tokyo — you'll meet up later, not in Kanazawa</li>
+      <li><strong>Sunday</strong> — not the ideal crowd day for Kanazawa, but there's no other way to fit it into the route</li>
+    </ul>
 
-    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem;">Из Kyoto — расчёт по времени</div>
-    <div class="practical-table" style="margin:0.3rem 0 0;">
+    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem;" data-lang="ru">Из Kyoto — расчёт по времени</div>
+    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem; display:none;" data-lang="en">Timing from Kyoto</div>
+    <div class="practical-table" style="margin:0.3rem 0 0;" data-lang="ru">
       <div class="practical-row">
         <div class="practical-label">Выход из отеля</div>
         <div class="practical-value">План — <strong>9:00–9:30</strong>. Формальный дедлайн выселения — 12:00, но ждать его незачем: чем раньше выйдете, тем свободнее весь день в Kanazawa.</div>
@@ -885,11 +936,26 @@ body.site-nav-locked { overflow: hidden; }
         <div class="practical-value">Даже выезд к самому дедлайну (12:00) даёт прибытие ~14:00–14:30 — тесно, но всё ещё рабочий вариант: тогда сразу в Omicho и Nagamachi без остановок, а Castle Park и Higashi Chaya под вечерний свет пойдут в любом случае.</div>
       </div>
     </div>
+    <div class="practical-table" style="margin:0.3rem 0 0; display:none;" data-lang="en">
+      <div class="practical-row">
+        <div class="practical-label">Hotel departure</div>
+        <div class="practical-value">Plan for <strong>9:00–9:30</strong>. The formal checkout deadline is 12:00, but there's no reason to wait for it: the earlier you leave, the freer the whole day in Kanazawa.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Arrival in Kanazawa</div>
+        <div class="practical-value">Leaving at 9:00–9:30 and catching a train soon after puts you there around <strong>11:00–12:00</strong>. Hotel check-in doesn't open until 15:00, so head straight to Omicho Market and Nagamachi first (bags go into station lockers), with plenty of margin before the 16:30–17:00 close.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">If running late</div>
+        <div class="practical-value">Even leaving right at the deadline (12:00) puts you there ~14:00–14:30 — tight, but still workable: go straight to Omicho and Nagamachi with no stops, and Castle Park and Higashi Chaya under evening light still work either way.</div>
+      </div>
+    </div>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-omicho">Omicho Market</button>
     <button class="nav-place-btn" data-target="loc-nagamachi">Nagamachi</button>
     <button class="nav-place-btn" data-target="loc-kanazawacastle">Kanazawa Castle Park</button>
@@ -905,13 +971,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>При выходе из отеля в 9:00–9:30 весь Kanazawa-кусок дня перестаёт быть гонкой и превращается в обычный, хорошо укладывающийся маршрут. Логика всё та же: Omicho Market и внутренние помещения Nagamachi закрываются к 16:30–17:00, а Kanazawa Castle Park, 21st Century Museum и Higashi Chaya работают допоздна и только выигрывают от вечернего света — поэтому дневные пункты идут первыми, вечерние последними, но теперь с запасом, а не впритык.</p>
-      <div class="blockquote">И золото, которым вечером будет светиться Higashi Chaya, два века делали здесь нелегально — под официальным запретом сёгуната.</div>
-      <p>С вокзала — в Omicho Market (сумки, если рано, в камеру хранения), затем в Nagamachi. К середине дня — заселение в Machi No Odoriba, дальше Kanazawa Castle Park и 21st Century Museum без спешки. Завершить день логично в Higashi Chaya, когда дневные лавки уже закрылись, но зажглись бумажные фонари — по общему мнению, это лучшее время для квартала, не худшее.</p>
+      <p data-lang="ru">При выходе из отеля в 9:00–9:30 весь Kanazawa-кусок дня перестаёт быть гонкой и превращается в обычный, хорошо укладывающийся маршрут. Логика всё та же: Omicho Market и внутренние помещения Nagamachi закрываются к 16:30–17:00, а Kanazawa Castle Park, 21st Century Museum и Higashi Chaya работают допоздна и только выигрывают от вечернего света — поэтому дневные пункты идут первыми, вечерние последними, но теперь с запасом, а не впритык.</p>
+      <div class="blockquote" data-lang="ru">И золото, которым вечером будет светиться Higashi Chaya, два века делали здесь нелегально — под официальным запретом сёгуната.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">And the gold that will glow through Higashi Chaya this evening was made here illegally for two centuries — under the shogunate's official ban.</div>
+      <p data-lang="ru">С вокзала — в Omicho Market (сумки, если рано, в камеру хранения), затем в Nagamachi. К середине дня — заселение в Machi No Odoriba, дальше Kanazawa Castle Park и 21st Century Museum без спешки. Завершить день логично в Higashi Chaya, когда дневные лавки уже закрылись, но зажглись бумажные фонари — по общему мнению, это лучшее время для квартала, не худшее.</p>
+      <p data-lang="en" style="display:none;">Leaving the hotel at 9:00–9:30 turns the whole Kanazawa portion of the day from a race into an ordinary, well-paced route. Same logic as before: Omicho Market and Nagamachi's indoor spaces close by 16:30–17:00, while Kanazawa Castle Park, the 21st Century Museum, and Higashi Chaya stay open late and only benefit from evening light — so the daytime stops go first, evening stops last, just now with margin instead of a scramble. From the station, into Omicho Market (bags into station lockers if early), then Nagamachi. By midday, check in at Machi No Odoriba, then an unhurried Kanazawa Castle Park and 21st Century Museum. It makes sense to close the day at Higashi Chaya, once the daytime shops have shut but the paper lanterns have come on — by general consensus, the district's best hour, not its worst.</p>
     </div>
   </details>
 
@@ -919,138 +989,177 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Рынок</span>
+    <span class="place-kicker" data-lang="ru">Рынок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Market</span>
     <h2 class="section-title" id="loc-omicho">Omicho Market</h2>
-    <span class="place-caption">Рынок, который клан построил под себя</span>
+    <span class="place-caption" data-lang="ru">Рынок, который клан построил под себя</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A market the clan built to order</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Omicho Market</span></div></figure>
       <div>
-        <p>До 1721 года рыбные и овощные ряды были разбросаны по всему городу вдоль двух рек. После крупного пожара 1690 года клан Kaga сам стянул их в одно место — не стихийно выросший рынок, а решение сверху, продиктованное логистикой снабжения замка. Сравни с Nishiki Market в Kyoto, которую ты уже видела 29 сентября: там рынок вырос из купеческих гильдий снизу, здесь — построен по приказу.</p>
-        <p>Сегодня это «кухня города» в буквальном смысле — свежая рыба Sea of Japan (nodoguro, amaebi, крабы в сезон) и местные Kaga-овощи, около 170 лавок под одной крышей. Утро — время шеф-поваров, день — уже туристический ажиотаж, но кайсэн-дон здесь по-прежнему готовят для местных, не только на фото.</p>
+        <p data-lang="ru">До 1721 года рыбные и овощные ряды были разбросаны по всему городу вдоль двух рек. После крупного пожара 1690 года клан Kaga сам стянул их в одно место — не стихийно выросший рынок, а решение сверху, продиктованное логистикой снабжения замка. Сравни с Nishiki Market в Kyoto, которую ты уже видела 29 сентября: там рынок вырос из купеческих гильдий снизу, здесь — построен по приказу.</p>
+        <p data-lang="ru">Сегодня это «кухня города» в буквальном смысле — свежая рыба Sea of Japan (nodoguro, amaebi, крабы в сезон) и местные Kaga-овощи, около 170 лавок под одной крышей. Утро — время шеф-поваров, день — уже туристический ажиотаж, но кайсэн-дон здесь по-прежнему готовят для местных, не только на фото.</p>
+        <p data-lang="en" style="display:none;">Before 1721, fish and vegetable stalls were scattered across town along two rivers. After a major fire in 1690, the Kaga clan pulled them together into one place itself — not a market that grew up on its own, but a top-down decision driven by the logistics of supplying the castle. Compare it to Nishiki Market in Kyoto, already seen on September 29th: that one grew from merchant guilds, bottom-up; this one was built by decree. Today it's the city's kitchen in the literal sense — fresh Sea of Japan fish (nodoguro, amaebi, crab in season) and local Kaga vegetables, about 170 stalls under one roof. Mornings belong to chefs, daytime is tourist rush, but the kaisendon bowls here are still cooked for locals, not just for photos.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство лавок работает <strong>9:00–17:00</strong>, некоторые закрываются раньше. 15 минут пешком от Kanazawa Station.</p>
+        <p data-lang="ru">Большинство лавок работает <strong>9:00–17:00</strong>, некоторые закрываются раньше. 15 минут пешком от Kanazawa Station.</p>
+        <p data-lang="en" style="display:none;">Most stalls run <strong>9:00–17:00</strong>, some close earlier. 15 minutes on foot from Kanazawa Station.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -minor" id="loc-nagamachi">Nagamachi Samurai District</h2>
-    <span class="place-caption">Стены, которые кутают в солому</span>
+    <span class="place-caption" data-lang="ru">Стены, которые кутают в солому</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Walls wrapped in straw</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Nagamachi</span></div></figure>
       <div>
-        <p>Квартал среднего самурайства клана Kaga — узкие улицы за глинобитными стенами tsuchi-kabe, за которыми жили не богатейшие вассалы (те стояли ближе к замку), а средний слой служилых людей. Дом Nomura — лучше всего сохранившийся пример, двенадцать поколений одной семьи в одном поместье, с садом с прудом и водопадом внутри стен, которые снаружи выглядят совсем скромно.</p>
-        <p>Зимой стены укутывают соломенными матами komo-gake, чтобы глина не трескалась от мороза — в октябре этого не увидишь, но сама практика жива уже больше века и держится не туристами, а самими жителями квартала.</p>
+        <p data-lang="ru">Квартал среднего самурайства клана Kaga — узкие улицы за глинобитными стенами tsuchi-kabe, за которыми жили не богатейшие вассалы (те стояли ближе к замку), а средний слой служилых людей. Дом Nomura — лучше всего сохранившийся пример, двенадцать поколений одной семьи в одном поместье, с садом с прудом и водопадом внутри стен, которые снаружи выглядят совсем скромно.</p>
+        <p data-lang="ru">Зимой стены укутывают соломенными матами komo-gake, чтобы глина не трескалась от мороза — в октябре этого не увидишь, но сама практика жива уже больше века и держится не туристами, а самими жителями квартала.</p>
+        <p data-lang="en" style="display:none;">The district housed the Kaga clan's middle-ranking samurai — narrow streets behind earthen tsuchi-kabe walls, home not to the wealthiest vassals (who lived closer to the castle) but the mid-level service class. The Nomura house is the best-preserved example — twelve generations of one family in one estate, with a pond-and-waterfall garden hidden behind walls that look quite modest from outside. In winter the walls get wrapped in straw mats, komo-gake, so the clay doesn't crack in the frost — you won't see this in October, but the practice is over a century old and kept alive by the district's own residents, not by tourism.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Улицы открыты постоянно и бесплатно. Дом Nomura — <strong>8:30–17:30</strong>, около 550 иен. 10 минут от Kanazawa Station на автобусе или прямая петля от Omicho Market.</p>
+        <p data-lang="ru">Улицы открыты постоянно и бесплатно. Дом Nomura — <strong>8:30–17:30</strong>, около 550 иен. 10 минут от Kanazawa Station на автобусе или прямая петля от Omicho Market.</p>
+        <p data-lang="en" style="display:none;">Streets are always open, free. The Nomura house is open <strong>8:30–17:30</strong>, around 550 yen. 10 minutes from Kanazawa Station by bus, or a direct loop from Omicho Market.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#samurai">Samurai — те, кто служит</a> · клан Maeda и стратегия культурного смирения — см. следующую карточку</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#samurai">Samurai — те, кто служит</a> · клан Maeda и стратегия культурного смирения — см. следующую карточку</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#samurai">Samurai — those who serve</a> · the Maeda clan and its strategy of cultural restraint — see the next card</p>
 
     <hr>
 
-    <span class="place-kicker">Замок</span>
+    <span class="place-kicker" data-lang="ru">Замок</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Castle</span>
     <h2 class="section-title -major" id="loc-kanazawacastle">Kanazawa Castle Park</h2>
-    <span class="place-caption">Дом, который был богаче всех, кроме сёгуна</span>
+    <span class="place-caption" data-lang="ru">Дом, который был богаче всех, кроме сёгуна</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The house that was richer than everyone but the shogun</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Резиденция клана Maeda 280 с лишним лет; официальный доход домена Kaga — около 1,2 миллиона koku, второе богатство в Japan после самого сёгуна Tokugawa</li>
         <li>Maeda были tozama — «внешними» даймё, не входившими в изначальный круг союзников Tokugawa, а значит, объектом постоянного подозрения именно из-за своего богатства</li>
         <li>Ответ клана — не крепить армию, а демонстративно вкладывать деньги в культуру: чайную церемонию, театр Но, ремёсла, сады — стратегия, а не просто вкус</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Home to the Maeda clan for over 280 years; the Kaga domain's official income was about 1.2 million koku, the second-richest in Japan after the shogun's own house</li>
+        <li>The Maeda were tozama, "outside" daimyō who weren't part of Tokugawa's original circle of allies — and were under constant suspicion precisely because of their wealth</li>
+        <li>The clan's answer wasn't to build up an army, it was to pointedly pour money into culture — tea ceremony, Noh theater, crafts, gardens — a strategy, not just a taste</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Kanazawa Castle</span></div></figure>
       <div>
-        <p>Логика была простой и довольно системной: сёгунат регулярно ослаблял слишком богатые кланы через санкин-котай (обязательные разорительные поездки в Edo) или прямые конфискации земель под любым предлогом. Maeda обошли эту ловушку, сделав ставку на то, что искусство не читается как военная угроза — и вливая million-koku доход в мастеров, а не в самураев. Ты увидишь результат этой стратегии весь оставшийся день: золото, лак, шёлк, керамика Kanazawa — это не побочный продукт богатства клана, это и есть его стратегия выживания, оформленная как культура.</p>
+        <p data-lang="ru">Логика была простой и довольно системной: сёгунат регулярно ослаблял слишком богатые кланы через санкин-котай (обязательные разорительные поездки в Edo) или прямые конфискации земель под любым предлогом. Maeda обошли эту ловушку, сделав ставку на то, что искусство не читается как военная угроза — и вливая million-koku доход в мастеров, а не в самураев. Ты увидишь результат этой стратегии весь оставшийся день: золото, лак, шёлк, керамика Kanazawa — это не побочный продукт богатства клана, это и есть его стратегия выживания, оформленная как культура.</p>
+        <p data-lang="en" style="display:none;">The logic was simple and fairly systematic: the shogunate routinely weakened wealthy clans through sankin-kōtai (compulsory, ruinously expensive trips to Edo) or outright land confiscation on whatever pretext. The Maeda sidestepped the trap by betting that art doesn't read as a military threat — and pouring their million-koku income into craftsmen instead of soldiers. You'll see the result of that strategy for the rest of the day: Kanazawa's gold, lacquer, silk, ceramics aren't a byproduct of the clan's wealth, they are its survival strategy, dressed up as culture.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Сам замок горел дважды и в основном представляет собой реконструкции разных веков — тот же вопрос подлинности, что вчера в Kinkaku-ji, только здесь никто не считает это трагедией: ворота Ishikawa-mon (1788) и склад Sanjikken Nagaya (1858) официально числятся памятниками, несмотря на то что оба — уже не первая версия себя.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Сам замок горел дважды и в основном представляет собой реконструкции разных веков — тот же вопрос подлинности, что вчера в Kinkaku-ji, только здесь никто не считает это трагедией: ворота Ishikawa-mon (1788) и склад Sanjikken Nagaya (1858) официально числятся памятниками, несмотря на то что оба — уже не первая версия себя.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The castle itself burned down twice and is mostly reconstructions from different centuries — the same question of authenticity as yesterday at Kinkaku-ji, except here no one treats it as a tragedy: the Ishikawa-mon gate (1788) and the Sanjikken Nagaya storehouse (1858) are officially registered monuments, despite neither being the first version of itself.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Территория открыта круглый год, вход свободный на большую часть парка. Вечерняя подсветка — с заката до <strong>21:00</strong>. Рядом с Kenrokuen, который вы оставили на завтра.</p>
+        <p data-lang="ru">Территория открыта круглый год, вход свободный на большую часть парка. Вечерняя подсветка — с заката до <strong>21:00</strong>. Рядом с Kenrokuen, который вы оставили на завтра.</p>
+        <p data-lang="en" style="display:none;">Grounds open year-round, free entry to most of the park. Evening illumination from sunset until <strong>21:00</strong>. Right next to Kenrokuen, saved for tomorrow.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a></p>
 
     <hr>
 
-    <span class="place-kicker">Музей</span>
+    <span class="place-kicker" data-lang="ru">Музей</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Museum</span>
     <h2 class="section-title -minor" id="loc-21stcentury">21st Century Museum</h2>
-    <span class="place-caption">Музей без фасада</span>
+    <span class="place-caption" data-lang="ru">Музей без фасада</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A museum with no facade</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>21st Century Museum</span></div></figure>
       <div>
-        <p>Открыт в 2004 году по проекту бюро SANAA (Kazuyo Sejima и Ryue Nishizawa) — круглое стеклянное здание без главного входа и без задней стороны: у него пять равноправных ворот, обращённых в разные части города. Это архитектурное заявление против традиционной музейной иерархии «парадный фасад vs служебный вход» — здание в буквальном смысле открыто со всех направлений сразу.</p>
-        <p>Самая фотографируемая работа — «Swimming Pool» Leandro Erlich: слой воды поверх стекла создаёт иллюзию, что люди внизу стоят на дне бассейна, а те, кто наверху, смотрят на них сквозь толщу воды. Простой оптический трюк, который считывается сразу и не отпускает потом весь день.</p>
+        <p data-lang="ru">Открыт в 2004 году по проекту бюро SANAA (Kazuyo Sejima и Ryue Nishizawa) — круглое стеклянное здание без главного входа и без задней стороны: у него пять равноправных ворот, обращённых в разные части города. Это архитектурное заявление против традиционной музейной иерархии «парадный фасад vs служебный вход» — здание в буквальном смысле открыто со всех направлений сразу.</p>
+        <p data-lang="ru">Самая фотографируемая работа — «Swimming Pool» Leandro Erlich: слой воды поверх стекла создаёт иллюзию, что люди внизу стоят на дне бассейна, а те, кто наверху, смотрят на них сквозь толщу воды. Простой оптический трюк, который считывается сразу и не отпускает потом весь день.</p>
+        <p data-lang="en" style="display:none;">Opened in 2004, designed by SANAA (Kazuyo Sejima and Ryue Nishizawa) — a round glass building with no main entrance and no back side: it has five equal gates facing different parts of the city. It's an architectural statement against the usual museum hierarchy of "grand facade vs. service entrance" — the building is literally open from every direction at once. The most photographed piece is Leandro Erlich's "Swimming Pool": a layer of water over glass creates the illusion that people below are standing on the pool floor, while people above look down at them through a body of water. A simple optical trick that lands instantly and stays with you the rest of the day.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Бесплатная зона (Interaction Zone, дворы, часть коридоров) открыта до <strong>22:00</strong>. Платная Exhibition Zone с «Swimming Pool» обычно закрывается раньше, около <strong>18:00</strong> — если хочется успеть внутрь, идти сюда сразу после Nagamachi, а не откладывать на самый вечер.</p>
+        <p data-lang="ru">Бесплатная зона (Interaction Zone, дворы, часть коридоров) открыта до <strong>22:00</strong>. Платная Exhibition Zone с «Swimming Pool» обычно закрывается раньше, около <strong>18:00</strong> — если хочется успеть внутрь, идти сюда сразу после Nagamachi, а не откладывать на самый вечер.</p>
+        <p data-lang="en" style="display:none;">The free zone (Interaction Zone, courtyards, part of the corridors) stays open until <strong>22:00</strong>. The paid Exhibition Zone with "Swimming Pool" usually closes earlier, around <strong>18:00</strong> — if you want to get inside, come here right after Nagamachi, not late in the evening.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Квартал</span>
+    <span class="place-kicker" data-lang="ru">Квартал</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">District</span>
     <h2 class="section-title -major" id="loc-higashichaya">Higashi Chaya</h2>
-    <span class="place-caption">Квартал, построенный на запрещённом золоте</span>
+    <span class="place-caption" data-lang="ru">Квартал, построенный на запрещённом золоте</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A district built on forbidden gold</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Официальный квартал чайных домов с 1820 года — деревянные фасады, решётки kōshi, гейко (так в Kanazawa называют гейш) всё ещё работают здесь по вечерам</li>
         <li>В 1696 году сёгунат Tokugawa запретил производство золотой фольги где-либо, кроме Edo и Kyoto — Kaga clan почти два века делал её тайно, маскируя под «ремонт» изделий</li>
         <li>После падения сёгуната в 1868 году эдоская фольга исчезла вместе с самим Edo-производством, а подпольное мастерство Kanazawa выжило — и сегодня даёт около 98–100% всей золотой фольги Japan</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>An official teahouse district since 1820 — wooden facades, kōshi lattice screens, geiko (Kanazawa's term for geisha) still working here in the evenings</li>
+        <li>In 1696 the Tokugawa shogunate banned gold leaf production anywhere except Edo and Kyoto — the Kaga clan made it secretly for almost two centuries, disguising it as "repair work" on other goods</li>
+        <li>After the shogunate fell in 1868, Edo's gold leaf industry vanished along with Edo production itself, while Kanazawa's underground craft survived — and today produces roughly 98–100% of all gold leaf in Japan</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Higashi Chaya</span></div></figure>
       <div>
-        <p>Золотое мороженое, которое продают сегодня туристам на каждом углу квартала, стоит на фундаменте четырёхвекового подполья, а не на маркетинге последних лет.</p>
+        <p data-lang="ru">Золотое мороженое, которое продают сегодня туристам на каждом углу квартала, стоит на фундаменте четырёхвекового подполья, а не на маркетинге последних лет.</p>
+        <p data-lang="en" style="display:none;">The gold-leaf ice cream sold to tourists on every corner of the district today rests on a foundation of four centuries underground, not on recent marketing.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Запрещённое ремесло пережило и сам запрет, и запрещавший его институт: у Edo не осталось преемников фольги, у Kanazawa — осталась вся отрасль целиком. Редкий случай, когда нелегальное производство оказалось устойчивее легального.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Запрещённое ремесло пережило и сам запрет, и запрещавший его институт: у Edo не осталось преемников фольги, у Kanazawa — осталась вся отрасль целиком. Редкий случай, когда нелегальное производство оказалось устойчивее легального.</p>
+      <p data-lang="en" style="display:none;">The banned craft outlived both the ban and the institution that imposed it: Edo has no successors left in gold leaf, Kanazawa kept the entire industry. A rare case where the illegal production turned out more durable than the legal one.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Днём квартал переполнен туристами; после 17:00 большинство лавок закрывается, но именно тогда зажигаются фонари и улица становится тем самым видом, ради которого сюда едут — заходи сюда последним пунктом дня, не первым.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Днём квартал переполнен туристами; после 17:00 большинство лавок закрывается, но именно тогда зажигаются фонари и улица становится тем самым видом, ради которого сюда едут — заходи сюда последним пунктом дня, не первым.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>The district is packed with tourists by day; after 17:00 most shops close, but that's exactly when the lanterns light up and the street becomes the image people actually came for — come here as the last stop of the day, not the first.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Улицы открыты постоянно. Отдельные чайные дома и лавки — обычно до 17:00–18:00, рестораны и бары работают позже.</p>
+        <p data-lang="ru">Улицы открыты постоянно. Отдельные чайные дома и лавки — обычно до 17:00–18:00, рестораны и бары работают позже.</p>
+        <p data-lang="en" style="display:none;">Streets always open. Individual teahouses and shops usually run until 17:00–18:00, restaurants and bars stay open later.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · золото Kanazawa и Kinkaku-ji (день 2 октября) — почти наверняка одна и та же отрасль</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · золото Kanazawa и Kinkaku-ji (день 2 октября) — почти наверняка одна и та же отрасль</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a> · Kanazawa's gold and Kinkaku-ji (October 2nd) — almost certainly the same industry</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="t4">Food & Coffee</h2>
-  <p><strong>Omicho Market</strong> — логичное место для позднего обеда: кайсэн-дон с местным крабом и amaebi, есть стоячие и сидячие варианты прямо между рядами. Вечером в <strong>Higashi Chaya</strong> — золотое мороженое как десерт-достопримечательность, а на полноценный ужин — любой из ресторанов в переулках квартала, где вечерняя тишина после закрытия лавок работает не хуже вида.</p>
+  <p data-lang="ru"><strong>Omicho Market</strong> — логичное место для позднего обеда: кайсэн-дон с местным крабом и amaebi, есть стоячие и сидячие варианты прямо между рядами. Вечером в <strong>Higashi Chaya</strong> — золотое мороженое как десерт-достопримечательность, а на полноценный ужин — любой из ресторанов в переулках квартала, где вечерняя тишина после закрытия лавок работает не хуже вида.</p>
+  <p data-lang="en" style="display:none;"><strong>Omicho Market</strong> is a logical spot for a late lunch: kaisendon with local crab and amaebi, with both standing and seated options right between the stalls. In the evening at <strong>Higashi Chaya</strong>, gold-leaf ice cream works as a dessert-and-sight combined, and for a proper dinner, any of the restaurants tucked into the district's side streets, where the evening quiet after the shops close works as well as the view.</p>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Золото, которое ты видела вчера на Kinkaku-ji, почти наверняка родом отсюда — Kanazawa производит практически всю золотую фольгу Japan, и слой, нанесённый при реставрации 1987 года, с высокой вероятностью вышел из тех же мастерских, что работают в Higashi Chaya сегодня. Разница в статусе показательна: то же самое золото, которое два века делали нелегально и тайно, теперь покрывает главный национальный символ страны.</p>
-  <p>А стратегия клана Maeda — вкладывать богатство в культуру, чтобы не выглядеть военной угрозой, — зеркально повторяет то, что ты уже слышала о Tokugawa Ieyasu и Nijō Castle в Higashiyama Day: тот же сёгунат, который построил свою власть на подавлении слишком сильных соседей, одновременно вынудил один из этих кланов превратиться в главного производителя роскоши в стране. Подозрительность сёгуната случайно профинансировала половину японских ремёсел, которыми восхищаются сегодня.</p>
+  <p data-lang="ru">Золото, которое ты видела вчера на Kinkaku-ji, почти наверняка родом отсюда — Kanazawa производит практически всю золотую фольгу Japan, и слой, нанесённый при реставрации 1987 года, с высокой вероятностью вышел из тех же мастерских, что работают в Higashi Chaya сегодня. Разница в статусе показательна: то же самое золото, которое два века делали нелегально и тайно, теперь покрывает главный национальный символ страны.</p>
+  <p data-lang="ru">А стратегия клана Maeda — вкладывать богатство в культуру, чтобы не выглядеть военной угрозой, — зеркально повторяет то, что ты уже слышала о Tokugawa Ieyasu и Nijō Castle в Higashiyama Day: тот же сёгунат, который построил свою власть на подавлении слишком сильных соседей, одновременно вынудил один из этих кланов превратиться в главного производителя роскоши в стране. Подозрительность сёгуната случайно профинансировала половину японских ремёсел, которыми восхищаются сегодня.</p>
 
-  <p class="footnote">Kanazawa Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Kanazawa Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Kanazawa Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1090,6 +1199,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

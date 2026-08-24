@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,29 +883,42 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">民を貴しと為す</span>
-    <blockquote>Народ важнее всего остального</blockquote>
-    <span class="quote-author">Мэн-цзы, IV век до н.э.</span>
-    <span class="quote-source">Этим принципом советник сёгуна обосновал отказ отстраивать заново главную башню замка — последний полный день в Tokyo начинается с руин башни, которую нарочно не восстановили</span>
+    <span class="quote-jp" data-lang="ru">民を貴しと為す</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">民を貴しと為す</span>
+    <blockquote data-lang="ru">Народ важнее всего остального</blockquote>
+    <blockquote data-lang="en" style="display:none;">The people matter more than anything else</blockquote>
+    <span class="quote-author" data-lang="ru">Мэн-цзы, IV век до н.э.</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Mencius, 4th century BCE</span>
+    <span class="quote-source" data-lang="ru">Этим принципом советник сёгуна обосновал отказ отстраивать заново главную башню замка — последний полный день в Tokyo начинается с руин башни, которую нарочно не восстановили</span>
+    <span class="quote-source" data-lang="en" style="display:none;">A shogunal advisor used this exact principle to justify never rebuilding the castle's main tower — your last full day in Tokyo starts with the ruins of a tower deliberately left unrestored</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">4 момента</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">4 момента</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">4 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Суббота</strong> — Chuo-dori в Ginza перекрывают для пешеходов (hokōsha tengoku), в октябре с 12:00 до 17:00; лучшее время дня для неспешной прогулки по главной улице</li>
       <li><strong>Imperial Palace East Gardens</strong> — бесплатно, без брони; закрыты по понедельникам и пятницам, так что суббота — рабочий день для визита</li>
       <li><strong>Обед — выбор без принуждения</strong>: аутентичные изакая под путями в Yurakucho или depachika (гастрономические подвалы) Mitsukoshi/Matsuya — оба варианта в пешей доступности от дворца</li>
       <li><strong>Это последний полный день в Tokyo</strong> — завтра, 11 октября, только выселение и вылет</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Saturday</strong> — Ginza's Chuo-dori closes to traffic for pedestrians (hokōsha tengoku), 12:00–17:00 in October; the best window of the day for an unhurried walk down the main street</li>
+      <li><strong>Imperial Palace East Gardens</strong> — free, no reservation; closed Mondays and Fridays, so Saturday works fine for a visit</li>
+      <li><strong>Lunch, no pressure either way</strong>: authentic izakaya under the tracks in Yurakucho, or depachika (department-store food halls) at Mitsukoshi/Matsuya — both within walking distance of the palace</li>
+      <li><strong>This is the last full day in Tokyo</strong> — tomorrow, October 11th, is just checkout and the flight</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-eastgardens">Imperial Palace East Gardens</button>
     <button class="nav-place-btn" data-target="loc-yurakucho">Yurakucho / Depachika</button>
     <button class="nav-place-btn" data-target="loc-ginza">Ginza</button>
@@ -884,13 +932,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>День движется по прямой исторической линии, а не по кругу, как многие другие: утро — центр власти Tokugawa, обед — переходная зона между Edo и Meiji, вечер — витрина модернизации, ставшая витриной наших дней. С утра — Imperial Palace East Gardens, пока воздух прохладнее и туристических групп меньше.</p>
-      <div class="blockquote">Единственный «замок» всей поездки, который остался руиной по сознательному выбору, а не по нехватке средств — стоит без крыши уже 367 лет, и это тоже было решением.</div>
-      <p>Дальше — обед в Yurakucho или depachika, оба варианта рядом друг с другом и с дворцом. Вторая половина дня и вечер — Ginza, растянутая ровно настолько, насколько хватит сил: универмаги, Ginza Six, Itoya, и, если совпадёт по времени, пешеходная Chuo-dori после полудня.</p>
+      <p data-lang="ru">День движется по прямой исторической линии, а не по кругу, как многие другие: утро — центр власти Tokugawa, обед — переходная зона между Edo и Meiji, вечер — витрина модернизации, ставшая витриной наших дней. С утра — Imperial Palace East Gardens, пока воздух прохладнее и туристических групп меньше.</p>
+      <div class="blockquote" data-lang="ru">Единственный «замок» всей поездки, который остался руиной по сознательному выбору, а не по нехватке средств — стоит без крыши уже 367 лет, и это тоже было решением.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">The only "castle" of the whole trip that stayed a ruin by deliberate choice, not for lack of funds — it's stood roofless for 367 years, and that was a decision too.</div>
+      <p data-lang="ru">Дальше — обед в Yurakucho или depachika, оба варианта рядом друг с другом и с дворцом. Вторая половина дня и вечер — Ginza, растянутая ровно настолько, насколько хватит сил: универмаги, Ginza Six, Itoya, и, если совпадёт по времени, пешеходная Chuo-dori после полудня.</p>
+      <p data-lang="en" style="display:none;">The day moves along a straight historical line rather than a loop, like many others: morning at the center of Tokugawa power, lunch in the transitional zone between Edo and Meiji, evening in a showcase of modernization that's become today's showcase. Start with the Imperial Palace East Gardens in the morning, while the air's still cool and the tour groups thinner. Then lunch at Yurakucho or depachika, both close to each other and to the palace. The afternoon and evening belong to Ginza, stretched as far as energy allows: department stores, Ginza Six, Itoya, and, if timing lines up, the pedestrian-only Chuo-dori after noon.</p>
     </div>
   </details>
 
@@ -898,89 +950,120 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Сад</span>
+    <span class="place-kicker" data-lang="ru">Сад</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Garden</span>
     <h2 class="section-title -major" id="loc-eastgardens">Imperial Palace East Gardens</h2>
-    <span class="place-caption">Башня, которую нарочно не отстроили</span>
+    <span class="place-caption" data-lang="ru">Башня, которую нарочно не отстроили</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The tower deliberately left unrebuilt</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Это территория Edo Castle — резиденции сёгунов Tokugawa на протяжении 265 лет, крупнейшего замка в мире по площади в своё время</li>
         <li>Главная башня (tenshu), достроенная в 1638 году и на тот момент самая высокая в японской истории, сгорела в Великом пожаре Meireki 1657 года — и больше никогда не была восстановлена</li>
         <li>Каменное основание башни (tenshudai), высотой около 11 метров, сохранилось и открыто для подъёма — сегодня это просто платформа без единой постройки наверху</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>This is the site of Edo Castle, home to the Tokugawa shoguns for 265 years and, in its day, the largest castle in the world by area</li>
+        <li>The main tower (tenshu), completed in 1638 and the tallest in Japanese history at the time, burned in the Great Meireki Fire of 1657 — and was never rebuilt</li>
+        <li>The tower's stone base (tenshudai), about 11 meters tall, survives and is open to climb — today it's simply a platform with no structure on top</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Imperial Palace East Gardens</span></div></figure>
       <div>
-        <p>Пожар Meireki убил около 100 000 человек и выжег большую часть Edo — отчасти потому, что сёгунат прежде запрещал устраивать в городе противопожарные разрывы, не желая открывать прямые линии обзора на замок. После катастрофы старший советник Hoshina Masayuki настоял не восстанавливать башню: город нуждался в перестройке жилья и инфраструктуры, а не в дорогостоящем символе. Решение приняли и больше к нему не возвращались — за все оставшиеся 210 лет правления Tokugawa.</p>
+        <p data-lang="ru">Пожар Meireki убил около 100 000 человек и выжег большую часть Edo — отчасти потому, что сёгунат прежде запрещал устраивать в городе противопожарные разрывы, не желая открывать прямые линии обзора на замок. После катастрофы старший советник Hoshina Masayuki настоял не восстанавливать башню: город нуждался в перестройке жилья и инфраструктуры, а не в дорогостоящем символе. Решение приняли и больше к нему не возвращались — за все оставшиеся 210 лет правления Tokugawa.</p>
+        <p data-lang="en" style="display:none;">The Meireki fire killed around 100,000 people and burned most of Edo — partly because the shogunate had previously banned firebreaks in the city, unwilling to open clear sightlines to the castle. After the disaster, senior advisor Hoshina Masayuki insisted the tower not be rebuilt: the city needed housing and infrastructure rebuilt, not an expensive symbol. The decision was made and never revisited, for all 210 remaining years of Tokugawa rule.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Это единственный «замок» всего вашего маршрута, который остался руиной по сознательному выбору, а не по нехватке средств или интереса: Kinkaku-ji отстроили заново, Kanazawa Castle реконструировали по частям, Nijō Castle стоит нетронутым — а самый важный замок страны, резиденция самого сёгуна, стоит без крыши уже 367 лет.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Это единственный «замок» всего вашего маршрута, который остался руиной по сознательному выбору, а не по нехватке средств или интереса: Kinkaku-ji отстроили заново, Kanazawa Castle реконструировали по частям, Nijō Castle стоит нетронутым — а самый важный замок страны, резиденция самого сёгуна, стоит без крыши уже 367 лет.</p>
+      <p data-lang="en" style="display:none;">This is the only "castle" on the whole route that stayed a ruin by deliberate choice, not for lack of funds or interest: Kinkaku-ji was rebuilt, Kanazawa Castle was reconstructed piece by piece, Nijō Castle stands intact — while the country's most important castle, the shogun's own residence, has stood roofless for 367 years.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>С платформы tenshudai открывается вид на небоскрёбы Marunouchi — редкий кадр, где хорошо видно основание XVII века на фоне стекла XXI-го, без построек между ними.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>С платформы tenshudai открывается вид на небоскрёбы Marunouchi — редкий кадр, где хорошо видно основание XVII века на фоне стекла XXI-го, без построек между ними.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>From the tenshudai platform there's a view of the Marunouchi skyscrapers — a rare shot with the 17th-century base clearly framed against 21st-century glass, nothing in between.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Бесплатно, без брони. Закрыты по <strong>понедельникам и пятницам</strong>. На осмотр — 45–90 минут. Около 90% территории доступно для колясок.</p>
+        <p data-lang="ru">Бесплатно, без брони. Закрыты по <strong>понедельникам и пятницам</strong>. На осмотр — 45–90 минут. Около 90% территории доступно для колясок.</p>
+        <p data-lang="en" style="display:none;">Free, no reservation. Closed <strong>Mondays and Fridays</strong>. Allow 45–90 minutes. About 90% of the grounds are stroller/wheelchair accessible.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · сравнение с Nijō Castle (день 29 сентября) — тот же клан Tokugawa, два прямо противоположных решения о сохранении власти в камне</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo — 250 лет железного мира</a> · сравнение с Nijō Castle (день 29 сентября) — тот же клан Tokugawa, два прямо противоположных решения о сохранении власти в камне</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate — 250 years of enforced peace</a> · a comparison with Nijō Castle (September 29th) — the same Tokugawa clan, two exactly opposite decisions about preserving power in stone</p>
 
     <hr>
 
-    <span class="place-kicker">Обед</span>
+    <span class="place-kicker" data-lang="ru">Обед</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Lunch</span>
     <h2 class="section-title" id="loc-yurakucho">Yurakucho / Depachika</h2>
-    <span class="place-caption">Два разных обеда в пешей доступности</span>
+    <span class="place-caption" data-lang="ru">Два разных обеда в пешей доступности</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Two different lunches, both walkable</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Yurakucho</span></div></figure>
       <div>
-        <p>Yurakucho — переулки прямо под железнодорожными путями JR, с 1950-х облюбованные izakaya для клерков соседних контор: дым от гриля, тесные стойки, атмосфера, которая нарочно не менялась десятилетиями. Альтернатива — depachika, гастрономические подвалы универмагов Mitsukoshi или Matsuya: витрины с деликатесами вместо тесноты, дегустация на ходу вместо сидячего стола, но не менее аутентично по-своему — это тоже японская институция со своей историей.</p>
+        <p data-lang="ru">Yurakucho — переулки прямо под железнодорожными путями JR, с 1950-х облюбованные izakaya для клерков соседних контор: дым от гриля, тесные стойки, атмосфера, которая нарочно не менялась десятилетиями. Альтернатива — depachika, гастрономические подвалы универмагов Mitsukoshi или Matsuya: витрины с деликатесами вместо тесноты, дегустация на ходу вместо сидячего стола, но не менее аутентично по-своему — это тоже японская институция со своей историей.</p>
+        <p data-lang="en" style="display:none;">Yurakucho is a stretch of alleys right under the JR train tracks, favored since the 1950s by izakaya serving clerks from nearby offices: grill smoke, tight counters, an atmosphere deliberately unchanged for decades. The alternative is depachika, the food-hall basements of department stores like Mitsukoshi or Matsuya: display cases of delicacies instead of cramped seating, grazing on the move instead of a sit-down table, but no less authentic in its own way — it's a Japanese institution with its own history too.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Выбор зависит от настроения, не от качества: Yurakucho — если хочется сесть и никуда не спешить, depachika — если утро в саду уже было насыщенным и хочется взять еду на ходу перед Ginza.</div>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika — гастрономический подвал универмага</a></p>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Выбор зависит от настроения, не от качества: Yurakucho — если хочется сесть и никуда не спешить, depachika — если утро в саду уже было насыщенным и хочется взять еду на ходу перед Ginza.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>The choice comes down to mood, not quality: Yurakucho if you want to sit down and take your time, depachika if the morning at the garden was already full and you'd rather grab food on the way to Ginza.</div>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#depachika">Depachika — гастрономический подвал универмага</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#depachika">Depachika — a department store's food-hall basement</a></p>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title -major" id="loc-ginza">Ginza</h2>
-    <span class="place-caption">Серебряный монетный двор, ставший витриной трёх эпох</span>
+    <span class="place-caption" data-lang="ru">Серебряный монетный двор, ставший витриной трёх эпох</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A silver mint that became the showcase of three eras</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Название означает «место, где чеканят серебро» — Tokugawa Ieyasu разместил здесь монетный двор в 1612 году; в 1800-м двор перенесли в Nihonbashi из-за коррупционного скандала, но имя осталось</li>
         <li>В 1872 году квартал выгорел почти полностью — и на пепелище правительство Meiji построило первую в Japan «кирпичную улицу», нанятого британского архитектора Thomas Waters, как витрину западной модернизации</li>
         <li>По выходным (сегодня суббота) главная улица Chuo-dori становится полностью пешеходной — традиция «пешеходного рая», hokōsha tengoku, с 1970-х</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The name means "place where silver is minted" — Tokugawa Ieyasu put a mint here in 1612; the mint moved to Nihonbashi in 1800 after a corruption scandal, but the name stuck</li>
+        <li>The district burned down almost entirely in 1872, and the Meiji government built Japan's first "brick street" on the ashes, designed by hired British architect Thomas Waters, as a showcase of Western modernization</li>
+        <li>On weekends (today's Saturday) the main Chuo-dori becomes fully pedestrian — the "pedestrian paradise" tradition, hokōsha tengoku, dating to the 1970s</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Ginza</span></div></figure>
       <div>
-        <p>Три раза за 400 лет Ginza полностью меняла содержание, ни разу не поменяв имя: сначала государственный монетный двор, потом квартал ремесленников и театров, потом кирпичная витрина Meiji с газовыми фонарями и первыми в стране западными витринами, куда ходили просто посмотреть на «просвещённую Japan», — и, наконец, нынешний квартал глобального люкса. Это ровно тот процесс смены содержания при сохранении оболочки, который ты уже видела в Akihabara вчера, только растянутый не на полвека, а на четыре столетия.</p>
-        <p>Из практического: флагманы Uniqlo и GU — для базового гардероба, Ginza Six — люкс и сад на крыше с бесплатным входом, Itoya (с 1904 года, 12 этажей) — канцелярия и бумага такого уровня, что обращает в свою веру даже равнодушных к канцелярии людей, Ginza Place — просто прогулка и архитектура.</p>
+        <p data-lang="ru">Три раза за 400 лет Ginza полностью меняла содержание, ни разу не поменяв имя: сначала государственный монетный двор, потом квартал ремесленников и театров, потом кирпичная витрина Meiji с газовыми фонарями и первыми в стране западными витринами, куда ходили просто посмотреть на «просвещённую Japan», — и, наконец, нынешний квартал глобального люкса. Это ровно тот процесс смены содержания при сохранении оболочки, который ты уже видела в Akihabara вчера, только растянутый не на полвека, а на четыре столетия.</p>
+        <p data-lang="ru">Из практического: флагманы Uniqlo и GU — для базового гардероба, Ginza Six — люкс и сад на крыше с бесплатным входом, Itoya (с 1904 года, 12 этажей) — канцелярия и бумага такого уровня, что обращает в свою веру даже равнодушных к канцелярии людей, Ginza Place — просто прогулка и архитектура.</p>
+        <p data-lang="en" style="display:none;">Three times in 400 years, Ginza has completely changed its substance without ever changing its name: first a state mint, then a district of craftsmen and theaters, then a brick Meiji showcase with gas lamps and the country's first Western storefronts, where people went just to look at "enlightened Japan" — and finally today's district of global luxury. It's the exact same process of changing content while keeping the shell that you saw yesterday in Akihabara, just stretched not over half a century but over four. Practically: the Uniqlo and GU flagships for a basic wardrobe, Ginza Six for luxury and a free-entry rooftop garden, Itoya (since 1904, 12 floors) for stationery and paper on a level that converts even people indifferent to stationery, Ginza Place for a simple architecture walk.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Hokōsha tengoku в октябре — <strong>12:00–17:00</strong> по субботам, воскресеньям и праздникам. Большинство магазинов работает до 20:00–21:00. Ginza Six и Itoya — без входного билета.</p>
+        <p data-lang="ru">Hokōsha tengoku в октябре — <strong>12:00–17:00</strong> по субботам, воскресеньям и праздникам. Большинство магазинов работает до 20:00–21:00. Ginza Six и Itoya — без входного билета.</p>
+        <p data-lang="en" style="display:none;">Hokōsha tengoku in October runs <strong>12:00–17:00</strong> Saturdays, Sundays, and holidays. Most shops stay open until 20:00–21:00. Ginza Six and Itoya are free to enter.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo</a> — монетный двор 1612 года · <a href="glossary.html#meiji-restoration">Реставрация Meiji</a> — кирпичная витрина 1872 года</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#tokugawa-edo">Сёгунат Tokugawa / Edo</a> — монетный двор 1612 года · <a href="glossary.html#meiji-restoration">Реставрация Meiji</a> — кирпичная витрина 1872 года</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#tokugawa-edo">The Tokugawa / Edo shogunate</a> — the 1612 mint · <a href="glossary.html#meiji-restoration">The Meiji Restoration</a> — the 1872 brick showcase</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Сегодняшний день закрывает тему, которая шла через всю поездку с разных сторон: что происходит с властью, когда она меняет форму, но не место. Nijō Castle (29 сентября) — тот же клан Tokugawa, но замок, который сохранили и в котором в 1867 году сёгун сам объявил о передаче власти императору. Edo Castle — тот же клан, но замок, чью главную башню осознанно оставили руиной ради города. А Ginza — не замок вообще, а всего лишь монетный двор, переживший и сёгунат, и Meiji, и всё, что после, просто потому что деньги, в отличие от власти, никогда не обязаны выглядеть величественно.</p>
-  <p>А смена содержания квартала при сохранении имени и адреса — тот же приём, что вчера в Akihabara (радиодетали → аниме) и позавчера в золоте Kanazawa (запрет → монополия): японские кварталы в этой поездке регулярно оказываются устойчивее любой отдельной эпохи, которая через них прошла.</p>
+  <p data-lang="ru">Сегодняшний день закрывает тему, которая шла через всю поездку с разных сторон: что происходит с властью, когда она меняет форму, но не место. Nijō Castle (29 сентября) — тот же клан Tokugawa, но замок, который сохранили и в котором в 1867 году сёгун сам объявил о передаче власти императору. Edo Castle — тот же клан, но замок, чью главную башню осознанно оставили руиной ради города. А Ginza — не замок вообще, а всего лишь монетный двор, переживший и сёгунат, и Meiji, и всё, что после, просто потому что деньги, в отличие от власти, никогда не обязаны выглядеть величественно.</p>
+  <p data-lang="en" style="display:none;">Today closes out a theme that's run through the whole trip from different angles: what happens to power when it changes shape but not place. Nijō Castle (September 29th) is the same Tokugawa clan, but a castle that was preserved, and in which the shogun himself announced the transfer of power to the emperor in 1867. Edo Castle is the same clan, but a castle whose main tower was deliberately left a ruin for the city's sake. And Ginza isn't a castle at all, just a mint that outlasted the shogunate, Meiji, and everything after — simply because money, unlike power, is never obligated to look majestic.</p>
+  <p data-lang="ru">А смена содержания квартала при сохранении имени и адреса — тот же приём, что вчера в Akihabara (радиодетали → аниме) и позавчера в золоте Kanazawa (запрет → монополия): японские кварталы в этой поездке регулярно оказываются устойчивее любой отдельной эпохи, которая через них прошла.</p>
+  <p data-lang="en" style="display:none;">And a district changing its substance while keeping its name and address is the same trick as Akihabara yesterday (radio parts → anime) and Kanazawa's gold two days ago (ban → monopoly): the Japanese districts in this trip keep turning out sturdier than any single era that passed through them.</p>
 
-  <p class="footnote">Ginza Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Ginza Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Ginza Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1020,6 +1103,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

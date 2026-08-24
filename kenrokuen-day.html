@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,19 +883,25 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">兼六園</span>
-    <blockquote>Простор и уединённость, труд и старина, вода и даль — редкий сад совмещает все шесть сразу</blockquote>
-    <span class="quote-author">По мотивам Ли Гэфэя, «Записки о знаменитых садах Лояна», XI век</span>
-    <span class="quote-source">Классическая китайская теория сада считала эти шесть качеств взаимоисключающими — отсюда и название места, куда идёшь сегодня утром</span>
+    <span class="quote-jp" data-lang="ru">兼六園</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">兼六園</span>
+    <blockquote data-lang="ru">Простор и уединённость, труд и старина, вода и даль — редкий сад совмещает все шесть сразу</blockquote>
+    <blockquote data-lang="en" style="display:none;">Spaciousness and seclusion, artifice and antiquity, water and distant views — few gardens hold all six at once</blockquote>
+    <span class="quote-author" data-lang="ru">По мотивам Ли Гэфэя, «Записки о знаменитых садах Лояна», XI век</span>
+    <span class="quote-author" data-lang="en" style="display:none;">After Li Gefei, "Record of the Famous Gardens of Luoyang," 11th century</span>
+    <span class="quote-source" data-lang="ru">Классическая китайская теория сада считала эти шесть качеств взаимоисключающими — отсюда и название места, куда идёшь сегодня утром</span>
+    <span class="quote-source" data-lang="en" style="display:none;">Classical Chinese garden theory held these six qualities to be mutually exclusive — hence the name of the place you're visiting this morning</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">6 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">6 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">6 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Спокойный день, без гонки</strong> — завтрак включён в Machi No Odoriba на это утро, дальше сад и дорога в Tokyo</li>
       <li><strong>Kenrokuen открыт с 7:00 до 18:00</strong> (график март–15 октября) — идёте туда после завтрака и выселения, не до</li>
       <li><strong>Выселение из Machi No Odoriba до 10:00</strong> — жёсткий дедлайн отеля; сумки можно оставить и забрать позже</li>
@@ -868,9 +909,18 @@ body.site-nav-locked { overflow: hidden; }
       <li><strong>Shinkansen Kanazawa → Tokyo</strong> — прямой Hokuriku Shinkansen без пересадок, около 2.5 часов; бронь и точное время открытия окна см. в <a href="trip-logistics.html">Logistics</a></li>
       <li><strong>Tokyu Stay Ginza</strong> — заезд с 15:00; Kris там уже с 4-го числа, отдельным номером</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>A calm day, no rush</strong> — breakfast is included at Machi No Odoriba this morning, then the garden and the ride to Tokyo</li>
+      <li><strong>Kenrokuen is open 7:00–18:00</strong> (March–15 October schedule) — go there after breakfast and checkout, not before</li>
+      <li><strong>Checkout from Machi No Odoriba by 10:00</strong> — the hotel's hard deadline; bags can be left and picked up later</li>
+      <li><strong>Monday</strong> — the 21st Century Museum is closed Mondays, so it's not on today's list — it was already covered yesterday</li>
+      <li><strong>Shinkansen Kanazawa → Tokyo</strong> — direct Hokuriku Shinkansen, no transfers, about 2.5 hours; see <a href="trip-logistics.html">Logistics</a> for the booking window and exact times</li>
+      <li><strong>Tokyu Stay Ginza</strong> — check-in from 15:00; Kris is already there since the 4th, in a separate room</li>
+    </ul>
 
-    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem;">Из Kanazawa — расчёт по времени</div>
-    <div class="practical-table" style="margin:0.3rem 0 0;">
+    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem;" data-lang="ru">Из Kanazawa — расчёт по времени</div>
+    <div class="day-section-title" style="margin-top:1.1rem; padding-top:1rem; border-top:1px dashed var(--line); font-size:0.72rem; display:none;" data-lang="en">Timing from Kanazawa</div>
+    <div class="practical-table" style="margin:0.3rem 0 0;" data-lang="ru">
       <div class="practical-row">
         <div class="practical-label">Завтрак и выселение</div>
         <div class="practical-value">Завтракаете без спешки, выселяетесь до <strong>10:00</strong>, сумки оставляете в отеле или в камере хранения на вокзале — Kenrokuen идёт уже налегке.</div>
@@ -884,11 +934,26 @@ body.site-nav-locked { overflow: hidden; }
         <div class="practical-value">С учётом сада и возврата за сумками — посадка на Shinkansen ориентировочно к <strong>13:00–13:30</strong>. При переезде ~2.5 часа прибытие в Tokyo — около <strong>15:30–16:00</strong>, то есть практически сразу после открытия заселения в Ginza в 15:00, без лишнего ожидания.</div>
       </div>
     </div>
+    <div class="practical-table" style="margin:0.3rem 0 0; display:none;" data-lang="en">
+      <div class="practical-row">
+        <div class="practical-label">Breakfast & checkout</div>
+        <div class="practical-value">Unhurried breakfast, checkout by <strong>10:00</strong>, bags left at the hotel or a station locker — Kenrokuen happens with nothing to carry.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Kenrokuen</div>
+        <div class="practical-value">Go after 10:00, at an easy pace. The garden won't be empty by this hour, but that's a fair trade for a relaxed morning — an hour for the main loop is plenty.</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Train to Tokyo</div>
+        <div class="practical-value">Factoring in the garden and grabbing the bags — board the Shinkansen roughly by <strong>13:00–13:30</strong>. With a ~2.5-hour ride, arrival in Tokyo lands around <strong>15:30–16:00</strong>, essentially right after Ginza check-in opens at 15:00, no extra waiting.</div>
+      </div>
+    </div>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-kenrokuen">Kenrokuen</button>
   </nav>
 
@@ -900,13 +965,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>День без внутреннего конфликта: одна точка, а дальше просто дорога. Ранний заход в Kenrokuen ради пустого сада — это опция, а не требование: при спокойном завтраке и выселении к 10:00 сад уже не будет безлюдным, но час прогулки в своём темпе всё равно того стоит — просто сам сад и Kotoji-toro будут делить внимание с другими посетителями, а не только с вами.</p>
-      <div class="blockquote">Сад был закрыт для посторонних два века — и распахнулся ровно тогда, когда прятать стало не от кого.</div>
-      <p>После сада — только логистика: забрать сумки, вокзал, прямой Shinkansen до Tokyo без пересадок. Впервые за несколько дней дорога проще, чем накануне — стоит этим воспользоваться и не планировать ничего плотного между поездом и заселением в Ginza.</p>
+      <p data-lang="ru">День без внутреннего конфликта: одна точка, а дальше просто дорога. Ранний заход в Kenrokuen ради пустого сада — это опция, а не требование: при спокойном завтраке и выселении к 10:00 сад уже не будет безлюдным, но час прогулки в своём темпе всё равно того стоит — просто сам сад и Kotoji-toro будут делить внимание с другими посетителями, а не только с вами.</p>
+      <div class="blockquote" data-lang="ru">Сад был закрыт для посторонних два века — и распахнулся ровно тогда, когда прятать стало не от кого.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">The garden was closed to outsiders for two centuries — and opened wide the moment there was no one left to hide it from.</div>
+      <p data-lang="ru">После сада — только логистика: забрать сумки, вокзал, прямой Shinkansen до Tokyo без пересадок. Впервые за несколько дней дорога проще, чем накануне — стоит этим воспользоваться и не планировать ничего плотного между поездом и заселением в Ginza.</p>
+      <p data-lang="en" style="display:none;">A day with no internal conflict: one stop, and after that just travel. An early visit to Kenrokuen for an empty garden is an option, not a requirement — with a relaxed breakfast and a checkout by 10:00, the garden won't be deserted, but an hour's walk at your own pace is still worth it — the garden and Kotoji-toro will just be sharing the view with other visitors, not just you. After the garden it's pure logistics: grab the bags, the station, a direct Shinkansen to Tokyo with no transfers. For the first time in a few days, the travel is simpler than the day before — worth taking advantage of it and not scheduling anything dense between the train and Ginza check-in.</p>
     </div>
   </details>
 
@@ -914,48 +983,64 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Сад</span>
+    <span class="place-kicker" data-lang="ru">Сад</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Garden</span>
     <h2 class="section-title -major" id="loc-kenrokuen">Kenrokuen</h2>
-    <span class="place-caption">Сад, который распахнули, когда прятаться стало не от кого</span>
+    <span class="place-caption" data-lang="ru">Сад, который распахнули, когда прятаться стало не от кого</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The garden thrown open once there was no one left to hide from</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Один из трёх величайших садов Japan (вместе с Kairaku-en и Kōraku-en); заложен в 1676 году пятым лордом Kaga, Maeda Tsunanori, как частная вилла-сад</li>
         <li>Сгорел в 1759-м, восстановлен к 1774-му; нынешнее имя получил в 1822 году — в честь шести качеств идеального сада из китайского трактата XI века, которые классическая теория считала несовместимыми попарно</li>
         <li>Открыт для публики в 1874 году — через три года после того, как домены официально упразднили и клан Maeda потерял феодальную власть</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>One of Japan's three great gardens (alongside Kairaku-en and Kōraku-en); laid out in 1676 by the fifth Kaga lord, Maeda Tsunanori, as a private villa garden</li>
+        <li>Burned down in 1759, restored by 1774; got its current name in 1822, after the six qualities of the ideal garden from an 11th-century Chinese treatise, which classical theory held to be mutually incompatible in pairs</li>
+        <li>Opened to the public in 1874, three years after domains were formally abolished and the Maeda clan lost its feudal power</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Kenrokuen</span></div></figure>
       <div>
-        <p>Шесть качеств — простор и уединённость, труд человека и старина, вода и даль — по китайской теории должны гасить друг друга: простор разрушает уединённость, рукотворность спорит со стариной. Kenrokuen строили почти два века именно для того, чтобы доказать обратное, и это тот редкий случай, когда результат действительно соответствует претензии, а не только названию.</p>
-        <p>Символ сада — двуногий каменный фонарь Kotoji-toro (1760), названный так за сходство с мостиком-подставкой koto, японской цитры; сегодня это фактически логотип всего города, от манхолов до упаковки золотого мороженого. Рядом — старейший в Japan действующий фонтан: никакого насоса, только перепад высоты с пруда Kasumigaike, чистая гидравлика XIX века, замаскированная под украшение, — тот же почерк, что ты уже видела вчера в подпольном золоте Kanazawa: практичное, спрятанное внутри красивого.</p>
+        <p data-lang="ru">Шесть качеств — простор и уединённость, труд человека и старина, вода и даль — по китайской теории должны гасить друг друга: простор разрушает уединённость, рукотворность спорит со стариной. Kenrokuen строили почти два века именно для того, чтобы доказать обратное, и это тот редкий случай, когда результат действительно соответствует претензии, а не только названию.</p>
+        <p data-lang="ru">Символ сада — двуногий каменный фонарь Kotoji-toro (1760), названный так за сходство с мостиком-подставкой koto, японской цитры; сегодня это фактически логотип всего города, от манхолов до упаковки золотого мороженого. Рядом — старейший в Japan действующий фонтан: никакого насоса, только перепад высоты с пруда Kasumigaike, чистая гидравлика XIX века, замаскированная под украшение, — тот же почерк, что ты уже видела вчера в подпольном золоте Kanazawa: практичное, спрятанное внутри красивого.</p>
+        <p data-lang="en" style="display:none;">The six qualities — spaciousness and seclusion, human artifice and antiquity, water and distant views — should cancel each other out by Chinese theory: spaciousness destroys seclusion, artifice fights antiquity. Kenrokuen was built over nearly two centuries specifically to prove the opposite, and it's a rare case where the result actually lives up to the claim, not just the name. The garden's icon is the two-legged stone lantern Kotoji-toro (1760), named for its resemblance to the bridge on a koto, the Japanese zither — today it's essentially the city's logo, showing up on manhole covers and gold-leaf ice cream packaging alike. Nearby stands Japan's oldest working fountain: no pump at all, just the elevation drop from Kasumigaike pond, pure 19th-century hydraulics dressed up as decoration — the same signature you saw yesterday in Kanazawa's underground gold trade: the practical, hidden inside the beautiful.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Сад строили закрытым два века — не для гостей, а для семьи клана. Публике его открыли не из щедрости, а потому что в 1874 году прятать было уже не от кого: сёгунат пал, домены упразднили, и сама система, требовавшая секретности, перестала существовать.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Сад строили закрытым два века — не для гостей, а для семьи клана. Публике его открыли не из щедрости, а потому что в 1874 году прятать было уже не от кого: сёгунат пал, домены упразднили, и сама система, требовавшая секретности, перестала существовать.</p>
+      <p data-lang="en" style="display:none;">The garden was built closed for two centuries — not for guests, for the clan's own family. It wasn't opened to the public out of generosity, but because by 1874 there was no one left to hide it from: the shogunate had fallen, the domains were abolished, and the very system that required secrecy had stopped existing.</p>
     </div>
 
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Знаменитые верёвочные конструкции yukitsuri на соснах — защита от снега, устанавливают их в ноябре; в октябре сосны стоят без них. Не пропущенная деталь, а просто не сезон.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Знаменитые верёвочные конструкции yukitsuri на соснах — защита от снега, устанавливают их в ноябре; в октябре сосны стоят без них. Не пропущенная деталь, а просто не сезон.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The famous rope structures on the pines, yukitsuri, are snow protection, installed in November — the pines stand without them in October. Not a missed detail, just not the season.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Платный вход <strong>7:00–18:00</strong> (график до 15 октября). Бесплатный ранний вход — до открытия, через ворота Katsurazaka или Mayumizaka, без билета. Взрослый билет — 320 иен.</p>
+        <p data-lang="ru">Платный вход <strong>7:00–18:00</strong> (график до 15 октября). Бесплатный ранний вход — до открытия, через ворота Katsurazaka или Mayumizaka, без билета. Взрослый билет — 320 иен.</p>
+        <p data-lang="en" style="display:none;">Paid entry <strong>7:00–18:00</strong> (schedule runs through October 15). Free early entry before opening, through the Katsurazaka or Mayumizaka gates, no ticket needed. Adult ticket 320 yen.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Реставрация Meiji — сверхскоростной прыжок во времени</a> · клан Maeda и стратегия культурного смирения (день 4 октября) · опубличивание частных садов даймё после 1871 года</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Реставрация Meiji — сверхскоростной прыжок во времени</a> · клан Maeda и стратегия культурного смирения (день 4 октября) · опубличивание частных садов даймё после 1871 года</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#meiji-restoration">The Meiji Restoration — a hyper-speed leap in time</a> · the Maeda clan and its strategy of cultural restraint (October 4th) · daimyō private gardens made public after 1871</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Вчера ты видела логику: Maeda прятали богатство под видом искусства, потому что открытая демонстрация силы была опасна при живом сёгунате. Kenrokuen — та же логика, доведённая до конца: частный сад, построенный поколениями клана специально закрытым от посторонних глаз, стал общественным парком ровно в тот момент, когда прятать стало не от кого — сёгунат пал, домены упразднили, и статус секрета потерял смысл вместе с самой системой, которая этот секрет требовала.</p>
-  <p>А фонтан на естественном перепаде высоты — тот же инженерный инстинкт, что ты уже встречала в акведуке Suirokaku у Nanzen-ji (27 сентября): и там, и там красота служит прикрытием для голой инженерии, только раскрыта под разными углами — там это подчёркнуто, здесь спрятано настолько хорошо, что большинство посетителей проходит мимо фонтана, не заметив, что он вообще работает без насоса.</p>
+  <p data-lang="ru">Вчера ты видела логику: Maeda прятали богатство под видом искусства, потому что открытая демонстрация силы была опасна при живом сёгунате. Kenrokuen — та же логика, доведённая до конца: частный сад, построенный поколениями клана специально закрытым от посторонних глаз, стал общественным парком ровно в тот момент, когда прятать стало не от кого — сёгунат пал, домены упразднили, и статус секрета потерял смысл вместе с самой системой, которая этот секрет требовала.</p>
+  <p data-lang="en" style="display:none;">Yesterday you saw the logic: the Maeda hid their wealth behind art, because an open display of power was dangerous under a living shogunate. Kenrokuen is that same logic taken to its conclusion: a private garden, built over generations by the clan specifically closed to outside eyes, became a public park at the exact moment there was no one left to hide it from — the shogunate fell, the domains were abolished, and secrecy lost its purpose along with the system that had required it.</p>
+  <p data-lang="ru">А фонтан на естественном перепаде высоты — тот же инженерный инстинкт, что ты уже встречала в акведуке Suirokaku у Nanzen-ji (27 сентября): и там, и там красота служит прикрытием для голой инженерии, только раскрыта под разными углами — там это подчёркнуто, здесь спрятано настолько хорошо, что большинство посетителей проходит мимо фонтана, не заметив, что он вообще работает без насоса.</p>
+  <p data-lang="en" style="display:none;">And the fountain running on a natural elevation drop is the same engineering instinct you already met in the Suirokaku aqueduct at Nanzen-ji (September 27th): in both cases beauty covers for bare engineering, just revealed from different angles — there it's foregrounded, here it's hidden so well that most visitors walk past the fountain without noticing it runs with no pump at all.</p>
 
-  <p class="footnote">Kenrokuen Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Kenrokuen Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Kenrokuen Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -995,6 +1080,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

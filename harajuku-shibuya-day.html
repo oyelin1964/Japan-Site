@@ -700,6 +700,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -834,7 +863,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -848,30 +883,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">よきをとり あしきをすてて 外国におとらぬ国となすよしもがな</span>
-    <blockquote>Возьмём то, что хорошо, отбросим то, что дурно — пусть страна наша не уступит чужим землям</blockquote>
-    <span class="quote-author">Император Meiji, вака (御製)</span>
-    <span class="quote-source">Стихи выставлены у бочек бургундского вина при входе в Meiji Jingu — квинтэссенция эпохи, которая сегодня приведёт тебя от рукотворного «вечного леса» к Shibuya Crossing</span>
+    <span class="quote-jp" data-lang="ru">よきをとり あしきをすてて 外国におとらぬ国となすよしもがな</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">よきをとり あしきをすてて 外国におとらぬ国となすよしもがな</span>
+    <blockquote data-lang="ru">Возьмём то, что хорошо, отбросим то, что дурно — пусть страна наша не уступит чужим землям</blockquote>
+    <blockquote data-lang="en" style="display:none;">Let us take what is good and discard what is bad, so our country need not fall behind others</blockquote>
+    <span class="quote-author" data-lang="ru">Император Meiji, вака (御製)</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Emperor Meiji, waka (御製)</span>
+    <span class="quote-source" data-lang="ru">Стихи выставлены у бочек бургундского вина при входе в Meiji Jingu — квинтэссенция эпохи, которая сегодня приведёт тебя от рукотворного «вечного леса» к Shibuya Crossing</span>
+    <span class="quote-source" data-lang="en" style="display:none;">The poem is displayed by the Burgundy wine barrels at Meiji Jingu's entrance — the quintessence of an era that today takes you from a man-made "eternal forest" to Shibuya Crossing</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-    <ul>
+    <ul data-lang="ru">
       <li><strong>Пятница, не воскресенье</strong> — уличных танцоров и косплееров у Yoyogi Park сегодня не будет: это чисто воскресный ритуал (Hokoten), в будни площадка пустует</li>
       <li><strong>Meiji Jingu</strong> — лес и храм займут минимум час; в проходе под тории держись сбоку, центр дороги — для ками</li>
       <li><strong>Takeshita Street</strong> — узкая пешеходная улица, к вечеру пятницы уже плотный поток людей</li>
       <li><strong>Meikyoku Kissa Lion</strong> — говорить внутри не принято, Wi-Fi и розеток нет, заказы делаются молча по карточкам</li>
       <li><strong>Grandfather's</strong> — маленький бар у станции Shibuya, пластинки крутят по одной, недорого</li>
     </ul>
+    <ul data-lang="en" style="display:none;">
+      <li><strong>Friday, not Sunday</strong> — no street dancers or cosplayers at Yoyogi Park today: that's a strictly Sunday ritual (Hokoten), the space sits empty on weekdays</li>
+      <li><strong>Meiji Jingu</strong> — forest and shrine take at least an hour; when passing under the torii, keep to the side, the center of the path is for the kami</li>
+      <li><strong>Takeshita Street</strong> — a narrow pedestrian street, already packed by Friday evening</li>
+      <li><strong>Meikyoku Kissa Lion</strong> — talking isn't customary inside, no Wi-Fi or outlets, orders are placed silently with cards</li>
+      <li><strong>Grandfather's</strong> — a small bar near Shibuya station, records played one at a time, inexpensive</li>
+    </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-meijijingu">Meiji Jingu</button>
     <button class="nav-place-btn" data-target="loc-yoyogipark">Yoyogi Park</button>
     <button class="nav-place-btn" data-target="loc-takeshita">Takeshita Street</button>
@@ -892,18 +941,28 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>День распадается на два разных ритма, и стоит держать их как единую дугу, а не два случайных пункта: тихий рукотворный лес утром — и самый людный перекрёсток мира вечером. Meiji Jingu и соседний Yoyogi Park логично пройти в начале дня, пока лес не наполнился шумом города; дальше — сплошной шопинг-коридор Takeshita Street → Cat Street → Omotesando → Aoyama, без резких скачков, который можно растягивать или сжимать по настроению.</p>
-      <div class="blockquote">Самый «древний на вид» лес Токио на деле моложе метро — его посадили нарочно, с расчётом на то, как он будет выглядеть через сто лет, а не сегодня.</div>
-      <p>Shibuya Crossing разумнее приберечь на сумерки: именно тогда неон над перекрёстком и толпа под ним начинают работать вместе, а не порознь. Meikyoku Kissa Lion и Grandfather's — оба хороши как вечерний якорь после толчеи, только в разной тональности: один — молчаливая классика, другой — виниловый бар с недорогим виски.</p>
-      <ul style="margin-top:0.8rem;">
+      <p data-lang="ru">День распадается на два разных ритма, и стоит держать их как единую дугу, а не два случайных пункта: тихий рукотворный лес утром — и самый людный перекрёсток мира вечером. Meiji Jingu и соседний Yoyogi Park логично пройти в начале дня, пока лес не наполнился шумом города; дальше — сплошной шопинг-коридор Takeshita Street → Cat Street → Omotesando → Aoyama, без резких скачков, который можно растягивать или сжимать по настроению.</p>
+      <div class="blockquote" data-lang="ru">Самый «древний на вид» лес Токио на деле моложе метро — его посадили нарочно, с расчётом на то, как он будет выглядеть через сто лет, а не сегодня.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">Tokyo's most "ancient-looking" forest is actually younger than the subway — it was planted deliberately, planned for how it would look a century later, not today.</div>
+      <p data-lang="ru">Shibuya Crossing разумнее приберечь на сумерки: именно тогда неон над перекрёстком и толпа под ним начинают работать вместе, а не порознь. Meikyoku Kissa Lion и Grandfather's — оба хороши как вечерний якорь после толчеи, только в разной тональности: один — молчаливая классика, другой — виниловый бар с недорогим виски.</p>
+      <ul style="margin-top:0.8rem;" data-lang="ru">
         <li><strong>Meiji Jingu → Yoyogi Park</strong> — соседние ворота в ворота, без отдельного перехода</li>
         <li><strong>Harajuku Station → Takeshita Street → Cat Street → Omotesando</strong> — одна связанная прогулка, суммарно около 30–40 минут без остановок</li>
         <li><strong>Omotesando → Shibuya Crossing</strong> — 15–20 минут пешком или одна остановка на метро</li>
         <li><strong>Shibuya Crossing → Grandfather's / Meikyoku Kissa Lion</strong> — оба в нескольких минутах от станции, в разные стороны</li>
+      </ul>
+      <p data-lang="en" style="display:none;">The day breaks into two distinct rhythms, best held as one arc, not two unrelated stops: a quiet man-made forest in the morning, the world's most crowded intersection by evening. Meiji Jingu and neighboring Yoyogi Park make sense early on, before the forest fills with city noise; then a continuous shopping stretch, Takeshita Street → Cat Street → Omotesando → Aoyama, with no sharp jumps, that stretches or compresses depending on mood. Shibuya Crossing is better saved for dusk — that's when the neon above and the crowd below start working together instead of separately. Meikyoku Kissa Lion and Grandfather's both work as an evening anchor after the crush, just in different registers: one silent and classical, the other a vinyl bar with cheap whisky.</p>
+      <ul style="margin-top:0.8rem; display:none;" data-lang="en">
+        <li><strong>Meiji Jingu → Yoyogi Park</strong> — neighboring gates, no separate transfer</li>
+        <li><strong>Harajuku Station → Takeshita Street → Cat Street → Omotesando</strong> — one connected walk, about 30–40 minutes total with no stops</li>
+        <li><strong>Omotesando → Shibuya Crossing</strong> — 15–20 minutes on foot or one metro stop</li>
+        <li><strong>Shibuya Crossing → Grandfather's / Meikyoku Kissa Lion</strong> — both a few minutes from the station, in different directions</li>
       </ul>
     </div>
   </details>
@@ -912,283 +971,383 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Святилище</span>
+    <span class="place-kicker" data-lang="ru">Святилище</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Shrine</span>
     <h2 class="section-title -major" id="loc-meijijingu">Meiji Jingu</h2>
-    <span class="place-caption">Лес, которому нарочно не дают выглядеть новым</span>
+    <span class="place-caption" data-lang="ru">Лес, которому нарочно не дают выглядеть новым</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A forest deliberately kept from looking new</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Лес вокруг храма не природный, а рукотворный: в 1920 году свыше 100 000 деревьев 365 видов посадили 110 000 добровольцев — включая японские общины Кореи, Тайваня и Сахалина</li>
         <li>С момента посадки лес считается священным и его не трогают вообще: упавшие деревья просто оставляют гнить, поэтому за век он стал самоподдерживающейся экосистемой с дикими птицами и енотовидными собаками</li>
         <li>Главные тории — 12 метров высотой, из 1500-летнего тайваньского кипариса; первые ворота 1920 года сгорели от удара молнии в 1966-м</li>
         <li>На подходе — два ряда бочек лицом друг к другу: японское саке от пивоварен со всей страны и бургундское вино — жест в честь увлечения императора Мэйдзи западной культурой</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The forest around the shrine isn't natural, it's man-made: in 1920 over 100,000 trees of 365 species were planted by 110,000 volunteers, including Japanese communities from Korea, Taiwan, and Sakhalin</li>
+        <li>The forest has been considered sacred and left untouched since planting: fallen trees are simply left to rot, so over a century it's become a self-sustaining ecosystem with wild birds and raccoon dogs</li>
+        <li>The main torii stands 12 meters tall, made from a 1,500-year-old Taiwanese cypress; the original 1920 gate burned down after a lightning strike in 1966</li>
+        <li>On the approach, two rows of barrels face each other: Japanese sake from breweries across the country, and Burgundy wine — a gesture honoring Emperor Meiji's fascination with Western culture</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Meiji Jingu</span></div></figure>
       <div>
-        <p>До 1920 года здесь были не древние рощи, а болото, поля и редкий сосняк — ничего священного. Проектировщики во главе с Honda Seiroku (тем же лесоводом, что спроектировал Hibiya Park) сознательно выбирали не то, как деревья будут выглядеть при посадке, а то, как они будут выглядеть через сто и двести лет: сосны первого поколения должны были уступить место дубу и камфорному дереву, и лес — состариться в вечнозелёный, будто он тут всегда стоял.</p>
-        <p>Тории пережили похожую историю обновления: оригинальные ворота 1920 года сделали из 1200-летнего тайваньского кипариса — и молния разбила правый столб в июле 1966-го. Токийский торговец лесом несколько лет искал замену на Тайване, пока не нашёл на склоне горы Danda дерево возрастом 1500 лет; нынешние ворота из него стоят с 1975 года.</p>
+        <p data-lang="ru">До 1920 года здесь были не древние рощи, а болото, поля и редкий сосняк — ничего священного. Проектировщики во главе с Honda Seiroku (тем же лесоводом, что спроектировал Hibiya Park) сознательно выбирали не то, как деревья будут выглядеть при посадке, а то, как они будут выглядеть через сто и двести лет: сосны первого поколения должны были уступить место дубу и камфорному дереву, и лес — состариться в вечнозелёный, будто он тут всегда стоял.</p>
+        <p data-lang="ru">Тории пережили похожую историю обновления: оригинальные ворота 1920 года сделали из 1200-летнего тайваньского кипариса — и молния разбила правый столб в июле 1966-го. Токийский торговец лесом несколько лет искал замену на Тайване, пока не нашёл на склоне горы Danda дерево возрастом 1500 лет; нынешние ворота из него стоят с 1975 года.</p>
+        <p data-lang="en" style="display:none;">Before 1920 this was swamp, fields, and sparse pine, not ancient groves — nothing sacred about it. The planners, led by Honda Seiroku (the same forester who designed Hibiya Park), deliberately chose not how the trees would look at planting, but how they'd look in a hundred or two hundred years: first-generation pines were meant to give way to oak and camphor, the forest aging into an evergreen that looked like it had always been there. The torii had a similar renewal story: the original 1920 gate was made from a 1,200-year-old Taiwanese cypress, and lightning shattered the right pillar in July 1966. A Tokyo timber merchant spent years searching Taiwan for a replacement until he found a 1,500-year-old tree on the slope of Mount Danda; the current gate, made from it, has stood since 1975.</p>
       </div>
     </div>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Самый «древний на вид» лес Токио на деле моложе метро. Лесоводы посадили не то, что красиво выглядит сейчас, а то, что будет выглядеть тысячелетним через сто лет, — и он действительно так выглядит, просто по чужому расчёту, а не по факту возраста.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Самый «древний на вид» лес Токио на деле моложе метро. Лесоводы посадили не то, что красиво выглядит сейчас, а то, что будет выглядеть тысячелетним через сто лет, — и он действительно так выглядит, просто по чужому расчёту, а не по факту возраста.</p>
+      <p data-lang="en" style="display:none;">Tokyo's most "ancient-looking" forest is actually younger than the subway. The foresters didn't plant what looks beautiful now, they planted what would look a thousand years old a century from now — and it does look that way, just by someone else's calculation, not by actual age.</p>
     </div>
 
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Перед тории принято один раз поклониться и пройти сбоку, а не по центру дороги — центр традиционно оставляют для ками.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Донаты бургундского вина идут с 2006 года: раз в год делегация французского ордена Confrérie des Chevaliers du Tastevin приезжает провести церемонию подношения прямо у бочек.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>Custom is to bow once before the torii and pass to the side, not down the center of the path — the center is traditionally reserved for the kami.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br>The Burgundy wine donations have run since 2006: once a year a delegation from the French order Confrérie des Chevaliers du Tastevin comes to hold an offering ceremony right at the barrels.</div>
+    </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт от рассвета до заката, часы меняются по сезону (примерно 5:00–6:30 открытие). Вход бесплатный. Полный круг от южного (Harajuku) входа — около 90 минут с прогулкой по лесу. Северный (Yoyogi) и западный (Sangūbashi) входы заметно тише.</p>
+        <p data-lang="ru">Открыт от рассвета до заката, часы меняются по сезону (примерно 5:00–6:30 открытие). Вход бесплатный. Полный круг от южного (Harajuku) входа — около 90 минут с прогулкой по лесу. Северный (Yoyogi) и западный (Sangūbashi) входы заметно тише.</p>
+        <p data-lang="en" style="display:none;">Open sunrise to sunset, hours shift by season (opening around 5:00–6:30). Free entry. A full loop from the south (Harajuku) entrance, with a walk through the forest, takes about 90 minutes. The north (Yoyogi) and west (Sangūbashi) entrances are noticeably quieter.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja)</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri и рождение современного синто</a> · <a href="glossary.html#torii-vs-mon">Torii vs. mon</a> · Honda Seiroku и рукотворные леса эпохи Meiji</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#shrine">Shrine (jinja)</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri и рождение современного синто</a> · <a href="glossary.html#torii-vs-mon">Torii vs. mon</a> · Honda Seiroku и рукотворные леса эпохи Meiji</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#shrine">Shrine (jinja)</a> · <a href="glossary.html#shinbutsu-shugo">Shinbutsu Bunri and the birth of modern Shinto</a> · <a href="glossary.html#torii-vs-mon">Torii vs. mon</a> · Honda Seiroku and the man-made forests of the Meiji era</p>
 
     <hr>
 
-    <span class="place-kicker">Парк</span>
+    <span class="place-kicker" data-lang="ru">Парк</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Park</span>
     <h2 class="section-title -minor" id="loc-yoyogipark">Yoyogi Park</h2>
-    <span class="place-caption">От военного городка до Олимпийской деревни</span>
+    <span class="place-caption" data-lang="ru">От военного городка до Олимпийской деревни</span>
+    <span class="place-caption" data-lang="en" style="display:none;">From military housing to Olympic village</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>С 1946 по 1963 год здесь стоял Washington Heights — жилой городок для офицеров союзных войск на 800+ домов</li>
         <li>Именно близость к базе невольно запустила моду Harajuku: магазин Kiddy Land на Omotesando начинал с продажи посуды и мелочей семьям американских военных</li>
         <li>В 1964-м опустевшие казармы стали Олимпийской деревней для более чем 5000 спортсменов; один барак — тот, что занимала голландская команда, — уцелел и стоит в парке до сих пор как памятник</li>
         <li>С конца 1970-х это же место — родина Takenoko-zoku, «племени бамбуковых ростков»: но танцуют они по воскресеньям, не сегодня</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>From 1946 to 1963 this was Washington Heights, allied officers' housing spanning 800+ homes</li>
+        <li>The base's proximity unintentionally kicked off Harajuku's fashion scene: the Kiddy Land store on Omotesando started out selling housewares and odds and ends to American military families</li>
+        <li>In 1964, the empty barracks became the Olympic Village for over 5,000 athletes; one barrack, the one used by the Dutch team, survives and still stands in the park as a monument</li>
+        <li>Since the late 1970s this same spot has been the birthplace of the Takenoko-zoku, the "bamboo shoot tribe" — but they dance on Sundays, not today</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Yoyogi Park</span></div></figure>
       <div>
-        <p>До всего этого здесь был военный плац: именно на этом поле в 1910 году капитан Yoshitoshi Tokugawa совершил первый в Japan успешный полёт на моторном самолёте. После 1945-го плац стал американским жилым городком, а в 1964-м, когда территорию вернули Japan к Олимпиаде, часть казарм превратили в Олимпийскую деревню, а рядом Kenzō Tange построил гимнастический комплекс для плавания и баскетбола — его двойной изгиб крыши до сих пор один из самых узнаваемых силуэтов города. Публичным парком место стало только в 1967-м.</p>
-        <p>С конца 1970-х по середину 1990-х ближайшая к парку пешеходная зона на Omotesando каждые выходные превращалась в стихийную сцену: Takenoko-zoku в ярких «харлемских костюмах» и рокабилли-группы в стиле 1950-х танцевали под переносные колонки. Разгонять их власти начали из-за шума грузовиков с аппаратурой, а не из-за самих костюмов.</p>
+        <p data-lang="ru">До всего этого здесь был военный плац: именно на этом поле в 1910 году капитан Yoshitoshi Tokugawa совершил первый в Japan успешный полёт на моторном самолёте. После 1945-го плац стал американским жилым городком, а в 1964-м, когда территорию вернули Japan к Олимпиаде, часть казарм превратили в Олимпийскую деревню, а рядом Kenzō Tange построил гимнастический комплекс для плавания и баскетбола — его двойной изгиб крыши до сих пор один из самых узнаваемых силуэтов города. Публичным парком место стало только в 1967-м.</p>
+        <p data-lang="ru">С конца 1970-х по середину 1990-х ближайшая к парку пешеходная зона на Omotesando каждые выходные превращалась в стихийную сцену: Takenoko-zoku в ярких «харлемских костюмах» и рокабилли-группы в стиле 1950-х танцевали под переносные колонки. Разгонять их власти начали из-за шума грузовиков с аппаратурой, а не из-за самих костюмов.</p>
+        <p data-lang="en" style="display:none;">Before any of that, this was a military parade ground — right on this field in 1910, Captain Yoshitoshi Tokugawa made Japan's first successful powered flight. After 1945 the ground became American housing, and in 1964, when the land was returned to Japan for the Olympics, part of the barracks became the Olympic Village while Kenzō Tange built a swimming and basketball gymnasium nearby — its double-curved roof is still one of the city's most recognizable silhouettes. The site only became a public park in 1967. From the late 1970s to the mid-1990s, the pedestrian zone nearest the park on Omotesando turned into a spontaneous stage every weekend: Takenoko-zoku in bright "Harlem costumes" and 1950s-style rockabilly groups dancing to portable speakers. Authorities started cracking down because of the noise from the equipment trucks, not the costumes themselves.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Уцелевший барак Washington Heights — единственное здание городка, пережившее снос 1960-х; сегодня это тихий музейный экспонат посреди парка, мимо которого проходят, не замечая.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Уцелевший барак Washington Heights — единственное здание городка, пережившее снос 1960-х; сегодня это тихий музейный экспонат посреди парка, мимо которого проходят, не замечая.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The surviving Washington Heights barrack is the only building from the housing complex to escape demolition in the 1960s; today it's a quiet museum piece in the middle of the park that most people walk past without noticing.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Вход свободный, парк открыт круглосуточно, но после темноты освещение слабое. Соседствует с южным входом Meiji Jingu — логично проходить одним заходом.</p>
+        <p data-lang="ru">Вход свободный, парк открыт круглосуточно, но после темноты освещение слабое. Соседствует с южным входом Meiji Jingu — логично проходить одним заходом.</p>
+        <p data-lang="en" style="display:none;">Free entry, park open 24 hours, but lighting is weak after dark. Neighbors Meiji Jingu's south entrance — logical to visit both in one pass.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Washington Heights и оккупационный период Japan · Kenzō Tange и Yoyogi National Gymnasium · Takenoko-zoku и уличная культура Hokoten 1977–1996</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Washington Heights и оккупационный период Japan · Kenzō Tange и Yoyogi National Gymnasium · Takenoko-zoku и уличная культура Hokoten 1977–1996</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Washington Heights and Japan's occupation period · Kenzō Tange and the Yoyogi National Gymnasium · the Takenoko-zoku and Hokoten street culture, 1977–1996</p>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title" id="loc-takeshita">Takeshita Street</h2>
-    <span class="place-caption">Названа бамбуком раньше, чем стала «племенем ростков»</span>
+    <span class="place-caption" data-lang="ru">Названа бамбуком раньше, чем стала «племенем ростков»</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Named for bamboo before it became a "tribe of shoots"</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Takeshita Street</span></div></figure>
       <div>
-        <p>Название буквально значит «под бамбуком» — задолго до кавайной моды здесь росли бамбуковые рощи Meiji-эпохи. Совпадение сработало дважды: когда в 1978 году на этой же улице открылся магазин Boutique Takenoko («Бамбуковый росток»), его костюмами увлеклись танцоры из Yoyogi Park — и субкультура получила имя Takenoko-zoku, «племя бамбуковых ростков», по чистой случайности рифмуясь с самим названием улицы.</p>
-        <p>Коммерческая история короче: тихая жилая улочка 1950-х начала обрастать бутиками в 1970–80-х, когда сюда стянулась молодёжная мода — готическая лолита, decora, gyaru, visual kei, задокументированные уличными фотографами 1990–2000-х. 350 метров сегодня — одна из самых плотных пешеходных зон Токио.</p>
+        <p data-lang="ru">Название буквально значит «под бамбуком» — задолго до кавайной моды здесь росли бамбуковые рощи Meiji-эпохи. Совпадение сработало дважды: когда в 1978 году на этой же улице открылся магазин Boutique Takenoko («Бамбуковый росток»), его костюмами увлеклись танцоры из Yoyogi Park — и субкультура получила имя Takenoko-zoku, «племя бамбуковых ростков», по чистой случайности рифмуясь с самим названием улицы.</p>
+        <p data-lang="ru">Коммерческая история короче: тихая жилая улочка 1950-х начала обрастать бутиками в 1970–80-х, когда сюда стянулась молодёжная мода — готическая лолита, decora, gyaru, visual kei, задокументированные уличными фотографами 1990–2000-х. 350 метров сегодня — одна из самых плотных пешеходных зон Токио.</p>
+        <p data-lang="en" style="display:none;">The name literally means "under the bamboo" — long before kawaii fashion, Meiji-era bamboo groves grew here. The coincidence hit twice: when the shop Boutique Takenoko ("Bamboo Shoot") opened on this same street in 1978, dancers from Yoyogi Park got obsessed with its costumes, and the subculture took the name Takenoko-zoku, the "bamboo shoot tribe," rhyming with the street's own name by pure chance. The commercial history is shorter: a quiet 1950s residential lane started sprouting boutiques in the 1970s–80s as youth fashion moved in — gothic lolita, decora, gyaru, visual kei, all documented by street photographers of the 1990s–2000s. Today, 350 meters of it is one of Tokyo's most densely packed pedestrian zones.</p>
       </div>
     </div>
-    <div class="notes-grid">
+    <div class="notes-grid" data-lang="ru">
       <div class="note"><span class="note-tag tag-try">Что попробовать</span><br><strong>Marion Crepes</strong>, открывшийся здесь в 1976–77-м, изобрёл сам жанр «харадзюкского крепа» — витрину десертов, которую теперь копируют по всей Japan.</div>
       <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br><strong>2nd STREET</strong> — один из немногих магазинов на этой улице, где вместо кавайного новья продают винтаж и секонд-хенд; забавный контраст с остальным потоком.</div>
     </div>
+    <div class="notes-grid" data-lang="en" style="display:none;">
+      <div class="note"><span class="note-tag tag-try">Try</span><br><strong>Marion Crepes</strong>, which opened here in 1976–77, invented the entire genre of the "Harajuku crepe" — a dessert display now copied across Japan.</div>
+      <div class="note"><span class="note-tag tag-attention">Note</span><br><strong>2nd STREET</strong> is one of the few shops on this street selling vintage and secondhand instead of kawaii new goods — an amusing contrast with the rest of the flow.</div>
+    </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Большинство магазинов работают с 10:30–11:00 до 20:00. К вечеру пятницы уже плотно; по субботам-воскресеньям почти невозможно идти свободным шагом.</p>
+        <p data-lang="ru">Большинство магазинов работают с 10:30–11:00 до 20:00. К вечеру пятницы уже плотно; по субботам-воскресеньям почти невозможно идти свободным шагом.</p>
+        <p data-lang="en" style="display:none;">Most shops run 10:30–11:00 to 20:00. Already crowded by Friday evening; on weekends it's nearly impossible to walk at a free pace.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Кавайная культура и японские молодёжные «племена» (zoku) · история района Harajuku как площадки для моды</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Кавайная культура и японские молодёжные «племена» (zoku) · история района Harajuku как площадки для моды</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Kawaii culture and Japan's youth "tribes" (zoku) · the history of Harajuku as a fashion platform</p>
 
     <hr>
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title -minor" id="loc-catstreet">Ura-Harajuku / Cat Street</h2>
-    <span class="place-caption">Променад над закованной в бетон рекой</span>
+    <span class="place-caption" data-lang="ru">Променад над закованной в бетон рекой</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A promenade over a river locked in concrete</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Cat Street</span></div></figure>
       <div>
-        <p>Официальное название — Kyū-Shibuya-gawa Yūhodō, «променад вдоль старой реки Shibuya»: под мостовой в буквальном смысле течёт закованная в бетон река, убранная под землю в 1964 году той же олимпийской подготовкой, что превратила Washington Heights в Yoyogi Park. Прозвище «Cat Street» с историей не связано вовсе — версий три, и ни одна не доказана: то ли от кошек, живших у бывшей реки, то ли от узких извилистых поворотов «как у кошки», то ли от рок-н-ролльной группы Black Cats, выступавшей здесь в 1950-х.</p>
-        <p>Сегодня это Ura-Harajuku — «изнанка Harajuku»: независимые бутики и подобранный винтаж вместо толчеи Takeshita Street и вместо роскоши Omotesando в двух шагах отсюда.</p>
+        <p data-lang="ru">Официальное название — Kyū-Shibuya-gawa Yūhodō, «променад вдоль старой реки Shibuya»: под мостовой в буквальном смысле течёт закованная в бетон река, убранная под землю в 1964 году той же олимпийской подготовкой, что превратила Washington Heights в Yoyogi Park. Прозвище «Cat Street» с историей не связано вовсе — версий три, и ни одна не доказана: то ли от кошек, живших у бывшей реки, то ли от узких извилистых поворотов «как у кошки», то ли от рок-н-ролльной группы Black Cats, выступавшей здесь в 1950-х.</p>
+        <p data-lang="ru">Сегодня это Ura-Harajuku — «изнанка Harajuku»: независимые бутики и подобранный винтаж вместо толчеи Takeshita Street и вместо роскоши Omotesando в двух шагах отсюда.</p>
+        <p data-lang="en" style="display:none;">The official name is Kyū-Shibuya-gawa Yūhodō, "promenade along the old Shibuya river": a river locked in concrete literally flows under the pavement, buried in 1964 by the same Olympic preparations that turned Washington Heights into Yoyogi Park. The nickname "Cat Street" has no proven origin — three theories, none confirmed: cats that lived by the old river, narrow winding turns "like a cat," or a rock 'n' roll band called Black Cats that played here in the 1950s. Today this is Ura-Harajuku, "the backside of Harajuku": independent boutiques and curated vintage instead of Takeshita Street's crush or Omotesando's luxury, just steps from either.</p>
       </div>
     </div>
     <details class="essence-card">
-      <summary><span class="essence-label">По пути на Cat Street</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">По пути на Cat Street</span><span class="essence-label" data-lang="en" style="display:none;">On the way to Cat Street</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li><strong>Iyoshi Cola</strong> — крафтовый лимонад с неожиданной родословной: основатель Kobayashi нашёл рецепт столетней давности, а вкус довёл до ума, разбирая мастерскую покойного деда — мастера традиционной китайской медицины wakanpō. Инструменты и логику трав из этой мастерской он и перенёс в рецептуру колы; второй магазин бренда открылся именно здесь, на Cat Street, в 2021 году</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li><strong>Iyoshi Cola</strong> — a craft soda with an unexpected pedigree: founder Kobayashi found a century-old recipe, then perfected the flavor while clearing out his late grandfather's workshop, a practitioner of traditional Chinese medicine, wakanpō. He carried the tools and herbal logic from that workshop straight into the cola recipe; the brand's second shop opened right here on Cat Street in 2021</li>
+      </ul></div>
     </details>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Река под ногами объясняет заодно и название следующей на сегодня точки: Shibuya (渋谷) переводится как «терпкая/мутная долина» — сам район стоит в русле бывших рек, сходившихся здесь до застройки.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Река под ногами объясняет заодно и название следующей на сегодня точки: Shibuya (渋谷) переводится как «терпкая/мутная долина» — сам район стоит в русле бывших рек, сходившихся здесь до застройки.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The river underfoot also explains the name of today's next stop: Shibuya (渋谷) translates as "astringent/muddy valley" — the district itself sits in the bed of former rivers that converged here before it was built up.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Магазины вдоль улицы обычно работают 11:00–20:00. Часы Iyoshi Cola меняются — сверься при подходе, бренд держит негустой график.</p>
+        <p data-lang="ru">Магазины вдоль улицы обычно работают 11:00–20:00. Часы Iyoshi Cola меняются — сверься при подходе, бренд держит негустой график.</p>
+        <p data-lang="en" style="display:none;">Shops along the street usually run 11:00–20:00. Iyoshi Cola's hours vary — check as you approach, the brand keeps a loose schedule.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Река Shibuya и токийские реки, убранные под землю к Олимпиаде-1964 · независимая бутик-сцена Ura-Harajuku</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Река Shibuya и токийские реки, убранные под землю к Олимпиаде-1964 · независимая бутик-сцена Ura-Harajuku</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>The Shibuya river and Tokyo's rivers buried for the 1964 Olympics · Ura-Harajuku's independent boutique scene</p>
 
     <hr>
 
-    <span class="place-kicker">Проспект</span>
+    <span class="place-kicker" data-lang="ru">Проспект</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Avenue</span>
     <h2 class="section-title -minor" id="loc-omotesando">Omotesando Avenue</h2>
-    <span class="place-caption">Вторая часть того же жеста 1920 года</span>
+    <span class="place-caption" data-lang="ru">Вторая часть того же жеста 1920 года</span>
+    <span class="place-caption" data-lang="en" style="display:none;">The second half of the same 1920 gesture</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Проложен в 1919–1920 годах как парадный подход (sandō) к только что построенному Meiji Jingu — с самого начала не улица, а часть храмового ритуала</li>
         <li>Деревья zelkova вдоль проспекта посажены тогда же, специально под конечный рост через полвека-век — та же логика долгого планирования, что и в самом лесу Meiji Jingu по соседству</li>
         <li>В 2006 году Tadao Ando построил на месте снесённых Dōjunkai Aoyama Apartments (1927, соцжильё после землетрясения Kantō) комплекс Omotesando Hills, специально вкопанный в землю, чтобы не быть выше окружающих деревьев</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Laid out in 1919–1920 as a ceremonial approach (sandō) to the newly built Meiji Jingu — from the start not a street but part of the temple ritual</li>
+        <li>The zelkova trees along the avenue were planted at the same time, specifically for their eventual growth over half a century to a century — the same long-planning logic as the Meiji Jingu forest right next door</li>
+        <li>In 2006 Tadao Ando built the Omotesando Hills complex on the site of the demolished Dōjunkai Aoyama Apartments (1927, post-Kantō-earthquake social housing), deliberately sunk into the ground so it wouldn't rise above the surrounding trees</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Omotesando Avenue</span></div></figure>
       <div>
-        <p>Если Meiji Jingu — лес, спроектированный на век вперёд, то Omotesando — тот же жест, растянутый в проспект: единая композиция храма и подхода к нему, а не два отдельных проекта в разное время. Снос Dōjunkai Aoyama Apartments в начале 2000-х вызвал споры именно поэтому — здание было не просто памятником архитектуры 1920-х, а частью того же исторического слоя, что и сам проспект.</p>
-        <p>Ando частично признал это в проекте: восточное крыло Omotesando Hills воссоздаёт фасад одного из снесённых корпусов Dōjunkai — фрагмент разрушенного здания в буквальном смысле встроен обратно в новое.</p>
+        <p data-lang="ru">Если Meiji Jingu — лес, спроектированный на век вперёд, то Omotesando — тот же жест, растянутый в проспект: единая композиция храма и подхода к нему, а не два отдельных проекта в разное время. Снос Dōjunkai Aoyama Apartments в начале 2000-х вызвал споры именно поэтому — здание было не просто памятником архитектуры 1920-х, а частью того же исторического слоя, что и сам проспект.</p>
+        <p data-lang="ru">Ando частично признал это в проекте: восточное крыло Omotesando Hills воссоздаёт фасад одного из снесённых корпусов Dōjunkai — фрагмент разрушенного здания в буквальном смысле встроен обратно в новое.</p>
+        <p data-lang="en" style="display:none;">If Meiji Jingu is a forest designed a century ahead, Omotesando is the same gesture stretched into an avenue: one unified composition of temple and approach, not two separate projects at different times. The demolition of the Dōjunkai Aoyama Apartments in the early 2000s sparked controversy for exactly that reason — the building wasn't just a piece of 1920s architecture, it was part of the same historical layer as the avenue itself. Ando partly acknowledged that in the design: the east wing of Omotesando Hills recreates the facade of one of the demolished Dōjunkai buildings — a fragment of the destroyed structure literally built back into the new one.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br><strong>MoMA Design Store</strong> на третьем этаже комплекса GYRE — первый филиал музейного магазина MoMA за пределами Нью-Йорка, товары отбирают кураторы самого музея.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br><strong>MoMA Design Store</strong> на третьем этаже комплекса GYRE — первый филиал музейного магазина MoMA за пределами Нью-Йорка, товары отбирают кураторы самого музея.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The <strong>MoMA Design Store</strong> on the third floor of the GYRE complex is the first MoMA museum shop outside New York — the goods are selected by the museum's own curators.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Магазины обычно работают 11:00–20:00. Проспект длиной около 1 км — прогулка туда-обратно займёт около часа; с заходом в боковые улицы и Nezu Museum (Kengo Kuma) — 2–3 часа.</p>
+        <p data-lang="ru">Магазины обычно работают 11:00–20:00. Проспект длиной около 1 км — прогулка туда-обратно займёт около часа; с заходом в боковые улицы и Nezu Museum (Kengo Kuma) — 2–3 часа.</p>
+        <p data-lang="en" style="display:none;">Shops usually run 11:00–20:00. The avenue is about 1 km long — a there-and-back walk takes about an hour; with detours into side streets and the Nezu Museum (Kengo Kuma), 2–3 hours.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Tadao Ando и японский бетонный минимализм · землетрясение Kantō 1923 года и соцжильё Dōjunkai</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Tadao Ando и японский бетонный минимализм · землетрясение Kantō 1923 года и соцжильё Dōjunkai</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>Tadao Ando and Japanese concrete minimalism · the 1923 Kantō earthquake and Dōjunkai social housing</p>
 
     <hr>
 
-    <span class="place-kicker">Магазин</span>
+    <span class="place-kicker" data-lang="ru">Магазин</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Store</span>
     <h2 class="section-title" id="loc-mykita">MYKITA Tokyo</h2>
-    <span class="place-caption">Немецкие очки на японской логике складывания</span>
+    <span class="place-caption" data-lang="ru">Немецкие очки на японской логике складывания</span>
+    <span class="place-caption" data-lang="en" style="display:none;">German glasses built on Japanese folding logic</span>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>MYKITA</span></div></figure>
       <div>
-        <p>Немецкий бренд очков, основанный в 2003 году в Берлине — название происходит от «Kita» (Kindertagesstätte, детский сад): первая мастерская буквально занимала бывшее здание яслей. Первая коллекция была вырезана из тонкого листового металла и согнута вручную без единого винта или пайки — техника, которую основатели напрямую позаимствовали у японского оригами.</p>
-        <p>Получается небольшой круг: немецкий бренд построил инженерию на японской логике складывания, а теперь держит витрину в двух шагах от Meiji Jingu — там, где эта логика родилась.</p>
+        <p data-lang="ru">Немецкий бренд очков, основанный в 2003 году в Берлине — название происходит от «Kita» (Kindertagesstätte, детский сад): первая мастерская буквально занимала бывшее здание яслей. Первая коллекция была вырезана из тонкого листового металла и согнута вручную без единого винта или пайки — техника, которую основатели напрямую позаимствовали у японского оригами.</p>
+        <p data-lang="ru">Получается небольшой круг: немецкий бренд построил инженерию на японской логике складывания, а теперь держит витрину в двух шагах от Meiji Jingu — там, где эта логика родилась.</p>
+        <p data-lang="en" style="display:none;">A German eyewear brand founded in Berlin in 2003 — the name comes from "Kita" (Kindertagesstätte, daycare center): the first workshop literally occupied a former nursery building. The first collection was cut from thin sheet metal and hand-bent with no screws or soldering — a technique the founders borrowed directly from Japanese origami. It comes full circle: a German brand built its engineering on Japanese folding logic, and now keeps a storefront steps from Meiji Jingu, where that logic was born.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Обычные часы бутиков Omotesando/Aoyama — около 11:00–20:00.</p>
+        <p data-lang="ru">Обычные часы бутиков Omotesando/Aoyama — около 11:00–20:00.</p>
+        <p data-lang="en" style="display:none;">Standard Omotesando/Aoyama boutique hours, around 11:00–20:00.</p>
       </div>
     </details>
 
     <hr>
-    <span class="place-kicker">Перекрёсток</span>
+    <span class="place-kicker" data-lang="ru">Перекрёсток</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Crossing</span>
     <h2 class="section-title -major" id="loc-shibuyacrossing">Shibuya Crossing</h2>
-    <span class="place-caption">Дно долины, ставшее самым людным местом планеты</span>
+    <span class="place-caption" data-lang="ru">Дно долины, ставшее самым людным местом планеты</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A valley floor that became the planet's busiest spot</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Пять переходов включаются одновременно: за один цикл зелёного (около 2 минут) здесь успевает пройти до 3000 человек — считается самым людным пешеходным перекрёстком в мире</li>
         <li>Название района, Shibuya (渋谷), буквально значит «терпкая/мутная долина» — перекрёсток в буквальном смысле стоит на дне долины, где раньше сходилось несколько токийских рек, включая ту, что течёт под Cat Street</li>
         <li>У выхода Hachikō — бронзовая статуя пса, который десять лет после смерти хозяина каждый вечер приходил встречать его на этом самом месте</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Five crosswalks light up at once: a single green cycle (about 2 minutes) lets up to 3,000 people cross — said to be the world's busiest pedestrian intersection</li>
+        <li>The district's name, Shibuya (渋谷), literally means "astringent/muddy valley" — the crossing sits literally at the bottom of a valley where several Tokyo rivers used to converge, including the one running under Cat Street</li>
+        <li>By the Hachikō exit stands a bronze statue of the dog who, for ten years after his owner's death, came every evening to meet him at this exact spot</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Shibuya Crossing</span></div></figure>
       <div>
-        <p>История перекрёстка начинается со станции Shibuya 1885 года; движение росло вместе со станцией, и в 1973-м ввели саму систему «scramble» — все машины останавливаются разом со всех сторон, и пешеходы заливают перекрёсток по диагонали, а не только прямо. С тех пор место снималось в десятках фильмов, от «Трудностей перевода» до «Форсажа», и стало почти синонимом Tokyo для тех, кто в Japan никогда не был.</p>
-        <p>Профессор Hidesaburō Ueno завёл щенка акиты по кличке Hachikō в 1923 году; пёс каждый день провожал и встречал хозяина на этой станции. В мае 1925-го Ueno скончался на работе от кровоизлияния — и Hachikō ещё почти десять лет, до самой своей смерти в марте 1935-го, приходил встречать поезд, которым хозяин уже никогда не вернётся. Бронзовую статую поставили в 1934-м, пока пёс был ещё жив, — редкий случай прижизненного памятника.</p>
+        <p data-lang="ru">История перекрёстка начинается со станции Shibuya 1885 года; движение росло вместе со станцией, и в 1973-м ввели саму систему «scramble» — все машины останавливаются разом со всех сторон, и пешеходы заливают перекрёсток по диагонали, а не только прямо. С тех пор место снималось в десятках фильмов, от «Трудностей перевода» до «Форсажа», и стало почти синонимом Tokyo для тех, кто в Japan никогда не был.</p>
+        <p data-lang="ru">Профессор Hidesaburō Ueno завёл щенка акиты по кличке Hachikō в 1923 году; пёс каждый день провожал и встречал хозяина на этой станции. В мае 1925-го Ueno скончался на работе от кровоизлияния — и Hachikō ещё почти десять лет, до самой своей смерти в марте 1935-го, приходил встречать поезд, которым хозяин уже никогда не вернётся. Бронзовую статую поставили в 1934-м, пока пёс был ещё жив, — редкий случай прижизненного памятника.</p>
+        <p data-lang="en" style="display:none;">The crossing's history begins with Shibuya station in 1885; traffic grew with the station, and in 1973 the "scramble" system itself was introduced — all cars stop at once from every direction, and pedestrians flood the intersection diagonally, not just straight across. Since then the place has appeared in dozens of films, from "Lost in Translation" to the "Fast & Furious" franchise, and has become nearly synonymous with Tokyo for people who've never set foot in Japan. Professor Hidesaburō Ueno got an Akita puppy named Hachikō in 1923; the dog saw him off and greeted him at this station every day. In May 1925, Ueno died at work of a hemorrhage — and Hachikō kept coming to meet a train his owner would never be on for almost ten more years, until his own death in March 1935. The bronze statue went up in 1934, while the dog was still alive — a rare case of a monument built for a living subject.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br><strong>Mag's Park</strong> — бесплатная смотровая площадка на крыше Magnet by Shibuya109 (7 этаж), даёт вид на перекрёсток сверху без очереди, которая обычно стоит в Starbucks напротив.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br><strong>Mag's Park</strong> — бесплатная смотровая площадка на крыше Magnet by Shibuya109 (7 этаж), даёт вид на перекрёсток сверху без очереди, которая обычно стоит в Starbucks напротив.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br><strong>Mag's Park</strong>, a free rooftop viewpoint atop Magnet by Shibuya109 (7th floor), gives an overhead view of the crossing without the line that usually forms at the Starbucks across the street.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Общественное пространство, открыто всегда. Пик толпы — вечер и выходные. Для съёмки лучше сумерки: неон уже виден, но естественного света ещё достаточно.</p>
+        <p data-lang="ru">Общественное пространство, открыто всегда. Пик толпы — вечер и выходные. Для съёмки лучше сумерки: неон уже виден, но естественного света ещё достаточно.</p>
+        <p data-lang="en" style="display:none;">Public space, always open. Crowd peaks in the evening and on weekends. Dusk is best for photos — the neon is already visible while there's still enough natural light.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span>Происхождение названия «Shibuya» · «Трудности перевода» и другие фильмы, снятые на перекрёстке</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span>Происхождение названия «Shibuya» · «Трудности перевода» и другие фильмы, снятые на перекрёстке</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span>The origin of the name "Shibuya" · "Lost in Translation" and other films shot at the crossing</p>
 
     <hr>
 
-    <span class="place-kicker">Магазин</span>
+    <span class="place-kicker" data-lang="ru">Магазин</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Store</span>
     <h2 class="section-title" id="loc-tsuchiyakaban">TSUCHIYA KABAN Shibuya Store</h2>
-    <span class="place-caption">Кожа, которой позволяют стареть красиво</span>
+    <span class="place-caption" data-lang="ru">Кожа, которой позволяют стареть красиво</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Leather allowed to age beautifully</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Tsuchiya Kaban</span></div></figure>
       <div>
-        <p>Основан в 1965 году Kunio Tsuchiya, мастером из префектуры Gifu, изначально как мастерская randoseru — тех самых жёстких кожаных ранцев, которые каждый первоклассник в Japan носит ровно шесть лет без права на замену. Именно дисциплина «должен выдержать шесть лет ежедневной жизни ребёнка» легла в основу линии взрослых кожаных изделий, которую бренд запустил в 2000-х — та же строчка, та же одержимость тем, как кожа стареет.</p>
-        <p>В 2022 году сам Tsuchiya, которому тогда было за восемьдесят, получил звание «Современного мастера-ремесленника» от японского Министерства здравоохранения, труда и благосостояния.</p>
+        <p data-lang="ru">Основан в 1965 году Kunio Tsuchiya, мастером из префектуры Gifu, изначально как мастерская randoseru — тех самых жёстких кожаных ранцев, которые каждый первоклассник в Japan носит ровно шесть лет без права на замену. Именно дисциплина «должен выдержать шесть лет ежедневной жизни ребёнка» легла в основу линии взрослых кожаных изделий, которую бренд запустил в 2000-х — та же строчка, та же одержимость тем, как кожа стареет.</p>
+        <p data-lang="ru">В 2022 году сам Tsuchiya, которому тогда было за восемьдесят, получил звание «Современного мастера-ремесленника» от японского Министерства здравоохранения, труда и благосостояния.</p>
+        <p data-lang="en" style="display:none;">Founded in 1965 by Kunio Tsuchiya, a craftsman from Gifu prefecture, originally as a workshop for randoseru — the rigid leather school satchels every first-grader in Japan carries for exactly six years, no substitutions allowed. That discipline, "it has to survive six years of a child's daily life," became the foundation for the adult leather goods line the brand launched in the 2000s — same stitching, same obsession with how the leather ages. In 2022, Tsuchiya himself, by then in his eighties, was named a "Contemporary Master Craftsman" by Japan's Ministry of Health, Labour and Welfare.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag tag-attention">Обрати внимание</span><br>Кожу здесь выбирают и обрабатывают так, чтобы она красиво старела, а не выглядела вечно новой — та же логика, что уже встречалась в глоссарии.</div>
+    <div class="note" data-lang="ru"><span class="note-tag tag-attention">Обрати внимание</span><br>Кожу здесь выбирают и обрабатывают так, чтобы она красиво старела, а не выглядела вечно новой — та же логика, что уже встречалась в глоссарии.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-attention">Note</span><br>The leather here is chosen and treated to age beautifully, not to stay looking eternally new — the same logic already met in the glossary.</div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Обычные часы магазина — около 11:00–20:00.</p>
+        <p data-lang="ru">Обычные часы магазина — около 11:00–20:00.</p>
+        <p data-lang="en" style="display:none;">Standard shop hours, around 11:00–20:00.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> — эстетика честного старения материала</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> — эстетика честного старения материала</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#wabi-sabi">Wabi-Sabi</a> — the aesthetic of a material aging honestly</p>
 
     <hr>
 
-    <span class="place-kicker">Вечер</span>
+    <span class="place-kicker" data-lang="ru">Вечер</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Evening</span>
     <h2 class="section-title -minor" id="loc-grandfathers">Grandfather's</h2>
-    <span class="place-caption">Бар, где пластинку не ставят фоном</span>
-    <div class="note"><span class="note-tag tag-tip">Практический совет</span><br>Вечером — выбор между этим баром и Meikyoku Kissa Lion, оба ниже по улице от станции. Разница только в тональности: здесь — виски и винил, там — тишина и классика.</div>
+    <span class="place-caption" data-lang="ru">Бар, где пластинку не ставят фоном</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A bar where a record isn't background noise</span>
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br>Вечером — выбор между этим баром и Meikyoku Kissa Lion, оба ниже по улице от станции. Разница только в тональности: здесь — виски и винил, там — тишина и классика.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br>In the evening, it's a choice between this bar and Meikyoku Kissa Lion, both a bit down the street from the station. The difference is just tone: here it's whisky and vinyl, there it's silence and classical.</div>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Grandfather's</span></div></figure>
       <div>
-        <p>Открылся в 1971 году в двух шагах от станции Shibuya и с тех пор почти не менялся. Здесь не включают плейлист — диджей ставит пластинки по одной, трек за треком, начав когда-то с рок-н-ролла 1950–60-х и постепенно добавив фанк, соул и фолк 1970-х. Разговоров здесь немного не потому, что это запрещено, а потому что внимание по умолчанию обращено к музыке, а не к соседу за стойкой.</p>
-        <p>Это уже третье за поездку место с той же логикой «один трек за раз» — после Little Soul Cafe в Shimokitazawa и Beatle Momo в Higashiyama, только с виски вместо коктейлей и ромов.</p>
+        <p data-lang="ru">Открылся в 1971 году в двух шагах от станции Shibuya и с тех пор почти не менялся. Здесь не включают плейлист — диджей ставит пластинки по одной, трек за треком, начав когда-то с рок-н-ролла 1950–60-х и постепенно добавив фанк, соул и фолк 1970-х. Разговоров здесь немного не потому, что это запрещено, а потому что внимание по умолчанию обращено к музыке, а не к соседу за стойкой.</p>
+        <p data-lang="ru">Это уже третье за поездку место с той же логикой «один трек за раз» — после Little Soul Cafe в Shimokitazawa и Beatle Momo в Higashiyama, только с виски вместо коктейлей и ромов.</p>
+        <p data-lang="en" style="display:none;">Opened in 1971 steps from Shibuya station and has barely changed since. There's no playlist here — the DJ puts on records one at a time, track by track, starting decades ago with 1950s–60s rock 'n' roll and gradually adding 1970s funk, soul, and folk. There isn't much talking, not because it's forbidden, but because attention defaults to the music, not the person next to you at the bar. This is already the third place on this trip built on the same "one track at a time" logic, after Little Soul Cafe in Shimokitazawa and Beatle Momo in Higashiyama — just whisky here instead of cocktails and rum.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Стакан Suntory виски — от 500 иен, цены в целом невысокие для такого расположения. Бронь обычно не нужна, но мест немного.</p>
+        <p data-lang="ru">Стакан Suntory виски — от 500 иен, цены в целом невысокие для такого расположения. Бронь обычно не нужна, но мест немного.</p>
+        <p data-lang="en" style="display:none;">A glass of Suntory whisky starts at 500 yen, prices generally modest for a location like this. No reservation usually needed, but seating is limited.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и традиция ongaku kissa</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и традиция ongaku kissa</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> and the ongaku kissa tradition</p>
 
     <hr>
 
-    <span class="place-kicker">Вечер</span>
+    <span class="place-kicker" data-lang="ru">Вечер</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Evening</span>
     <h2 class="section-title -major" id="loc-meikyokulion">Meikyoku Kissa Lion</h2>
-    <span class="place-caption">Сто лет тишины и Баха</span>
+    <span class="place-caption" data-lang="ru">Сто лет тишины и Баха</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A hundred years of silence and Bach</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Открыт в 1926 году 24-летним Yanosuke Yamadera вместе с матерью — почти сто лет здесь играют исключительно классику</li>
         <li>Оригинальное здание сгорело при бомбардировках 1945-го; нынешнее — точная реконструкция 1950 года, включая трёхметровые самодельные колонки, спроектированные как церковный орган</li>
         <li>Разговаривать внутри не принято: заказ кофе без сиропа или просьба счёта делаются молча, через специальные карточки на столе</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Opened in 1926 by 24-year-old Yanosuke Yamadera together with his mother — for nearly a century, only classical music has played here</li>
+        <li>The original building burned down in the 1945 bombing raids; the current one is an exact 1950 reconstruction, including three-meter homemade speakers built like a church organ</li>
+        <li>Talking isn't customary inside: ordering coffee without syrup or asking for the check is done silently, using special cards on the table</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Meikyoku Kissa Lion</span></div></figure>
       <div>
-        <p>Meikyoku kissa — «кафе шедевров», классический родственник jazz kissa: та же логика 1920–30-х (пластинка стоит как месячная зарплата, значит слушать её лучше сообща в специальном кафе), только для симфонической, а не джазовой музыки. Lion — старейшее из уцелевших в Tokyo: свыше 5000 пластинок разложены по алфавиту композиторов, а с 15:00 до 19:00 играет не по заявкам, а по кураторской программе дня — «концерт Lion».</p>
-        <p>Это уже четвёртое место за поездку, построенное вокруг одной и той же идеи нераздельного внимания к одному треку — после Little Soul Cafe, Beatle Momo и Grandfather's, но здесь дисциплина строже всего: тут не просто тихо, тут по правилам нельзя говорить вообще.</p>
+        <p data-lang="ru">Meikyoku kissa — «кафе шедевров», классический родственник jazz kissa: та же логика 1920–30-х (пластинка стоит как месячная зарплата, значит слушать её лучше сообща в специальном кафе), только для симфонической, а не джазовой музыки. Lion — старейшее из уцелевших в Tokyo: свыше 5000 пластинок разложены по алфавиту композиторов, а с 15:00 до 19:00 играет не по заявкам, а по кураторской программе дня — «концерт Lion».</p>
+        <p data-lang="ru">Это уже четвёртое место за поездку, построенное вокруг одной и той же идеи нераздельного внимания к одному треку — после Little Soul Cafe, Beatle Momo и Grandfather's, но здесь дисциплина строже всего: тут не просто тихо, тут по правилам нельзя говорить вообще.</p>
+        <p data-lang="en" style="display:none;">Meikyoku kissa, "masterpiece café," is the classical cousin of jazz kissa: the same 1920s–30s logic (a record cost a month's wages, so better to listen to it together in a dedicated café), just for symphonic rather than jazz music. Lion is the oldest surviving one in Tokyo: over 5,000 records arranged alphabetically by composer, and from 15:00 to 19:00 the daily program isn't by request but curated in advance — the "Lion concert." This is already the fourth place on this trip built around the same idea of undivided attention to a single track, after Little Soul Cafe, Beatle Momo, and Grandfather's — but the discipline here is the strictest of all: it's not just quiet, talking isn't allowed at all, by house rule.</p>
       </div>
     </div>
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт ежедневно <strong>11:00–22:30</strong>. Курение разрешено. Wi-Fi и розеток нет. Напитки — 550–720 иен. С 15:00 до 19:00 заявки не принимаются — играет собранная заранее программа.</p>
+        <p data-lang="ru">Открыт ежедневно <strong>11:00–22:30</strong>. Курение разрешено. Wi-Fi и розеток нет. Напитки — 550–720 иен. С 15:00 до 19:00 заявки не принимаются — играет собранная заранее программа.</p>
+        <p data-lang="en" style="display:none;">Open daily <strong>11:00–22:30</strong>. Smoking allowed. No Wi-Fi or outlets. Drinks 550–720 yen. From 15:00 to 19:00 no requests are taken — a pre-assembled program plays instead.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и родственная традиция ongaku kissa</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> и родственная традиция ongaku kissa</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#jazz-kissa">Jazz kissa</a> and the related ongaku kissa tradition</p>
 
   </section>
 
   <hr>
 
   <h2 class="section-title" id="t4">Food & Coffee</h2>
-  <p><strong>Juan Bowl & Tea Tokyo</strong> хорошо ложится на паузу между Omotesando и Shibuya — простое меню боул-блюд и чая, не требует отдельного крюка в маршруте. Возле Cat Street и Omotesando стоит взглянуть на <strong>AMORE Vintage AOYAMA</strong>, если интересен винтажный люкс: Chanel, Hermès, Louis Vuitton в состоянии, которое сложно отличить от нового, часто дешевле новой вещи в бутике бренда.</p>
+  <p data-lang="ru"><strong>Juan Bowl & Tea Tokyo</strong> хорошо ложится на паузу между Omotesando и Shibuya — простое меню боул-блюд и чая, не требует отдельного крюка в маршруте. Возле Cat Street и Omotesando стоит взглянуть на <strong>AMORE Vintage AOYAMA</strong>, если интересен винтажный люкс: Chanel, Hermès, Louis Vuitton в состоянии, которое сложно отличить от нового, часто дешевле новой вещи в бутике бренда.</p>
+  <p data-lang="en" style="display:none;"><strong>Juan Bowl & Tea Tokyo</strong> works well as a pause between Omotesando and Shibuya — a simple menu of rice bowls and tea, no detour required. Near Cat Street and Omotesando it's worth a look at <strong>AMORE Vintage AOYAMA</strong> for vintage luxury: Chanel, Hermès, Louis Vuitton in condition hard to tell from new, often cheaper than a new piece from the brand's own boutique.</p>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Meiji Jingu и Yoyogi Park — два разных ответа на один и тот же вопрос: как правительство Meiji строило ощущение вечной традиции с нуля. Тот же жест 1868–1920-х годов, что насильно развёл синто и буддизм по разным зданиям (см. Shinbutsu Bunri у Asakusa Shrine), спроектировал лес, которому нарочно не давали выглядеть новым, — а полвека спустя та же логика превратила бывший военный городок в городской парк. Под Cat Street и под всем районом Shibuya лежит ещё один слой той же истории: реку, убранную под бетон к Олимпиаде-1964, — та же Олимпиада, что превратила Washington Heights в Yoyogi Park.</p>
-  <p>А четыре «одна пластинка за раз» места этой поездки — Little Soul Cafe в Shimokitazawa, Beatle Momo в Higashiyama, сегодняшние Grandfather's и Meikyoku Kissa Lion — стоит держать в голове как один сюжет, а не совпадение: японская привычка слушать музыку целиком, не фоном, живёт минимум с 1920-х и явно не собирается заканчиваться.</p>
+  <p data-lang="ru">Meiji Jingu и Yoyogi Park — два разных ответа на один и тот же вопрос: как правительство Meiji строило ощущение вечной традиции с нуля. Тот же жест 1868–1920-х годов, что насильно развёл синто и буддизм по разным зданиям (см. Shinbutsu Bunri у Asakusa Shrine), спроектировал лес, которому нарочно не давали выглядеть новым, — а полвека спустя та же логика превратила бывший военный городок в городской парк. Под Cat Street и под всем районом Shibuya лежит ещё один слой той же истории: реку, убранную под бетон к Олимпиаде-1964, — та же Олимпиада, что превратила Washington Heights в Yoyogi Park.</p>
+  <p data-lang="ru">А четыре «одна пластинка за раз» места этой поездки — Little Soul Cafe в Shimokitazawa, Beatle Momo в Higashiyama, сегодняшние Grandfather's и Meikyoku Kissa Lion — стоит держать в голове как один сюжет, а не совпадение: японская привычка слушать музыку целиком, не фоном, живёт минимум с 1920-х и явно не собирается заканчиваться.</p>
 
-  <p class="footnote">Harajuku & Shibuya Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Harajuku & Shibuya Day · Japan 2026 · план дня, собранный вручную</p>
+  <p data-lang="en" style="display:none;">Meiji Jingu and Yoyogi Park are two different answers to the same question: how the Meiji government built a sense of eternal tradition from scratch. The same 1868–1920s gesture that forcibly split Shinto and Buddhism into separate buildings (see Shinbutsu Bunri at Asakusa Shrine) designed a forest deliberately kept from looking new — and half a century later, the same logic turned a former military housing complex into a city park. Underneath Cat Street and the whole Shibuya district lies another layer of the same history: a river buried in concrete for the 1964 Olympics, the very Olympics that turned Washington Heights into Yoyogi Park.</p>
+  <p data-lang="en" style="display:none;">And the four "one record at a time" places on this trip — Little Soul Cafe in Shimokitazawa, Beatle Momo in Higashiyama, and today's Grandfather's and Meikyoku Kissa Lion — are worth holding in mind as one story, not a coincidence: the Japanese habit of listening to music whole, not as background, has been alive since at least the 1920s and shows no sign of ending.</p>
+
+  <p class="footnote" data-lang="en" style="display:none;">Harajuku & Shibuya Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1228,6 +1387,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>

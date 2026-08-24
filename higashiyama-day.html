@@ -737,6 +737,35 @@
   .top-bar a.title-link { text-decoration: none; }
   .top-bar .spacer { width: 90px; flex-shrink: 0; }
   @media (max-width: 600px) { .top-bar .spacer { display: none; } }
+
+  /* ---------- Language toggle (EN trial layer) ---------- */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-right: 0.7rem;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+  }
+  .lang-toggle button.-active {
+    background: var(--red);
+    color: #FAF8F4;
+  }
 </style>
 <style>
 /* ============================================================
@@ -871,7 +900,13 @@ body.site-nav-locked { overflow: hidden; }
 
 <div class="top-bar">
   <a href="index.html" class="title-link"><span class="title">Japan 2026</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  <div style="display:flex; align-items:center;">
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-set-lang="ru" class="-active">RU</button>
+      <button type="button" data-set-lang="en">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Меню">☰</button>
+  </div>
 </div>
 
 <header class="hero">
@@ -885,30 +920,44 @@ body.site-nav-locked { overflow: hidden; }
 <main class="wrap">
 
   <div class="opening-quote">
-    <span class="quote-jp">一期に一度の会のように</span>
-    <blockquote>Каждую встречу стоит проводить так, будто она случится лишь раз в жизни</blockquote>
-    <span class="quote-author">Сэн-но Рикю</span>
-    <span class="quote-source">В записи ученика, Yamanoue Sōji Ki</span>
+    <span class="quote-jp" data-lang="ru">一期に一度の会のように</span>
+    <span class="quote-jp" data-lang="en" style="display:none;">一期に一度の会のように</span>
+    <blockquote data-lang="ru">Каждую встречу стоит проводить так, будто она случится лишь раз в жизни</blockquote>
+    <blockquote data-lang="en" style="display:none;">Treat every meeting as though it will happen only once in a lifetime</blockquote>
+    <span class="quote-author" data-lang="ru">Сэн-но Рикю</span>
+    <span class="quote-author" data-lang="en" style="display:none;">Sen no Rikyū</span>
+    <span class="quote-source" data-lang="ru">В записи ученика, Yamanoue Sōji Ki</span>
+    <span class="quote-source" data-lang="en" style="display:none;">Recorded by a disciple, in the Yamanoue Sōji Ki</span>
   </div>
 
   <details class="day-section -flags">
     <summary>
-      <span class="day-section-title">На сегодня</span>
-      <span class="day-section-hint">5 моментов</span>
+      <span class="day-section-title" data-lang="ru">На сегодня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Today's Highlights</span>
+      <span class="day-section-hint" data-lang="ru">5 моментов</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">5 things to know</span>
     </summary>
     <div class="day-section-body day-flags">
-      <ul>
+      <ul data-lang="ru">
         <li><strong>Kiyomizu-dera</strong> — открывается около 6:00, приходи к открытию: к 9:00–9:30 уже подходят группы</li>
         <li><strong>Jishu Shrine</strong> — закрыт на реставрацию без объявленной даты, не планируй его в маршруте</li>
         <li><strong>Sannenzaka</strong> — к полудню сплошной поток людей, пройти лучше до 10 утра</li>
         <li><strong>Mouriya Gion</strong> — ужин по брони, разбирают за несколько недель; детали и ссылка — в <a href="trip-logistics.html">Logistics</a></li>
         <li><strong>Beatle Momo</strong> — по воскресеньям закрыт, в остальные дни 19:00–23:30; бронь через Instagram, детали — в <a href="trip-logistics.html">Logistics</a></li>
       </ul>
+      <ul data-lang="en" style="display:none;">
+        <li><strong>Kiyomizu-dera</strong> — opens around 6:00, come right at opening: tour groups start arriving by 9:00–9:30</li>
+        <li><strong>Jishu Shrine</strong> — closed for restoration, no reopening date announced, don't plan it into the route</li>
+        <li><strong>Sannenzaka</strong> — a solid wall of people by noon, better to walk it before 10am</li>
+        <li><strong>Mouriya Gion</strong> — dinner needs a reservation, books up weeks out; details and link in <a href="trip-logistics.html">Logistics</a></li>
+        <li><strong>Beatle Momo</strong> — closed Sundays, 19:00–23:30 other days; book via Instagram, details in <a href="trip-logistics.html">Logistics</a></li>
+      </ul>
     </div>
   </details>
 
   <nav class="nav-places">
-    <div class="nav-places-label">По местам ↓</div>
+    <div class="nav-places-label" data-lang="ru">По местам ↓</div>
+    <div class="nav-places-label" data-lang="en" style="display:none;">Jump to a place ↓</div>
     <button class="nav-place-btn" data-target="loc-kiyomizu">Kiyomizu-dera</button>
     <button class="nav-place-btn" data-target="loc-sannenzaka">Sannenzaka</button>
     <button class="nav-place-btn" data-target="loc-kodaiji">Kōdai-ji</button>
@@ -926,13 +975,17 @@ body.site-nav-locked { overflow: hidden; }
 
   <details class="day-section -rhythm">
     <summary>
-      <span class="day-section-title">Ритм дня</span>
-      <span class="day-section-hint">как всё связано по времени</span>
+      <span class="day-section-title" data-lang="ru">Ритм дня</span>
+      <span class="day-section-title" data-lang="en" style="display:none;">Rhythm of the Day</span>
+      <span class="day-section-hint" data-lang="ru">как всё связано по времени</span>
+      <span class="day-section-hint" data-lang="en" style="display:none;">hour-by-hour route</span>
     </summary>
     <div class="day-section-body">
-      <p>Утренняя часть — одна прогулка по склону холма без резких подъёмов: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, суммарно меньше 20 минут ходьбы. Сложность не в расстоянии, а во времени: Kiyomizu-dera стоит поймать в районе открытия, иначе к 9:00–9:30 уже людно, а Sannenzaka к полудню превращается в сплошной поток — лучше пройти её до 10 утра.</p>
-      <div class="blockquote">От Kōdai-ji до Maruyama Park можно спуститься по Nene no Michi — переулку, названному в честь вдовы Hideyoshi, который проходит мимо Ishibei-koji, одной из самых нетронутых улочек старого Kyoto.</div>
-      <p>От Maruyama Park до Gion — 10–15 минут пешком через территорию Yasaka Shrine. После ужина в Mouriya Gion до Pontocho Alley — около 10 минут через Kamo River, а оттуда до бара Beatle Momo — ещё 5–7 минут в сторону Kawaramachi.</p>
+      <p data-lang="ru">Утренняя часть — одна прогулка по склону холма без резких подъёмов: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, суммарно меньше 20 минут ходьбы. Сложность не в расстоянии, а во времени: Kiyomizu-dera стоит поймать в районе открытия, иначе к 9:00–9:30 уже людно, а Sannenzaka к полудню превращается в сплошной поток — лучше пройти её до 10 утра.</p>
+      <div class="blockquote" data-lang="ru">От Kōdai-ji до Maruyama Park можно спуститься по Nene no Michi — переулку, названному в честь вдовы Hideyoshi, который проходит мимо Ishibei-koji, одной из самых нетронутых улочек старого Kyoto.</div>
+      <div class="blockquote" data-lang="en" style="display:none;">From Kōdai-ji to Maruyama Park, you can walk down Nene no Michi — a lane named for Hideyoshi's widow, passing Ishibei-koji, one of old Kyoto's best-preserved streets.</div>
+      <p data-lang="ru">От Maruyama Park до Gion — 10–15 минут пешком через территорию Yasaka Shrine. После ужина в Mouriya Gion до Pontocho Alley — около 10 минут через Kamo River, а оттуда до бара Beatle Momo — ещё 5–7 минут в сторону Kawaramachi.</p>
+      <p data-lang="en" style="display:none;">The morning is one hillside walk with no steep climbs: Kiyomizu-dera → Sannenzaka → Kōdai-ji + Bamboo Forest → Maruyama Park, under 20 minutes on foot in total. The challenge isn't distance, it's timing — catch Kiyomizu-dera near opening or it's crowded by 9:00–9:30, and Sannenzaka turns into a solid stream of people by noon, so walk it before 10am. From Maruyama Park to Gion is 10–15 minutes on foot through the Yasaka Shrine grounds. After dinner at Mouriya Gion, it's about 10 minutes to Pontocho Alley across the Kamo River, and another 5–7 minutes from there to Beatle Momo, toward Kawaramachi.</p>
     </div>
   </details>
 
@@ -940,172 +993,230 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t3">
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-kiyomizu">Kiyomizu-dera</h2>
-    <span class="place-caption">Сцена без единого гвоздя</span>
+    <span class="place-caption" data-lang="ru">Сцена без единого гвоздя</span>
+    <span class="place-caption" data-lang="en" style="display:none;">A stage built without a single nail</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Сцена (Butai) выступает на 13 метров над склоном, держится на десятках деревянных колонн, соединённых без единого гвоздя техникой kigumi</li>
         <li>Фраза «прыгнуть со сцены Kiyomizu» — не метафора: в период Edo с неё прыгнуло не менее 234 задокументированных человека, веря в исполнение желания при удачном приземлении; с 1872 года практика под запретом</li>
         <li>Три потока Otowa Waterfall традиционно связывают с учёбой, любовью и долголетием — пить из всех трёх сразу считается жадностью</li>
         <li>Jishu Shrine с «камнями любви» сейчас закрыт на реставрацию без объявленной даты открытия — не планируй его в маршруте</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The stage (Butai) juts 13 meters out over the hillside, held up by dozens of wooden pillars joined with no nails at all, using the kigumi technique</li>
+        <li>The phrase "jump off Kiyomizu's stage" isn't a figure of speech: in the Edo period, at least 234 documented people jumped, believing a safe landing would grant a wish; the practice has been banned since 1872</li>
+        <li>The three streams of Otowa Waterfall are traditionally tied to study, love, and longevity — drinking from all three at once is considered greedy</li>
+        <li>Jishu Shrine and its "love stones" are currently closed for restoration with no reopening date — don't plan it into the route</li>
+      </ul></div>
     </details>
     <div class="cols cols-golden">
       <figure><div class="img-placeholder -warm"><span>Kiyomizu-dera</span></div></figure>
       <div>
-        <p>Храм основан в 778 году монахом Enchin, которому было видение источника на горе Otowa. Здесь есть деталь, которая переворачивает привычную логику: Kiyomizu-dera старше самого Kyoto как столицы. Императорский двор перебрался в Heian-kyō только в 794 году — храм на 16 лет старше города, который позже вырастет вокруг него. Главный объект поклонения — статуя Kannon, bodhisattva сострадания: культ милосердия на этом склоне появился раньше, чем государственная власть.</p>
-        <p>Архитектурная слава пришла позже: нынешние постройки — реконструкция 1633 года, заказанная сёгуном Tokugawa Iemitsu после очередного из десятков пожаров. Для Japan это не подделка: как и в Sensō-ji, важна непрерывность места, а не возраст досок.</p>
+        <p data-lang="ru">Храм основан в 778 году монахом Enchin, которому было видение источника на горе Otowa. Здесь есть деталь, которая переворачивает привычную логику: Kiyomizu-dera старше самого Kyoto как столицы. Императорский двор перебрался в Heian-kyō только в 794 году — храм на 16 лет старше города, который позже вырастет вокруг него. Главный объект поклонения — статуя Kannon, bodhisattva сострадания: культ милосердия на этом склоне появился раньше, чем государственная власть.</p>
+        <p data-lang="ru">Архитектурная слава пришла позже: нынешние постройки — реконструкция 1633 года, заказанная сёгуном Tokugawa Iemitsu после очередного из десятков пожаров. Для Japan это не подделка: как и в Sensō-ji, важна непрерывность места, а не возраст досок.</p>
+        <p data-lang="en" style="display:none;">Founded in 778 by the monk Enchin, who had a vision of a spring on Mount Otowa. There's a detail here that flips the usual logic: Kiyomizu-dera is older than Kyoto itself as a capital. The imperial court didn't move to Heian-kyō until 794 — the temple is 16 years older than the city that would later grow up around it. The main object of worship is a statue of Kannon, the bodhisattva of compassion: a cult of mercy took root on this hillside before state power ever did. The architectural fame came later — the current buildings are a 1633 reconstruction, commissioned by shogun Tokugawa Iemitsu after yet another of the dozens of fires. In Japan this isn't a copy in any diminished sense — as with Sensō-ji, what matters is the continuity of the place, not the age of the timber.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag">Обрати внимание</span>Смотровая площадка со стороны Otowa Waterfall — одно из немногих мест, откуда видно саму конструкцию сцены снизу. Большинство туристов фотографируют вид со сцены и уходят, ни разу не взглянув на инженерию, которая её держит.</div>
+    <div class="note" data-lang="ru"><span class="note-tag">Обрати внимание</span>Смотровая площадка со стороны Otowa Waterfall — одно из немногих мест, откуда видно саму конструкцию сцены снизу. Большинство туристов фотографируют вид со сцены и уходят, ни разу не взглянув на инженерию, которая её держит.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag">Note</span>The viewpoint by Otowa Waterfall is one of the few spots where you can see the stage's structure from below. Most visitors photograph the view from the stage and leave without ever looking at the engineering holding it up.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>6:00–18:00</strong>. Приход к открытию почти полностью снимает толпу; к 9:00–9:30 подходят автобусы с группами.</p>
-        <p><strong>Jishu Shrine</strong> сейчас закрыт на реставрацию, дата открытия не объявлена — не планируй его в маршруте.</p>
+        <p data-lang="ru">Открыт <strong>6:00–18:00</strong>. Приход к открытию почти полностью снимает толпу; к 9:00–9:30 подходят автобусы с группами.</p>
+        <p data-lang="ru"><strong>Jishu Shrine</strong> сейчас закрыт на реставрацию, дата открытия не объявлена — не планируй его в маршруте.</p>
+        <p data-lang="en" style="display:none;">Open <strong>6:00–18:00</strong>. Coming right at opening nearly eliminates the crowds; tour buses start arriving by 9:00–9:30.</p>
+        <p data-lang="en" style="display:none;"><strong>Jishu Shrine</strong> is currently closed for restoration, no reopening date announced — don't plan it into the route.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · <a href="glossary.html#kigumi-joinery">Kigumi joinery и сейсмостойкая архитектура храмов</a> · Прыжки со сцены Kiyomizu в период Edo · Sakanoue no Tamuramaro и легенда об основании храма</p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#temple">Temple (tera) — как устроен буддийский храм</a> · <a href="glossary.html#kigumi-joinery">Kigumi joinery и сейсмостойкая архитектура храмов</a> · Прыжки со сцены Kiyomizu в период Edo · Sakanoue no Tamuramaro и легенда об основании храма</p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#temple">Temple (tera) — how a Buddhist temple is structured</a> · <a href="glossary.html#kigumi-joinery">Kigumi joinery and earthquake-resistant temple architecture</a> · Jumping from Kiyomizu's stage in the Edo period · Sakanoue no Tamuramaro and the temple's founding legend</p>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title -minor" id="loc-sannenzaka">Sannenzaka</h2>
-    <span class="place-caption">И соседняя Ninenzaka — лестница со страховкой в виде тыквы</span>
+    <span class="place-caption" data-lang="ru">И соседняя Ninenzaka — лестница со страховкой в виде тыквы</span>
+    <span class="place-caption" data-lang="en" style="display:none;">And neighboring Ninenzaka — a stairway with a gourd for insurance</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Sannenzaka</span></div></figure>
       <div>
-        <p>Официальная версия происхождения имени связана с пагодой Koyasu при храме Taishi-ji на середине склона — туда веками приходили молиться о лёгких родах. Но прижилась другая, менее благочестивая легенда: споткнёшься на этой лестнице — умрёшь в течение трёх лет. У подножия до сих пор продают маленькую тыкву-горлянку (hyōtan) как оберег от этой судьбы — суеверие, давно ставшее сувенирным бизнесом.</p>
-        <p>Соседняя Ninenzaka несёт зеркальную, чуть менее суровую версию легенды: упал здесь — жди несчастья два года, а не три.</p>
+        <p data-lang="ru">Официальная версия происхождения имени связана с пагодой Koyasu при храме Taishi-ji на середине склона — туда веками приходили молиться о лёгких родах. Но прижилась другая, менее благочестивая легенда: споткнёшься на этой лестнице — умрёшь в течение трёх лет. У подножия до сих пор продают маленькую тыкву-горлянку (hyōtan) как оберег от этой судьбы — суеверие, давно ставшее сувенирным бизнесом.</p>
+        <p data-lang="ru">Соседняя Ninenzaka несёт зеркальную, чуть менее суровую версию легенды: упал здесь — жди несчастья два года, а не три.</p>
+        <p data-lang="en" style="display:none;">The official story ties the name to the Koyasu pagoda at Taishi-ji temple halfway up the slope, where people prayed for easy childbirth for centuries. But a less pious legend is the one that stuck: trip on this stairway and you'll die within three years. Vendors at the bottom still sell a small gourd (hyōtan) as protection against that fate — a superstition that became a souvenir business long ago. Neighboring Ninenzaka carries a mirrored, slightly milder version of the legend: fall here and misfortune waits two years, not three.</p>
       </div>
     </div>
-    <p><span class="inline-label">Совет</span> Обе улицы застроены в основном в период Taishō, но выглядят гораздо старше — брусчатку сохранили, а линии электропередач специально убрали под землю.</p>
-    <p><span class="inline-label">Попробуй</span> <strong>Nama Yatsuhashi</strong> — свежий мочи с начинкой, продают именно на этом отрезке в десятках вариаций, и это совсем не то же самое, что коробка из аэропорта.</p>
+    <p data-lang="ru"><span class="inline-label">Совет</span> Обе улицы застроены в основном в период Taishō, но выглядят гораздо старше — брусчатку сохранили, а линии электропередач специально убрали под землю.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Tip</span> Both streets are mostly built in the Taishō period but read as far older — the cobblestone stayed, and power lines were deliberately buried underground.</p>
+    <p data-lang="ru"><span class="inline-label">Попробуй</span> <strong>Nama Yatsuhashi</strong> — свежий мочи с начинкой, продают именно на этом отрезке в десятках вариаций, и это совсем не то же самое, что коробка из аэропорта.</p>
+    <p data-lang="en" style="display:none;"><span class="inline-label">Try</span> <strong>Nama Yatsuhashi</strong> — fresh filled mochi, sold along this stretch in dozens of variations, and nothing like the boxed version from the airport.</p>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Улица открыта постоянно, но к полудню — сплошной поток людей. Пройти лучше <strong>до 10 утра</strong>.</p>
+        <p data-lang="ru">Улица открыта постоянно, но к полудню — сплошной поток людей. Пройти лучше <strong>до 10 утра</strong>.</p>
+        <p data-lang="en" style="display:none;">Always open, but a solid stream of people by noon. Better to walk it <strong>before 10am</strong>.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Храм</span>
+    <span class="place-kicker" data-lang="ru">Храм</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Temple</span>
     <h2 class="section-title -major" id="loc-kodaiji">Kōdai-ji</h2>
-    <span class="place-caption">И Bamboo Forest — храм, построенный вдовой</span>
+    <span class="place-caption" data-lang="ru">И Bamboo Forest — храм, построенный вдовой</span>
+    <span class="place-caption" data-lang="en" style="display:none;">And the Bamboo Forest — a temple built by a widow</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Основан в 1606 году Nene (Kita-no-Mandokoro) — вдовой Toyotomi Hideyoshi, человека, который в 1590 году впервые за полтора века объединил Japan</li>
         <li>Строительство финансировал Tokugawa Ieyasu — соперник и преемник Hideyoshi по власти, что само по себе исторический жест примирения</li>
         <li>Два чайных домика на территории спроектированы Sen no Rikyū — тем самым мастером, чьё учение о неповторимости каждой встречи легло в основу идеи ichigo ichie</li>
         <li>Bamboo grove здесь заметно тише знаменитого в Arashiyama — та же атмосфера, но без толп</li>
       </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>Founded in 1606 by Nene (Kita-no-Mandokoro), widow of Toyotomi Hideyoshi, the man who unified Japan in 1590 for the first time in a century and a half</li>
+        <li>Construction was funded by Tokugawa Ieyasu — Hideyoshi's rival and successor to power, a historical gesture of reconciliation in itself</li>
+        <li>Two tea houses on the grounds were designed by Sen no Rikyū, the very master whose teaching on the unrepeatable nature of each meeting underlies the idea of ichigo ichie</li>
+        <li>The bamboo grove here is noticeably quieter than the famous one in Arashiyama — the same atmosphere, without the crowds</li>
+      </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Kōdai-ji Bamboo Forest</span></div></figure>
       <div>
-        <p>Hideyoshi поднялся из крестьян до фактического правителя Japan — редчайший случай социальной мобильности в средневековой Japan. Nene пережила его на 26 лет и провела остаток жизни, финансируя этот храм и молясь за его душу; сама она тоже здесь похоронена, в мавзолее Otama-ya, украшенном лаком с золотой и серебряной пудрой.</p>
+        <p data-lang="ru">Hideyoshi поднялся из крестьян до фактического правителя Japan — редчайший случай социальной мобильности в средневековой Japan. Nene пережила его на 26 лет и провела остаток жизни, финансируя этот храм и молясь за его душу; сама она тоже здесь похоронена, в мавзолее Otama-ya, украшенном лаком с золотой и серебряной пудрой.</p>
+        <p data-lang="en" style="display:none;">Hideyoshi rose from peasant stock to become Japan's de facto ruler — an exceptionally rare case of social mobility in medieval Japan. Nene outlived him by 26 years and spent the rest of her life funding this temple and praying for his soul; she's buried here too, in the Otama-ya mausoleum, decorated with lacquer dusted in gold and silver powder.</p>
       </div>
     </div>
-    <p>Обычно Kōdai-ji читают просто как жест вдовьей скорби. Но время постройки говорит о другом. Hideyoshi умер в 1598 году, а уже в 1600-м battle at Sekigahara решила исход борьбы за власть в пользу Tokugawa Ieyasu — того самого человека, что оплатил строительство этого храма. К 1606 году, когда Kōdai-ji был готов, клан Toyotomi доживал последние годы: в 1615-м Tokugawa возьмёт Osaka Castle штурмом и уничтожит род Hideyoshi окончательно.</p>
+    <p data-lang="ru">Обычно Kōdai-ji читают просто как жест вдовьей скорби. Но время постройки говорит о другом. Hideyoshi умер в 1598 году, а уже в 1600-м battle at Sekigahara решила исход борьбы за власть в пользу Tokugawa Ieyasu — того самого человека, что оплатил строительство этого храма. К 1606 году, когда Kōdai-ji был готов, клан Toyotomi доживал последние годы: в 1615-м Tokugawa возьмёт Osaka Castle штурмом и уничтожит род Hideyoshi окончательно.</p>
+    <p data-lang="en" style="display:none;">Kōdai-ji is usually read simply as a widow's gesture of grief. But the timing says something else. Hideyoshi died in 1598, and by 1600 the battle of Sekigahara had already decided the power struggle in favor of Tokugawa Ieyasu — the very man who paid for this temple. By 1606, when Kōdai-ji was finished, the Toyotomi clan had only a few years left: in 1615 Tokugawa would take Osaka Castle by force and wipe out Hideyoshi's line for good.</p>
 
     <div class="panel-dark">
-      <div class="panel-label">Поворот</div>
-      <p>Kōdai-ji — не только памятник мужу. Это памятник человеку, который выиграл почти всё, кроме главного: он так и не смог превратить личную власть в устойчивую династию. Строгий сад камней вокруг храма можно читать как попытку навести порядок именно в тот момент, когда мир <strong>Hideyoshi</strong> уже разваливался на глазах у его вдовы.</p>
+      <div class="panel-label" data-lang="ru">Поворот</div>
+      <div class="panel-label" data-lang="en" style="display:none;">Twist</div>
+      <p data-lang="ru">Kōdai-ji — не только памятник мужу. Это памятник человеку, который выиграл почти всё, кроме главного: он так и не смог превратить личную власть в устойчивую династию. Строгий сад камней вокруг храма можно читать как попытку навести порядок именно в тот момент, когда мир <strong>Hideyoshi</strong> уже разваливался на глазах у его вдовы.</p>
+      <p data-lang="en" style="display:none;">Kōdai-ji isn't only a memorial to a husband. It's a memorial to a man who won almost everything except the one thing that mattered: he never managed to turn personal power into a lasting dynasty. The austere rock garden around the temple can be read as an attempt to impose order at the exact moment <strong>Hideyoshi's</strong> world was already falling apart in front of his widow's eyes.</p>
     </div>
 
-    <div class="note"><span class="note-tag">Обрати внимание</span>Внутренние стены мавзолея Otama-ya украшены техникой <strong>Kōdai-ji maki-e</strong> — золотым и серебряным напылением по лаку, ставшим фирменным стилем именно этого храма. А бамбук за мавзолеем — не декоративный фон для фото: это резкий переход от камня и архитектуры к живому вертикальному лесу, расположенный так, будто контраст задуман сознательно.</div>
+    <div class="note" data-lang="ru"><span class="note-tag">Обрати внимание</span>Внутренние стены мавзолея Otama-ya украшены техникой <strong>Kōdai-ji maki-e</strong> — золотым и серебряным напылением по лаку, ставшим фирменным стилем именно этого храма. А бамбук за мавзолеем — не декоративный фон для фото: это резкий переход от камня и архитектуры к живому вертикальному лесу, расположенный так, будто контраст задуман сознательно.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag">Note</span>The inner walls of the Otama-ya mausoleum are decorated with <strong>Kōdai-ji maki-e</strong> — gold and silver dusted over lacquer, a technique that became this temple's signature style. The bamboo behind the mausoleum isn't decorative photo backdrop — it's a sharp cut from stone and architecture into a living vertical forest, positioned as if the contrast were deliberate.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>9:00–17:30</strong>, регистрация закрывается в <strong>17:00</strong>. Входной билет включает музей Kōdai-ji Sho; bamboo grove — часть маршрута по территории, отдельно покупать ничего не нужно.</p>
+        <p data-lang="ru">Открыт <strong>9:00–17:30</strong>, регистрация закрывается в <strong>17:00</strong>. Входной билет включает музей Kōdai-ji Sho; bamboo grove — часть маршрута по территории, отдельно покупать ничего не нужно.</p>
+        <p data-lang="en" style="display:none;">Open <strong>9:00–17:30</strong>, last admission <strong>17:00</strong>. The entry ticket includes the Kōdai-ji Sho museum; the bamboo grove is part of the grounds walk, nothing separate to buy.</p>
       </div>
     </details>
 
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi и объединение Japan</a> · <a href="glossary.html#tokugawa-edo">Battle of Sekigahara 1600 и падение клана Toyotomi</a> · <a href="glossary.html#chado-tea-ceremony">Sen no Rikyū и чайная церемония</a> · <a href="glossary.html#maki-e-lacquer">Kōdai-ji maki-e lacquerwork</a> · <a href="glossary.html#gardens">Karesansui и логика японского сада</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi и объединение Japan</a> · <a href="glossary.html#tokugawa-edo">Battle of Sekigahara 1600 и падение клана Toyotomi</a> · <a href="glossary.html#chado-tea-ceremony">Sen no Rikyū и чайная церемония</a> · <a href="glossary.html#maki-e-lacquer">Kōdai-ji maki-e lacquerwork</a> · <a href="glossary.html#gardens">Karesansui и логика японского сада</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#azuchi-momoyama">Toyotomi Hideyoshi and the unification of Japan</a> · <a href="glossary.html#tokugawa-edo">The Battle of Sekigahara, 1600, and the fall of the Toyotomi clan</a> · <a href="glossary.html#chado-tea-ceremony">Sen no Rikyū and the tea ceremony</a> · <a href="glossary.html#maki-e-lacquer">Kōdai-ji maki-e lacquerwork</a> · <a href="glossary.html#gardens">Karesansui and the logic of Japanese gardens</a></p>
 
     <hr>
 
-    <span class="place-kicker">Парк</span>
+    <span class="place-kicker" data-lang="ru">Парк</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Park</span>
     <h2 class="section-title" id="loc-maruyama">Maruyama Park</h2>
-    <span class="place-caption">Старейший парк Kyoto</span>
+    <span class="place-caption" data-lang="ru">Старейший парк Kyoto</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Kyoto's oldest park</span>
     <div class="photo-break"><span class="mark">円</span><span class="cap">Maruyama Park · Gion shidare-zakura</span></div>
-    <p>Park открылся в 1886 году на земле, когда-то принадлежавшей Yasaka Shrine. Meiji-правительство национализировало территорию и разбило здесь городской парк — почти буквальное повторение истории Asakusa Shrine, где та же эпоха тем же жестом отделяла синто от буддизма и от частных владений.</p>
-    <p>В центре — знаменитая плакучая вишня Gion shidare-zakura. Первое дерево простояло около 220 лет и погибло в 1947 году; нынешнее — уже второе поколение, выращенное из семян, собранных ещё при жизни оригинала. Дерево, которым любуются сегодня, физически моложе многих туристов, но воспринимается как несомненный символ места — тот же принцип непрерывности, что и в Kiyomizu-dera.</p>
-    <div class="note"><span class="note-tag">Заметка</span>Рядом стоят статуи Sakamoto Ryōma и Nakaoka Shintarō — самураев-активистов конца сёгуната, чья гибель в 1867 году ускорила падение старого режима и приход Meiji Restoration.</div>
+    <p data-lang="ru">Park открылся в 1886 году на земле, когда-то принадлежавшей Yasaka Shrine. Meiji-правительство национализировало территорию и разбило здесь городской парк — почти буквальное повторение истории Asakusa Shrine, где та же эпоха тем же жестом отделяла синто от буддизма и от частных владений.</p>
+    <p data-lang="ru">В центре — знаменитая плакучая вишня Gion shidare-zakura. Первое дерево простояло около 220 лет и погибло в 1947 году; нынешнее — уже второе поколение, выращенное из семян, собранных ещё при жизни оригинала. Дерево, которым любуются сегодня, физически моложе многих туристов, но воспринимается как несомненный символ места — тот же принцип непрерывности, что и в Kiyomizu-dera.</p>
+    <p data-lang="en" style="display:none;">The park opened in 1886 on land that once belonged to Yasaka Shrine. The Meiji government nationalized the site and built a city park here — almost a literal repeat of the Asakusa Shrine story, where the same era used the same gesture to separate Shinto from Buddhism and from private holdings. At its center stands the famous weeping cherry, the Gion shidare-zakura. The first tree stood for about 220 years before dying in 1947; the current one is a second generation, grown from seeds collected while the original was still alive. The tree admired today is physically younger than many of the tourists looking at it, yet reads as the unmistakable symbol of the place — the same principle of continuity as at Kiyomizu-dera.</p>
+    <div class="note" data-lang="ru"><span class="note-tag">Заметка</span>Рядом стоят статуи Sakamoto Ryōma и Nakaoka Shintarō — самураев-активистов конца сёгуната, чья гибель в 1867 году ускорила падение старого режима и приход Meiji Restoration.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag">Note</span>Nearby stand statues of Sakamoto Ryōma and Nakaoka Shintarō — activist samurai from the shogunate's final years, whose assassination in 1867 hastened the old regime's collapse and the arrival of the Meiji Restoration.</div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Вход свободный, парк открыт круглосуточно.</p>
+        <p data-lang="ru">Вход свободный, парк открыт круглосуточно.</p>
+        <p data-lang="en" style="display:none;">Free entry, park open 24 hours.</p>
       </div>
     </details>
-    <p class="read-more"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Реставрация Meiji — сверхскоростной прыжок во времени</a></p>
+    <p class="read-more" data-lang="ru"><span class="read-more-label">Подробнее</span><a href="glossary.html#meiji-restoration">Реставрация Meiji — сверхскоростной прыжок во времени</a></p>
+    <p class="read-more" data-lang="en" style="display:none;"><span class="read-more-label">More</span><a href="glossary.html#meiji-restoration">The Meiji Restoration — a hyper-speed leap in time</a></p>
 
     <hr>
 
-    <span class="place-kicker">Ужин</span>
+    <span class="place-kicker" data-lang="ru">Ужин</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Dinner</span>
     <h2 class="section-title -minor" id="loc-mouriya">Mouriya Gion</h2>
-    <span class="place-caption">Kobe beef teppanyaki на ужин</span>
+    <span class="place-caption" data-lang="ru">Kobe beef teppanyaki на ужин</span>
+    <span class="place-caption" data-lang="en" style="display:none;">Kobe beef teppanyaki for dinner</span>
     <div class="cols">
       <figure><div class="img-placeholder"><span>Mouriya Gion</span></div></figure>
       <div>
-        <p>Mouriya — не выдумка для туристов, а настоящий институт Kobe: сеть основана в 1885 году, и филиал в Gion работает по тем же стандартам, что и оригинал. Здесь Kobe beef готовят teppanyaki — на раскалённой стальной пластине прямо перед гостями, техника, которую после войны сделали популярной именно рестораны такого рода.</p>
+        <p data-lang="ru">Mouriya — не выдумка для туристов, а настоящий институт Kobe: сеть основана в 1885 году, и филиал в Gion работает по тем же стандартам, что и оригинал. Здесь Kobe beef готовят teppanyaki — на раскалённой стальной пластине прямо перед гостями, техника, которую после войны сделали популярной именно рестораны такого рода.</p>
+        <p data-lang="en" style="display:none;">Mouriya isn't a tourist invention, it's a genuine Kobe institution — the chain was founded in 1885, and the Gion branch runs to the same standards as the original. Kobe beef here is cooked teppanyaki-style, on a hot steel plate right in front of guests, a technique restaurants like this one made popular after the war.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>Открыт <strong>11:30–21:00</strong>. Teppanyaki-рестораны такого уровня обычно разбирают за несколько недель — бронируй как можно раньше, лучше сразу через официальный сайт или Klook.</p>
+        <p data-lang="ru">Открыт <strong>11:30–21:00</strong>. Teppanyaki-рестораны такого уровня обычно разбирают за несколько недель — бронируй как можно раньше, лучше сразу через официальный сайт или Klook.</p>
+        <p data-lang="en" style="display:none;">Open <strong>11:30–21:00</strong>. Teppanyaki restaurants at this level typically book out weeks ahead — reserve as early as possible, ideally through the official site or Klook.</p>
       </div>
     </details>
 
     <hr>
 
-    <span class="place-kicker">Улица</span>
+    <span class="place-kicker" data-lang="ru">Улица</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Street</span>
     <h2 class="section-title" id="loc-pontocho">Pontocho Alley</h2>
-    <span class="place-caption">Переулок шириной в вытянутые руки</span>
+    <span class="place-caption" data-lang="ru">Переулок шириной в вытянутые руки</span>
+    <span class="place-caption" data-lang="en" style="display:none;">An alley the width of two outstretched arms</span>
     <details class="essence-card">
-      <summary><span class="essence-label">Коротко</span></summary>
-      <div class="essence-card-body"><ul>
+      <summary><span class="essence-label" data-lang="ru">Коротко</span><span class="essence-label" data-lang="en" style="display:none;">In brief</span></summary>
+      <div class="essence-card-body"><ul data-lang="ru">
         <li>Официальный символ квартала — птица chidori (галстучник), изображена на красных фонарях у входа</li>
         <li>Летом рестораны выставляют деревянные террасы kawayuka прямо над Kamo River — традиция с 1920-х годов</li>
         <li>На противоположном берегу реки — Gion, второй геиша-квартал Kyoto; исторически оба квартала конкурировали за одних и тех же гостей</li>
+      </ul></div>
+      <div class="essence-card-body" data-lang="en" style="display:none;"><ul>
+        <li>The district's official symbol is the chidori (plover), pictured on the red lanterns at the entrance</li>
+        <li>In summer, restaurants build wooden kawayuka platforms right over the Kamo River — a tradition dating to the 1920s</li>
+        <li>Gion, Kyoto's other geisha district, sits across the river — historically the two competed for the same guests</li>
       </ul></div>
     </details>
     <div class="cols">
       <figure><div class="img-placeholder -warm"><span>Pontocho Alley</span></div></figure>
       <div>
-        <p>Pontocho возник в 1670 году не как спланированный квартал, а как нанос земли после укрепления берегов Kamo River — купцы застроили его почти сразу. Ширина переулка объясняется прозаично: налог считался по ширине фасада, а не по глубине здания, поэтому дома строили узкими и очень длинными. К 1710 году Pontocho уже был официальным hanamachi — одним из пяти районов, где принимают geiko и maiko.</p>
+        <p data-lang="ru">Pontocho возник в 1670 году не как спланированный квартал, а как нанос земли после укрепления берегов Kamo River — купцы застроили его почти сразу. Ширина переулка объясняется прозаично: налог считался по ширине фасада, а не по глубине здания, поэтому дома строили узкими и очень длинными. К 1710 году Pontocho уже был официальным hanamachi — одним из пяти районов, где принимают geiko и maiko.</p>
+        <p data-lang="en" style="display:none;">Pontocho appeared in 1670 not as a planned district but as silted land after the Kamo River's banks were reinforced — merchants built on it almost immediately. The alley's width has a mundane explanation: tax was assessed on frontage width, not building depth, so houses were built narrow and very long. By 1710, Pontocho was already an official hanamachi, one of five districts where geiko and maiko entertain.</p>
       </div>
     </div>
-    <div class="note"><span class="note-tag">Обрати внимание</span>Вечером здесь можно случайно встретить maiko, идущую между чайными домами — из уважения к её работе фотографировать в упор и загораживать дорогу не стоит.</div>
+    <div class="note" data-lang="ru"><span class="note-tag">Обрати внимание</span>Вечером здесь можно случайно встретить maiko, идущую между чайными домами — из уважения к её работе фотографировать в упор и загораживать дорогу не стоит.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag">Note</span>In the evening you might spot a maiko walking between teahouses — out of respect for her work, avoid close-up photos and don't block her path.</div>
 
     <hr>
 
-    <span class="place-kicker">Бар</span>
+    <span class="place-kicker" data-lang="ru">Бар</span>
+    <span class="place-kicker" data-lang="en" style="display:none;">Bar</span>
     <h2 class="section-title -minor" id="loc-beatlemomo">Beatle Momo</h2>
-    <span class="place-caption">Бар одной пластинки за раз</span>
+    <span class="place-caption" data-lang="ru">Бар одной пластинки за раз</span>
+    <span class="place-caption" data-lang="en" style="display:none;">One record at a time</span>
     <div class="cols">
       <figure><div class="img-placeholder -deep"><span>Beatle Momo</span></div></figure>
       <div>
-        <p>Record Sakaba Beatle Momo — не тематический бар «Битлз», а винтажный бар с настоящим виниловым проигрывателем и коллекцией из тысяч пластинок, от 1950-х до наших дней. Момо, хозяин, ставит именно то, что просят гости — музыка здесь работает как язык, не требующий перевода.</p>
+        <p data-lang="ru">Record Sakaba Beatle Momo — не тематический бар «Битлз», а винтажный бар с настоящим виниловым проигрывателем и коллекцией из тысяч пластинок, от 1950-х до наших дней. Момо, хозяин, ставит именно то, что просят гости — музыка здесь работает как язык, не требующий перевода.</p>
+        <p data-lang="en" style="display:none;">Record Sakaba Beatle Momo isn't a Beatles-themed bar — it's a vintage bar with a real turntable and a collection thousands of records deep, from the 1950s to today. Momo, the owner, plays exactly what guests ask for — music here works as a language that needs no translation.</p>
       </div>
     </div>
 
     <details class="practical-card">
-      <summary><span class="practical-card-title">Часы и практика</span></summary>
+      <summary><span class="practical-card-title" data-lang="ru">Часы и практика</span><span class="practical-card-title" data-lang="en" style="display:none;">Hours & practicalities</span></summary>
       <div class="practical-card-body">
-        <p>По <strong>воскресеньям закрыт</strong>. В остальные дни работает <strong>19:00–23:30</strong>. Бронь оформляется на один из двух сеансов — на 19:00 или на 21:00.</p>
-        <p>Заведение маленькое — около <strong>25 мест</strong>. Забронировать можно через Instagram-аккаунт бара; без брони лучше приходить к самому открытию.</p>
+        <p data-lang="ru">По <strong>воскресеньям закрыт</strong>. В остальные дни работает <strong>19:00–23:30</strong>. Бронь оформляется на один из двух сеансов — на 19:00 или на 21:00.</p>
+        <p data-lang="ru">Заведение маленькое — около <strong>25 мест</strong>. Забронировать можно через Instagram-аккаунт бара; без брони лучше приходить к самому открытию.</p>
+        <p data-lang="en" style="display:none;"><strong>Closed Sundays</strong>. Open <strong>19:00–23:30</strong> other days. Reservations are for one of two seatings — 19:00 or 21:00.</p>
+        <p data-lang="en" style="display:none;">Small venue — around <strong>25 seats</strong>. Book via the bar's Instagram account; without a reservation, come right at opening.</p>
       </div>
     </details>
 
@@ -1115,16 +1226,20 @@ body.site-nav-locked { overflow: hidden; }
 
   <section id="t4">
     <h2 class="section-title">Food & Coffee</h2>
-    <p><strong>Nama Yatsuhashi на Sannenzaka</strong> — свежий, а не сувенирный вариант классической сладости, стоит попробовать по дороге, а не покупать упаковку в аэропорту. <strong>Mouriya Gion</strong> — основной ужин дня, подробности в разделе про это место выше.</p>
+    <p data-lang="ru"><strong>Nama Yatsuhashi на Sannenzaka</strong> — свежий, а не сувенирный вариант классической сладости, стоит попробовать по дороге, а не покупать упаковку в аэропорту. <strong>Mouriya Gion</strong> — основной ужин дня, подробности в разделе про это место выше.</p>
+    <p data-lang="en" style="display:none;"><strong>Nama Yatsuhashi on Sannenzaka</strong> — the fresh version of the classic sweet, not the souvenir box, worth trying along the way rather than buying at the airport. <strong>Mouriya Gion</strong> is the day's main dinner, details in its own section above.</p>
   </section>
 
   <hr>
 
   <h2 class="section-title" id="connections">Connections</h2>
-  <p>Kōdai-ji построен на деньги Tokugawa Ieyasu — человека, который в 1600 году при Sekigahara разбил сторонников клана Toyotomi, а в 1603-м получил от императора титул сёгуна. Тот же Ieyasu годом позже начал строить Nijō Castle в Kyoto — резиденцию, которая должна была демонстрировать власть его рода. Круг замкнётся в другой день поездки: именно в Nijō Castle в 1867 году последний сёгун из рода Tokugawa, Yoshinobu, объявит Taisei Hōkan — добровольную передачу власти императору. Один и тот же клан профинансировал храм для вдовы своего поверженного соперника и два с половиной века спустя в собственном замке сдал власть, которую отобрал у этого соперника.</p>
-  <p>А Sen no Rikyū, чьи чайные домики стоят на территории Kōdai-ji, — фигура, к которой в поездке возвращаешься не раз: его мысль о неповторимости каждой встречи (ichigo ichie) звучит в сегодняшней вступительной цитате и лежит в основе логики chadō, которую стоит держать в голове в любом японском саду или чайном павильоне.</p>
+  <p data-lang="ru">Kōdai-ji построен на деньги Tokugawa Ieyasu — человека, который в 1600 году при Sekigahara разбил сторонников клана Toyotomi, а в 1603-м получил от императора титул сёгуна. Тот же Ieyasu годом позже начал строить Nijō Castle в Kyoto — резиденцию, которая должна была демонстрировать власть его рода. Круг замкнётся в другой день поездки: именно в Nijō Castle в 1867 году последний сёгун из рода Tokugawa, Yoshinobu, объявит Taisei Hōkan — добровольную передачу власти императору. Один и тот же клан профинансировал храм для вдовы своего поверженного соперника и два с половиной века спустя в собственном замке сдал власть, которую отобрал у этого соперника.</p>
+  <p data-lang="ru">А Sen no Rikyū, чьи чайные домики стоят на территории Kōdai-ji, — фигура, к которой в поездке возвращаешься не раз: его мысль о неповторимости каждой встречи (ichigo ichie) звучит в сегодняшней вступительной цитате и лежит в основе логики chadō, которую стоит держать в голове в любом японском саду или чайном павильоне.</p>
+  <p data-lang="en" style="display:none;">Kōdai-ji was built with money from Tokugawa Ieyasu — the man who crushed the Toyotomi clan's supporters at Sekigahara in 1600 and received the title of shogun from the emperor in 1603. That same Ieyasu began building Nijō Castle in Kyoto a year later, a residence meant to display his family's power. The circle closes on another day of the trip: it's at Nijō Castle in 1867 that the last Tokugawa shogun, Yoshinobu, would announce Taisei Hōkan, the voluntary handover of power to the emperor. The same clan funded a temple for its fallen rival's widow and, two and a half centuries later, surrendered in its own castle the very power it had taken from that rival.</p>
+  <p data-lang="en" style="display:none;">And Sen no Rikyū, whose tea houses stand on the Kōdai-ji grounds, is a figure you'll circle back to more than once on this trip: his idea that every meeting is unrepeatable (ichigo ichie) echoes in today's opening quote and underlies the logic of chadō worth keeping in mind at any Japanese garden or tea pavilion.</p>
 
-  <p class="footnote">Higashiyama Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="ru">Higashiyama Day · Japan 2026 · план дня, собранный вручную</p>
+  <p class="footnote" data-lang="en" style="display:none;">Higashiyama Day · Japan 2026 · a day plan, handmade</p>
 </main>
 
 <button class="back-btn" id="backBtn">↑ Наверх</button>
@@ -1164,6 +1279,31 @@ body.site-nav-locked { overflow: hidden; }
   }
   window.addEventListener('DOMContentLoaded', openDeepLink);
   window.addEventListener('hashchange', openDeepLink);
+</script>
+<script>
+/* ---------- Language toggle (EN trial layer) ---------- */
+(function () {
+  const STORAGE_KEY = 'japan2026-lang';
+  const buttons = document.querySelectorAll('#langToggle [data-set-lang]');
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    buttons.forEach(b => b.classList.toggle('-active', b.dataset.setLang === lang));
+    document.documentElement.lang = lang;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const lang = b.dataset.setLang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      applyLang(lang);
+    });
+  });
+
+  applyLang(localStorage.getItem(STORAGE_KEY) || 'ru');
+})();
 </script>
 
 <script>
