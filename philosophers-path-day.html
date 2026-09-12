@@ -1206,22 +1206,22 @@ window.SITE_DATA = {
 
   days: [
     { file: "asakusa-day.html",       kanji: "浅", title: "Asakusa Day",       area: "Taitō" },
+    { file: "nikko-day.html",         kanji: "光", title: "Nikko Day",         area: "Tochigi" },
     { file: "shimokitazawa-day.html", kanji: "猫",   title: "Shimokitazawa Day", area: "Setagaya" },
     { file: "philosophers-path-day.html", kanji: "哲", title: "Philosopher's Path Day",  area: "North Higashiyama" },
+    { file: "arashiyama-day.html", kanji: "嵐", title: "Arashiyama Day",      area: "Ukyō-ku" },
     { file: "fushimi-nijo-day.html",         kanji: "狐",   title: "Fushimi & Nijō Day",         area: "Fushimi/Gion" },
+    { file: "omihachiman-day.html",kanji: "近", title: "Omihachiman Day",     area: "Shiga" },
     { file: "higashiyama-day.html",   kanji: "東", title: "Higashiyama Day",   area: "Higashiyama-ku" },
-    { file: "harajuku-shibuya-day.html",kanji: "森", title: "Harajuku & Shibuya Day", area: "Shibuya-ku" },
-    { file: "shinjuku-day.html",   kanji: "新", title: "Shinjuku Day",         area: "Shinjuku-ku" },
+    { file: "osaka-day.html",      kanji: "大阪", title: "Osaka Day",           area: "Osaka" },
     { file: "kinkaku-day.html",    kanji: "金", title: "Kinkaku-ji Day",       area: "Kita-ku" },
     { file: "kanazawa-day.html",   kanji: "箔", title: "Kanazawa Day",         area: "Kanazawa" },
     { file: "kenrokuen-day.html",  kanji: "六", title: "Kenrokuen Day",        area: "Kanazawa → Tokyo" },
     { file: "teamlab-odaiba-day.html", kanji: "波", title: "teamLab & Odaiba Day", area: "Kōtō · Minato" },
-    { file: "akihabara-day.html",  kanji: "神", title: "Kanda & Akihabara Day", area: "Chiyoda" },
-    { file: "ginza-day.html",      kanji: "銀", title: "Ginza Day",           area: "Chiyoda · Chūō" },
-    { file: "arashiyama-day.html", kanji: "嵐", title: "Arashiyama Day",      area: "Ukyō-ku" },
-    { file: "omihachiman-day.html",kanji: "近", title: "Omihachiman Day",     area: "Shiga" },
-    { file: "osaka-day.html",      kanji: "大阪", title: "Osaka Day",           area: "Osaka" },
     { file: "kamakura-day.html",   kanji: "鎌倉", title: "Kamakura Day",        area: "Kamakura" },
+    { file: "harajuku-shibuya-day.html",kanji: "森", title: "Harajuku & Shibuya Day", area: "Shibuya-ku" },
+    { file: "hakone-day.html",     kanji: "箱", title: "Hakone Day",           area: "Hakone" },
+    { file: "ginza-day.html",      kanji: "銀", title: "Akihabara, Ginza & Shinjuku Day", area: "Chiyoda · Chūō · Shinjuku-ku" },
     // Add future days here as they're built — the drawer picks them up automatically.
   ],
 
@@ -1243,6 +1243,9 @@ window.SITE_DATA = {
     { name: "Ueno Park",          file: "asakusa-day.html",       anchor: "loc-uenopark",    day: "Asakusa Day",       dayFile: "asakusa-day.html" },
     { name: "National Museum of Western Art", file: "asakusa-day.html", anchor: "loc-nmwa",  day: "Asakusa Day",       dayFile: "asakusa-day.html" },
 
+    { name: "Toshogu Shrine",     file: "nikko-day.html", anchor: "loc-toshogu",  day: "Nikko Day", dayFile: "nikko-day.html" },
+    { name: "Akechidaira, Chuzenji & Kegon Falls", file: "nikko-day.html", anchor: "loc-chuzenji", day: "Nikko Day", dayFile: "nikko-day.html" },
+
     { name: "Gōtoku-ji Temple",       file: "shimokitazawa-day.html", anchor: "loc-gotokuji",   day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
     { name: "Nerdy Dogs",             file: "shimokitazawa-day.html", anchor: "loc-nerdydogs",  day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
     { name: "Desk Labo",              file: "shimokitazawa-day.html", anchor: "loc-desklabo",   day: "Shimokitazawa Day", dayFile: "shimokitazawa-day.html" },
@@ -1255,11 +1258,23 @@ window.SITE_DATA = {
     { name: "Ōtoyo Shrine",      file: "philosophers-path-day.html", anchor: "loc-otoyoshrine",  day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
     { name: "Ginkaku-ji",        file: "philosophers-path-day.html", anchor: "loc-ginkakuji",    day: "Philosopher's Path Day", dayFile: "philosophers-path-day.html" },
 
+    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+    { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
+
     { name: "Fushimi Inari Taisha",   file: "fushimi-nijo-day.html", anchor: "loc-fushimiinari", day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
     { name: "Vermillion Cafe",        file: "fushimi-nijo-day.html", anchor: "loc-vermillion",   day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
     { name: "Nishiki Market",         file: "fushimi-nijo-day.html", anchor: "loc-nishiki",       day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
     { name: "Nijō Castle",            file: "fushimi-nijo-day.html", anchor: "loc-nijocastle",    day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
     { name: "Gion Tsujiri Main Store",file: "fushimi-nijo-day.html", anchor: "loc-giontsujiri",   day: "Fushimi & Nijō Day", dayFile: "fushimi-nijo-day.html" },
+
+    { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+    { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+    { name: "Himure Hachimangu Shrine",file: "omihachiman-day.html", anchor: "loc-himure",        day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
+
     { name: "Kiyomizu-dera",     file: "higashiyama-day.html", anchor: "loc-kiyomizu",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Sannenzaka",        file: "higashiyama-day.html", anchor: "loc-sannenzaka",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Kōdai-ji",          file: "higashiyama-day.html", anchor: "loc-kodaiji",     day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
@@ -1267,32 +1282,16 @@ window.SITE_DATA = {
     { name: "Mouriya Gion",      file: "higashiyama-day.html", anchor: "loc-mouriya",     day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Pontocho Alley",    file: "higashiyama-day.html", anchor: "loc-pontocho",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Beatle Momo",       file: "higashiyama-day.html", anchor: "loc-beatlemomo",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
-    { name: "Meiji Jingu",              file: "harajuku-shibuya-day.html", anchor: "loc-meijijingu",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Yoyogi Park",              file: "harajuku-shibuya-day.html", anchor: "loc-yoyogipark",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Takeshita Street",         file: "harajuku-shibuya-day.html", anchor: "loc-takeshita",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Ura-Harajuku / Cat Street",file: "harajuku-shibuya-day.html", anchor: "loc-catstreet",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Omotesando Avenue",        file: "harajuku-shibuya-day.html", anchor: "loc-omotesando",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "MYKITA Tokyo",             file: "harajuku-shibuya-day.html", anchor: "loc-mykita",           day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Shibuya Crossing",         file: "harajuku-shibuya-day.html", anchor: "loc-shibuyacrossing",  day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "TSUCHIYA KABAN",           file: "harajuku-shibuya-day.html", anchor: "loc-tsuchiyakaban",    day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Grandfather's",            file: "harajuku-shibuya-day.html", anchor: "loc-grandfathers",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Meikyoku Kissa Lion",      file: "harajuku-shibuya-day.html", anchor: "loc-meikyokulion",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
-    { name: "Shinjuku Gyoen",            file: "shinjuku-day.html", anchor: "loc-gyoen",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "LE TALON GRISE",            file: "shinjuku-day.html", anchor: "loc-talongrise",   day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Udon Shin",                 file: "shinjuku-day.html", anchor: "loc-udonshin",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Beams Japan",               file: "shinjuku-day.html", anchor: "loc-beams",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "The Giant 3D Cat",          file: "shinjuku-day.html", anchor: "loc-cat3d",        day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "2nd Street Shinjuku 2",     file: "shinjuku-day.html", anchor: "loc-2ndstreet",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Suehiro-dori Street",       file: "shinjuku-day.html", anchor: "loc-suehiro",      day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Hanazono Shrine",           file: "shinjuku-day.html", anchor: "loc-hanazono",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Keio Department Store",     file: "shinjuku-day.html", anchor: "loc-keio",         day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Tokyo Metropolitan Government Building", file: "shinjuku-day.html", anchor: "loc-tocho", day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Omoide Yokocho",            file: "shinjuku-day.html", anchor: "loc-omoide",       day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Kabukicho",                 file: "shinjuku-day.html", anchor: "loc-kabukicho",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Godzilla Head",             file: "shinjuku-day.html", anchor: "loc-godzilla",     day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Gyopao Gyoza Shinjuku",     file: "shinjuku-day.html", anchor: "loc-gyopao",       day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Shinjuku Golden-Gai",       file: "shinjuku-day.html", anchor: "loc-goldengai",    day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
-    { name: "Ramen Nagi Golden Gai Honkan", file: "shinjuku-day.html", anchor: "loc-nagi",      day: "Shinjuku Day", dayFile: "shinjuku-day.html" },
+
+    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Namba Yasaka Jinja",     file: "osaka-day.html", anchor: "loc-yasaka",       day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Dotonbori",              file: "osaka-day.html", anchor: "loc-dotonbori",    day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Amerikamura",            file: "osaka-day.html", anchor: "loc-amemura",      day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
+    { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
 
     { name: "Kinkaku-ji",           file: "kinkaku-day.html", anchor: "loc-kinkakuji",         day: "Kinkaku-ji Day", dayFile: "kinkaku-day.html" },
     { name: "Ryōan-ji",             file: "kinkaku-day.html", anchor: "loc-ryoanji",           day: "Kinkaku-ji Day", dayFile: "kinkaku-day.html" },
@@ -1311,43 +1310,40 @@ window.SITE_DATA = {
     { name: "Odaiba waterfront",       file: "teamlab-odaiba-day.html", anchor: "loc-odaiba",      day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
     { name: "Hamarikyu Gardens",       file: "teamlab-odaiba-day.html", anchor: "loc-hamarikyu",   day: "teamLab & Odaiba Day", dayFile: "teamlab-odaiba-day.html" },
 
-    { name: "Jimbocho",                file: "akihabara-day.html", anchor: "loc-jimbocho",        day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Akihabara",               file: "akihabara-day.html", anchor: "loc-akihabara",       day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Ameyoko",                 file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-    { name: "Yanaka",                  file: "akihabara-day.html", anchor: "loc-evening",         day: "Kanda & Akihabara Day", dayFile: "akihabara-day.html" },
-
-    { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Ginza Day", dayFile: "ginza-day.html" },
-    { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Ginza Day", dayFile: "ginza-day.html" },
-    { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Ginza Day", dayFile: "ginza-day.html" },
-
-    { name: "Yusai-Tei Gallery",       file: "arashiyama-day.html", anchor: "loc-yusaitei",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Arashiyama Bamboo Forest",file: "arashiyama-day.html", anchor: "loc-bamboo",         day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Gio-ji",                  file: "arashiyama-day.html", anchor: "loc-gioji",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Saga-Toriimoto",          file: "arashiyama-day.html", anchor: "loc-toriimoto",      day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Adashino Nenbutsuji",     file: "arashiyama-day.html", anchor: "loc-adashino",       day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-    { name: "Otagi Nenbutsuji",        file: "arashiyama-day.html", anchor: "loc-otagi",          day: "Arashiyama Day", dayFile: "arashiyama-day.html" },
-
-    { name: "Shinmachi-dōri",          file: "omihachiman-day.html", anchor: "loc-shinmachi",     day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
-    { name: "Hachiman-bori",           file: "omihachiman-day.html", anchor: "loc-hachimanbori",  day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
-    { name: "Himure Hachimangu Shrine",file: "omihachiman-day.html", anchor: "loc-himure",        day: "Omihachiman Day", dayFile: "omihachiman-day.html" },
-
-    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Namba Yasaka Jinja",     file: "osaka-day.html", anchor: "loc-yasaka",       day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Dotonbori",              file: "osaka-day.html", anchor: "loc-dotonbori",    day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Amerikamura",            file: "osaka-day.html", anchor: "loc-amemura",      day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Kitan Hibiki",           file: "osaka-day.html", anchor: "loc-kitanhibiki",  day: "Osaka Day", dayFile: "osaka-day.html" },
-    { name: "Bar Nayuta",             file: "osaka-day.html", anchor: "loc-nayuta",       day: "Osaka Day", dayFile: "osaka-day.html" },
-
     { name: "Tsurugaoka Hachiman-gu", file: "kamakura-day.html", anchor: "loc-hachimangu", day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kōtoku-in",              file: "kamakura-day.html", anchor: "loc-kotokuin",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Hase-dera",              file: "kamakura-day.html", anchor: "loc-hasedera",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Yuigahama Beach",        file: "kamakura-day.html", anchor: "loc-yuigahama",  day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Zeniarai Benten",        file: "kamakura-day.html", anchor: "loc-zeniarai",   day: "Kamakura Day", dayFile: "kamakura-day.html" },
     { name: "Kamakurakōkō-mae",       file: "kamakura-day.html", anchor: "loc-kokomae",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
-    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" }
+    { name: "Komachi St",             file: "kamakura-day.html", anchor: "loc-komachi",    day: "Kamakura Day", dayFile: "kamakura-day.html" },
+
+    { name: "Meiji Jingu",              file: "harajuku-shibuya-day.html", anchor: "loc-meijijingu",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Yoyogi Park",              file: "harajuku-shibuya-day.html", anchor: "loc-yoyogipark",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Takeshita Street",         file: "harajuku-shibuya-day.html", anchor: "loc-takeshita",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Ura-Harajuku / Cat Street",file: "harajuku-shibuya-day.html", anchor: "loc-catstreet",        day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Omotesando Avenue",        file: "harajuku-shibuya-day.html", anchor: "loc-omotesando",       day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "MYKITA Tokyo",             file: "harajuku-shibuya-day.html", anchor: "loc-mykita",           day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Shibuya Crossing",         file: "harajuku-shibuya-day.html", anchor: "loc-shibuyacrossing",  day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "TSUCHIYA KABAN",           file: "harajuku-shibuya-day.html", anchor: "loc-tsuchiyakaban",    day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Grandfather's",            file: "harajuku-shibuya-day.html", anchor: "loc-grandfathers",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+    { name: "Meikyoku Kissa Lion",      file: "harajuku-shibuya-day.html", anchor: "loc-meikyokulion",     day: "Harajuku & Shibuya Day", dayFile: "harajuku-shibuya-day.html" },
+
+    { name: "Hakone Shrine & Lake Ashi", file: "hakone-day.html", anchor: "loc-hakoneshrine", day: "Hakone Day", dayFile: "hakone-day.html" },
+    { name: "Owakudani",                 file: "hakone-day.html", anchor: "loc-owakudani",    day: "Hakone Day", dayFile: "hakone-day.html" },
+    { name: "Oshino Hakkai",             file: "hakone-day.html", anchor: "loc-oshinohakkai", day: "Hakone Day", dayFile: "hakone-day.html" },
+
+    { name: "Akihabara",               file: "ginza-day.html", anchor: "loc-akihabara",       day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Kanda / Jimbocho",        file: "ginza-day.html", anchor: "loc-jimbocho",        day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Ameyoko",                 file: "ginza-day.html", anchor: "loc-ameyoko",         day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Imperial Palace East Gardens", file: "ginza-day.html", anchor: "loc-eastgardens",  day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Yurakucho",               file: "ginza-day.html", anchor: "loc-yurakucho",          day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Ginza",                   file: "ginza-day.html", anchor: "loc-ginza",              day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Omoide Yokocho",          file: "ginza-day.html", anchor: "loc-omoide",             day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Kabukicho",               file: "ginza-day.html", anchor: "loc-kabukicho",          day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Godzilla Head",           file: "ginza-day.html", anchor: "loc-godzilla",           day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "Shinjuku Golden-Gai",     file: "ginza-day.html", anchor: "loc-goldengai",          day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" },
+    { name: "The Giant 3D Cat",        file: "ginza-day.html", anchor: "loc-cat3d",              day: "Akihabara, Ginza & Shinjuku Day", dayFile: "ginza-day.html" }
   ]
 };
 
@@ -1400,10 +1396,10 @@ window.SITE_DATA = {
     drawer.id = 'siteNavDrawer';
 
     const CHAPTERS = [
-      { label: "Tokyo I",          files: ["asakusa-day.html", "shinjuku-day.html", "shimokitazawa-day.html"] },
-      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "kinkaku-day.html", "osaka-day.html"] },
+      { label: "Tokyo I",          files: ["asakusa-day.html", "nikko-day.html", "shimokitazawa-day.html"] },
+      { label: "Kyoto & Environs", files: ["philosophers-path-day.html", "arashiyama-day.html", "fushimi-nijo-day.html", "omihachiman-day.html", "higashiyama-day.html", "osaka-day.html", "kinkaku-day.html"] },
       { label: "Kanazawa",         files: ["kanazawa-day.html", "kenrokuen-day.html"] },
-      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "akihabara-day.html", "harajuku-shibuya-day.html", "ginza-day.html"] },
+      { label: "Tokyo II",         files: ["teamlab-odaiba-day.html", "kamakura-day.html", "harajuku-shibuya-day.html", "hakone-day.html", "ginza-day.html"] },
     ];
     const daysHtml = CHAPTERS.map(ch => {
       const items = ch.files.map(f => DATA.days.find(d => d.file === f)).filter(Boolean).map(dayLinkHtml).join('');
