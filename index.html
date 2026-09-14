@@ -529,8 +529,8 @@ body.site-nav-locked { overflow: hidden; }
   <div class="dash-grid">
     <div class="dash-stat">
       <span class="dash-num" id="daysLeft">—</span>
-      <span class="dash-label" data-lang="ru">дней до вылета</span>
-      <span class="dash-label" data-lang="en" style="display:none;">days to departure</span>
+      <span class="dash-label" id="daysLeftLabelRu" data-lang="ru">дней до вылета</span>
+      <span class="dash-label" id="daysLeftLabelEn" data-lang="en" style="display:none;">days to departure</span>
     </div>
     <div class="dash-stat">
       <span class="dash-num ink">17</span>
@@ -563,8 +563,8 @@ body.site-nav-locked { overflow: hidden; }
         <span class="chapter-kicker" data-lang="ru">Глава I · 22–26 сентября</span>
         <span class="chapter-kicker" data-lang="en" style="display:none;">Chapter I · September 22–26</span>
         <h3 class="chapter-title">Tokyo I</h3>
-        <p class="chapter-intro" data-lang="ru">Первая посадка. Прилёт 23-го днём, и пять ночей на то, чтобы сбить джетлаг и понять, что этот город не собирается объяснять себя новичкам — придётся разбираться самим.</p>
-        <p class="chapter-intro" data-lang="en" style="display:none;">The first landing. Arriving on the 23rd in the afternoon, with five nights to shake off jet lag and realize this city isn't going to explain itself to newcomers — you'll have to figure it out yourself.</p>
+        <p class="chapter-intro" data-lang="ru">Пять ночей на то, чтобы сбить джетлаг и понять, что этот город не собирается объяснять себя новичкам — придётся разбираться самим.</p>
+        <p class="chapter-intro" data-lang="en" style="display:none;">Five nights to shake off jet lag and realize this city isn't going to explain itself to newcomers — you'll have to figure it out yourself.</p>
       </div>
     </summary>
     <div class="chapter-body">
@@ -600,8 +600,8 @@ body.site-nav-locked { overflow: hidden; }
         <span class="day-kanji">猫</span>
         <span class="day-body">
           <h3>Shimokitazawa Day</h3>
-          <span class="day-hook" data-lang="ru">Винтажные лавки и театры в квартале, куда туристы почти не доходят</span>
-          <span class="day-hook" data-lang="en" style="display:none;">Vintage shops and theaters in a district tourists rarely reach</span>
+          <span class="day-hook" data-lang="ru">Винтажные лавки в квартале, куда туристы почти не доходят</span>
+          <span class="day-hook" data-lang="en" style="display:none;">Vintage shops in a district tourists rarely reach</span>
         </span>
         <span class="arrow">→</span>
       </a>
@@ -865,8 +865,8 @@ body.site-nav-locked { overflow: hidden; }
 
   </div>
 
-  <p class="footnote" data-lang="ru">Japan 2026 · указатель · обновляется по ходу подготовки</p>
-  <p class="footnote" data-lang="en" style="display:none;">Japan 2026 · index · updated as preparation continues</p>
+  <p class="footnote" data-lang="ru">Japan 2026 · указатель</p>
+  <p class="footnote" data-lang="en" style="display:none;">Japan 2026 · index</p>
 </main>
 
 <script>
@@ -981,7 +981,6 @@ window.SITE_DATA = {
     { name: "Pontocho Alley",    file: "higashiyama-day.html", anchor: "loc-pontocho",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Beatle Momo",       file: "higashiyama-day.html", anchor: "loc-beatlemomo",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
 
-    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },
@@ -1092,15 +1091,30 @@ window.SITE_DATA = {
   }
   updateFx();
 
-  // ---- Обратный отсчёт до вылета (первый день маршрута, JST) ----
+  // ---- Обратный отсчёт: до вылета, затем до возвращения домой (JST / IDT) ----
   function updateCountdown() {
     const tripStart = new Date('2026-09-22T00:00:00+09:00');
+    const homeArrival = new Date('2026-10-12T02:40:00+03:00');
     const now = new Date();
-    const diffDays = Math.ceil((tripStart - now) / 86400000);
     const el = document.getElementById('daysLeft');
-    if (diffDays > 0) el.textContent = diffDays;
-    else if (diffDays === 0) el.textContent = '0';
-    else el.textContent = currentLang() === 'en' ? 'en route' : 'в пути';
+    const labelRu = document.getElementById('daysLeftLabelRu');
+    const labelEn = document.getElementById('daysLeftLabelEn');
+
+    if (now < tripStart) {
+      const diffDays = Math.ceil((tripStart - now) / 86400000);
+      el.textContent = diffDays;
+      if (labelRu) labelRu.textContent = 'дней до вылета';
+      if (labelEn) labelEn.textContent = 'days to departure';
+    } else if (now < homeArrival) {
+      const diffDays = Math.ceil((homeArrival - now) / 86400000);
+      el.textContent = diffDays > 0 ? diffDays : '0';
+      if (labelRu) labelRu.textContent = 'дней до возвращения';
+      if (labelEn) labelEn.textContent = 'days to return';
+    } else {
+      el.textContent = currentLang() === 'en' ? 'home' : 'дома';
+      if (labelRu) labelRu.textContent = 'с возвращением';
+      if (labelEn) labelEn.textContent = 'welcome back';
+    }
   }
   updateCountdown();
 

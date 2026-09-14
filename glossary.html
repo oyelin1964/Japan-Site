@@ -439,13 +439,13 @@
     font-size: 0.8rem;
     color: var(--muted);
   }
-  .used-in a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold); }
+  .used-in a { color: var(--red); text-decoration: none; border-bottom: 1px dotted var(--red-soft); }
+  .used-in a:hover { color: var(--red-soft); }
 
-  /* Inline cross-references inside entry prose (term → another glossary entry).
-     Distinct from .used-in (gold, "see also / used in day X") — these are red,
-     the site's primary link color. Scoped to any descendant of .entry (prose,
-     idea-card, lead-suff, term-quote) plus .subtheme-body, since subtheme
-     cards live outside the <article class="entry"> as siblings. */
+  /* Inline cross-references inside entry prose (term → another glossary entry),
+     scoped to any descendant of .entry (prose, idea-card, lead-suff, term-quote)
+     plus .subtheme-body, since subtheme cards live outside the <article class="entry">
+     as siblings. Same red as .used-in — the site's one link color throughout. */
   .entry a.ref-link,
   .subtheme-body a.ref-link {
     color: var(--red);
@@ -972,6 +972,7 @@ body.site-nav-locked { overflow: hidden; }
           <div class="term-quote">«Поскольку нет ничего достигаемого, Бодхисаттва не имеет препятствий в своём уме. Поскольку нет препятствий, он не имеет страха и оставляет далеко позади искажённые мечты и иллюзии. В конечном итоге — Нирвана!»
             <cite>Сутра Сердца</cite>
           </div>
+          <div class="used-in">Упоминается в: <a href="arashiyama-day.html#loc-otagi">Arashiyama Day → Otagi Nenbutsuji</a>, <a href="kamakura-day.html#loc-hasedera">Kamakura Day → Hase-dera</a></div>
         </article>
 
         <article class="entry" id="upaya">
@@ -1131,7 +1132,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Kami может пугать не меньше, чем восхищать — определение Norinaga включает «злое и мрачное» наравне с прекрасным. Благоговение, а не доброта — вот общий знаменатель.
           </div>
-          <div class="used-in">Упоминается в: <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a></div>
+          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-shrine">Asakusa Day → Asakusa Shrine</a>, <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a></div>
         </article>
 
         <article class="entry" id="izanagi-izanami">
@@ -1253,7 +1254,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             То, что сегодня выглядит как «два разных храма по соседству», почти всегда когда-то было одним целым. Разделение — не древняя традиция, а политическое решение, которому чуть больше полутора веков.
           </div>
-          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-shrine">Asakusa Day → Asakusa Shrine и разделённая память</a></div>
+          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-shrine">Asakusa Day → Asakusa Shrine и разделённая память</a>, <a href="harajuku-shibuya-day.html#loc-meijijingu">Harajuku &amp; Shibuya Day → Meiji Jingu</a></div>
         </article>
 
         <article class="entry" id="kannon">
@@ -1265,7 +1266,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Тысяча рук Kannon — не украшение, а буквальная метафора: сострадание, которое масштабируется. Один взгляд милосердия способен заметить только одного страдающего; отсюда и потребность в тысяче рук сразу.
           </div>
-          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-sensoji">Asakusa Day → Sensō-ji</a></div>
+          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-sensoji">Asakusa Day → Sensō-ji</a>, <a href="kamakura-day.html#loc-hasedera">Kamakura Day → Hase-dera</a></div>
         </article>
 
         <article class="entry" id="inari-kitsune">
@@ -1278,7 +1279,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Тысячи ворот torii на горе — не декорация древности, а действующая экономика благодарности: каждые новые ворота дарят компания или человек, которому Inari, по их ощущению, помог разбогатеть. Гора буквально растёт из чужой удачи.
           </div>
-          <div class="used-in">Упоминается в: <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a></div>
+          <div class="used-in">Упоминается в: <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a>, <a href="philosophers-path-day.html#loc-otoyoshrine">Philosopher's Path Day → Ōtoyo Shrine</a></div>
         </article>
 
         <article class="entry" id="kappa-yokai">
@@ -1304,6 +1305,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Парфенон стареет и разрушается, оставаясь тем же камнем. Ise Jingū — противоположная стратегия бессмертия: не тот же материал, а тот же процесс, повторённый безостановочно. И то и другое — способ обмануть время, просто с разных сторон.
           </div>
+          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-sensoji">Asakusa Day → Sensō-ji</a></div>
         </article>
 
 
@@ -1332,6 +1334,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Torii нельзя «закрыть» — в этом весь смысл. Синтоистская граница священного открыта всегда; закрывающиеся ворота с охраняющими статуями — уже буддийская, более осторожная логика входа.
           </div>
+          <div class="used-in">Упоминается в: <a href="arashiyama-day.html#loc-toriimoto">Arashiyama Day → Saga-Toriimoto</a>, <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a>, <a href="harajuku-shibuya-day.html#loc-meijijingu">Harajuku &amp; Shibuya Day → Meiji Jingu</a></div>
         </article>
 
         <article class="entry" id="matsuri">
@@ -1550,6 +1553,7 @@ body.site-nav-locked { overflow: hidden; }
             <li><strong>Rokuharamitsu-ji</strong> (Киото) — район Рокухара был «штаб-квартирой» клана Тайра, где стояло более 5000 домов клана; в сокровищнице храма хранится деревянная статуя Тайра-но Киёмори.</li>
             <li><strong><a href="arashiyama-day.html#loc-gioji" class="ref-link">Giō-ji</a></strong> (Арасияма) — уединённый храм с садом из мха, куда приняла постриг танцовщица Гио, отвергнутая Киёмори.</li>
             <li><strong>Пролив Данноура</strong> (Симоносеки) — место финальной морской битвы 1185 года.</li>
+            <li><strong><a href="kamakura-day.html#loc-hachimangu" class="ref-link">Tsurugaoka Hachimangū</a></strong> (Камакура) — заложен победителем войны, Минамото-но Ёритомо, сразу после разгрома клана Тайра.</li>
           </ul>
         </div>
 
@@ -1597,8 +1601,8 @@ body.site-nav-locked { overflow: hidden; }
         <div class="period-location-card">
           <span class="period-locations-label">Локации в поездке</span>
           <ul>
-            <li><strong>Tsurugaoka Hachimangū</strong> (Камакура) — главный синтоистский храм города, заложенный Минамото-но Ёритомо и посвящённый богу войны Хатиману, покровителю самураев.</li>
-            <li><strong>Kōtoku-in</strong> (Камакура) — Великий Будда (Дайбуцу), монументальная бронзовая статуя 1252 года, символ суровой самурайской веры в противовес роскоши Нары.</li>
+            <li><strong><a href="kamakura-day.html#loc-hachimangu" class="ref-link">Tsurugaoka Hachimangū</a></strong> (Камакура) — главный синтоистский храм города, заложенный Минамото-но Ёритомо и посвящённый богу войны Хатиману, покровителю самураев.</li>
+            <li><strong><a href="kamakura-day.html#loc-kotokuin" class="ref-link">Kōtoku-in</a></strong> (Камакура) — Великий Будда (Дайбуцу), монументальная бронзовая статуя 1252 года, символ суровой самурайской веры в противовес роскоши Нары.</li>
             <li><strong>Пещеры Тосё-дзи (Yagura)</strong> в Камакуре — место гибели сёгуната: здесь в 1333 году 800 самураев клана Hōjō совершили массовое сэппуку.</li>
           </ul>
         </div>
@@ -1798,10 +1802,12 @@ body.site-nav-locked { overflow: hidden; }
         <div class="period-location-card">
           <span class="period-locations-label">Локации в поездке</span>
           <ul>
-            <li><strong>Замок Осака</strong> — главное творение Тоётоми Хидэёси: монументальная башня и гигантские каменные блоки стен, доставленные со всей Японии.</li>
+            <li><strong><a href="osaka-day.html#loc-osakacastle" class="ref-link">Замок Осака</a></strong> — главное творение Тоётоми Хидэёси: монументальная башня и гигантские каменные блоки стен, доставленные со всей Японии.</li>
             <li><strong>Honnō-ji</strong> (Киото) — место рокового предательства и гибели Оды Нобунаги в 1582 году.</li>
             <li><strong>Замок Nijō</strong> (Киото) — основан в эту эпоху как резиденция объединителей в столице.</li>
             <li><strong>Гора Hiei</strong> и храм Enryaku-ji — могущественный горный монастырский комплекс к северу от Киото, сожжённый Нобунагой в 1571 году.</li>
+            <li><strong><a href="higashiyama-day.html#loc-kodaiji" class="ref-link">Kōdai-ji</a></strong> (Киото) — построен вдовой Хидэёси, Nene, в его память в 1606 году.</li>
+            <li><strong><a href="omihachiman-day.html#loc-shinmachi" class="ref-link">Ōmihachiman</a></strong> — город-крепость, основанный в 1585 году племянником Хидэёси, Toyotomi Hidetsugu.</li>
           </ul>
         </div>
 
@@ -1848,10 +1854,16 @@ body.site-nav-locked { overflow: hidden; }
         <div class="period-location-card">
           <span class="period-locations-label">Локации в поездке</span>
           <ul>
-            <li><strong>Nikkō Tōshō-gū</strong> (горы Никко) — роскошный мавзолей Токугавы Иэясу, резной шедевр с золотом, где находятся знаменитые «три обезьяны» (не вижу, не слышу, не скажу).</li>
+            <li><strong><a href="nikko-day.html#loc-toshogu" class="ref-link">Nikkō Tōshō-gū</a></strong> (горы Никко) — роскошный мавзолей Токугавы Иэясу, резной шедевр с золотом, где находятся знаменитые «три обезьяны» (не вижу, не слышу, не скажу).</li>
             <li><strong>Sengaku-ji</strong> (Токио) — место, где похоронены все 47 ронинов и их сюзерен; по сей день здесь непрерывно курятся благовония.</li>
-            <li><strong>Замок Nijō</strong> (Киото) — резиденция сёгунов Токугава со знаменитыми «поющими» соловьиными полами, скрипящими при шагах для защиты от ниндзя. Здесь в 1867 году последний сёгун передал власть Императору.</li>
-            <li><strong>Асакуса и храм Sensō-ji</strong> (Токио) — душа старого торгового Эдо.</li>
+            <li><strong><a href="fushimi-nijo-day.html#loc-nijocastle" class="ref-link">Замок Nijō</a></strong> (Киото) — резиденция сёгунов Токугава со знаменитыми «поющими» соловьиными полами, скрипящими при шагах для защиты от ниндзя. Здесь в 1867 году последний сёгун передал власть Императору.</li>
+            <li><strong><a href="asakusa-day.html#loc-sensoji" class="ref-link">Асакуса и храм Sensō-ji</a></strong> (Токио) — душа старого торгового Эдо.</li>
+            <li><strong><a href="osaka-day.html#loc-osakacastle" class="ref-link">Замок Осака</a></strong> — здесь в 1615 году пал клан Toyotomi, последняя военная угроза власти Токугавы.</li>
+            <li><strong><a href="philosophers-path-day.html#loc-nanzenji" class="ref-link">Nanzen-ji</a></strong> (Киото) — гигантские ворота Sanmon перестроили в 1628 году в память о погибших при осаде Osaka Castle 1615 года.</li>
+            <li><strong><a href="higashiyama-day.html#loc-kodaiji" class="ref-link">Kōdai-ji</a></strong> (Киото) — построен уже после падения клана Toyotomi при Sekigahara (1600).</li>
+            <li><strong><a href="ginza-day.html#loc-ginza" class="ref-link">Ginza</a></strong> (Токио) — название от серебряного монетного двора, основанного здесь в 1612 году.</li>
+            <li><strong><a href="kanazawa-day.html#loc-kanazawacastle" class="ref-link">Kanazawa Castle Park</a></strong> — резиденция клана Maeda, второго по влиянию дома эпохи Edo.</li>
+            <li><strong><a href="teamlab-odaiba-day.html#loc-hamarikyu" class="ref-link">Hamarikyu Gardens</a></strong> (Токио) — бывший сад-резиденция сёгунского клана с прудом на приливной морской воде.</li>
           </ul>
         </div>
 
@@ -1910,8 +1922,14 @@ body.site-nav-locked { overflow: hidden; }
           <ul>
             <li><strong>Meiji Jingū</strong> (Токио) — главный императорский храм Японии, окружённый рукотворным вековым лесом из 100 000 деревьев. Возведён в честь Императора Мэйдзи и его супруги — символ рождения современной Японии.</li>
             <li><strong>Kyoto Gosho</strong> (Императорский дворец, Киото) — где родился император Мэйдзи и откуда он зачитал «Клятву пяти пунктов», прежде чем двор переехал в Токио.</li>
-            <li><strong>Замок Nijō</strong> (Киото) — здесь в 1867 году 15-й сёгун Токугава Ёсинобу подписал указ о передаче верховной власти Императору, бескровно ликвидировав институт сёгуната.</li>
+            <li><strong><a href="fushimi-nijo-day.html#loc-nijocastle" class="ref-link">Замок Nijō</a></strong> (Киото) — здесь в 1867 году 15-й сёгун Токугава Ёсинобу подписал указ о передаче верховной власти Императору, бескровно ликвидировав институт сёгуната.</li>
             <li><strong>Мост Sanjō-ōhashi и район Понтотё</strong> (Киото) — улицы, где разворачивались кровавые стычки между самураями Синсэнгуми и реформаторами Мэйдзи.</li>
+            <li><strong><a href="asakusa-day.html#loc-uenopark" class="ref-link">Ueno Park</a></strong> (Токио) — разбит на месте, где в 1868 году правительственные войска Мэйдзи разгромили последних защитников сёгуната.</li>
+            <li><strong><a href="ginza-day.html#loc-ginza" class="ref-link">Ginza</a></strong> (Токио) — после пожара 1872 года отстроена в кирпиче как витрина новой, вестернизированной Japan.</li>
+            <li><strong><a href="higashiyama-day.html#loc-maruyama" class="ref-link">Maruyama Park</a></strong> (Киото) — один из первых публичных парков западного образца в Japan, разбит в 1886 году.</li>
+            <li><strong><a href="kenrokuen-day.html#loc-kenrokuen" class="ref-link">Kenrokuen</a></strong> (Kanazawa) — частный сад клана Maeda, открыт для публики уже в эпоху Мэйдзи, в 1874 году.</li>
+            <li><strong><a href="philosophers-path-day.html#loc-nanzenji" class="ref-link">Nanzen-ji</a></strong> (Киото) — здесь проходит акведук канала Lake Biwa, построенного в эпоху Мэйдзи и питавшего первую в Japan гидроэлектростанцию.</li>
+            <li><strong><a href="shimokitazawa-day.html#loc-gotokuji" class="ref-link">Gōtoku-ji Temple</a></strong> (Токио) — пережил реформу Синбуцу Бунри 1868 года, отделившую синто от буддизма.</li>
           </ul>
         </div>
 
@@ -2249,7 +2267,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Не пытайтесь увидеть «главное» в святилище — по конструкции его почти всегда невозможно увидеть. Смысл jinja не в предмете за дверью honden, а в самом жесте: отметить границу и остановиться перед ней.
           </div>
-          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-shrine">Asakusa Day → Asakusa Shrine</a>, <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a></div>
+          <div class="used-in">Упоминается в: <a href="asakusa-day.html#loc-shrine">Asakusa Day → Asakusa Shrine</a>, <a href="fushimi-nijo-day.html#loc-fushimiinari">Fushimi & Nijō Day → Fushimi Inari Taisha</a>, <a href="harajuku-shibuya-day.html#loc-meijijingu">Harajuku &amp; Shibuya Day → Meiji Jingu</a>, <a href="omihachiman-day.html#loc-himure">Omihachiman Day → Himure Hachimangu Shrine</a>, <a href="osaka-day.html#loc-yasaka">Osaka Day → Namba Yasaka Jinja</a></div>
         </article>
         <article class="entry" id="gardens">
           <div class="entry-source">Сад как композиция, а не украшение</div>
@@ -2304,7 +2322,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Западная реставрация стремится спрятать шов. Wabi-sabi — прямая тому противоположность: несовершенство не маскируют, а подсвечивают, потому что именно оно и есть история вещи.
           </div>
-          <div class="used-in">Упоминается в: <a href="higashiyama-day.html#loc-kodaiji">Higashiyama Day → Kōdai-ji, чайные домики Sen no Rikyū</a></div>
+          <div class="used-in">Упоминается в: <a href="higashiyama-day.html#loc-kodaiji">Higashiyama Day → Kōdai-ji, чайные домики Sen no Rikyū</a>, <a href="harajuku-shibuya-day.html#loc-tsuchiyakaban">Harajuku &amp; Shibuya Day → TSUCHIYA KABAN Shibuya Store</a>, <a href="philosophers-path-day.html#loc-ginkakuji">Philosopher's Path Day → Ginkaku-ji</a></div>
         </article>
 
         <div class="period-subthemes" id="wabi-sabi-subthemes">
@@ -2342,6 +2360,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             В следующий раз, когда пауза в разговоре с японцем покажется неловкой, — не спешите её заполнять. Может быть, это не неловкость, а ma: момент, в который как раз и происходит самое важное.
           </div>
+          <div class="used-in">Упоминается в: <a href="kinkaku-day.html#loc-ryoanji">Kinkaku-ji Day → Ryōan-ji</a></div>
         </article>
         <article class="entry" id="mono-no-aware">
           <div class="entry-source">Печаль вещей · тот же учёный, что и в статье про kami</div>
@@ -2487,7 +2506,7 @@ body.site-nav-locked { overflow: hidden; }
             <span class="idea-card-label">Идея вдогонку</span>
             Сегодняшние модные «listening bar» по всему миру — прямые потомки jazz kissa, просто с коктейлями вместо кофе и разрешением говорить шёпотом. Оригинал строже — и в этом весь смысл.
           </div>
-          <div class="used-in">Упоминается в: <a href="shimokitazawa-day.html#loc-littlesoul">Shimokitazawa Day → Little Soul Cafe</a></div>
+          <div class="used-in">Упоминается в: <a href="shimokitazawa-day.html#loc-littlesoul">Shimokitazawa Day → Little Soul Cafe</a>, <a href="harajuku-shibuya-day.html#loc-grandfathers">Harajuku &amp; Shibuya Day → Grandfather's</a></div>
         </article>
 
         <article class="entry" id="depachika">
@@ -2499,7 +2518,7 @@ body.site-nav-locked { overflow: hidden; }
             Ближе к закрытию цены на скоропортящееся начинают резать на 20–50% — местные это знают и подгадывают визит специально под вечер.
           </div>
           <p>На маршруте настоящего depachika нет, но та же одержимость подачей, сезонностью и происхождением продукта видна в миниатюре в двух местах — в овощных рядах Nishiki Market и на полках обычного с виду супермаркета Ōzeki.</p>
-          <div class="used-in">Упоминается в: <a href="fushimi-nijo-day.html#loc-nishiki">Fushimi & Nijō Day → Nishiki Market</a>, <a href="shimokitazawa-day.html#loc-ozeki">Shimokitazawa Day → Ōzeki</a></div>
+          <div class="used-in">Упоминается в: <a href="fushimi-nijo-day.html#loc-nishiki">Fushimi & Nijō Day → Nishiki Market</a>, <a href="shimokitazawa-day.html#loc-ozeki">Shimokitazawa Day → Ōzeki</a>, <a href="ginza-day.html#loc-yurakucho">Akihabara, Ginza &amp; Shinjuku Day → Yurakucho / Depachika</a></div>
         </article>
       </div>
     </section>
@@ -2704,7 +2723,6 @@ window.SITE_DATA = {
     { name: "Pontocho Alley",    file: "higashiyama-day.html", anchor: "loc-pontocho",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Beatle Momo",       file: "higashiyama-day.html", anchor: "loc-beatlemomo",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
 
-    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },

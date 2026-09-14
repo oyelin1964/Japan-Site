@@ -1204,7 +1204,7 @@ body.site-nav-locked { overflow: hidden; }
     <h4 data-lang="ru">Экскурсии — забронированы через Klook</h4>
     <h4 data-lang="en" style="display:none;">Excursions — booked via Klook</h4>
 
-    <div class="logi-card" data-lang="ru">
+    <div class="logi-card" id="res-nikko" data-lang="ru">
       <div class="logi-card-header">
         <span class="logi-card-title">Никко — Тосёгу, оз. Тюдзэндзи и водопад Кэгон <span class="status-tag">Reserved</span></span>
         <span class="logi-card-dates">25 Sep 2026</span>
@@ -1217,10 +1217,11 @@ body.site-nav-locked { overflow: hidden; }
         <div><span class="logi-label">Сбор</span>08:00, здание Mitsui Sumitomo Bank (Shinjuku Nishiguchi Branch), первый этаж — прийти к 07:45</div>
       </div>
       <div class="logi-lines">
-        <div class="logi-line"><span class="logi-label">Включено</span>автобус, гид на английском/китайском, вход в Toshogu Shrine</div>
+        <div class="logi-line"><span class="logi-label">Включено</span>автобус, гид на английском/китайском, остановка у Shinkyo Bridge, вход в Toshogu Shrine</div>
         <div class="logi-line"><span class="logi-label">Не включено</span>обед — с собой или на месте в районе оз. Тюдзэндзи / водопада Кэгон</div>
-        <div class="logi-line"><span class="logi-label">Возврат</span>время не указано в ваучере — уточнить в письме с подтверждением</div>
+        <div class="logi-line"><span class="logi-label">Возврат</span>ориентировочно 18:00 в Синдзюку</div>
       </div>
+      <p style="margin-top:0.6rem;"><a href="nikko-day.html">← вернуться на страницу дня</a></p>
       <div class="logi-note">При плохой погоде (тайфун, снегопад) решение об отмене тура принимают за день до вылета до 15:00 по Японии и сообщают по email. Экстренная связь: +81-80-8844-6305 / +81-80-9570-0309 (WhatsApp, LINE, WeChat).
         <br><a class="logi-doc-link" href="NIKKO-25-9.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
@@ -1253,7 +1254,7 @@ body.site-nav-locked { overflow: hidden; }
       </div>
     </div>
 
-    <div class="logi-card" data-lang="ru">
+    <div class="logi-card" id="res-hakone" data-lang="ru">
       <div class="logi-card-header">
         <span class="logi-card-title">Хаконэ — «Земля, море и небо»: Lake Ashi, Овакудани, Осино Хаккай <span class="status-tag">Reserved</span></span>
         <span class="logi-card-dates">9 Oct 2026</span>
@@ -1274,6 +1275,7 @@ body.site-nav-locked { overflow: hidden; }
           Confirmation PDF
         </a>
       </div>
+      <p style="margin-top:0.6rem;"><a href="hakone-day.html">← вернуться на страницу дня</a></p>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
       <div class="logi-card-header">
@@ -1296,6 +1298,7 @@ body.site-nav-locked { overflow: hidden; }
           Confirmation PDF
         </a>
       </div>
+      <p style="margin-top:0.6rem;"><a href="hakone-day.html">← back to the day page</a></p>
     </div>
 
     <h4 data-lang="ru">Поезда — с датой открытия окна брони</h4>
@@ -1425,7 +1428,7 @@ body.site-nav-locked { overflow: hidden; }
     <h4 data-lang="ru">Timed-tickets и галереи — без фиксированного окна, но разбирают заранее</h4>
     <h4 data-lang="en" style="display:none;">Timed tickets & galleries — no fixed window, but sell out early</h4>
 
-    <div class="logi-card" data-lang="ru">
+    <div class="logi-card" id="res-teamlab" data-lang="ru">
       <div class="logi-card-header">
         <span class="logi-card-title">teamLab Planets, Toyosu <span class="status-tag">Reserved · оплачено</span></span>
         <span class="logi-card-dates">6 Oct 2026 · 10:30–11:00</span>
@@ -1444,6 +1447,7 @@ body.site-nav-locked { overflow: hidden; }
           Confirmation PDF
         </a>
       </div>
+      <p style="margin-top:0.6rem;"><a href="teamlab-odaiba-day.html">← вернуться на страницу дня</a></p>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
       <div class="logi-card-header">
@@ -1464,6 +1468,7 @@ body.site-nav-locked { overflow: hidden; }
           Confirmation PDF
         </a>
       </div>
+      <p style="margin-top:0.6rem;"><a href="teamlab-odaiba-day.html">← back to the day page</a></p>
     </div>
 
     <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br><strong>Yusai-Tei Gallery, Arashiyama</strong> (день 28 Sep). Вход только по брони на таймслот, около 2000 иен. Ссылка на форму брони уже есть в заметках к поездке.</div>
@@ -1665,7 +1670,6 @@ window.SITE_DATA = {
     { name: "Pontocho Alley",    file: "higashiyama-day.html", anchor: "loc-pontocho",    day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
     { name: "Beatle Momo",       file: "higashiyama-day.html", anchor: "loc-beatlemomo",  day: "Higashiyama Day", dayFile: "higashiyama-day.html" },
 
-    { name: "Kyo-train Garaku",       file: "osaka-day.html", anchor: "loc-garaku",       day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Karahori · tokito",      file: "osaka-day.html", anchor: "loc-karahori",     day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Osaka Castle",           file: "osaka-day.html", anchor: "loc-osakacastle",  day: "Osaka Day", dayFile: "osaka-day.html" },
     { name: "Kuromon Ichiba Market",  file: "osaka-day.html", anchor: "loc-kuromon",      day: "Osaka Day", dayFile: "osaka-day.html" },
