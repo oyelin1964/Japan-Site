@@ -21,6 +21,7 @@
     --red-soft: #C85A4B;
     --line: #E1DACB;
     --gold: #8C6239; /* Darkened gold slightly for better text readability */
+    --gold-dark: #6E4A1E;
     --gray-bg: #EFECE6;
     --blue: #4A6D8C;
     --green-bg: #E4EDE3;
@@ -28,6 +29,9 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; color-scheme: light only; scroll-padding-top: 96px; }
+
+  a { color: var(--red); }
+  a:hover { color: var(--red-soft); }
 
   body {
     background: var(--paper) !important;
@@ -440,43 +444,57 @@
   ul.plain, ol.plain { margin: 0.8rem 0 1.2rem 1.3rem; }
   ul.plain li, ol.plain li { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--ink-soft); }
 
-  .footnote {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.82rem;
-    color: #5C564E;
+  /* ---------- Transfer guide (airport → hotel, illustrated) ---------- */
+  .transfer-lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    margin: -0.3rem 0 1.3rem;
   }
-
-  .back-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--ink);
-    color: var(--paper);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.03em;
-    padding: 0.65rem 1.3rem;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(28,25,23,0.25);
-    z-index: 40;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+  .transfer-step-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: var(--red);
+    margin: 1.8rem 0 0.4rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
   }
-  .back-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+  .transfer-step-title .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--gold-dark);
+    font-size: 1rem;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .tab-panel { animation: none; }
+  .transfer-diagram {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.3rem 0.7rem 0.9rem;
+    margin: 0.8rem 0 1.6rem;
+    box-shadow: 0 2px 12px rgba(28,25,23,0.05);
+  }
+  .transfer-diagram svg text { font-family: 'Inter', sans-serif; }
+  .transfer-diagram .t-title { font-size: 0.8rem; font-weight: 700; fill: var(--ink); }
+  .transfer-diagram .t-sub { font-size: 0.7rem; fill: var(--ink-soft); }
+  .transfer-box-neutral rect { fill: var(--paper-deep); stroke: var(--line); stroke-width: 1; }
+  .transfer-box-caution rect { fill: rgba(140,98,57,0.12); stroke: var(--gold); stroke-width: 1; }
+  .transfer-box-caution .t-title { fill: var(--gold-dark); }
+  .transfer-box-action rect { fill: rgba(140,98,57,0.2); stroke: var(--gold); stroke-width: 1; }
+  .transfer-box-action .t-title { fill: var(--gold-dark); }
+  .transfer-box-final rect { fill: rgba(178,58,46,0.1); stroke: var(--red); stroke-width: 1; }
+  .transfer-box-final .t-title { fill: var(--red); }
+  .transfer-arrow { stroke: var(--ink-soft); stroke-width: 1.5; }
+  .transfer-diagram-caption {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.7rem;
   }
 
   /* ---------- Top bar: consistent site-wide back-to-index nav ---------- */
@@ -744,6 +762,7 @@ body.site-nav-locked { overflow: hidden; }
     <button class="tab-btn active" data-tab="t1">Flights</button>
     <button class="tab-btn" data-tab="t2">Hotels</button>
     <button class="tab-btn" data-tab="t3">Bookings</button>
+    <button class="tab-btn" data-tab="t4">Transfer</button>
   </nav>
 
   <!-- TAB 1: Flights -->
@@ -966,6 +985,14 @@ body.site-nav-locked { overflow: hidden; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Переписка с отелем (раздельный заезд)
         </a>
+        <a class="logi-doc-link" href="Booking_Akasaka_Confirmation.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Booking Confirmation
+        </a>
+        <a class="logi-doc-link" href="Booking_Akasaka_Confirmation-Japan-Payment%20confirmation.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Payment Confirmation
+        </a>
       </div>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
@@ -994,6 +1021,14 @@ body.site-nav-locked { overflow: hidden; }
         <a class="logi-doc-link" href="Booking_Akasaka_Conversation%20with%20Hotel.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Hotel correspondence (staggered check-in)
+        </a>
+        <a class="logi-doc-link" href="Booking_Akasaka_Confirmation.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Booking Confirmation
+        </a>
+        <a class="logi-doc-link" href="Booking_Akasaka_Confirmation-Japan-Payment%20confirmation.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Payment Confirmation
         </a>
       </div>
     </div>
@@ -1128,6 +1163,10 @@ body.site-nav-locked { overflow: hidden; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
+        <a class="logi-doc-link" href="Confirmation%20Kris%20Stay%20Ginza%20Email.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Email подтверждения
+        </a>
       </div>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
@@ -1152,6 +1191,10 @@ body.site-nav-locked { overflow: hidden; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
+        <a class="logi-doc-link" href="Confirmation%20Kris%20Stay%20Ginza%20Email.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation Email
+        </a>
       </div>
     </div>
 
@@ -1172,7 +1215,20 @@ body.site-nav-locked { overflow: hidden; }
         <div class="logi-line"><span class="logi-label">Оплата</span>через букинг</div>
         <div class="logi-line"><span class="logi-label">Отмена</span>бесплатно до ~21 Sep (точный час не в подтверждении) · далее 50%, no-show 100%</div>
       </div>
-      <div class="logi-note">Superior Twin, без стиральной машины (есть в других номерах), 2 гостя, без питания. С 16 июля 2026 по 31 января 2027 в отеле идёт ремонт лобби и ресторана — возможен шум 10:00–18:00.</div>
+      <div class="logi-note">Superior Twin, без стиральной машины (есть в других номерах), 2 гостя, без питания. С 16 июля 2026 по 31 января 2027 в отеле идёт ремонт лобби и ресторана — возможен шум 10:00–18:00.
+        <br><a class="logi-doc-link" href="Stay-Ginza-Confirmation-Receipt.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Receipt
+        </a>
+        <a class="logi-doc-link" href="Stay-Ginza-Confirmation-JP.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF (JP)
+        </a>
+        <a class="logi-doc-link" href="Stay-Ginza-Confirmation-En.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF (En)
+        </a>
+      </div>
     </div>
     <div class="logi-card" data-lang="en" style="display:none;">
       <div class="logi-card-header">
@@ -1191,7 +1247,20 @@ body.site-nav-locked { overflow: hidden; }
         <div class="logi-line"><span class="logi-label">Payment</span>via booking</div>
         <div class="logi-line"><span class="logi-label">Cancellation</span>free until ~21 Sep (exact time not in confirmation) · then 50%, no-show 100%</div>
       </div>
-      <div class="logi-note">Superior Twin, no washing machine (available in other rooms), 2 guests, no meals. From July 16, 2026 to January 31, 2027 the hotel's lobby and restaurant are under renovation — possible noise 10:00–18:00.</div>
+      <div class="logi-note">Superior Twin, no washing machine (available in other rooms), 2 guests, no meals. From July 16, 2026 to January 31, 2027 the hotel's lobby and restaurant are under renovation — possible noise 10:00–18:00.
+        <br><a class="logi-doc-link" href="Stay-Ginza-Confirmation-Receipt.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Receipt
+        </a>
+        <a class="logi-doc-link" href="Stay-Ginza-Confirmation-JP.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF (JP)
+        </a>
+        <a class="logi-doc-link" href="Stay-Ginza-Confirmation-En.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          Confirmation PDF (En)
+        </a>
+      </div>
     </div>
 
   </section>
@@ -1355,14 +1424,14 @@ body.site-nav-locked { overflow: hidden; }
         <span class="logi-card-dates">4 Oct 2026</span>
       </div>
       <div class="logi-meta">
-        <div><span class="logi-label">Reservation No.</span>46393</div>
+        <div><span class="logi-label">Reservation No.</span>46393 · Код 5419</div>
         <div><span class="logi-label">Поезд 1</span>Thunder-Bird 13, Car 3, места 7-C / 7-D · Kyoto 10:09 → Tsuruga 11:02</div>
         <div><span class="logi-label">Пересадка</span>Tsuruga, 15 минут</div>
         <div><span class="logi-label">Поезд 2</span>Tsurugi 14, Car 8, места 10-D / 10-E · Tsuruga 11:17 → Kanazawa 12:02</div>
         <div><span class="logi-label">Цена</span>¥15,440 (2 взрослых)</div>
       </div>
       <div class="logi-note">Оба поезда только с местом. Билет получить на станции до посадки — понадобится физическая карта оплаты.
-        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kyoto-Kanazawa.pdf" target="_blank" rel="noopener">
+        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kyoto-Kanazawa-2nd.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
@@ -1374,14 +1443,14 @@ body.site-nav-locked { overflow: hidden; }
         <span class="logi-card-dates">4 Oct 2026</span>
       </div>
       <div class="logi-meta">
-        <div><span class="logi-label">Reservation No.</span>46393</div>
+        <div><span class="logi-label">Reservation No.</span>46393 · Code 5419</div>
         <div><span class="logi-label">Train 1</span>Thunder-Bird 13, Car 3, seats 7-C / 7-D · Kyoto 10:09 → Tsuruga 11:02</div>
         <div><span class="logi-label">Transfer</span>Tsuruga, 15 minutes</div>
         <div><span class="logi-label">Train 2</span>Tsurugi 14, Car 8, seats 10-D / 10-E · Tsuruga 11:17 → Kanazawa 12:02</div>
         <div><span class="logi-label">Price</span>¥15,440 (2 adults)</div>
       </div>
       <div class="logi-note">Both trains reserved-seat only. Pick up the physical ticket at the station before boarding — you'll need the physical payment card.
-        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kyoto-Kanazawa.pdf" target="_blank" rel="noopener">
+        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kyoto-Kanazawa-2nd.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
@@ -1394,13 +1463,13 @@ body.site-nav-locked { overflow: hidden; }
         <span class="logi-card-dates">5 Oct 2026</span>
       </div>
       <div class="logi-meta">
-        <div><span class="logi-label">Reservation No.</span>49262</div>
+        <div><span class="logi-label">Reservation No.</span>49262 · Код 5419</div>
         <div><span class="logi-label">Поезд</span>Kagayaki 534, Car 4, места 12-D / 12-E</div>
         <div><span class="logi-label">Время</span>Kanazawa 13:50 → Tokyo 16:20</div>
         <div><span class="logi-label">Цена</span>¥28,800 (2 взрослых)</div>
       </div>
       <div class="logi-note">Прямой Hokuriku Shinkansen без пересадок. Билет получить на станции до посадки — понадобится физическая карта оплаты.
-        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kanazawa-Tokyo.pdf" target="_blank" rel="noopener">
+        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kanazawa%20Tokyo.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
@@ -1412,18 +1481,21 @@ body.site-nav-locked { overflow: hidden; }
         <span class="logi-card-dates">5 Oct 2026</span>
       </div>
       <div class="logi-meta">
-        <div><span class="logi-label">Reservation No.</span>49262</div>
+        <div><span class="logi-label">Reservation No.</span>49262 · Code 5419</div>
         <div><span class="logi-label">Train</span>Kagayaki 534, Car 4, seats 12-D / 12-E</div>
         <div><span class="logi-label">Time</span>Kanazawa 13:50 → Tokyo 16:20</div>
         <div><span class="logi-label">Price</span>¥28,800 (2 adults)</div>
       </div>
       <div class="logi-note">Direct Hokuriku Shinkansen, no transfers. Pick up the physical ticket at the station before boarding — you'll need the physical payment card.
-        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kanazawa-Tokyo.pdf" target="_blank" rel="noopener">
+        <br><a class="logi-doc-link" href="JR-WEST%20ONLINE%20TRAIN%20RESERVATION-Kanazawa%20Tokyo.pdf" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
           Confirmation PDF
         </a>
       </div>
     </div>
+
+    <div class="note" data-lang="ru"><span class="note-tag tag-tip">Практический совет</span><br><strong>Как получить оба билета</strong> (брони 46393 и 49262). Понадобится физическая карта VISA на …2720 (виртуальные карты не принимаются) — она нужна на любом этапе получения. У автомата с пометкой e5489 дополнительно спросят 4-значный PIN, заданный при бронировании; в кассе Midori-no-madoguchi (окошко с человеком) — только карта и номер брони, PIN не нужен. Получить можно в любой день до начала поездки, не обязательно 4 октября — например, сразу по прилёте в Киото. Автоматы работают ок. 4:30–23:20, кассы — ок. 4:30–23:30 (у каждой станции свои часы). Обе брони на одно имя и карту, но на автомате их, скорее всего, придётся оформить по очереди — по одной на каждый номер брони. Без получения билета до посадки — пересчёт по полной цене прямо в поезде. Источник: <a href="https://www.westjr.co.jp/global/en/howto/train-reservation/receive/" target="_blank" rel="noopener">westjr.co.jp — Receiving your ticket</a>.</div>
+    <div class="note" data-lang="en" style="display:none;"><span class="note-tag tag-tip">Practical tip</span><br><strong>Picking up both tickets</strong> (reservations 46393 and 49262). You'll need the physical VISA card ending …2720 (virtual cards aren't accepted) at any pickup point. A machine marked e5489 also asks for the 4-digit PIN set at booking; at a staffed Midori-no-madoguchi ticket office you only need the card and reservation number — no PIN there. Pickup is allowed any day before travel starts, not just on 4 Oct — e.g. right after arriving in Kyoto. Machines run roughly 4:30–23:20, ticket offices roughly 4:30–23:30 (hours vary by station). Both reservations are under the same name and card, but at a machine you'll likely process them one at a time, by reservation number. Boarding without collecting the ticket means repurchasing at full price on the train. Source: <a href="https://www.westjr.co.jp/global/en/howto/train-reservation/receive/" target="_blank" rel="noopener">westjr.co.jp — Receiving your ticket</a>.</div>
 
     <h4 data-lang="ru">Timed-tickets и галереи — без фиксированного окна, но разбирают заранее</h4>
     <h4 data-lang="en" style="display:none;">Timed tickets & galleries — no fixed window, but sell out early</h4>
@@ -1520,6 +1592,241 @@ body.site-nav-locked { overflow: hidden; }
 
     <p class="footnote" style="margin-top:0; padding-top:0; border-top:none;" data-lang="ru">Как забронируете что-то из этого списка — карточка переезжает сюда с реальным номером подтверждения, а в Practical Info соответствующего дня останется только короткая строка-напоминание, без дублирования деталей.</p>
     <p class="footnote" style="margin-top:0; padding-top:0; border-top:none; display:none;" data-lang="en">Once anything on this list is booked, the card moves here with a real confirmation number, and the corresponding day's Practical Info keeps just a short reminder line, no duplicated detail.</p>
+  </section>
+
+  <!-- TAB 4: Transfer (Narita → Akasaka) -->
+  <section class="tab-panel" id="t4">
+
+    <h4 data-lang="ru">Нарита → отель в Акасаке</h4>
+    <h4 data-lang="en" style="display:none;">Narita → the hotel in Akasaka</h4>
+    <p class="transfer-lede" data-lang="ru">Самый комфортный путь — целиком на Keisei Skyliner: нормальное кресло, полка для чемодана, оплата картой.</p>
+    <p class="transfer-lede" data-lang="en" style="display:none;">The most comfortable route — the whole way on the Keisei Skyliner: a proper seat, room for the suitcase, pay by card.</p>
+
+    <div class="practical-table" data-lang="ru">
+      <div class="practical-row">
+        <div class="practical-label">Skyliner</div>
+        <div class="practical-value">до Keisei-Ueno — ¥2 580 с человека, оплата физической картой в кассе</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Метро</div>
+        <div class="practical-value">Ginza Line до Akasaka-mitsuke — ≈¥210, Suica с телефона</div>
+      </div>
+    </div>
+    <div class="practical-table" data-lang="en" style="display:none;">
+      <div class="practical-row">
+        <div class="practical-label">Skyliner</div>
+        <div class="practical-value">to Keisei-Ueno — ¥2,580 per person, pay by card at the counter</div>
+      </div>
+      <div class="practical-row">
+        <div class="practical-label">Subway</div>
+        <div class="practical-value">Ginza Line to Akasaka-mitsuke — ≈¥210, tap Suica on your phone</div>
+      </div>
+    </div>
+
+    <div data-lang="ru">
+      <div class="transfer-step-title"><span class="step-num">01</span>Нарита → посадка на Skyliner</div>
+      <ol class="plain">
+        <li>Заберите багаж в зале прилёта, 1-й этаж (1F).</li>
+        <li>Идите по сине-жёлтым указателям «Train / Keisei Line» к лифту — спуститесь на подземный этаж B1. Эскалатор с чемоданом не берите.</li>
+        <li>Найдите синюю кассу Skyliner &amp; Keisei Information Center. Скажите: «One ticket for Skyliner to Keisei-Ueno, please» — и оплатите физической картой.</li>
+        <li>Кассир выдаст 2 бумажных билета (Base Fare + Liner). Пройдите турникет (Ticket Gate Entrance), вставив оба билета стопкой в одну щель — заберите оба сверху.</li>
+        <li><strong>Это ещё не платформа.</strong> По официальной схеме станции перроны Narita Sky Access Line есть и на B1F, и на B2F — после турникета почти наверняка будет ещё один спуск (эскалатор или лестница). Смотрите табло со своим поездом и номером платформы, а не только на «уже спустились один раз».</li>
+        <li>На платформе найдите свой вагон и место, поставьте чемодан на багажную стойку у входа в вагон.</li>
+      </ol>
+
+      <div class="transfer-diagram">
+        <svg width="100%" viewBox="0 0 380 380" role="img">
+          <title>Схема выхода из Нариты к платформе Skyliner</title>
+          <desc>Терминал 1 этаж 1F, лифт на B1, касса Skyliner, турникет, ещё один спуск на платформу B1F/B2F</desc>
+          <defs><marker id="rtArrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+          <g class="transfer-box-neutral">
+            <rect x="55" y="10" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="30" text-anchor="middle" dominant-baseline="central">Terminal 1, этаж 1F</text>
+            <text class="t-sub" x="190" y="48" text-anchor="middle" dominant-baseline="central">зал прилёта, синие знаки Train</text>
+          </g>
+          <line x1="190" y1="64" x2="190" y2="84" class="transfer-arrow" marker-end="url(#rtArrowA)"/>
+
+          <g class="transfer-box-caution">
+            <rect x="55" y="84" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="104" text-anchor="middle" dominant-baseline="central">Лифт вниз на B1</text>
+            <text class="t-sub" x="190" y="122" text-anchor="middle" dominant-baseline="central">не эскалатор — с чемоданом</text>
+          </g>
+          <line x1="190" y1="138" x2="190" y2="158" class="transfer-arrow" marker-end="url(#rtArrowA)"/>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="158" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="178" text-anchor="middle" dominant-baseline="central">Касса Skyliner, B1</text>
+            <text class="t-sub" x="190" y="196" text-anchor="middle" dominant-baseline="central">оплата картой → 2 билета</text>
+          </g>
+          <line x1="190" y1="212" x2="190" y2="232" class="transfer-arrow" marker-end="url(#rtArrowA)"/>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="232" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="252" text-anchor="middle" dominant-baseline="central">Турникет (Ticket Gate)</text>
+            <text class="t-sub" x="190" y="270" text-anchor="middle" dominant-baseline="central">оба билета вместе, одна щель</text>
+          </g>
+          <line x1="190" y1="286" x2="190" y2="306" class="transfer-arrow" marker-end="url(#rtArrowA)"/>
+
+          <g class="transfer-box-final">
+            <rect x="55" y="306" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="326" text-anchor="middle" dominant-baseline="central">Ещё один спуск на платформу</text>
+            <text class="t-sub" x="190" y="344" text-anchor="middle" dominant-baseline="central">B1F или B2F — смотрите по табло</text>
+          </g>
+        </svg>
+        <div class="transfer-diagram-caption">45 минут до Keisei-Ueno</div>
+      </div>
+
+      <div class="transfer-step-title"><span class="step-num">02</span>Keisei-Ueno → Ginza Line → отель</div>
+      <ol class="plain">
+        <li>Едьте до конечной станции Keisei-Ueno (45 минут). На выходе снова вставьте оба билета стопкой в турникет — он заберёт их навсегда.</li>
+        <li>Не выходите на улицу: идите по крытому переходу по оранжевым знакам [G] Ginza Line, ориентируясь на значки Elevator.</li>
+        <li>На турникете метро приложите телефон с Suica к сенсору. Садитесь на Ginza Line в сторону Shibuya — без пересадок до Akasaka-mitsuke (≈19 минут).</li>
+        <li>На выходе снова приложите Suica (спишется ≈¥210), поднимитесь на лифте на улицу.</li>
+        <li>Пройдите ≈350 метров (3–4 минуты) по ровному тротуару до дверей Centurion Hotel Residential Akasaka.</li>
+      </ol>
+
+      <div class="transfer-diagram">
+        <svg width="100%" viewBox="0 0 380 300" role="img">
+          <title>Схема пересадки на Ginza Line и пути до отеля</title>
+          <desc>Keisei-Ueno, переход к линии Гиндза, поездка до Акасака-митсукэ, выход и пеший путь до отеля</desc>
+          <defs><marker id="rtArrowB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="10" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="30" text-anchor="middle" dominant-baseline="central">Keisei-Ueno, выход</text>
+            <text class="t-sub" x="190" y="48" text-anchor="middle" dominant-baseline="central">оба билета в турникет вместе</text>
+          </g>
+          <line x1="190" y1="64" x2="190" y2="84" class="transfer-arrow" marker-end="url(#rtArrowB)"/>
+
+          <g class="transfer-box-caution">
+            <rect x="55" y="84" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="104" text-anchor="middle" dominant-baseline="central">Лифт к Ginza Line</text>
+            <text class="t-sub" x="190" y="122" text-anchor="middle" dominant-baseline="central">следуйте оранжевым знакам [G]</text>
+          </g>
+          <line x1="190" y1="138" x2="190" y2="158" class="transfer-arrow" marker-end="url(#rtArrowB)"/>
+
+          <g class="transfer-box-neutral">
+            <rect x="55" y="158" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="178" text-anchor="middle" dominant-baseline="central">Ginza Line → Akasaka-mitsuke</text>
+            <text class="t-sub" x="190" y="196" text-anchor="middle" dominant-baseline="central">Suica, без пересадок, ≈19 мин</text>
+          </g>
+          <line x1="190" y1="212" x2="190" y2="232" class="transfer-arrow" marker-end="url(#rtArrowB)"/>
+
+          <g class="transfer-box-final">
+            <rect x="55" y="232" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="252" text-anchor="middle" dominant-baseline="central">Лифт наверх + отель</text>
+            <text class="t-sub" x="190" y="270" text-anchor="middle" dominant-baseline="central">Suica ≈¥210, 350м пешком</text>
+          </g>
+        </svg>
+        <div class="transfer-diagram-caption">Centurion Hotel Residential Akasaka</div>
+      </div>
+
+      <div class="callout"><span class="icon">🧳</span><div><strong>Правило чемодана:</strong> везде, где на схеме жёлтый или красный блок — только лифт, эскалаторы Нариты и Уэно не рассчитаны на большой багаж. Тариф метро указан приблизительно (¥200–210 в зависимости от актуального тарифа Tokyo Metro) — на Suica всегда есть небольшой запас.</div></div>
+    </div>
+
+    <div data-lang="en" style="display:none;">
+      <div class="transfer-step-title"><span class="step-num">01</span>Narita → boarding the Skyliner</div>
+      <ol class="plain">
+        <li>Collect your bags in the arrivals hall, 1st floor (1F).</li>
+        <li>Follow the blue-and-yellow "Train / Keisei Line" signs to a lift and go down to basement level B1. Skip the escalator with a suitcase.</li>
+        <li>Find the blue Skyliner &amp; Keisei Information Center counter. Say: "One ticket for Skyliner to Keisei-Ueno, please" — and pay by card.</li>
+        <li>You'll get 2 paper tickets (Base Fare + Liner). Go through the ticket gate, feeding both tickets into the same slot, stacked — take both back from the top.</li>
+        <li><strong>That's not the platform yet.</strong> The station's official map shows Narita Sky Access Line platforms on both B1F and B2F — past the ticket gate there's almost certainly one more level down (escalator or stairs). Check the board for your train and platform number, don't assume "one descent" is the whole story.</li>
+        <li>On the platform, find your car and seat, and put the suitcase on the luggage rack by the car's entrance.</li>
+      </ol>
+
+      <div class="transfer-diagram">
+        <svg width="100%" viewBox="0 0 380 380" role="img">
+          <title>Route out of Narita to the Skyliner platform</title>
+          <desc>Terminal 1, level 1F, lift to B1, Skyliner counter, ticket gate, one more descent to the platform B1F/B2F</desc>
+          <defs><marker id="rtArrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+          <g class="transfer-box-neutral">
+            <rect x="55" y="10" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="30" text-anchor="middle" dominant-baseline="central">Terminal 1, level 1F</text>
+            <text class="t-sub" x="190" y="48" text-anchor="middle" dominant-baseline="central">arrivals hall, blue Train signs</text>
+          </g>
+          <line x1="190" y1="64" x2="190" y2="84" class="transfer-arrow" marker-end="url(#rtArrowC)"/>
+
+          <g class="transfer-box-caution">
+            <rect x="55" y="84" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="104" text-anchor="middle" dominant-baseline="central">Lift down to B1</text>
+            <text class="t-sub" x="190" y="122" text-anchor="middle" dominant-baseline="central">not the escalator — you have a case</text>
+          </g>
+          <line x1="190" y1="138" x2="190" y2="158" class="transfer-arrow" marker-end="url(#rtArrowC)"/>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="158" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="178" text-anchor="middle" dominant-baseline="central">Skyliner counter, B1</text>
+            <text class="t-sub" x="190" y="196" text-anchor="middle" dominant-baseline="central">pay by card → 2 tickets</text>
+          </g>
+          <line x1="190" y1="212" x2="190" y2="232" class="transfer-arrow" marker-end="url(#rtArrowC)"/>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="232" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="252" text-anchor="middle" dominant-baseline="central">Ticket gate</text>
+            <text class="t-sub" x="190" y="270" text-anchor="middle" dominant-baseline="central">both tickets together, one slot</text>
+          </g>
+          <line x1="190" y1="286" x2="190" y2="306" class="transfer-arrow" marker-end="url(#rtArrowC)"/>
+
+          <g class="transfer-box-final">
+            <rect x="55" y="306" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="326" text-anchor="middle" dominant-baseline="central">One more level down to the platform</text>
+            <text class="t-sub" x="190" y="344" text-anchor="middle" dominant-baseline="central">B1F or B2F — check the board</text>
+          </g>
+        </svg>
+        <div class="transfer-diagram-caption">45 minutes to Keisei-Ueno</div>
+      </div>
+
+      <div class="transfer-step-title"><span class="step-num">02</span>Keisei-Ueno → Ginza Line → hotel</div>
+      <ol class="plain">
+        <li>Ride to the last stop, Keisei-Ueno (45 minutes). At the exit, feed both tickets into the turnstile again, stacked — it keeps them for good.</li>
+        <li>Don't go outside: follow the covered passage, tracking the orange [G] Ginza Line signs and the Elevator icons.</li>
+        <li>Tap your phone's Suica at the subway turnstile. Take the Ginza Line toward Shibuya — no transfers, ≈19 minutes to Akasaka-mitsuke.</li>
+        <li>Tap Suica again at the exit (≈¥210 charged), then take the lift up to the street.</li>
+        <li>Walk ≈350 m (3–4 minutes) on level pavement to the door of Centurion Hotel Residential Akasaka.</li>
+      </ol>
+
+      <div class="transfer-diagram">
+        <svg width="100%" viewBox="0 0 380 300" role="img">
+          <title>Transfer to the Ginza Line and the walk to the hotel</title>
+          <desc>Keisei-Ueno, passage to the Ginza Line, ride to Akasaka-mitsuke, exit and walk to the hotel</desc>
+          <defs><marker id="rtArrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+          <g class="transfer-box-action">
+            <rect x="55" y="10" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="30" text-anchor="middle" dominant-baseline="central">Keisei-Ueno, exit</text>
+            <text class="t-sub" x="190" y="48" text-anchor="middle" dominant-baseline="central">both tickets into the turnstile together</text>
+          </g>
+          <line x1="190" y1="64" x2="190" y2="84" class="transfer-arrow" marker-end="url(#rtArrowD)"/>
+
+          <g class="transfer-box-caution">
+            <rect x="55" y="84" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="104" text-anchor="middle" dominant-baseline="central">Lift to the Ginza Line</text>
+            <text class="t-sub" x="190" y="122" text-anchor="middle" dominant-baseline="central">follow the orange [G] signs</text>
+          </g>
+          <line x1="190" y1="138" x2="190" y2="158" class="transfer-arrow" marker-end="url(#rtArrowD)"/>
+
+          <g class="transfer-box-neutral">
+            <rect x="55" y="158" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="178" text-anchor="middle" dominant-baseline="central">Ginza Line → Akasaka-mitsuke</text>
+            <text class="t-sub" x="190" y="196" text-anchor="middle" dominant-baseline="central">Suica, no transfers, ≈19 min</text>
+          </g>
+          <line x1="190" y1="212" x2="190" y2="232" class="transfer-arrow" marker-end="url(#rtArrowD)"/>
+
+          <g class="transfer-box-final">
+            <rect x="55" y="232" width="270" height="54" rx="8"/>
+            <text class="t-title" x="190" y="252" text-anchor="middle" dominant-baseline="central">Lift up + hotel</text>
+            <text class="t-sub" x="190" y="270" text-anchor="middle" dominant-baseline="central">Suica ≈¥210, 350 m on foot</text>
+          </g>
+        </svg>
+        <div class="transfer-diagram-caption">Centurion Hotel Residential Akasaka</div>
+      </div>
+
+      <div class="callout"><span class="icon">🧳</span><div><strong>Suitcase rule:</strong> wherever the diagram shows a gold or red block, take the lift — the escalators at Narita and Ueno aren't built for large luggage. The metro fare is approximate (¥200–210, depending on the current Tokyo Metro rate) — Suica always keeps a small buffer.</div></div>
+    </div>
+
   </section>
 
   <p class="footnote" data-lang="ru">Trip Logistics · Japan 2026 · собрано из Notion (Flight Japan, Hotels Japan) вручную</p>
